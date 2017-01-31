@@ -1,0 +1,725 @@
+# Onfido\DefaultApi
+
+All URIs are relative to *https://api.onfido.com/v2*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**cancelReport**](DefaultApi.md#cancelReport) | **POST** /checks/{check_id}/reports/{report_id}/cancel | This endpoint is for cancelling individual paused reports.
+[**createApplicant**](DefaultApi.md#createApplicant) | **POST** /applicants | Create Applicant
+[**createCheck**](DefaultApi.md#createCheck) | **POST** /applicants/{applicant_id}/checks | Create a check
+[**destroyApplicant**](DefaultApi.md#destroyApplicant) | **DELETE** /applicants/{applicant_id} | Delete Applicant
+[**downloadDocument**](DefaultApi.md#downloadDocument) | **GET** /applicants/{applicant_id}/documents/{document_id}/download | Download a documents raw data
+[**findApplicant**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
+[**findCheck**](DefaultApi.md#findCheck) | **GET** /applicants/{applicant_id}/checks/{check_id} | Retrieve a Check
+[**findDocument**](DefaultApi.md#findDocument) | **GET** /applicants/{applicant_id}/documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
+[**findReport**](DefaultApi.md#findReport) | **GET** /checks/{check_id}/reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
+[**findReportTypeGroup**](DefaultApi.md#findReportTypeGroup) | **GET** /report_type_groups/{report_type_group_id} | Retrieve single report type group object
+[**listApplicants**](DefaultApi.md#listApplicants) | **GET** /applicants | List Applicants
+[**listChecks**](DefaultApi.md#listChecks) | **GET** /applicants/{applicant_id}/checks | Retrieve Checks
+[**listDocuments**](DefaultApi.md#listDocuments) | **GET** /applicants/{applicant_id}/documents | List documents
+[**listReportTypeGroups**](DefaultApi.md#listReportTypeGroups) | **GET** /report_type_groups | Retrieve all report type groups
+[**listReports**](DefaultApi.md#listReports) | **GET** /checks/{check_id}/reports | All the reports belonging to a particular check can be listed from this endpoint.
+[**resumeCheck**](DefaultApi.md#resumeCheck) | **POST** /checks/{check_id}/resume | Resume a Check
+[**resumeReport**](DefaultApi.md#resumeReport) | **POST** /checks/{check_id}/reports/{report_id}/resume | This endpoint is for resuming individual paused reports.
+[**updateApplicant**](DefaultApi.md#updateApplicant) | **PUT** /applicants/{applicant_id} | Update Applicant
+[**uploadDocument**](DefaultApi.md#uploadDocument) | **POST** /applicants/{applicant_id}/documents | Upload a document
+
+
+# **cancelReport**
+> cancelReport($check_id, $report_id)
+
+This endpoint is for cancelling individual paused reports.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$check_id = "check_id_example"; // string | 
+$report_id = "report_id_example"; // string | 
+
+try {
+    $api_instance->cancelReport($check_id, $report_id);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **check_id** | **string**|  |
+ **report_id** | **string**|  |
+
+### Return type
+
+void (empty response body)
+
+# **createApplicant**
+> \Onfido\Models\Applicant createApplicant($data)
+
+Create Applicant
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$data = new \Onfido\Models\Applicant(); // \Onfido\Models\Applicant | 
+
+try {
+    $result = $api_instance->createApplicant($data);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**\Onfido\Models\Applicant**](../Model/\Onfido\Models\Applicant.md)|  | [optional]
+
+### Return type
+
+[**\Onfido\Models\Applicant**](../Model/Applicant.md)
+
+# **createCheck**
+> \Onfido\Models\Check createCheck($applicant_id, $data)
+
+Create a check
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+$data = new \Onfido\Models\CheckCreationRequest(); // \Onfido\Models\CheckCreationRequest | 
+
+try {
+    $result = $api_instance->createCheck($applicant_id, $data);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+ **data** | [**\Onfido\Models\CheckCreationRequest**](../Model/\Onfido\Models\CheckCreationRequest.md)|  | [optional]
+
+### Return type
+
+[**\Onfido\Models\Check**](../Model/Check.md)
+
+# **destroyApplicant**
+> destroyApplicant($applicant_id)
+
+Delete Applicant
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+
+try {
+    $api_instance->destroyApplicant($applicant_id);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+
+### Return type
+
+void (empty response body)
+
+# **downloadDocument**
+> \SplFileObject downloadDocument($applicant_id, $document_id)
+
+Download a documents raw data
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+$document_id = "document_id_example"; // string | 
+
+try {
+    $result = $api_instance->downloadDocument($applicant_id, $document_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+ **document_id** | **string**|  |
+
+### Return type
+
+[**\SplFileObject**](../Model/\SplFileObject.md)
+
+# **findApplicant**
+> \Onfido\Models\Applicant findApplicant($applicant_id)
+
+Retrieve Applicant
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+
+try {
+    $result = $api_instance->findApplicant($applicant_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\Applicant**](../Model/Applicant.md)
+
+# **findCheck**
+> \Onfido\Models\Check findCheck($applicant_id, $check_id)
+
+Retrieve a Check
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+$check_id = "check_id_example"; // string | 
+
+try {
+    $result = $api_instance->findCheck($applicant_id, $check_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+ **check_id** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\Check**](../Model/Check.md)
+
+# **findDocument**
+> \Onfido\Models\Document findDocument($applicant_id, $document_id)
+
+A single document can be retrieved by calling this endpoint with the document’s unique identifier.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+$document_id = "document_id_example"; // string | 
+
+try {
+    $result = $api_instance->findDocument($applicant_id, $document_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+ **document_id** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\Document**](../Model/Document.md)
+
+# **findReport**
+> \Onfido\Models\Report findReport($check_id, $report_id)
+
+A single report can be retrieved using this endpoint with the corresponding unique identifier.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$check_id = "check_id_example"; // string | 
+$report_id = "report_id_example"; // string | 
+
+try {
+    $result = $api_instance->findReport($check_id, $report_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **check_id** | **string**|  |
+ **report_id** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\Report**](../Model/Report.md)
+
+# **findReportTypeGroup**
+> \Onfido\Models\ReportTypeGroup findReportTypeGroup($report_type_group_id)
+
+Retrieve single report type group object
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$report_type_group_id = "report_type_group_id_example"; // string | 
+
+try {
+    $result = $api_instance->findReportTypeGroup($report_type_group_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **report_type_group_id** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\ReportTypeGroup**](../Model/ReportTypeGroup.md)
+
+# **listApplicants**
+> \Onfido\Models\ApplicantsList listApplicants()
+
+List Applicants
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+
+try {
+    $result = $api_instance->listApplicants();
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\Onfido\Models\ApplicantsList**](../Model/ApplicantsList.md)
+
+# **listChecks**
+> \Onfido\Models\ChecksList listChecks($applicant_id)
+
+Retrieve Checks
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+
+try {
+    $result = $api_instance->listChecks($applicant_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\ChecksList**](../Model/ChecksList.md)
+
+# **listDocuments**
+> \Onfido\Models\DocumentsList listDocuments($applicant_id)
+
+List documents
+
+All documents belonging to an applicant can be listed from this endpoint
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+
+try {
+    $result = $api_instance->listDocuments($applicant_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\DocumentsList**](../Model/DocumentsList.md)
+
+# **listReportTypeGroups**
+> \Onfido\Models\ReportTypeGroupsList listReportTypeGroups()
+
+Retrieve all report type groups
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+
+try {
+    $result = $api_instance->listReportTypeGroups();
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\Onfido\Models\ReportTypeGroupsList**](../Model/ReportTypeGroupsList.md)
+
+# **listReports**
+> \Onfido\Models\ReportsList listReports($check_id)
+
+All the reports belonging to a particular check can be listed from this endpoint.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$check_id = "check_id_example"; // string | 
+
+try {
+    $result = $api_instance->listReports($check_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **check_id** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\ReportsList**](../Model/ReportsList.md)
+
+# **resumeCheck**
+> resumeCheck($check_id)
+
+Resume a Check
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$check_id = "check_id_example"; // string | 
+
+try {
+    $api_instance->resumeCheck($check_id);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **check_id** | **string**|  |
+
+### Return type
+
+void (empty response body)
+
+# **resumeReport**
+> resumeReport($check_id, $report_id)
+
+This endpoint is for resuming individual paused reports.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$check_id = "check_id_example"; // string | 
+$report_id = "report_id_example"; // string | 
+
+try {
+    $api_instance->resumeReport($check_id, $report_id);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **check_id** | **string**|  |
+ **report_id** | **string**|  |
+
+### Return type
+
+void (empty response body)
+
+# **updateApplicant**
+> \Onfido\Models\Applicant updateApplicant($applicant_id, $data)
+
+Update Applicant
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+$data = new \Onfido\Models\Applicant(); // \Onfido\Models\Applicant | 
+
+try {
+    $result = $api_instance->updateApplicant($applicant_id, $data);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+ **data** | [**\Onfido\Models\Applicant**](../Model/\Onfido\Models\Applicant.md)|  | [optional]
+
+### Return type
+
+[**\Onfido\Models\Applicant**](../Model/Applicant.md)
+
+# **uploadDocument**
+> \Onfido\Models\Document uploadDocument($applicant_id, $type, $side, $file)
+
+Upload a document
+
+Documents are uploaded using this endpoint. Along with the file upload the relevant document type must be specified. Documents must be uploaded as a multipart form. The valid file types are: jpg, png and pdf. The file size must be between 2KB and 3MB.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+$type = "type_example"; // string | 
+$side = "side_example"; // string | 
+$file = "/path/to/file.txt"; // \SplFileObject | 
+
+try {
+    $result = $api_instance->uploadDocument($applicant_id, $type, $side, $file);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+ **type** | **string**|  |
+ **side** | **string**|  | [optional]
+ **file** | **\SplFileObject**|  | [optional]
+
+### Return type
+
+[**\Onfido\Models\Document**](../Model/Document.md)
+
