@@ -73,9 +73,9 @@ class Report implements ArrayAccess
         'status' => 'string',
         'result' => 'string',
         'variant' => 'string',
-        'options' => 'map[string,string]',
-        'breakdowns' => 'map[string,string]',
-        'properties' => 'map[string,string]'
+        'options' => 'object',
+        'breakdown' => 'object',
+        'properties' => 'object'
     ];
 
     public static function swaggerTypes()
@@ -96,7 +96,7 @@ class Report implements ArrayAccess
         'result' => 'result',
         'variant' => 'variant',
         'options' => 'options',
-        'breakdowns' => 'breakdowns',
+        'breakdown' => 'breakdown',
         'properties' => 'properties'
     ];
 
@@ -114,7 +114,7 @@ class Report implements ArrayAccess
         'result' => 'setResult',
         'variant' => 'setVariant',
         'options' => 'setOptions',
-        'breakdowns' => 'setBreakdowns',
+        'breakdown' => 'setBreakdown',
         'properties' => 'setProperties'
     ];
 
@@ -132,7 +132,7 @@ class Report implements ArrayAccess
         'result' => 'getResult',
         'variant' => 'getVariant',
         'options' => 'getOptions',
-        'breakdowns' => 'getBreakdowns',
+        'breakdown' => 'getBreakdown',
         'properties' => 'getProperties'
     ];
 
@@ -175,7 +175,7 @@ class Report implements ArrayAccess
         $this->container['result'] = isset($data['result']) ? $data['result'] : null;
         $this->container['variant'] = isset($data['variant']) ? $data['variant'] : null;
         $this->container['options'] = isset($data['options']) ? $data['options'] : null;
-        $this->container['breakdowns'] = isset($data['breakdowns']) ? $data['breakdowns'] : null;
+        $this->container['breakdown'] = isset($data['breakdown']) ? $data['breakdown'] : null;
         $this->container['properties'] = isset($data['properties']) ? $data['properties'] : null;
     }
 
@@ -351,7 +351,7 @@ class Report implements ArrayAccess
 
     /**
      * Gets options
-     * @return map[string,string]
+     * @return object
      */
     public function getOptions()
     {
@@ -360,7 +360,7 @@ class Report implements ArrayAccess
 
     /**
      * Sets options
-     * @param map[string,string] $options Report options. Some reports e.g. criminal_history expose additional options.
+     * @param object $options Report options. Some reports e.g. criminal_history expose additional options.
      * @return $this
      */
     public function setOptions($options)
@@ -371,29 +371,29 @@ class Report implements ArrayAccess
     }
 
     /**
-     * Gets breakdowns
-     * @return map[string,string]
+     * Gets breakdown
+     * @return object
      */
-    public function getBreakdowns()
+    public function getBreakdown()
     {
-        return $this->container['breakdowns'];
+        return $this->container['breakdown'];
     }
 
     /**
-     * Sets breakdowns
-     * @param map[string,string] $breakdowns The details of the report. This is specific to each type of report.
+     * Sets breakdown
+     * @param object $breakdown The details of the report. This is specific to each type of report.
      * @return $this
      */
-    public function setBreakdowns($breakdowns)
+    public function setBreakdown($breakdown)
     {
-        $this->container['breakdowns'] = $breakdowns;
+        $this->container['breakdown'] = $breakdown;
 
         return $this;
     }
 
     /**
      * Gets properties
-     * @return map[string,string]
+     * @return object
      */
     public function getProperties()
     {
@@ -402,7 +402,7 @@ class Report implements ArrayAccess
 
     /**
      * Sets properties
-     * @param map[string,string] $properties The properties associated with the report, if any.
+     * @param object $properties The properties associated with the report, if any.
      * @return $this
      */
     public function setProperties($properties)

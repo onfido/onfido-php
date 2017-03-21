@@ -160,9 +160,9 @@ class ReportTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "breakdowns"
+     * Test attribute "breakdown"
      */
-    public function testPropertyBreakdowns()
+    public function testPropertyBreakdown()
     {
 
     }
