@@ -1,6 +1,6 @@
 <?php
 /**
- * ReportsList
+ * WebhooksList
  *
  * PHP version 5
  *
@@ -44,7 +44,7 @@ namespace Onfido\Models;
 use \ArrayAccess;
 
 /**
- * ReportsList Class Doc Comment
+ * WebhooksList Class Doc Comment
  *
  * @category    Class */
 /**
@@ -53,20 +53,20 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ReportsList implements ArrayAccess
+class WebhooksList implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'ReportsList';
+    protected static $swaggerModelName = 'WebhooksList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'reports' => '\Onfido\Models\Report[]'
+        'webhooks' => '\Onfido\Models\Webhook[]'
     ];
 
     public static function swaggerTypes()
@@ -79,7 +79,7 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'reports' => 'reports'
+        'webhooks' => 'webhooks'
     ];
 
 
@@ -88,7 +88,7 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'reports' => 'setReports'
+        'webhooks' => 'setWebhooks'
     ];
 
 
@@ -97,7 +97,7 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'reports' => 'getReports'
+        'webhooks' => 'getWebhooks'
     ];
 
     public static function attributeMap()
@@ -131,7 +131,7 @@ class ReportsList implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['reports'] = isset($data['reports']) ? $data['reports'] : null;
+        $this->container['webhooks'] = isset($data['webhooks']) ? $data['webhooks'] : null;
     }
 
     /**
@@ -158,22 +158,22 @@ class ReportsList implements ArrayAccess
 
 
     /**
-     * Gets reports
-     * @return \Onfido\Models\Report[]
+     * Gets webhooks
+     * @return \Onfido\Models\Webhook[]
      */
-    public function getReports()
+    public function getWebhooks()
     {
-        return $this->container['reports'];
+        return $this->container['webhooks'];
     }
 
     /**
-     * Sets reports
-     * @param \Onfido\Models\Report[] $reports
+     * Sets webhooks
+     * @param \Onfido\Models\Webhook[] $webhooks
      * @return $this
      */
-    public function setReports($reports)
+    public function setWebhooks($webhooks)
     {
-        $this->container['reports'] = $reports;
+        $this->container['webhooks'] = $webhooks;
 
         return $this;
     }

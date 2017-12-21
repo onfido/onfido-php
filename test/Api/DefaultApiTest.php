@@ -13,7 +13,7 @@
 /**
  * Onfido API
  *
- * The Onfido API is used to submit background checking requests
+ * The Onfido API is used to submit check requests.
  *
  * OpenAPI spec version: 2.0.0
  * 
@@ -123,6 +123,17 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for createWebhook
+     *
+     * Create a webhook.
+     *
+     */
+    public function testCreateWebhook()
+    {
+
+    }
+
+    /**
      * Test case for destroyApplicant
      *
      * Delete Applicant.
@@ -140,6 +151,28 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
      *
      */
     public function testDownloadDocument()
+    {
+
+    }
+
+    /**
+     * Test case for downloadLivePhoto
+     *
+     * Download live photo.
+     *
+     */
+    public function testDownloadLivePhoto()
+    {
+
+    }
+
+    /**
+     * Test case for findAddresses
+     *
+     * Search for addresses by postcode.
+     *
+     */
+    public function testFindAddresses()
     {
 
     }
@@ -178,6 +211,17 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for findLivePhoto
+     *
+     * Retrieve live photo.
+     *
+     */
+    public function testFindLivePhoto()
+    {
+
+    }
+
+    /**
      * Test case for findReport
      *
      * A single report can be retrieved using this endpoint with the corresponding unique identifier..
@@ -195,6 +239,17 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
      *
      */
     public function testFindReportTypeGroup()
+    {
+
+    }
+
+    /**
+     * Test case for findWebhook
+     *
+     * Retrieve a Webhook.
+     *
+     */
+    public function testFindWebhook()
     {
 
     }
@@ -233,6 +288,17 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for listLivePhotos
+     *
+     * List live photos.
+     *
+     */
+    public function testListLivePhotos()
+    {
+
+    }
+
+    /**
      * Test case for listReportTypeGroups
      *
      * Retrieve all report type groups.
@@ -250,6 +316,17 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
      *
      */
     public function testListReports()
+    {
+
+    }
+
+    /**
+     * Test case for listWebhooks
+     *
+     * List webhooks.
+     *
+     */
+    public function testListWebhooks()
     {
 
     }
@@ -294,6 +371,17 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
      *
      */
     public function testUploadDocument()
+    {
+
+    }
+
+    /**
+     * Test case for uploadLivePhoto
+     *
+     * Upload live photo.
+     *
+     */
+    public function testUploadLivePhoto()
     {
 
     }

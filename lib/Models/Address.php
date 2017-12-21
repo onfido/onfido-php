@@ -14,7 +14,7 @@
 /**
  * Onfido API
  *
- * The Onfido API is used to submit background checking requests
+ * The Onfido API is used to submit check requests.
  *
  * OpenAPI spec version: 2.0.0
  * 
@@ -66,18 +66,18 @@ class Address implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'string',
         'flat_number' => 'string',
         'building_number' => 'string',
         'building_name' => 'string',
         'street' => 'string',
         'sub_street' => 'string',
         'town' => 'string',
-        'state' => 'string',
         'postcode' => 'string',
         'country' => 'string',
+        'id' => 'string',
         'start_date' => '\DateTime',
-        'end_date' => '\DateTime'
+        'end_date' => '\DateTime',
+        'state' => 'string'
     ];
 
     public static function swaggerTypes()
@@ -90,18 +90,18 @@ class Address implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
         'flat_number' => 'flat_number',
         'building_number' => 'building_number',
         'building_name' => 'building_name',
         'street' => 'street',
         'sub_street' => 'sub_street',
         'town' => 'town',
-        'state' => 'state',
         'postcode' => 'postcode',
         'country' => 'country',
+        'id' => 'id',
         'start_date' => 'start_date',
-        'end_date' => 'end_date'
+        'end_date' => 'end_date',
+        'state' => 'state'
     ];
 
 
@@ -110,18 +110,18 @@ class Address implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
         'flat_number' => 'setFlatNumber',
         'building_number' => 'setBuildingNumber',
         'building_name' => 'setBuildingName',
         'street' => 'setStreet',
         'sub_street' => 'setSubStreet',
         'town' => 'setTown',
-        'state' => 'setState',
         'postcode' => 'setPostcode',
         'country' => 'setCountry',
+        'id' => 'setId',
         'start_date' => 'setStartDate',
-        'end_date' => 'setEndDate'
+        'end_date' => 'setEndDate',
+        'state' => 'setState'
     ];
 
 
@@ -130,18 +130,18 @@ class Address implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
         'flat_number' => 'getFlatNumber',
         'building_number' => 'getBuildingNumber',
         'building_name' => 'getBuildingName',
         'street' => 'getStreet',
         'sub_street' => 'getSubStreet',
         'town' => 'getTown',
-        'state' => 'getState',
         'postcode' => 'getPostcode',
         'country' => 'getCountry',
+        'id' => 'getId',
         'start_date' => 'getStartDate',
-        'end_date' => 'getEndDate'
+        'end_date' => 'getEndDate',
+        'state' => 'getState'
     ];
 
     public static function attributeMap()
@@ -175,18 +175,18 @@ class Address implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['flat_number'] = isset($data['flat_number']) ? $data['flat_number'] : null;
         $this->container['building_number'] = isset($data['building_number']) ? $data['building_number'] : null;
         $this->container['building_name'] = isset($data['building_name']) ? $data['building_name'] : null;
         $this->container['street'] = isset($data['street']) ? $data['street'] : null;
         $this->container['sub_street'] = isset($data['sub_street']) ? $data['sub_street'] : null;
         $this->container['town'] = isset($data['town']) ? $data['town'] : null;
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         $this->container['postcode'] = isset($data['postcode']) ? $data['postcode'] : null;
         $this->container['country'] = isset($data['country']) ? $data['country'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['start_date'] = isset($data['start_date']) ? $data['start_date'] : null;
         $this->container['end_date'] = isset($data['end_date']) ? $data['end_date'] : null;
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
     }
 
     /**
@@ -211,27 +211,6 @@ class Address implements ArrayAccess
         return true;
     }
 
-
-    /**
-     * Gets id
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     * @param string $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
 
     /**
      * Gets flat_number
@@ -360,27 +339,6 @@ class Address implements ArrayAccess
     }
 
     /**
-     * Gets state
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     * @param string $state The address state. US states must use the USPS abbreviation (see also ISO 3166-2:US), for example AK, CA, or TX.
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-
-    /**
      * Gets postcode
      * @return string
      */
@@ -423,6 +381,27 @@ class Address implements ArrayAccess
     }
 
     /**
+     * Gets id
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     * @param string $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
      * Gets start_date
      * @return \DateTime
      */
@@ -460,6 +439,27 @@ class Address implements ArrayAccess
     public function setEndDate($end_date)
     {
         $this->container['end_date'] = $end_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     * @param string $state The address state. US states must use the USPS abbreviation (see also ISO 3166-2:US), for example AK, CA, or TX.
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
         return $this;
     }

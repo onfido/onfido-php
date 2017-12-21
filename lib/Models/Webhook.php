@@ -1,6 +1,6 @@
 <?php
 /**
- * ReportsList
+ * Webhook
  *
  * PHP version 5
  *
@@ -44,7 +44,7 @@ namespace Onfido\Models;
 use \ArrayAccess;
 
 /**
- * ReportsList Class Doc Comment
+ * Webhook Class Doc Comment
  *
  * @category    Class */
 /**
@@ -53,20 +53,26 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ReportsList implements ArrayAccess
+class Webhook implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'ReportsList';
+    protected static $swaggerModelName = 'Webhook';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'reports' => '\Onfido\Models\Report[]'
+        'id' => 'string',
+        'url' => 'string',
+        'token' => 'string',
+        'enabled' => 'bool',
+        'href' => 'string',
+        'environments' => 'string[]',
+        'events' => 'string[]'
     ];
 
     public static function swaggerTypes()
@@ -79,7 +85,13 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'reports' => 'reports'
+        'id' => 'id',
+        'url' => 'url',
+        'token' => 'token',
+        'enabled' => 'enabled',
+        'href' => 'href',
+        'environments' => 'environments',
+        'events' => 'events'
     ];
 
 
@@ -88,7 +100,13 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'reports' => 'setReports'
+        'id' => 'setId',
+        'url' => 'setUrl',
+        'token' => 'setToken',
+        'enabled' => 'setEnabled',
+        'href' => 'setHref',
+        'environments' => 'setEnvironments',
+        'events' => 'setEvents'
     ];
 
 
@@ -97,7 +115,13 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'reports' => 'getReports'
+        'id' => 'getId',
+        'url' => 'getUrl',
+        'token' => 'getToken',
+        'enabled' => 'getEnabled',
+        'href' => 'getHref',
+        'environments' => 'getEnvironments',
+        'events' => 'getEvents'
     ];
 
     public static function attributeMap()
@@ -131,7 +155,13 @@ class ReportsList implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['reports'] = isset($data['reports']) ? $data['reports'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
+        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
+        $this->container['enabled'] = isset($data['enabled']) ? $data['enabled'] : null;
+        $this->container['href'] = isset($data['href']) ? $data['href'] : null;
+        $this->container['environments'] = isset($data['environments']) ? $data['environments'] : null;
+        $this->container['events'] = isset($data['events']) ? $data['events'] : null;
     }
 
     /**
@@ -158,22 +188,148 @@ class ReportsList implements ArrayAccess
 
 
     /**
-     * Gets reports
-     * @return \Onfido\Models\Report[]
+     * Gets id
+     * @return string
      */
-    public function getReports()
+    public function getId()
     {
-        return $this->container['reports'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets reports
-     * @param \Onfido\Models\Report[] $reports
+     * Sets id
+     * @param string $id The unique identifier of the webhook.
      * @return $this
      */
-    public function setReports($reports)
+    public function setId($id)
     {
-        $this->container['reports'] = $reports;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets url
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
+
+    /**
+     * Sets url
+     * @param string $url The url of the webhook
+     * @return $this
+     */
+    public function setUrl($url)
+    {
+        $this->container['url'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Gets token
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->container['token'];
+    }
+
+    /**
+     * Sets token
+     * @param string $token Webhook secret token used to sign the webhook's payload
+     * @return $this
+     */
+    public function setToken($token)
+    {
+        $this->container['token'] = $token;
+
+        return $this;
+    }
+
+    /**
+     * Gets enabled
+     * @return bool
+     */
+    public function getEnabled()
+    {
+        return $this->container['enabled'];
+    }
+
+    /**
+     * Sets enabled
+     * @param bool $enabled Determine if the webhook is active.
+     * @return $this
+     */
+    public function setEnabled($enabled)
+    {
+        $this->container['enabled'] = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets href
+     * @return string
+     */
+    public function getHref()
+    {
+        return $this->container['href'];
+    }
+
+    /**
+     * Sets href
+     * @param string $href The API endpoint to retrieve the webhook.
+     * @return $this
+     */
+    public function setHref($href)
+    {
+        $this->container['href'] = $href;
+
+        return $this;
+    }
+
+    /**
+     * Gets environments
+     * @return string[]
+     */
+    public function getEnvironments()
+    {
+        return $this->container['environments'];
+    }
+
+    /**
+     * Sets environments
+     * @param string[] $environments The environments from which the webhook will receive events.
+     * @return $this
+     */
+    public function setEnvironments($environments)
+    {
+        $this->container['environments'] = $environments;
+
+        return $this;
+    }
+
+    /**
+     * Gets events
+     * @return string[]
+     */
+    public function getEvents()
+    {
+        return $this->container['events'];
+    }
+
+    /**
+     * Sets events
+     * @param string[] $events The events that will be published to the webhook.
+     * @return $this
+     */
+    public function setEvents($events)
+    {
+        $this->container['events'] = $events;
 
         return $this;
     }

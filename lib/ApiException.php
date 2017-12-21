@@ -13,7 +13,7 @@
 /**
  * Onfido API
  *
- * The Onfido API is used to submit background checking requests
+ * The Onfido API is used to submit check requests.
  *
  * OpenAPI spec version: 2.0.0
  * 

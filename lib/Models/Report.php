@@ -14,7 +14,7 @@
 /**
  * Onfido API
  *
- * The Onfido API is used to submit background checking requests
+ * The Onfido API is used to submit check requests.
  *
  * OpenAPI spec version: 2.0.0
  * 
@@ -72,6 +72,7 @@ class Report implements ArrayAccess
         'name' => 'string',
         'status' => 'string',
         'result' => 'string',
+        'sub_result' => 'string',
         'variant' => 'string',
         'options' => 'object',
         'breakdown' => 'object',
@@ -94,6 +95,7 @@ class Report implements ArrayAccess
         'name' => 'name',
         'status' => 'status',
         'result' => 'result',
+        'sub_result' => 'sub_result',
         'variant' => 'variant',
         'options' => 'options',
         'breakdown' => 'breakdown',
@@ -112,6 +114,7 @@ class Report implements ArrayAccess
         'name' => 'setName',
         'status' => 'setStatus',
         'result' => 'setResult',
+        'sub_result' => 'setSubResult',
         'variant' => 'setVariant',
         'options' => 'setOptions',
         'breakdown' => 'setBreakdown',
@@ -130,6 +133,7 @@ class Report implements ArrayAccess
         'name' => 'getName',
         'status' => 'getStatus',
         'result' => 'getResult',
+        'sub_result' => 'getSubResult',
         'variant' => 'getVariant',
         'options' => 'getOptions',
         'breakdown' => 'getBreakdown',
@@ -173,6 +177,7 @@ class Report implements ArrayAccess
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
         $this->container['result'] = isset($data['result']) ? $data['result'] : null;
+        $this->container['sub_result'] = isset($data['sub_result']) ? $data['sub_result'] : null;
         $this->container['variant'] = isset($data['variant']) ? $data['variant'] : null;
         $this->container['options'] = isset($data['options']) ? $data['options'] : null;
         $this->container['breakdown'] = isset($data['breakdown']) ? $data['breakdown'] : null;
@@ -324,6 +329,27 @@ class Report implements ArrayAccess
     public function setResult($result)
     {
         $this->container['result'] = $result;
+
+        return $this;
+    }
+
+    /**
+     * Gets sub_result
+     * @return string
+     */
+    public function getSubResult()
+    {
+        return $this->container['sub_result'];
+    }
+
+    /**
+     * Sets sub_result
+     * @param string $sub_result The sub_result of the report. It gives a more detailed result for document reports only, and will be null otherwise.
+     * @return $this
+     */
+    public function setSubResult($sub_result)
+    {
+        $this->container['sub_result'] = $sub_result;
 
         return $this;
     }

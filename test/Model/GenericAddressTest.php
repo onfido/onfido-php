@@ -1,6 +1,6 @@
 <?php
 /**
- * IdNumberTest
+ * GenericAddressTest
  *
  * PHP version 5
  *
@@ -42,17 +42,17 @@
 namespace Onfido;
 
 /**
- * IdNumberTest Class Doc Comment
+ * GenericAddressTest Class Doc Comment
  *
  * @category    Class */
-// * @description IdNumber
+// * @description GenericAddress
 /**
  * @package     Onfido
  * @author      http://github.com/swagger-api/swagger-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class IdNumberTest extends \PHPUnit_Framework_TestCase
+class GenericAddressTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -88,33 +88,73 @@ class IdNumberTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "IdNumber"
+     * Test "GenericAddress"
      */
-    public function testIdNumber()
+    public function testGenericAddress()
     {
 
     }
 
     /**
-     * Test attribute "type"
+     * Test attribute "flat_number"
      */
-    public function testPropertyType()
+    public function testPropertyFlatNumber()
     {
 
     }
 
     /**
-     * Test attribute "value"
+     * Test attribute "building_number"
      */
-    public function testPropertyValue()
+    public function testPropertyBuildingNumber()
     {
 
     }
 
     /**
-     * Test attribute "state_code"
+     * Test attribute "building_name"
      */
-    public function testPropertyStateCode()
+    public function testPropertyBuildingName()
+    {
+
+    }
+
+    /**
+     * Test attribute "street"
+     */
+    public function testPropertyStreet()
+    {
+
+    }
+
+    /**
+     * Test attribute "sub_street"
+     */
+    public function testPropertySubStreet()
+    {
+
+    }
+
+    /**
+     * Test attribute "town"
+     */
+    public function testPropertyTown()
+    {
+
+    }
+
+    /**
+     * Test attribute "postcode"
+     */
+    public function testPropertyPostcode()
+    {
+
+    }
+
+    /**
+     * Test attribute "country"
+     */
+    public function testPropertyCountry()
     {
 
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Error
+ * LivePhoto
  *
  * PHP version 5
  *
@@ -44,7 +44,7 @@ namespace Onfido\Models;
 use \ArrayAccess;
 
 /**
- * Error Class Doc Comment
+ * LivePhoto Class Doc Comment
  *
  * @category    Class */
 /**
@@ -53,13 +53,13 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class Error implements ArrayAccess
+class LivePhoto implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'Error';
+    protected static $swaggerModelName = 'LivePhoto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -67,9 +67,13 @@ class Error implements ArrayAccess
       */
     protected static $swaggerTypes = [
         'id' => 'string',
-        'type' => 'string',
-        'message' => 'string',
-        'fields' => 'object'
+        'created_at' => '\DateTime',
+        'applicant_id' => 'string',
+        'href' => 'string',
+        'download_href' => 'string',
+        'file_name' => 'string',
+        'file_size' => 'int',
+        'file_type' => 'string'
     ];
 
     public static function swaggerTypes()
@@ -83,9 +87,13 @@ class Error implements ArrayAccess
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'type' => 'type',
-        'message' => 'message',
-        'fields' => 'fields'
+        'created_at' => 'created_at',
+        'applicant_id' => 'applicant_id',
+        'href' => 'href',
+        'download_href' => 'download_href',
+        'file_name' => 'file_name',
+        'file_size' => 'file_size',
+        'file_type' => 'file_type'
     ];
 
 
@@ -95,9 +103,13 @@ class Error implements ArrayAccess
      */
     protected static $setters = [
         'id' => 'setId',
-        'type' => 'setType',
-        'message' => 'setMessage',
-        'fields' => 'setFields'
+        'created_at' => 'setCreatedAt',
+        'applicant_id' => 'setApplicantId',
+        'href' => 'setHref',
+        'download_href' => 'setDownloadHref',
+        'file_name' => 'setFileName',
+        'file_size' => 'setFileSize',
+        'file_type' => 'setFileType'
     ];
 
 
@@ -107,9 +119,13 @@ class Error implements ArrayAccess
      */
     protected static $getters = [
         'id' => 'getId',
-        'type' => 'getType',
-        'message' => 'getMessage',
-        'fields' => 'getFields'
+        'created_at' => 'getCreatedAt',
+        'applicant_id' => 'getApplicantId',
+        'href' => 'getHref',
+        'download_href' => 'getDownloadHref',
+        'file_name' => 'getFileName',
+        'file_size' => 'getFileSize',
+        'file_type' => 'getFileType'
     ];
 
     public static function attributeMap()
@@ -144,9 +160,13 @@ class Error implements ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
-        $this->container['fields'] = isset($data['fields']) ? $data['fields'] : null;
+        $this->container['created_at'] = isset($data['created_at']) ? $data['created_at'] : null;
+        $this->container['applicant_id'] = isset($data['applicant_id']) ? $data['applicant_id'] : null;
+        $this->container['href'] = isset($data['href']) ? $data['href'] : null;
+        $this->container['download_href'] = isset($data['download_href']) ? $data['download_href'] : null;
+        $this->container['file_name'] = isset($data['file_name']) ? $data['file_name'] : null;
+        $this->container['file_size'] = isset($data['file_size']) ? $data['file_size'] : null;
+        $this->container['file_type'] = isset($data['file_type']) ? $data['file_type'] : null;
     }
 
     /**
@@ -183,7 +203,7 @@ class Error implements ArrayAccess
 
     /**
      * Sets id
-     * @param string $id
+     * @param string $id The unique identifier for the document.
      * @return $this
      */
     public function setId($id)
@@ -194,64 +214,148 @@ class Error implements ArrayAccess
     }
 
     /**
-     * Gets type
-     * @return string
+     * Gets created_at
+     * @return \DateTime
      */
-    public function getType()
+    public function getCreatedAt()
     {
-        return $this->container['type'];
+        return $this->container['created_at'];
     }
 
     /**
-     * Sets type
-     * @param string $type
+     * Sets created_at
+     * @param \DateTime $created_at The date and time at which the document was uploaded.
      * @return $this
      */
-    public function setType($type)
+    public function setCreatedAt($created_at)
     {
-        $this->container['type'] = $type;
+        $this->container['created_at'] = $created_at;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets applicant_id
      * @return string
      */
-    public function getMessage()
+    public function getApplicantId()
     {
-        return $this->container['message'];
+        return $this->container['applicant_id'];
     }
 
     /**
-     * Sets message
-     * @param string $message
+     * Sets applicant_id
+     * @param string $applicant_id The id of the applicant the live photo belongs to.
      * @return $this
      */
-    public function setMessage($message)
+    public function setApplicantId($applicant_id)
     {
-        $this->container['message'] = $message;
+        $this->container['applicant_id'] = $applicant_id;
 
         return $this;
     }
 
     /**
-     * Gets fields
-     * @return object
+     * Gets href
+     * @return string
      */
-    public function getFields()
+    public function getHref()
     {
-        return $this->container['fields'];
+        return $this->container['href'];
     }
 
     /**
-     * Sets fields
-     * @param object $fields
+     * Sets href
+     * @param string $href The uri of this resource.
      * @return $this
      */
-    public function setFields($fields)
+    public function setHref($href)
     {
-        $this->container['fields'] = $fields;
+        $this->container['href'] = $href;
+
+        return $this;
+    }
+
+    /**
+     * Gets download_href
+     * @return string
+     */
+    public function getDownloadHref()
+    {
+        return $this->container['download_href'];
+    }
+
+    /**
+     * Sets download_href
+     * @param string $download_href The uri that can be used to download the document.
+     * @return $this
+     */
+    public function setDownloadHref($download_href)
+    {
+        $this->container['download_href'] = $download_href;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_name
+     * @return string
+     */
+    public function getFileName()
+    {
+        return $this->container['file_name'];
+    }
+
+    /**
+     * Sets file_name
+     * @param string $file_name The name of the uploaded file.
+     * @return $this
+     */
+    public function setFileName($file_name)
+    {
+        $this->container['file_name'] = $file_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_size
+     * @return int
+     */
+    public function getFileSize()
+    {
+        return $this->container['file_size'];
+    }
+
+    /**
+     * Sets file_size
+     * @param int $file_size The size of the file in bytes.
+     * @return $this
+     */
+    public function setFileSize($file_size)
+    {
+        $this->container['file_size'] = $file_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_type
+     * @return string
+     */
+    public function getFileType()
+    {
+        return $this->container['file_type'];
+    }
+
+    /**
+     * Sets file_type
+     * @param string $file_type The file type of the uploaded file.
+     * @return $this
+     */
+    public function setFileType($file_type)
+    {
+        $this->container['file_type'] = $file_type;
 
         return $this;
     }

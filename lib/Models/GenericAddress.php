@@ -1,6 +1,6 @@
 <?php
 /**
- * Error
+ * GenericAddress
  *
  * PHP version 5
  *
@@ -44,7 +44,7 @@ namespace Onfido\Models;
 use \ArrayAccess;
 
 /**
- * Error Class Doc Comment
+ * GenericAddress Class Doc Comment
  *
  * @category    Class */
 /**
@@ -53,23 +53,27 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class Error implements ArrayAccess
+class GenericAddress implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'Error';
+    protected static $swaggerModelName = 'GenericAddress';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'string',
-        'type' => 'string',
-        'message' => 'string',
-        'fields' => 'object'
+        'flat_number' => 'string',
+        'building_number' => 'string',
+        'building_name' => 'string',
+        'street' => 'string',
+        'sub_street' => 'string',
+        'town' => 'string',
+        'postcode' => 'string',
+        'country' => 'string'
     ];
 
     public static function swaggerTypes()
@@ -82,10 +86,14 @@ class Error implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'type' => 'type',
-        'message' => 'message',
-        'fields' => 'fields'
+        'flat_number' => 'flat_number',
+        'building_number' => 'building_number',
+        'building_name' => 'building_name',
+        'street' => 'street',
+        'sub_street' => 'sub_street',
+        'town' => 'town',
+        'postcode' => 'postcode',
+        'country' => 'country'
     ];
 
 
@@ -94,10 +102,14 @@ class Error implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'type' => 'setType',
-        'message' => 'setMessage',
-        'fields' => 'setFields'
+        'flat_number' => 'setFlatNumber',
+        'building_number' => 'setBuildingNumber',
+        'building_name' => 'setBuildingName',
+        'street' => 'setStreet',
+        'sub_street' => 'setSubStreet',
+        'town' => 'setTown',
+        'postcode' => 'setPostcode',
+        'country' => 'setCountry'
     ];
 
 
@@ -106,10 +118,14 @@ class Error implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'type' => 'getType',
-        'message' => 'getMessage',
-        'fields' => 'getFields'
+        'flat_number' => 'getFlatNumber',
+        'building_number' => 'getBuildingNumber',
+        'building_name' => 'getBuildingName',
+        'street' => 'getStreet',
+        'sub_street' => 'getSubStreet',
+        'town' => 'getTown',
+        'postcode' => 'getPostcode',
+        'country' => 'getCountry'
     ];
 
     public static function attributeMap()
@@ -143,10 +159,14 @@ class Error implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
-        $this->container['fields'] = isset($data['fields']) ? $data['fields'] : null;
+        $this->container['flat_number'] = isset($data['flat_number']) ? $data['flat_number'] : null;
+        $this->container['building_number'] = isset($data['building_number']) ? $data['building_number'] : null;
+        $this->container['building_name'] = isset($data['building_name']) ? $data['building_name'] : null;
+        $this->container['street'] = isset($data['street']) ? $data['street'] : null;
+        $this->container['sub_street'] = isset($data['sub_street']) ? $data['sub_street'] : null;
+        $this->container['town'] = isset($data['town']) ? $data['town'] : null;
+        $this->container['postcode'] = isset($data['postcode']) ? $data['postcode'] : null;
+        $this->container['country'] = isset($data['country']) ? $data['country'] : null;
     }
 
     /**
@@ -173,85 +193,169 @@ class Error implements ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets flat_number
      * @return string
      */
-    public function getId()
+    public function getFlatNumber()
     {
-        return $this->container['id'];
+        return $this->container['flat_number'];
     }
 
     /**
-     * Sets id
-     * @param string $id
+     * Sets flat_number
+     * @param string $flat_number The flat number of this address
      * @return $this
      */
-    public function setId($id)
+    public function setFlatNumber($flat_number)
     {
-        $this->container['id'] = $id;
+        $this->container['flat_number'] = $flat_number;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets building_number
      * @return string
      */
-    public function getType()
+    public function getBuildingNumber()
     {
-        return $this->container['type'];
+        return $this->container['building_number'];
     }
 
     /**
-     * Sets type
-     * @param string $type
+     * Sets building_number
+     * @param string $building_number The building number of this address
      * @return $this
      */
-    public function setType($type)
+    public function setBuildingNumber($building_number)
     {
-        $this->container['type'] = $type;
+        $this->container['building_number'] = $building_number;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets building_name
      * @return string
      */
-    public function getMessage()
+    public function getBuildingName()
     {
-        return $this->container['message'];
+        return $this->container['building_name'];
     }
 
     /**
-     * Sets message
-     * @param string $message
+     * Sets building_name
+     * @param string $building_name The building name of this address
      * @return $this
      */
-    public function setMessage($message)
+    public function setBuildingName($building_name)
     {
-        $this->container['message'] = $message;
+        $this->container['building_name'] = $building_name;
 
         return $this;
     }
 
     /**
-     * Gets fields
-     * @return object
+     * Gets street
+     * @return string
      */
-    public function getFields()
+    public function getStreet()
     {
-        return $this->container['fields'];
+        return $this->container['street'];
     }
 
     /**
-     * Sets fields
-     * @param object $fields
+     * Sets street
+     * @param string $street The street of the applicant’s address
      * @return $this
      */
-    public function setFields($fields)
+    public function setStreet($street)
     {
-        $this->container['fields'] = $fields;
+        $this->container['street'] = $street;
+
+        return $this;
+    }
+
+    /**
+     * Gets sub_street
+     * @return string
+     */
+    public function getSubStreet()
+    {
+        return $this->container['sub_street'];
+    }
+
+    /**
+     * Sets sub_street
+     * @param string $sub_street The sub-street of the applicant’s address
+     * @return $this
+     */
+    public function setSubStreet($sub_street)
+    {
+        $this->container['sub_street'] = $sub_street;
+
+        return $this;
+    }
+
+    /**
+     * Gets town
+     * @return string
+     */
+    public function getTown()
+    {
+        return $this->container['town'];
+    }
+
+    /**
+     * Sets town
+     * @param string $town The town of the applicant’s address
+     * @return $this
+     */
+    public function setTown($town)
+    {
+        $this->container['town'] = $town;
+
+        return $this;
+    }
+
+    /**
+     * Gets postcode
+     * @return string
+     */
+    public function getPostcode()
+    {
+        return $this->container['postcode'];
+    }
+
+    /**
+     * Sets postcode
+     * @param string $postcode The postcode or ZIP of the applicant’s address
+     * @return $this
+     */
+    public function setPostcode($postcode)
+    {
+        $this->container['postcode'] = $postcode;
+
+        return $this;
+    }
+
+    /**
+     * Gets country
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->container['country'];
+    }
+
+    /**
+     * Sets country
+     * @param string $country The 3 character ISO country code of this address. For example, GBR is the country code for the United Kingdom
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->container['country'] = $country;
 
         return $this;
     }

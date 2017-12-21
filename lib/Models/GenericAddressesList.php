@@ -1,6 +1,6 @@
 <?php
 /**
- * ReportsList
+ * GenericAddressesList
  *
  * PHP version 5
  *
@@ -44,7 +44,7 @@ namespace Onfido\Models;
 use \ArrayAccess;
 
 /**
- * ReportsList Class Doc Comment
+ * GenericAddressesList Class Doc Comment
  *
  * @category    Class */
 /**
@@ -53,20 +53,20 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ReportsList implements ArrayAccess
+class GenericAddressesList implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'ReportsList';
+    protected static $swaggerModelName = 'GenericAddressesList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'reports' => '\Onfido\Models\Report[]'
+        'addresses' => '\Onfido\Models\GenericAddress[]'
     ];
 
     public static function swaggerTypes()
@@ -79,7 +79,7 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'reports' => 'reports'
+        'addresses' => 'addresses'
     ];
 
 
@@ -88,7 +88,7 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'reports' => 'setReports'
+        'addresses' => 'setAddresses'
     ];
 
 
@@ -97,7 +97,7 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'reports' => 'getReports'
+        'addresses' => 'getAddresses'
     ];
 
     public static function attributeMap()
@@ -131,7 +131,7 @@ class ReportsList implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['reports'] = isset($data['reports']) ? $data['reports'] : null;
+        $this->container['addresses'] = isset($data['addresses']) ? $data['addresses'] : null;
     }
 
     /**
@@ -158,22 +158,22 @@ class ReportsList implements ArrayAccess
 
 
     /**
-     * Gets reports
-     * @return \Onfido\Models\Report[]
+     * Gets addresses
+     * @return \Onfido\Models\GenericAddress[]
      */
-    public function getReports()
+    public function getAddresses()
     {
-        return $this->container['reports'];
+        return $this->container['addresses'];
     }
 
     /**
-     * Sets reports
-     * @param \Onfido\Models\Report[] $reports
+     * Sets addresses
+     * @param \Onfido\Models\GenericAddress[] $addresses
      * @return $this
      */
-    public function setReports($reports)
+    public function setAddresses($addresses)
     {
-        $this->container['reports'] = $reports;
+        $this->container['addresses'] = $addresses;
 
         return $this;
     }

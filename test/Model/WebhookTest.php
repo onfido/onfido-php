@@ -1,6 +1,6 @@
 <?php
 /**
- * IdNumberTest
+ * WebhookTest
  *
  * PHP version 5
  *
@@ -42,17 +42,17 @@
 namespace Onfido;
 
 /**
- * IdNumberTest Class Doc Comment
+ * WebhookTest Class Doc Comment
  *
  * @category    Class */
-// * @description IdNumber
+// * @description Webhook
 /**
  * @package     Onfido
  * @author      http://github.com/swagger-api/swagger-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class IdNumberTest extends \PHPUnit_Framework_TestCase
+class WebhookTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -88,33 +88,65 @@ class IdNumberTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "IdNumber"
+     * Test "Webhook"
      */
-    public function testIdNumber()
+    public function testWebhook()
     {
 
     }
 
     /**
-     * Test attribute "type"
+     * Test attribute "id"
      */
-    public function testPropertyType()
+    public function testPropertyId()
     {
 
     }
 
     /**
-     * Test attribute "value"
+     * Test attribute "url"
      */
-    public function testPropertyValue()
+    public function testPropertyUrl()
     {
 
     }
 
     /**
-     * Test attribute "state_code"
+     * Test attribute "token"
      */
-    public function testPropertyStateCode()
+    public function testPropertyToken()
+    {
+
+    }
+
+    /**
+     * Test attribute "enabled"
+     */
+    public function testPropertyEnabled()
+    {
+
+    }
+
+    /**
+     * Test attribute "href"
+     */
+    public function testPropertyHref()
+    {
+
+    }
+
+    /**
+     * Test attribute "environments"
+     */
+    public function testPropertyEnvironments()
+    {
+
+    }
+
+    /**
+     * Test attribute "events"
+     */
+    public function testPropertyEvents()
     {
 
     }

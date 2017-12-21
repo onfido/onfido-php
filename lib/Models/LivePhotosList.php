@@ -1,6 +1,6 @@
 <?php
 /**
- * ReportsList
+ * LivePhotosList
  *
  * PHP version 5
  *
@@ -44,7 +44,7 @@ namespace Onfido\Models;
 use \ArrayAccess;
 
 /**
- * ReportsList Class Doc Comment
+ * LivePhotosList Class Doc Comment
  *
  * @category    Class */
 /**
@@ -53,20 +53,20 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ReportsList implements ArrayAccess
+class LivePhotosList implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'ReportsList';
+    protected static $swaggerModelName = 'LivePhotosList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'reports' => '\Onfido\Models\Report[]'
+        'live_photos' => '\Onfido\Models\LivePhoto[]'
     ];
 
     public static function swaggerTypes()
@@ -79,7 +79,7 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'reports' => 'reports'
+        'live_photos' => 'live_photos'
     ];
 
 
@@ -88,7 +88,7 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'reports' => 'setReports'
+        'live_photos' => 'setLivePhotos'
     ];
 
 
@@ -97,7 +97,7 @@ class ReportsList implements ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'reports' => 'getReports'
+        'live_photos' => 'getLivePhotos'
     ];
 
     public static function attributeMap()
@@ -131,7 +131,7 @@ class ReportsList implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['reports'] = isset($data['reports']) ? $data['reports'] : null;
+        $this->container['live_photos'] = isset($data['live_photos']) ? $data['live_photos'] : null;
     }
 
     /**
@@ -158,22 +158,22 @@ class ReportsList implements ArrayAccess
 
 
     /**
-     * Gets reports
-     * @return \Onfido\Models\Report[]
+     * Gets live_photos
+     * @return \Onfido\Models\LivePhoto[]
      */
-    public function getReports()
+    public function getLivePhotos()
     {
-        return $this->container['reports'];
+        return $this->container['live_photos'];
     }
 
     /**
-     * Sets reports
-     * @param \Onfido\Models\Report[] $reports
+     * Sets live_photos
+     * @param \Onfido\Models\LivePhoto[] $live_photos
      * @return $this
      */
-    public function setReports($reports)
+    public function setLivePhotos($live_photos)
     {
-        $this->container['reports'] = $reports;
+        $this->container['live_photos'] = $live_photos;
 
         return $this;
     }

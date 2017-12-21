@@ -1,6 +1,6 @@
 <?php
 /**
- * IdNumberTest
+ * LivePhotosListTest
  *
  * PHP version 5
  *
@@ -42,17 +42,17 @@
 namespace Onfido;
 
 /**
- * IdNumberTest Class Doc Comment
+ * LivePhotosListTest Class Doc Comment
  *
  * @category    Class */
-// * @description IdNumber
+// * @description LivePhotosList
 /**
  * @package     Onfido
  * @author      http://github.com/swagger-api/swagger-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class IdNumberTest extends \PHPUnit_Framework_TestCase
+class LivePhotosListTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -88,33 +88,17 @@ class IdNumberTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "IdNumber"
+     * Test "LivePhotosList"
      */
-    public function testIdNumber()
+    public function testLivePhotosList()
     {
 
     }
 
     /**
-     * Test attribute "type"
+     * Test attribute "live_photos"
      */
-    public function testPropertyType()
-    {
-
-    }
-
-    /**
-     * Test attribute "value"
-     */
-    public function testPropertyValue()
-    {
-
-    }
-
-    /**
-     * Test attribute "state_code"
-     */
-    public function testPropertyStateCode()
+    public function testPropertyLivePhotos()
     {
 
     }

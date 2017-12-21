@@ -7,22 +7,30 @@ Method | HTTP request | Description
 [**cancelReport**](DefaultApi.md#cancelReport) | **POST** /checks/{check_id}/reports/{report_id}/cancel | This endpoint is for cancelling individual paused reports.
 [**createApplicant**](DefaultApi.md#createApplicant) | **POST** /applicants | Create Applicant
 [**createCheck**](DefaultApi.md#createCheck) | **POST** /applicants/{applicant_id}/checks | Create a check
+[**createWebhook**](DefaultApi.md#createWebhook) | **POST** /webhooks | Create a webhook
 [**destroyApplicant**](DefaultApi.md#destroyApplicant) | **DELETE** /applicants/{applicant_id} | Delete Applicant
 [**downloadDocument**](DefaultApi.md#downloadDocument) | **GET** /applicants/{applicant_id}/documents/{document_id}/download | Download a documents raw data
+[**downloadLivePhoto**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
+[**findAddresses**](DefaultApi.md#findAddresses) | **GET** /addresses/pick | Search for addresses by postcode
 [**findApplicant**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
 [**findCheck**](DefaultApi.md#findCheck) | **GET** /applicants/{applicant_id}/checks/{check_id} | Retrieve a Check
 [**findDocument**](DefaultApi.md#findDocument) | **GET** /applicants/{applicant_id}/documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
+[**findLivePhoto**](DefaultApi.md#findLivePhoto) | **GET** /live_photos/{live_photo_id} | Retrieve live photo
 [**findReport**](DefaultApi.md#findReport) | **GET** /checks/{check_id}/reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
 [**findReportTypeGroup**](DefaultApi.md#findReportTypeGroup) | **GET** /report_type_groups/{report_type_group_id} | Retrieve single report type group object
+[**findWebhook**](DefaultApi.md#findWebhook) | **GET** /webhooks/{webhook_id} | Retrieve a Webhook
 [**listApplicants**](DefaultApi.md#listApplicants) | **GET** /applicants | List Applicants
 [**listChecks**](DefaultApi.md#listChecks) | **GET** /applicants/{applicant_id}/checks | Retrieve Checks
 [**listDocuments**](DefaultApi.md#listDocuments) | **GET** /applicants/{applicant_id}/documents | List documents
+[**listLivePhotos**](DefaultApi.md#listLivePhotos) | **GET** /live_photos | List live photos
 [**listReportTypeGroups**](DefaultApi.md#listReportTypeGroups) | **GET** /report_type_groups | Retrieve all report type groups
 [**listReports**](DefaultApi.md#listReports) | **GET** /checks/{check_id}/reports | All the reports belonging to a particular check can be listed from this endpoint.
+[**listWebhooks**](DefaultApi.md#listWebhooks) | **GET** /webhooks | List webhooks
 [**resumeCheck**](DefaultApi.md#resumeCheck) | **POST** /checks/{check_id}/resume | Resume a Check
 [**resumeReport**](DefaultApi.md#resumeReport) | **POST** /checks/{check_id}/reports/{report_id}/resume | This endpoint is for resuming individual paused reports.
 [**updateApplicant**](DefaultApi.md#updateApplicant) | **PUT** /applicants/{applicant_id} | Update Applicant
 [**uploadDocument**](DefaultApi.md#uploadDocument) | **POST** /applicants/{applicant_id}/documents | Upload a document
+[**uploadLivePhoto**](DefaultApi.md#uploadLivePhoto) | **POST** /live_photos | Upload live photo
 
 
 # **cancelReport**
@@ -136,6 +144,42 @@ Name | Type | Description  | Notes
 
 [**\Onfido\Models\Check**](../Model/Check.md)
 
+# **createWebhook**
+> \Onfido\Models\Webhook createWebhook($data)
+
+Create a webhook
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$data = new \Onfido\Models\Webhook(); // \Onfido\Models\Webhook | 
+
+try {
+    $result = $api_instance->createWebhook($data);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**\Onfido\Models\Webhook**](../Model/\Onfido\Models\Webhook.md)|  | [optional]
+
+### Return type
+
+[**\Onfido\Models\Webhook**](../Model/Webhook.md)
+
 # **destroyApplicant**
 > destroyApplicant($applicant_id)
 
@@ -208,6 +252,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\SplFileObject**](../Model/\SplFileObject.md)
+
+# **downloadLivePhoto**
+> \SplFileObject downloadLivePhoto($live_photo_id)
+
+Download live photo
+
+Live photos are downloaded using this endpoint.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$live_photo_id = "live_photo_id_example"; // string | The live photo’s unique identifier.
+
+try {
+    $result = $api_instance->downloadLivePhoto($live_photo_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **live_photo_id** | **string**| The live photo’s unique identifier. |
+
+### Return type
+
+[**\SplFileObject**](../Model/\SplFileObject.md)
+
+# **findAddresses**
+> \Onfido\Models\GenericAddressesList findAddresses($postcode)
+
+Search for addresses by postcode
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$postcode = "postcode_example"; // string | 
+
+try {
+    $result = $api_instance->findAddresses($postcode);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **postcode** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\GenericAddressesList**](../Model/GenericAddressesList.md)
 
 # **findApplicant**
 > \Onfido\Models\Applicant findApplicant($applicant_id)
@@ -321,6 +439,42 @@ Name | Type | Description  | Notes
 
 [**\Onfido\Models\Document**](../Model/Document.md)
 
+# **findLivePhoto**
+> \Onfido\Models\LivePhoto findLivePhoto($live_photo_id)
+
+Retrieve live photo
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$live_photo_id = "live_photo_id_example"; // string | The live photo’s unique identifier.
+
+try {
+    $result = $api_instance->findLivePhoto($live_photo_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **live_photo_id** | **string**| The live photo’s unique identifier. |
+
+### Return type
+
+[**\Onfido\Models\LivePhoto**](../Model/LivePhoto.md)
+
 # **findReport**
 > \Onfido\Models\Report findReport($check_id, $report_id)
 
@@ -394,6 +548,42 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Onfido\Models\ReportTypeGroup**](../Model/ReportTypeGroup.md)
+
+# **findWebhook**
+> \Onfido\Models\Webhook findWebhook($webhook_id)
+
+Retrieve a Webhook
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$webhook_id = "webhook_id_example"; // string | 
+
+try {
+    $result = $api_instance->findWebhook($webhook_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhook_id** | **string**|  |
+
+### Return type
+
+[**\Onfido\Models\Webhook**](../Model/Webhook.md)
 
 # **listApplicants**
 > \Onfido\Models\ApplicantsList listApplicants()
@@ -501,6 +691,42 @@ Name | Type | Description  | Notes
 
 [**\Onfido\Models\DocumentsList**](../Model/DocumentsList.md)
 
+# **listLivePhotos**
+> \Onfido\Models\LivePhotosList listLivePhotos($applicant_id)
+
+List live photos
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | The id of the applicant the live photos belongs to.
+
+try {
+    $result = $api_instance->listLivePhotos($applicant_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**| The id of the applicant the live photos belongs to. |
+
+### Return type
+
+[**\Onfido\Models\LivePhotosList**](../Model/LivePhotosList.md)
+
 # **listReportTypeGroups**
 > \Onfido\Models\ReportTypeGroupsList listReportTypeGroups()
 
@@ -568,6 +794,38 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Onfido\Models\ReportsList**](../Model/ReportsList.md)
+
+# **listWebhooks**
+> \Onfido\Models\WebhooksList listWebhooks()
+
+List webhooks
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+
+try {
+    $result = $api_instance->listWebhooks();
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\Onfido\Models\WebhooksList**](../Model/WebhooksList.md)
 
 # **resumeCheck**
 > resumeCheck($check_id)
@@ -722,4 +980,46 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Onfido\Models\Document**](../Model/Document.md)
+
+# **uploadLivePhoto**
+> \Onfido\Models\LivePhoto uploadLivePhoto($applicant_id, $file, $advanced_validation)
+
+Upload live photo
+
+You can upload live photos to this endpoint. Like document upload, files must be uploaded as a multipart form. Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB. Live photos are validated at the point of upload to check that they contain exactly one face. This validation can be disabled by setting the advanced_validation argument to false.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | The applicant_id to associate the live photo to.
+$file = "/path/to/file.txt"; // \SplFileObject | The file to be uploaded.
+$advanced_validation = true; // bool | Validates that the live photo contains exactly one face.
+
+try {
+    $result = $api_instance->uploadLivePhoto($applicant_id, $file, $advanced_validation);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**| The applicant_id to associate the live photo to. |
+ **file** | **\SplFileObject**| The file to be uploaded. |
+ **advanced_validation** | **bool**| Validates that the live photo contains exactly one face. | [optional]
+
+### Return type
+
+[**\Onfido\Models\LivePhoto**](../Model/LivePhoto.md)
 

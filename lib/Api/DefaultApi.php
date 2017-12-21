@@ -13,7 +13,7 @@
 /**
  * Onfido API
  *
- * The Onfido API is used to submit background checking requests
+ * The Onfido API is used to submit check requests.
  *
  * OpenAPI spec version: 2.0.0
  * 
@@ -390,6 +390,93 @@ class DefaultApi
     }
 
     /**
+     * Operation createWebhook
+     *
+     * Create a webhook
+     *
+     * @param \Onfido\Models\Webhook $data  (optional)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return \Onfido\Models\Webhook
+     */
+    public function createWebhook($data = null)
+    {
+        list($response) = $this->createWebhookWithHttpInfo($data);
+        return $response;
+    }
+
+    /**
+     * Operation createWebhookWithHttpInfo
+     *
+     * Create a webhook
+     *
+     * @param \Onfido\Models\Webhook $data  (optional)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return array of \Onfido\Models\Webhook, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createWebhookWithHttpInfo($data = null)
+    {
+        // parse inputs
+        $resourcePath = "/webhooks";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        // body params
+        $_tempBody = null;
+        if (isset($data)) {
+            $_tempBody = $data;
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Authorization');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Authorization'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'POST',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Onfido\Models\Webhook',
+                '/webhooks'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Onfido\Models\Webhook', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Webhook', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation destroyApplicant
      *
      * Delete Applicant
@@ -579,6 +666,182 @@ class DefaultApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\SplFileObject', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation downloadLivePhoto
+     *
+     * Download live photo
+     *
+     * @param string $live_photo_id The live photo’s unique identifier. (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return \SplFileObject
+     */
+    public function downloadLivePhoto($live_photo_id)
+    {
+        list($response) = $this->downloadLivePhotoWithHttpInfo($live_photo_id);
+        return $response;
+    }
+
+    /**
+     * Operation downloadLivePhotoWithHttpInfo
+     *
+     * Download live photo
+     *
+     * @param string $live_photo_id The live photo’s unique identifier. (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function downloadLivePhotoWithHttpInfo($live_photo_id)
+    {
+        // verify the required parameter 'live_photo_id' is set
+        if ($live_photo_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $live_photo_id when calling downloadLivePhoto');
+        }
+        // parse inputs
+        $resourcePath = "/live_photos/{live_photo_id}/download";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        // path params
+        if ($live_photo_id !== null) {
+            $resourcePath = str_replace(
+                "{" . "live_photo_id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($live_photo_id),
+                $resourcePath
+            );
+        }
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Authorization');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Authorization'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\SplFileObject',
+                '/live_photos/{live_photo_id}/download'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\SplFileObject', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\SplFileObject', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation findAddresses
+     *
+     * Search for addresses by postcode
+     *
+     * @param string $postcode  (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return \Onfido\Models\GenericAddressesList
+     */
+    public function findAddresses($postcode)
+    {
+        list($response) = $this->findAddressesWithHttpInfo($postcode);
+        return $response;
+    }
+
+    /**
+     * Operation findAddressesWithHttpInfo
+     *
+     * Search for addresses by postcode
+     *
+     * @param string $postcode  (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return array of \Onfido\Models\GenericAddressesList, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function findAddressesWithHttpInfo($postcode)
+    {
+        // verify the required parameter 'postcode' is set
+        if ($postcode === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $postcode when calling findAddresses');
+        }
+        // parse inputs
+        $resourcePath = "/addresses/pick";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        // query params
+        if ($postcode !== null) {
+            $queryParams['postcode'] = $this->apiClient->getSerializer()->toQueryValue($postcode);
+        }
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Authorization');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Authorization'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Onfido\Models\GenericAddressesList',
+                '/addresses/pick'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Onfido\Models\GenericAddressesList', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\GenericAddressesList', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }
@@ -894,6 +1157,96 @@ class DefaultApi
     }
 
     /**
+     * Operation findLivePhoto
+     *
+     * Retrieve live photo
+     *
+     * @param string $live_photo_id The live photo’s unique identifier. (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return \Onfido\Models\LivePhoto
+     */
+    public function findLivePhoto($live_photo_id)
+    {
+        list($response) = $this->findLivePhotoWithHttpInfo($live_photo_id);
+        return $response;
+    }
+
+    /**
+     * Operation findLivePhotoWithHttpInfo
+     *
+     * Retrieve live photo
+     *
+     * @param string $live_photo_id The live photo’s unique identifier. (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return array of \Onfido\Models\LivePhoto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function findLivePhotoWithHttpInfo($live_photo_id)
+    {
+        // verify the required parameter 'live_photo_id' is set
+        if ($live_photo_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $live_photo_id when calling findLivePhoto');
+        }
+        // parse inputs
+        $resourcePath = "/live_photos/{live_photo_id}";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        // path params
+        if ($live_photo_id !== null) {
+            $resourcePath = str_replace(
+                "{" . "live_photo_id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($live_photo_id),
+                $resourcePath
+            );
+        }
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Authorization');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Authorization'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Onfido\Models\LivePhoto',
+                '/live_photos/{live_photo_id}'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Onfido\Models\LivePhoto', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\LivePhoto', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation findReport
      *
      * A single report can be retrieved using this endpoint with the corresponding unique identifier.
@@ -1083,6 +1436,100 @@ class DefaultApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\ReportTypeGroup', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation findWebhook
+     *
+     * Retrieve a Webhook
+     *
+     * @param string $webhook_id  (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return \Onfido\Models\Webhook
+     */
+    public function findWebhook($webhook_id)
+    {
+        list($response) = $this->findWebhookWithHttpInfo($webhook_id);
+        return $response;
+    }
+
+    /**
+     * Operation findWebhookWithHttpInfo
+     *
+     * Retrieve a Webhook
+     *
+     * @param string $webhook_id  (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return array of \Onfido\Models\Webhook, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function findWebhookWithHttpInfo($webhook_id)
+    {
+        // verify the required parameter 'webhook_id' is set
+        if ($webhook_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $webhook_id when calling findWebhook');
+        }
+        // parse inputs
+        $resourcePath = "/webhooks/{webhook_id}";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        // path params
+        if ($webhook_id !== null) {
+            $resourcePath = str_replace(
+                "{" . "webhook_id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($webhook_id),
+                $resourcePath
+            );
+        }
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Authorization');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Authorization'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Onfido\Models\Webhook',
+                '/webhooks/{webhook_id}'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Onfido\Models\Webhook', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Webhook', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
                 case 404:
@@ -1352,6 +1799,92 @@ class DefaultApi
     }
 
     /**
+     * Operation listLivePhotos
+     *
+     * List live photos
+     *
+     * @param string $applicant_id The id of the applicant the live photos belongs to. (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return \Onfido\Models\LivePhotosList
+     */
+    public function listLivePhotos($applicant_id)
+    {
+        list($response) = $this->listLivePhotosWithHttpInfo($applicant_id);
+        return $response;
+    }
+
+    /**
+     * Operation listLivePhotosWithHttpInfo
+     *
+     * List live photos
+     *
+     * @param string $applicant_id The id of the applicant the live photos belongs to. (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return array of \Onfido\Models\LivePhotosList, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listLivePhotosWithHttpInfo($applicant_id)
+    {
+        // verify the required parameter 'applicant_id' is set
+        if ($applicant_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $applicant_id when calling listLivePhotos');
+        }
+        // parse inputs
+        $resourcePath = "/live_photos";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        // query params
+        if ($applicant_id !== null) {
+            $queryParams['applicant_id'] = $this->apiClient->getSerializer()->toQueryValue($applicant_id);
+        }
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Authorization');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Authorization'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Onfido\Models\LivePhotosList',
+                '/live_photos'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Onfido\Models\LivePhotosList', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\LivePhotosList', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
      * Operation listReportTypeGroups
      *
      * Retrieve all report type groups
@@ -1513,6 +2046,82 @@ class DefaultApi
                     break;
                 case 404:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listWebhooks
+     *
+     * List webhooks
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return \Onfido\Models\WebhooksList
+     */
+    public function listWebhooks()
+    {
+        list($response) = $this->listWebhooksWithHttpInfo();
+        return $response;
+    }
+
+    /**
+     * Operation listWebhooksWithHttpInfo
+     *
+     * List webhooks
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return array of \Onfido\Models\WebhooksList, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listWebhooksWithHttpInfo()
+    {
+        // parse inputs
+        $resourcePath = "/webhooks";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Authorization');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Authorization'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Onfido\Models\WebhooksList',
+                '/webhooks'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Onfido\Models\WebhooksList', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\WebhooksList', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }
@@ -1928,6 +2537,116 @@ class DefaultApi
             switch ($e->getCode()) {
                 case 201:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Document', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation uploadLivePhoto
+     *
+     * Upload live photo
+     *
+     * @param string $applicant_id The applicant_id to associate the live photo to. (required)
+     * @param \SplFileObject $file The file to be uploaded. (required)
+     * @param bool $advanced_validation Validates that the live photo contains exactly one face. (optional)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return \Onfido\Models\LivePhoto
+     */
+    public function uploadLivePhoto($applicant_id, $file, $advanced_validation = null)
+    {
+        list($response) = $this->uploadLivePhotoWithHttpInfo($applicant_id, $file, $advanced_validation);
+        return $response;
+    }
+
+    /**
+     * Operation uploadLivePhotoWithHttpInfo
+     *
+     * Upload live photo
+     *
+     * @param string $applicant_id The applicant_id to associate the live photo to. (required)
+     * @param \SplFileObject $file The file to be uploaded. (required)
+     * @param bool $advanced_validation Validates that the live photo contains exactly one face. (optional)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return array of \Onfido\Models\LivePhoto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function uploadLivePhotoWithHttpInfo($applicant_id, $file, $advanced_validation = null)
+    {
+        // verify the required parameter 'applicant_id' is set
+        if ($applicant_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $applicant_id when calling uploadLivePhoto');
+        }
+        // verify the required parameter 'file' is set
+        if ($file === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $file when calling uploadLivePhoto');
+        }
+        // parse inputs
+        $resourcePath = "/live_photos";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(['multipart/form-data']);
+
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        // form params
+        if ($applicant_id !== null) {
+            $formParams['applicant_id'] = $this->apiClient->getSerializer()->toFormValue($applicant_id);
+        }
+        // form params
+        if ($file !== null) {
+            // PHP 5.5 introduced a CurlFile object that deprecates the old @filename syntax
+            // See: https://wiki.php.net/rfc/curl-file-upload
+            if (function_exists('curl_file_create')) {
+                $fileName = $this->apiClient->getSerializer()->toFormValue($file);
+                $mimeType = mime_content_type($fileName);
+                $formParams['file'] = curl_file_create($fileName, $mimeType);
+            } else {
+                $formParams['file'] = '@' . $this->apiClient->getSerializer()->toFormValue($file);
+            }
+        }
+        // form params
+        if ($advanced_validation !== null) {
+            $formParams['advanced_validation'] = $this->apiClient->getSerializer()->toFormValue($advanced_validation);
+        }
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Authorization');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Authorization'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'POST',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Onfido\Models\LivePhoto',
+                '/live_photos'
+            );
+
+            return [$this->apiClient->getSerializer()->deserialize($response, '\Onfido\Models\LivePhoto', $httpHeader), $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\LivePhoto', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }

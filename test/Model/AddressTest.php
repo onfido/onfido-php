@@ -14,7 +14,7 @@
 /**
  * Onfido API
  *
- * The Onfido API is used to submit background checking requests
+ * The Onfido API is used to submit check requests.
  *
  * OpenAPI spec version: 2.0.0
  * 
@@ -96,14 +96,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
-    {
-
-    }
-
-    /**
      * Test attribute "flat_number"
      */
     public function testPropertyFlatNumber()
@@ -152,14 +144,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "state"
-     */
-    public function testPropertyState()
-    {
-
-    }
-
-    /**
      * Test attribute "postcode"
      */
     public function testPropertyPostcode()
@@ -176,6 +160,14 @@ class AddressTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "id"
+     */
+    public function testPropertyId()
+    {
+
+    }
+
+    /**
      * Test attribute "start_date"
      */
     public function testPropertyStartDate()
@@ -187,6 +179,14 @@ class AddressTest extends \PHPUnit_Framework_TestCase
      * Test attribute "end_date"
      */
     public function testPropertyEndDate()
+    {
+
+    }
+
+    /**
+     * Test attribute "state"
+     */
+    public function testPropertyState()
     {
 
     }

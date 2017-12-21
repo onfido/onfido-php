@@ -14,7 +14,7 @@
 /**
  * Onfido API
  *
- * The Onfido API is used to submit background checking requests
+ * The Onfido API is used to submit check requests.
  *
  * OpenAPI spec version: 2.0.0
  * 
@@ -139,6 +139,14 @@ class ReportTest extends \PHPUnit_Framework_TestCase
      * Test attribute "result"
      */
     public function testPropertyResult()
+    {
+
+    }
+
+    /**
+     * Test attribute "sub_result"
+     */
+    public function testPropertySubResult()
     {
 
     }
