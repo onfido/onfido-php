@@ -71,6 +71,10 @@ class ObjectSerializer
             }
             return $data;
         } elseif (is_object($data)) {
+            if($data instanceof \stdClass) {
+                return (object)($data);
+            }
+
             $values = [];
             foreach (array_keys($data::swaggerTypes()) as $property) {
                 $getter = $data::getters()[$property];
