@@ -1,7 +1,7 @@
 {
     "name": "onfido/api-php-client",
     "version": "1.1.1",
-    "description": "",
+    "description": "A PHP client library for Onfido's API: https://documentation.onfido.com",
     "keywords": [
         "swagger",
         "php",
