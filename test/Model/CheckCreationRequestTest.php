@@ -159,4 +159,20 @@ class CheckCreationRequestTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Test attribute "brand_id"
+     */
+    public function testPropertyBrandId()
+    {
+
+    }
+
+    /**
+     * Test attribute "async"
+     */
+    public function testPropertyAsync()
+    {
+
+    }
+
 }
