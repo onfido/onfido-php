@@ -26,7 +26,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
     }
   ],
   "require": {
-    "onfido/api-php-client": "*@dev"
+    "onfido/api-php-client": "1.2.0"
   }
 }
 ```
