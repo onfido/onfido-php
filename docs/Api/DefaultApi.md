@@ -586,7 +586,7 @@ Name | Type | Description  | Notes
 [**\Onfido\Models\Webhook**](../Model/Webhook.md)
 
 # **listApplicants**
-> \Onfido\Models\ApplicantsList listApplicants()
+> \Onfido\Models\ApplicantsList listApplicants($page, $per_page)
 
 List Applicants
 
@@ -600,9 +600,11 @@ Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'tok
 Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
 
 $api_instance = new Onfido\Api\DefaultApi();
+$page = "page_example"; // string | The page to return. Defaults to the first page if omitted. The first page is `page=1`
+$per_page = "per_page_example"; // string | The number of objects per page. Defaults to 20 if omitted.
 
 try {
-    $result = $api_instance->listApplicants();
+    $result = $api_instance->listApplicants($page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     print_r($e->getResponseBody());
@@ -611,14 +613,18 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **string**| The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; | [optional]
+ **per_page** | **string**| The number of objects per page. Defaults to 20 if omitted. | [optional]
 
 ### Return type
 
 [**\Onfido\Models\ApplicantsList**](../Model/ApplicantsList.md)
 
 # **listChecks**
-> \Onfido\Models\ChecksList listChecks($applicant_id)
+> \Onfido\Models\ChecksList listChecks($applicant_id, $page, $per_page)
 
 Retrieve Checks
 
@@ -633,9 +639,11 @@ Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization'
 
 $api_instance = new Onfido\Api\DefaultApi();
 $applicant_id = "applicant_id_example"; // string | 
+$page = "page_example"; // string | The page to return. Defaults to the first page if omitted. The first page is `page=1`
+$per_page = "per_page_example"; // string | The number of objects per page. Defaults to 20 if omitted.
 
 try {
-    $result = $api_instance->listChecks($applicant_id);
+    $result = $api_instance->listChecks($applicant_id, $page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     print_r($e->getResponseBody());
@@ -648,6 +656,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
+ **page** | **string**| The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; | [optional]
+ **per_page** | **string**| The number of objects per page. Defaults to 20 if omitted. | [optional]
 
 ### Return type
 

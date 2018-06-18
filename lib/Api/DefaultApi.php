@@ -1547,12 +1547,14 @@ class DefaultApi
      *
      * List Applicants
      *
+     * @param string $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
+     * @param string $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
      * @throws \Onfido\ApiException on non-2xx response
      * @return \Onfido\Models\ApplicantsList
      */
-    public function listApplicants()
+    public function listApplicants($page = null, $per_page = null)
     {
-        list($response) = $this->listApplicantsWithHttpInfo();
+        list($response) = $this->listApplicantsWithHttpInfo($page, $per_page);
         return $response;
     }
 
@@ -1561,10 +1563,12 @@ class DefaultApi
      *
      * List Applicants
      *
+     * @param string $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
+     * @param string $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
      * @throws \Onfido\ApiException on non-2xx response
      * @return array of \Onfido\Models\ApplicantsList, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listApplicantsWithHttpInfo()
+    public function listApplicantsWithHttpInfo($page = null, $per_page = null)
     {
         // parse inputs
         $resourcePath = "/applicants";
@@ -1578,6 +1582,14 @@ class DefaultApi
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
 
+        // query params
+        if ($page !== null) {
+            $queryParams['page'] = $this->apiClient->getSerializer()->toQueryValue($page);
+        }
+        // query params
+        if ($per_page !== null) {
+            $queryParams['per_page'] = $this->apiClient->getSerializer()->toQueryValue($per_page);
+        }
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
 
@@ -1624,12 +1636,14 @@ class DefaultApi
      * Retrieve Checks
      *
      * @param string $applicant_id  (required)
+     * @param string $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
+     * @param string $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
      * @throws \Onfido\ApiException on non-2xx response
      * @return \Onfido\Models\ChecksList
      */
-    public function listChecks($applicant_id)
+    public function listChecks($applicant_id, $page = null, $per_page = null)
     {
-        list($response) = $this->listChecksWithHttpInfo($applicant_id);
+        list($response) = $this->listChecksWithHttpInfo($applicant_id, $page, $per_page);
         return $response;
     }
 
@@ -1639,10 +1653,12 @@ class DefaultApi
      * Retrieve Checks
      *
      * @param string $applicant_id  (required)
+     * @param string $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
+     * @param string $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
      * @throws \Onfido\ApiException on non-2xx response
      * @return array of \Onfido\Models\ChecksList, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listChecksWithHttpInfo($applicant_id)
+    public function listChecksWithHttpInfo($applicant_id, $page = null, $per_page = null)
     {
         // verify the required parameter 'applicant_id' is set
         if ($applicant_id === null) {
@@ -1660,6 +1676,14 @@ class DefaultApi
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
 
+        // query params
+        if ($page !== null) {
+            $queryParams['page'] = $this->apiClient->getSerializer()->toQueryValue($page);
+        }
+        // query params
+        if ($per_page !== null) {
+            $queryParams['per_page'] = $this->apiClient->getSerializer()->toQueryValue($per_page);
+        }
         // path params
         if ($applicant_id !== null) {
             $resourcePath = str_replace(
