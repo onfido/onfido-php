@@ -169,7 +169,15 @@ class ApiClient
             $postData = json_encode(\Onfido\ObjectSerializer::sanitizeForSerialization($postData));
         }
 
-        $url = $this->config->getHost() . $resourcePath;
+        $region = $this->config->getRegion();
+        $region_hosts = array(
+            'us' => str_replace('api.onfido', 'api.us.onfido', 'https://api.onfido.com/v2')
+        );
+        if (isset($region) && !isset($region_hosts[$region])) {
+            throw new ApiException('The region "' . $region . '" is not currently supported');
+        }
+        $host = isset($region) ? $region_hosts[$region] : 'https://api.onfido.com/v2';
+        $url = $host . $resourcePath;
 
         $curl = curl_init();
         // set timeout, if needed

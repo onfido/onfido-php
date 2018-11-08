@@ -97,11 +97,11 @@ class Configuration
     protected $defaultHeaders = [];
 
     /**
-     * The host
+     * The region
      *
      * @var string
      */
-    protected $host = 'https://api.onfido.com/v2';
+    protected $region = null;
 
     /**
      * Timeout (second) of the HTTP request, by default set to 0, no timeout
@@ -115,7 +115,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = "Swagger-Codegen/1.3.0/php";
+    protected $userAgent = "Swagger-Codegen/1.4.0/php";
 
     /**
      * Debug switch (default set to false)
@@ -317,26 +317,26 @@ class Configuration
     }
 
     /**
-     * Sets the host
+     * Sets the region
      *
-     * @param string $host Host
+     * @param string $region Region
      *
      * @return Configuration
      */
-    public function setHost($host)
+    public function setRegion($region)
     {
-        $this->host = $host;
+        $this->region = strtolower($region);
         return $this;
     }
 
     /**
-     * Gets the host
+     * Gets the region
      *
-     * @return string Host
+     * @return string Region
      */
-    public function getHost()
+    public function getRegion()
     {
-        return $this->host;
+        return $this->region;
     }
 
     /**
@@ -522,7 +522,7 @@ class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . phpversion() . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 2.0.0' . PHP_EOL;
-        $report .= '    SDK Package Version: 1.3.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 1.4.0' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

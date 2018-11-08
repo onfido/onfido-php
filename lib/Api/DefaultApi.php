@@ -72,7 +72,6 @@ class DefaultApi
     {
         if ($apiClient === null) {
             $apiClient = new ApiClient();
-            $apiClient->getConfig()->setHost('https://api.onfido.com/v2');
         }
 
         $this->apiClient = $apiClient;
