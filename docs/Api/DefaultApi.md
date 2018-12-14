@@ -26,6 +26,7 @@ Method | HTTP request | Description
 [**listReportTypeGroups**](DefaultApi.md#listReportTypeGroups) | **GET** /report_type_groups | Retrieve all report type groups
 [**listReports**](DefaultApi.md#listReports) | **GET** /checks/{check_id}/reports | All the reports belonging to a particular check can be listed from this endpoint.
 [**listWebhooks**](DefaultApi.md#listWebhooks) | **GET** /webhooks | List webhooks
+[**restoreApplicant**](DefaultApi.md#restoreApplicant) | **POST** /applicants/{applicant_id}/restore | Restore Applicant
 [**resumeCheck**](DefaultApi.md#resumeCheck) | **POST** /checks/{check_id}/resume | Resume a Check
 [**resumeReport**](DefaultApi.md#resumeReport) | **POST** /checks/{check_id}/reports/{report_id}/resume | This endpoint is for resuming individual paused reports.
 [**updateApplicant**](DefaultApi.md#updateApplicant) | **PUT** /applicants/{applicant_id} | Update Applicant
@@ -586,7 +587,7 @@ Name | Type | Description  | Notes
 [**\Onfido\Models\Webhook**](../Model/Webhook.md)
 
 # **listApplicants**
-> \Onfido\Models\ApplicantsList listApplicants($page, $per_page)
+> \Onfido\Models\ApplicantsList listApplicants($page, $per_page, $include_deleted)
 
 List Applicants
 
@@ -600,11 +601,12 @@ Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'tok
 Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
 
 $api_instance = new Onfido\Api\DefaultApi();
-$page = "page_example"; // string | The page to return. Defaults to the first page if omitted. The first page is `page=1`
-$per_page = "per_page_example"; // string | The number of objects per page. Defaults to 20 if omitted.
+$page = 56; // int | The page to return. Defaults to the first page if omitted. The first page is `page=1`
+$per_page = 56; // int | The number of objects per page. Defaults to 20 if omitted.
+$include_deleted = true; // bool | Whether to also include applicants scheduled for deletion. Defaults to false if omitted.
 
 try {
-    $result = $api_instance->listApplicants($page, $per_page);
+    $result = $api_instance->listApplicants($page, $per_page, $include_deleted);
     print_r($result);
 } catch (Exception $e) {
     print_r($e->getResponseBody());
@@ -616,8 +618,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **string**| The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; | [optional]
- **per_page** | **string**| The number of objects per page. Defaults to 20 if omitted. | [optional]
+ **page** | **int**| The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; | [optional]
+ **per_page** | **int**| The number of objects per page. Defaults to 20 if omitted. | [optional]
+ **include_deleted** | **bool**| Whether to also include applicants scheduled for deletion. Defaults to false if omitted. | [optional]
 
 ### Return type
 
@@ -639,8 +642,8 @@ Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization'
 
 $api_instance = new Onfido\Api\DefaultApi();
 $applicant_id = "applicant_id_example"; // string | 
-$page = "page_example"; // string | The page to return. Defaults to the first page if omitted. The first page is `page=1`
-$per_page = "per_page_example"; // string | The number of objects per page. Defaults to 20 if omitted.
+$page = 56; // int | The page to return. Defaults to the first page if omitted. The first page is `page=1`
+$per_page = 56; // int | The number of objects per page. Defaults to 20 if omitted.
 
 try {
     $result = $api_instance->listChecks($applicant_id, $page, $per_page);
@@ -656,8 +659,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
- **page** | **string**| The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; | [optional]
- **per_page** | **string**| The number of objects per page. Defaults to 20 if omitted. | [optional]
+ **page** | **int**| The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; | [optional]
+ **per_page** | **int**| The number of objects per page. Defaults to 20 if omitted. | [optional]
 
 ### Return type
 
@@ -836,6 +839,41 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**\Onfido\Models\WebhooksList**](../Model/WebhooksList.md)
+
+# **restoreApplicant**
+> restoreApplicant($applicant_id)
+
+Restore Applicant
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | 
+
+try {
+    $api_instance->restoreApplicant($applicant_id);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
+
+### Return type
+
+void (empty response body)
 
 # **resumeCheck**
 > resumeCheck($check_id)

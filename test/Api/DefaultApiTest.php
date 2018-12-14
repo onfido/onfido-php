@@ -332,6 +332,17 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for restoreApplicant
+     *
+     * Restore Applicant.
+     *
+     */
+    public function testRestoreApplicant()
+    {
+
+    }
+
+    /**
      * Test case for resumeCheck
      *
      * Resume a Check.

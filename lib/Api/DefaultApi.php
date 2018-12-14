@@ -194,6 +194,14 @@ class DefaultApi
             return [null, $statusCode, $httpHeader];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
             }
 
             throw $e;
@@ -378,6 +386,14 @@ class DefaultApi
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Check', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
                 case 422:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
@@ -559,6 +575,10 @@ class DefaultApi
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
                 case 422:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
@@ -667,6 +687,14 @@ class DefaultApi
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\SplFileObject', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
             }
 
             throw $e;
@@ -755,6 +783,14 @@ class DefaultApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\SplFileObject', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }
@@ -937,6 +973,10 @@ class DefaultApi
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
             }
 
             throw $e;
@@ -1045,6 +1085,10 @@ class DefaultApi
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
             }
 
             throw $e;
@@ -1149,6 +1193,14 @@ class DefaultApi
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Document', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
             }
 
             throw $e;
@@ -1237,6 +1289,14 @@ class DefaultApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\LivePhoto', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }
@@ -1344,6 +1404,10 @@ class DefaultApi
                     $e->setResponseObject($data);
                     break;
                 case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
@@ -1546,14 +1610,15 @@ class DefaultApi
      *
      * List Applicants
      *
-     * @param string $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
-     * @param string $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
+     * @param int $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
+     * @param int $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
+     * @param bool $include_deleted Whether to also include applicants scheduled for deletion. Defaults to false if omitted. (optional)
      * @throws \Onfido\ApiException on non-2xx response
      * @return \Onfido\Models\ApplicantsList
      */
-    public function listApplicants($page = null, $per_page = null)
+    public function listApplicants($page = null, $per_page = null, $include_deleted = null)
     {
-        list($response) = $this->listApplicantsWithHttpInfo($page, $per_page);
+        list($response) = $this->listApplicantsWithHttpInfo($page, $per_page, $include_deleted);
         return $response;
     }
 
@@ -1562,12 +1627,13 @@ class DefaultApi
      *
      * List Applicants
      *
-     * @param string $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
-     * @param string $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
+     * @param int $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
+     * @param int $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
+     * @param bool $include_deleted Whether to also include applicants scheduled for deletion. Defaults to false if omitted. (optional)
      * @throws \Onfido\ApiException on non-2xx response
      * @return array of \Onfido\Models\ApplicantsList, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listApplicantsWithHttpInfo($page = null, $per_page = null)
+    public function listApplicantsWithHttpInfo($page = null, $per_page = null, $include_deleted = null)
     {
         // parse inputs
         $resourcePath = "/applicants";
@@ -1588,6 +1654,10 @@ class DefaultApi
         // query params
         if ($per_page !== null) {
             $queryParams['per_page'] = $this->apiClient->getSerializer()->toQueryValue($per_page);
+        }
+        // query params
+        if ($include_deleted !== null) {
+            $queryParams['include_deleted'] = $this->apiClient->getSerializer()->toQueryValue($include_deleted);
         }
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
@@ -1635,8 +1705,8 @@ class DefaultApi
      * Retrieve Checks
      *
      * @param string $applicant_id  (required)
-     * @param string $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
-     * @param string $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
+     * @param int $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
+     * @param int $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
      * @throws \Onfido\ApiException on non-2xx response
      * @return \Onfido\Models\ChecksList
      */
@@ -1652,8 +1722,8 @@ class DefaultApi
      * Retrieve Checks
      *
      * @param string $applicant_id  (required)
-     * @param string $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
-     * @param string $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
+     * @param int $page The page to return. Defaults to the first page if omitted. The first page is &#x60;page&#x3D;1&#x60; (optional)
+     * @param int $per_page The number of objects per page. Defaults to 20 if omitted. (optional)
      * @throws \Onfido\ApiException on non-2xx response
      * @return array of \Onfido\Models\ChecksList, HTTP status code, HTTP response headers (array of strings)
      */
@@ -1723,6 +1793,14 @@ class DefaultApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\ChecksList', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }
@@ -1815,6 +1893,14 @@ class DefaultApi
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\DocumentsList', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
             }
 
             throw $e;
@@ -1899,6 +1985,14 @@ class DefaultApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\LivePhotosList', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }
@@ -2071,6 +2165,10 @@ class DefaultApi
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
             }
 
             throw $e;
@@ -2145,6 +2243,104 @@ class DefaultApi
             switch ($e->getCode()) {
                 case 200:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\WebhooksList', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation restoreApplicant
+     *
+     * Restore Applicant
+     *
+     * @param string $applicant_id  (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return void
+     */
+    public function restoreApplicant($applicant_id)
+    {
+        list($response) = $this->restoreApplicantWithHttpInfo($applicant_id);
+        return $response;
+    }
+
+    /**
+     * Operation restoreApplicantWithHttpInfo
+     *
+     * Restore Applicant
+     *
+     * @param string $applicant_id  (required)
+     * @throws \Onfido\ApiException on non-2xx response
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function restoreApplicantWithHttpInfo($applicant_id)
+    {
+        // verify the required parameter 'applicant_id' is set
+        if ($applicant_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $applicant_id when calling restoreApplicant');
+        }
+        // parse inputs
+        $resourcePath = "/applicants/{applicant_id}/restore";
+        $httpBody = '';
+        $queryParams = [];
+        $headerParams = [];
+        $formParams = [];
+        $_header_accept = $this->apiClient->selectHeaderAccept(['application/json']);
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType([]);
+
+        // path params
+        if ($applicant_id !== null) {
+            $resourcePath = str_replace(
+                "{" . "applicant_id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($applicant_id),
+                $resourcePath
+            );
+        }
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Authorization');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Authorization'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'POST',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                null,
+                '/applicants/{applicant_id}/restore'
+            );
+
+            return [null, $statusCode, $httpHeader];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }
@@ -2234,6 +2430,10 @@ class DefaultApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
@@ -2337,6 +2537,14 @@ class DefaultApi
             return [null, $statusCode, $httpHeader];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
             }
 
             throw $e;
@@ -2435,6 +2643,10 @@ class DefaultApi
                     $e->setResponseObject($data);
                     break;
                 case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
@@ -2562,6 +2774,14 @@ class DefaultApi
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Document', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
             }
 
             throw $e;
@@ -2670,6 +2890,14 @@ class DefaultApi
             switch ($e->getCode()) {
                 case 201:
                     $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\LivePhoto', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Onfido\Models\Error', $e->getResponseHeaders());
                     $e->setResponseObject($data);
                     break;
             }

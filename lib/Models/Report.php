@@ -76,7 +76,8 @@ class Report implements ArrayAccess
         'variant' => 'string',
         'options' => 'object',
         'breakdown' => 'object',
-        'properties' => 'object'
+        'properties' => 'object',
+        'documents' => 'object[]'
     ];
 
     public static function swaggerTypes()
@@ -99,7 +100,8 @@ class Report implements ArrayAccess
         'variant' => 'variant',
         'options' => 'options',
         'breakdown' => 'breakdown',
-        'properties' => 'properties'
+        'properties' => 'properties',
+        'documents' => 'documents'
     ];
 
 
@@ -118,7 +120,8 @@ class Report implements ArrayAccess
         'variant' => 'setVariant',
         'options' => 'setOptions',
         'breakdown' => 'setBreakdown',
-        'properties' => 'setProperties'
+        'properties' => 'setProperties',
+        'documents' => 'setDocuments'
     ];
 
 
@@ -137,7 +140,8 @@ class Report implements ArrayAccess
         'variant' => 'getVariant',
         'options' => 'getOptions',
         'breakdown' => 'getBreakdown',
-        'properties' => 'getProperties'
+        'properties' => 'getProperties',
+        'documents' => 'getDocuments'
     ];
 
     public static function attributeMap()
@@ -182,6 +186,7 @@ class Report implements ArrayAccess
         $this->container['options'] = isset($data['options']) ? $data['options'] : null;
         $this->container['breakdown'] = isset($data['breakdown']) ? $data['breakdown'] : null;
         $this->container['properties'] = isset($data['properties']) ? $data['properties'] : null;
+        $this->container['documents'] = isset($data['documents']) ? $data['documents'] : null;
     }
 
     /**
@@ -434,6 +439,27 @@ class Report implements ArrayAccess
     public function setProperties($properties)
     {
         $this->container['properties'] = $properties;
+
+        return $this;
+    }
+
+    /**
+     * Gets documents
+     * @return object[]
+     */
+    public function getDocuments()
+    {
+        return $this->container['documents'];
+    }
+
+    /**
+     * Sets documents
+     * @param object[] $documents Array of objects with document ids that were used in the Onfido engine. [ONLY USED IN A DOCUMENT CHECK]
+     * @return $this
+     */
+    public function setDocuments($documents)
+    {
+        $this->container['documents'] = $documents;
 
         return $this;
     }

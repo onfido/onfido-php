@@ -68,6 +68,7 @@ class Applicant implements ArrayAccess
     protected static $swaggerTypes = [
         'id' => 'string',
         'created_at' => '\DateTime',
+        'delete_at' => '\DateTime',
         'href' => 'string',
         'title' => 'string',
         'first_name' => 'string',
@@ -101,6 +102,7 @@ class Applicant implements ArrayAccess
     protected static $attributeMap = [
         'id' => 'id',
         'created_at' => 'created_at',
+        'delete_at' => 'delete_at',
         'href' => 'href',
         'title' => 'title',
         'first_name' => 'first_name',
@@ -130,6 +132,7 @@ class Applicant implements ArrayAccess
     protected static $setters = [
         'id' => 'setId',
         'created_at' => 'setCreatedAt',
+        'delete_at' => 'setDeleteAt',
         'href' => 'setHref',
         'title' => 'setTitle',
         'first_name' => 'setFirstName',
@@ -159,6 +162,7 @@ class Applicant implements ArrayAccess
     protected static $getters = [
         'id' => 'getId',
         'created_at' => 'getCreatedAt',
+        'delete_at' => 'getDeleteAt',
         'href' => 'getHref',
         'title' => 'getTitle',
         'first_name' => 'getFirstName',
@@ -213,6 +217,7 @@ class Applicant implements ArrayAccess
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['created_at'] = isset($data['created_at']) ? $data['created_at'] : null;
+        $this->container['delete_at'] = isset($data['delete_at']) ? $data['delete_at'] : null;
         $this->container['href'] = isset($data['href']) ? $data['href'] : null;
         $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         $this->container['first_name'] = isset($data['first_name']) ? $data['first_name'] : null;
@@ -307,6 +312,27 @@ class Applicant implements ArrayAccess
     public function setCreatedAt($created_at)
     {
         $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets delete_at
+     * @return \DateTime
+     */
+    public function getDeleteAt()
+    {
+        return $this->container['delete_at'];
+    }
+
+    /**
+     * Sets delete_at
+     * @param \DateTime $delete_at The date and time when this applicant is scheduled to be deleted, or null if the applicant is not scheduled to be deleted
+     * @return $this
+     */
+    public function setDeleteAt($delete_at)
+    {
+        $this->container['delete_at'] = $delete_at;
 
         return $this;
     }

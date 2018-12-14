@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **options** | **object** | Report options. Some reports e.g. criminal_history expose additional options. | [optional] 
 **breakdown** | **object** | The details of the report. This is specific to each type of report. | [optional] 
 **properties** | **object** | The properties associated with the report, if any. | [optional] 
+**documents** | **object[]** | Array of objects with document ids that were used in the Onfido engine. [ONLY USED IN A DOCUMENT CHECK] | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

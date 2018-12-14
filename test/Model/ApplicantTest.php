@@ -112,6 +112,14 @@ class ApplicantTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "delete_at"
+     */
+    public function testPropertyDeleteAt()
+    {
+
+    }
+
+    /**
      * Test attribute "href"
      */
     public function testPropertyHref()
