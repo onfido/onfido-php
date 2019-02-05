@@ -1,6 +1,6 @@
 <?php
 /**
- * LivePhotoTest
+ * LiveVideoTest
  *
  * PHP version 5
  *
@@ -42,17 +42,17 @@
 namespace Onfido;
 
 /**
- * LivePhotoTest Class Doc Comment
+ * LiveVideoTest Class Doc Comment
  *
  * @category    Class */
-// * @description LivePhoto
+// * @description LiveVideo
 /**
  * @package     Onfido
  * @author      http://github.com/swagger-api/swagger-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class LivePhotoTest extends \PHPUnit_Framework_TestCase
+class LiveVideoTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -88,9 +88,9 @@ class LivePhotoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "LivePhoto"
+     * Test "LiveVideo"
      */
-    public function testLivePhoto()
+    public function testLiveVideo()
     {
 
     }

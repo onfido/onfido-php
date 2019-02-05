@@ -1,6 +1,6 @@
 <?php
 /**
- * LivePhoto
+ * LiveVideo
  *
  * PHP version 5
  *
@@ -44,7 +44,7 @@ namespace Onfido\Models;
 use \ArrayAccess;
 
 /**
- * LivePhoto Class Doc Comment
+ * LiveVideo Class Doc Comment
  *
  * @category    Class */
 /**
@@ -53,13 +53,13 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class LivePhoto implements ArrayAccess
+class LiveVideo implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'LivePhoto';
+    protected static $swaggerModelName = 'LiveVideo';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -198,7 +198,7 @@ class LivePhoto implements ArrayAccess
 
     /**
      * Sets id
-     * @param string $id The unique identifier for the document.
+     * @param string $id The unique identifier for the video.
      * @return $this
      */
     public function setId($id)
@@ -219,7 +219,7 @@ class LivePhoto implements ArrayAccess
 
     /**
      * Sets created_at
-     * @param \DateTime $created_at The date and time at which the document was uploaded.
+     * @param \DateTime $created_at The date and time at which the video was uploaded.
      * @return $this
      */
     public function setCreatedAt($created_at)
@@ -261,7 +261,7 @@ class LivePhoto implements ArrayAccess
 
     /**
      * Sets download_href
-     * @param string $download_href The uri that can be used to download the document.
+     * @param string $download_href The uri that can be used to download the video.
      * @return $this
      */
     public function setDownloadHref($download_href)

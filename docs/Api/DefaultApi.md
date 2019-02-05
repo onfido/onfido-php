@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**findCheck**](DefaultApi.md#findCheck) | **GET** /applicants/{applicant_id}/checks/{check_id} | Retrieve a Check
 [**findDocument**](DefaultApi.md#findDocument) | **GET** /applicants/{applicant_id}/documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
 [**findLivePhoto**](DefaultApi.md#findLivePhoto) | **GET** /live_photos/{live_photo_id} | Retrieve live photo
+[**findLiveVideo**](DefaultApi.md#findLiveVideo) | **GET** /live_videos/{live_video_id} | Retrieve live video
 [**findReport**](DefaultApi.md#findReport) | **GET** /checks/{check_id}/reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
 [**findReportTypeGroup**](DefaultApi.md#findReportTypeGroup) | **GET** /report_type_groups/{report_type_group_id} | Retrieve single report type group object
 [**findWebhook**](DefaultApi.md#findWebhook) | **GET** /webhooks/{webhook_id} | Retrieve a Webhook
@@ -23,6 +24,7 @@ Method | HTTP request | Description
 [**listChecks**](DefaultApi.md#listChecks) | **GET** /applicants/{applicant_id}/checks | Retrieve Checks
 [**listDocuments**](DefaultApi.md#listDocuments) | **GET** /applicants/{applicant_id}/documents | List documents
 [**listLivePhotos**](DefaultApi.md#listLivePhotos) | **GET** /live_photos | List live photos
+[**listLiveVideos**](DefaultApi.md#listLiveVideos) | **GET** /live_videos | List live videos
 [**listReportTypeGroups**](DefaultApi.md#listReportTypeGroups) | **GET** /report_type_groups | Retrieve all report type groups
 [**listReports**](DefaultApi.md#listReports) | **GET** /checks/{check_id}/reports | All the reports belonging to a particular check can be listed from this endpoint.
 [**listWebhooks**](DefaultApi.md#listWebhooks) | **GET** /webhooks | List webhooks
@@ -476,6 +478,42 @@ Name | Type | Description  | Notes
 
 [**\Onfido\Models\LivePhoto**](../Model/LivePhoto.md)
 
+# **findLiveVideo**
+> \Onfido\Models\LiveVideo findLiveVideo($live_video_id)
+
+Retrieve live video
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$live_video_id = "live_video_id_example"; // string | The live video’s unique identifier.
+
+try {
+    $result = $api_instance->findLiveVideo($live_video_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **live_video_id** | **string**| The live video’s unique identifier. |
+
+### Return type
+
+[**\Onfido\Models\LiveVideo**](../Model/LiveVideo.md)
+
 # **findReport**
 > \Onfido\Models\Report findReport($check_id, $report_id)
 
@@ -719,7 +757,7 @@ Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'tok
 Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
 
 $api_instance = new Onfido\Api\DefaultApi();
-$applicant_id = "applicant_id_example"; // string | The id of the applicant the live photos belongs to.
+$applicant_id = "applicant_id_example"; // string | The id of the applicant the live photos belong to.
 
 try {
     $result = $api_instance->listLivePhotos($applicant_id);
@@ -734,11 +772,47 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **applicant_id** | **string**| The id of the applicant the live photos belongs to. |
+ **applicant_id** | **string**| The id of the applicant the live photos belong to. |
 
 ### Return type
 
 [**\Onfido\Models\LivePhotosList**](../Model/LivePhotosList.md)
+
+# **listLiveVideos**
+> \Onfido\Models\LiveVideosList listLiveVideos($applicant_id)
+
+List live videos
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Token
+Onfido\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'token=' . 'YOUR_API_KEY');
+Onfido\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Token');
+
+$api_instance = new Onfido\Api\DefaultApi();
+$applicant_id = "applicant_id_example"; // string | The id of the applicant the live videos belong to.
+
+try {
+    $result = $api_instance->listLiveVideos($applicant_id);
+    print_r($result);
+} catch (Exception $e) {
+    print_r($e->getResponseBody());
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**| The id of the applicant the live videos belong to. |
+
+### Return type
+
+[**\Onfido\Models\LiveVideosList**](../Model/LiveVideosList.md)
 
 # **listReportTypeGroups**
 > \Onfido\Models\ReportTypeGroupsList listReportTypeGroups()

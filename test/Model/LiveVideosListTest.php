@@ -1,6 +1,6 @@
 <?php
 /**
- * LivePhotoTest
+ * LiveVideosListTest
  *
  * PHP version 5
  *
@@ -42,17 +42,17 @@
 namespace Onfido;
 
 /**
- * LivePhotoTest Class Doc Comment
+ * LiveVideosListTest Class Doc Comment
  *
  * @category    Class */
-// * @description LivePhoto
+// * @description LiveVideosList
 /**
  * @package     Onfido
  * @author      http://github.com/swagger-api/swagger-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class LivePhotoTest extends \PHPUnit_Framework_TestCase
+class LiveVideosListTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -88,65 +88,17 @@ class LivePhotoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "LivePhoto"
+     * Test "LiveVideosList"
      */
-    public function testLivePhoto()
+    public function testLiveVideosList()
     {
 
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "live_videos"
      */
-    public function testPropertyId()
-    {
-
-    }
-
-    /**
-     * Test attribute "created_at"
-     */
-    public function testPropertyCreatedAt()
-    {
-
-    }
-
-    /**
-     * Test attribute "href"
-     */
-    public function testPropertyHref()
-    {
-
-    }
-
-    /**
-     * Test attribute "download_href"
-     */
-    public function testPropertyDownloadHref()
-    {
-
-    }
-
-    /**
-     * Test attribute "file_name"
-     */
-    public function testPropertyFileName()
-    {
-
-    }
-
-    /**
-     * Test attribute "file_size"
-     */
-    public function testPropertyFileSize()
-    {
-
-    }
-
-    /**
-     * Test attribute "file_type"
-     */
-    public function testPropertyFileType()
+    public function testPropertyLiveVideos()
     {
 
     }

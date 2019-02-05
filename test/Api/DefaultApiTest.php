@@ -222,6 +222,17 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for findLiveVideo
+     *
+     * Retrieve live video.
+     *
+     */
+    public function testFindLiveVideo()
+    {
+
+    }
+
+    /**
      * Test case for findReport
      *
      * A single report can be retrieved using this endpoint with the corresponding unique identifier..
@@ -294,6 +305,17 @@ class DefaultApiTest extends \PHPUnit_Framework_TestCase
      *
      */
     public function testListLivePhotos()
+    {
+
+    }
+
+    /**
+     * Test case for listLiveVideos
+     *
+     * List live videos.
+     *
+     */
+    public function testListLiveVideos()
     {
 
     }
