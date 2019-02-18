@@ -1,6 +1,6 @@
 <?php
 /**
- * LivePhoto
+ * LiveVideo
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * LivePhoto Class Doc Comment
+ * LiveVideo Class Doc Comment
  *
  * @category Class
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class LivePhoto implements ModelInterface, ArrayAccess
+class LiveVideo implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'live_photo';
+    protected static $openAPIModelName = 'live_video';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -253,7 +253,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string|null $id The unique identifier for the photo.
+     * @param string|null $id The unique identifier for the video.
      *
      * @return $this
      */
@@ -277,7 +277,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at The date and time at which the photo was uploaded.
+     * @param \DateTime|null $created_at The date and time at which the video was uploaded.
      *
      * @return $this
      */
@@ -325,7 +325,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
     /**
      * Sets download_href
      *
-     * @param string|null $download_href The uri that can be used to download the photo.
+     * @param string|null $download_href The uri that can be used to download the video.
      *
      * @return $this
      */

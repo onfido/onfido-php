@@ -11,11 +11,13 @@ Method | HTTP request | Description
 [**destroyApplicant**](DefaultApi.md#destroyApplicant) | **DELETE** /applicants/{applicant_id} | Delete Applicant
 [**downloadDocument**](DefaultApi.md#downloadDocument) | **GET** /applicants/{applicant_id}/documents/{document_id}/download | Download a documents raw data
 [**downloadLivePhoto**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
+[**downloadLiveVideo**](DefaultApi.md#downloadLiveVideo) | **GET** /live_videos/{live_video_id}/download | Download live video
 [**findAddresses**](DefaultApi.md#findAddresses) | **GET** /addresses/pick | Search for addresses by postcode
 [**findApplicant**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
 [**findCheck**](DefaultApi.md#findCheck) | **GET** /applicants/{applicant_id}/checks/{check_id} | Retrieve a Check
 [**findDocument**](DefaultApi.md#findDocument) | **GET** /applicants/{applicant_id}/documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
 [**findLivePhoto**](DefaultApi.md#findLivePhoto) | **GET** /live_photos/{live_photo_id} | Retrieve live photo
+[**findLiveVideo**](DefaultApi.md#findLiveVideo) | **GET** /live_videos/{live_video_id} | Retrieve live video
 [**findReport**](DefaultApi.md#findReport) | **GET** /checks/{check_id}/reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
 [**findReportTypeGroup**](DefaultApi.md#findReportTypeGroup) | **GET** /report_type_groups/{report_type_group_id} | Retrieve single report type group object
 [**findWebhook**](DefaultApi.md#findWebhook) | **GET** /webhooks/{webhook_id} | Retrieve a Webhook
@@ -23,6 +25,7 @@ Method | HTTP request | Description
 [**listChecks**](DefaultApi.md#listChecks) | **GET** /applicants/{applicant_id}/checks | Retrieve Checks
 [**listDocuments**](DefaultApi.md#listDocuments) | **GET** /applicants/{applicant_id}/documents | List documents
 [**listLivePhotos**](DefaultApi.md#listLivePhotos) | **GET** /live_photos | List live photos
+[**listLiveVideos**](DefaultApi.md#listLiveVideos) | **GET** /live_videos | List live videos
 [**listReportTypeGroups**](DefaultApi.md#listReportTypeGroups) | **GET** /report_type_groups | Retrieve all report type groups
 [**listReports**](DefaultApi.md#listReports) | **GET** /checks/{check_id}/reports | All the reports belonging to a particular check can be listed from this endpoint.
 [**listWebhooks**](DefaultApi.md#listWebhooks) | **GET** /webhooks | List webhooks
@@ -404,6 +407,60 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+# **downloadLiveVideo**
+> \SplFileObject downloadLiveVideo($live_video_id)
+
+Download live video
+
+Live videos are downloaded using this endpoint.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$live_video_id = 'live_video_id_example'; // string | The live video’s unique identifier.
+
+try {
+    $result = $apiInstance->downloadLiveVideo($live_video_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->downloadLiveVideo: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **live_video_id** | **string**| The live video’s unique identifier. |
+
+### Return type
+
+[**\SplFileObject**](../Model/\SplFileObject.md)
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*, application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 # **findAddresses**
 > \Onfido\Model\GenericAddressesList findAddresses($postcode)
 
@@ -656,6 +713,58 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Onfido\Model\LivePhoto**](../Model/LivePhoto.md)
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **findLiveVideo**
+> \Onfido\Model\LiveVideo findLiveVideo($live_video_id)
+
+Retrieve live video
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$live_video_id = 'live_video_id_example'; // string | The live video’s unique identifier.
+
+try {
+    $result = $apiInstance->findLiveVideo($live_video_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->findLiveVideo: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **live_video_id** | **string**| The live video’s unique identifier. |
+
+### Return type
+
+[**\Onfido\Model\LiveVideo**](../Model/LiveVideo.md)
 
 ### Authorization
 
@@ -1032,6 +1141,58 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Onfido\Model\LivePhotosList**](../Model/LivePhotosList.md)
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **listLiveVideos**
+> \Onfido\Model\LiveVideosList listLiveVideos($applicant_id)
+
+List live videos
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$applicant_id = 'applicant_id_example'; // string | The id of the applicant the live videos belong to.
+
+try {
+    $result = $apiInstance->listLiveVideos($applicant_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->listLiveVideos: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**| The id of the applicant the live videos belong to. |
+
+### Return type
+
+[**\Onfido\Model\LiveVideosList**](../Model/LiveVideosList.md)
 
 ### Authorization
 

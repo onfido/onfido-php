@@ -1,6 +1,6 @@
 <?php
 /**
- * LivePhoto
+ * LiveVideosList
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * LivePhoto Class Doc Comment
+ * LiveVideosList Class Doc Comment
  *
  * @category Class
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class LivePhoto implements ModelInterface, ArrayAccess
+class LiveVideosList implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'live_photo';
+    protected static $openAPIModelName = 'live_videos_list';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,13 +57,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'created_at' => '\DateTime',
-        'href' => 'string',
-        'download_href' => 'string',
-        'file_name' => 'string',
-        'file_size' => 'int',
-        'file_type' => 'string'
+        'live_videos' => '\Onfido\Model\LiveVideo[]'
     ];
 
     /**
@@ -72,13 +66,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'created_at' => 'date-time',
-        'href' => null,
-        'download_href' => null,
-        'file_name' => null,
-        'file_size' => null,
-        'file_type' => null
+        'live_videos' => null
     ];
 
     /**
@@ -108,13 +96,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'created_at' => 'created_at',
-        'href' => 'href',
-        'download_href' => 'download_href',
-        'file_name' => 'file_name',
-        'file_size' => 'file_size',
-        'file_type' => 'file_type'
+        'live_videos' => 'live_videos'
     ];
 
     /**
@@ -123,13 +105,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'created_at' => 'setCreatedAt',
-        'href' => 'setHref',
-        'download_href' => 'setDownloadHref',
-        'file_name' => 'setFileName',
-        'file_size' => 'setFileSize',
-        'file_type' => 'setFileType'
+        'live_videos' => 'setLiveVideos'
     ];
 
     /**
@@ -138,13 +114,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'created_at' => 'getCreatedAt',
-        'href' => 'getHref',
-        'download_href' => 'getDownloadHref',
-        'file_name' => 'getFileName',
-        'file_size' => 'getFileSize',
-        'file_type' => 'getFileType'
+        'live_videos' => 'getLiveVideos'
     ];
 
     /**
@@ -207,13 +177,7 @@ class LivePhoto implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['created_at'] = isset($data['created_at']) ? $data['created_at'] : null;
-        $this->container['href'] = isset($data['href']) ? $data['href'] : null;
-        $this->container['download_href'] = isset($data['download_href']) ? $data['download_href'] : null;
-        $this->container['file_name'] = isset($data['file_name']) ? $data['file_name'] : null;
-        $this->container['file_size'] = isset($data['file_size']) ? $data['file_size'] : null;
-        $this->container['file_type'] = isset($data['file_type']) ? $data['file_type'] : null;
+        $this->container['live_videos'] = isset($data['live_videos']) ? $data['live_videos'] : null;
     }
 
     /**
@@ -241,169 +205,25 @@ class LivePhoto implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets live_videos
      *
-     * @return string|null
+     * @return \Onfido\Model\LiveVideo[]|null
      */
-    public function getId()
+    public function getLiveVideos()
     {
-        return $this->container['id'];
+        return $this->container['live_videos'];
     }
 
     /**
-     * Sets id
+     * Sets live_videos
      *
-     * @param string|null $id The unique identifier for the photo.
+     * @param \Onfido\Model\LiveVideo[]|null $live_videos live_videos
      *
      * @return $this
      */
-    public function setId($id)
+    public function setLiveVideos($live_videos)
     {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at The date and time at which the photo was uploaded.
-     *
-     * @return $this
-     */
-    public function setCreatedAt($created_at)
-    {
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets href
-     *
-     * @return string|null
-     */
-    public function getHref()
-    {
-        return $this->container['href'];
-    }
-
-    /**
-     * Sets href
-     *
-     * @param string|null $href The uri of this resource.
-     *
-     * @return $this
-     */
-    public function setHref($href)
-    {
-        $this->container['href'] = $href;
-
-        return $this;
-    }
-
-    /**
-     * Gets download_href
-     *
-     * @return string|null
-     */
-    public function getDownloadHref()
-    {
-        return $this->container['download_href'];
-    }
-
-    /**
-     * Sets download_href
-     *
-     * @param string|null $download_href The uri that can be used to download the photo.
-     *
-     * @return $this
-     */
-    public function setDownloadHref($download_href)
-    {
-        $this->container['download_href'] = $download_href;
-
-        return $this;
-    }
-
-    /**
-     * Gets file_name
-     *
-     * @return string|null
-     */
-    public function getFileName()
-    {
-        return $this->container['file_name'];
-    }
-
-    /**
-     * Sets file_name
-     *
-     * @param string|null $file_name The name of the uploaded file.
-     *
-     * @return $this
-     */
-    public function setFileName($file_name)
-    {
-        $this->container['file_name'] = $file_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets file_size
-     *
-     * @return int|null
-     */
-    public function getFileSize()
-    {
-        return $this->container['file_size'];
-    }
-
-    /**
-     * Sets file_size
-     *
-     * @param int|null $file_size The size of the file in bytes.
-     *
-     * @return $this
-     */
-    public function setFileSize($file_size)
-    {
-        $this->container['file_size'] = $file_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets file_type
-     *
-     * @return string|null
-     */
-    public function getFileType()
-    {
-        return $this->container['file_type'];
-    }
-
-    /**
-     * Sets file_type
-     *
-     * @param string|null $file_type The file type of the uploaded file.
-     *
-     * @return $this
-     */
-    public function setFileType($file_type)
-    {
-        $this->container['file_type'] = $file_type;
+        $this->container['live_videos'] = $live_videos;
 
         return $this;
     }

@@ -143,6 +143,16 @@ class DefaultApiTest extends TestCase
     }
 
     /**
+     * Test case for downloadLiveVideo
+     *
+     * Download live video.
+     *
+     */
+    public function testDownloadLiveVideo()
+    {
+    }
+
+    /**
      * Test case for findAddresses
      *
      * Search for addresses by postcode.
@@ -189,6 +199,16 @@ class DefaultApiTest extends TestCase
      *
      */
     public function testFindLivePhoto()
+    {
+    }
+
+    /**
+     * Test case for findLiveVideo
+     *
+     * Retrieve live video.
+     *
+     */
+    public function testFindLiveVideo()
     {
     }
 
@@ -259,6 +279,16 @@ class DefaultApiTest extends TestCase
      *
      */
     public function testListLivePhotos()
+    {
+    }
+
+    /**
+     * Test case for listLiveVideos
+     *
+     * List live videos.
+     *
+     */
+    public function testListLiveVideos()
     {
     }
 
