@@ -184,9 +184,9 @@ class CheckCommonTest extends TestCase
     }
 
     /**
-     * Test attribute "async"
+     * Test attribute "asynchronous"
      */
-    public function testPropertyAsync()
+    public function testPropertyAsynchronous()
     {
     }
 }

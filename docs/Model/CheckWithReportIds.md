@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **type** | **string** | The type of the check, &#x60;standard&#x60; or &#x60;express&#x60;. | [optional] 
 **report_type_groups** | **string[]** | Array containing ids of the Report type groups being requested for. Write-only. | [optional] 
 **tags** | **string[]** | Array of tags being assigned to this check. | [optional] 
-**suppress_form_emails** | **bool** | For standard checks, applicant form will not be automatically sent if this is set to true. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. | [optional] [default to false]
-**charge_applicant_for_check** | **bool** | For standard checks, applicants will be presented with a mandatory payment screen before they can submit the applicant form, if this is set to true. In this case, your account will not be charged. Write-only. | [optional] [default to false]
+**suppress_form_emails** | **bool** | For standard checks, applicant form will not be automatically sent if this is set to true. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. Defaults to false. | [optional] 
+**charge_applicant_for_check** | **bool** | For standard checks, applicants will be presented with a mandatory payment screen before they can submit the applicant form, if this is set to true. In this case, your account will not be charged. Write-only. Defaults to false. | [optional] 
 **brand_id** | **string** | ID of the brand under which the check should be conducted. Write-only. | [optional] 
-**async** | **bool** | If this is set to true, we will queue checks for processing and return a response immediately. You can configure webhooks to notify you when the report is complete. Write-only. | [optional] [default to false]
+**asynchronous** | **bool** | If this is set to true, we will queue checks for processing and return a response immediately. You can configure webhooks to notify you when the report is complete. Write-only. Defaults to false. | [optional] 
 **reports** | **string[]** | An array of report ids. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -72,7 +72,7 @@ class Check implements ModelInterface, ArrayAccess
         'suppress_form_emails' => 'bool',
         'charge_applicant_for_check' => 'bool',
         'brand_id' => 'string',
-        'async' => 'bool',
+        'asynchronous' => 'bool',
         'reports' => '\Onfido\Model\Report[]'
     ];
 
@@ -97,7 +97,7 @@ class Check implements ModelInterface, ArrayAccess
         'suppress_form_emails' => null,
         'charge_applicant_for_check' => null,
         'brand_id' => null,
-        'async' => null,
+        'asynchronous' => null,
         'reports' => null
     ];
 
@@ -143,7 +143,7 @@ class Check implements ModelInterface, ArrayAccess
         'suppress_form_emails' => 'suppress_form_emails',
         'charge_applicant_for_check' => 'charge_applicant_for_check',
         'brand_id' => 'brand_id',
-        'async' => 'async',
+        'asynchronous' => 'asynchronous',
         'reports' => 'reports'
     ];
 
@@ -168,7 +168,7 @@ class Check implements ModelInterface, ArrayAccess
         'suppress_form_emails' => 'setSuppressFormEmails',
         'charge_applicant_for_check' => 'setChargeApplicantForCheck',
         'brand_id' => 'setBrandId',
-        'async' => 'setAsync',
+        'asynchronous' => 'setAsynchronous',
         'reports' => 'setReports'
     ];
 
@@ -193,7 +193,7 @@ class Check implements ModelInterface, ArrayAccess
         'suppress_form_emails' => 'getSuppressFormEmails',
         'charge_applicant_for_check' => 'getChargeApplicantForCheck',
         'brand_id' => 'getBrandId',
-        'async' => 'getAsync',
+        'asynchronous' => 'getAsynchronous',
         'reports' => 'getReports'
     ];
 
@@ -269,10 +269,10 @@ class Check implements ModelInterface, ArrayAccess
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         $this->container['report_type_groups'] = isset($data['report_type_groups']) ? $data['report_type_groups'] : null;
         $this->container['tags'] = isset($data['tags']) ? $data['tags'] : null;
-        $this->container['suppress_form_emails'] = isset($data['suppress_form_emails']) ? $data['suppress_form_emails'] : false;
-        $this->container['charge_applicant_for_check'] = isset($data['charge_applicant_for_check']) ? $data['charge_applicant_for_check'] : false;
+        $this->container['suppress_form_emails'] = isset($data['suppress_form_emails']) ? $data['suppress_form_emails'] : null;
+        $this->container['charge_applicant_for_check'] = isset($data['charge_applicant_for_check']) ? $data['charge_applicant_for_check'] : null;
         $this->container['brand_id'] = isset($data['brand_id']) ? $data['brand_id'] : null;
-        $this->container['async'] = isset($data['async']) ? $data['async'] : false;
+        $this->container['asynchronous'] = isset($data['asynchronous']) ? $data['asynchronous'] : null;
         $this->container['reports'] = isset($data['reports']) ? $data['reports'] : null;
     }
 
@@ -604,7 +604,7 @@ class Check implements ModelInterface, ArrayAccess
     /**
      * Sets suppress_form_emails
      *
-     * @param bool|null $suppress_form_emails For standard checks, applicant form will not be automatically sent if this is set to true. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only.
+     * @param bool|null $suppress_form_emails For standard checks, applicant form will not be automatically sent if this is set to true. You can manually send the form at any time after the check has been created, using the link found in the form_uri attribute of the check object. Write-only. Defaults to false.
      *
      * @return $this
      */
@@ -628,7 +628,7 @@ class Check implements ModelInterface, ArrayAccess
     /**
      * Sets charge_applicant_for_check
      *
-     * @param bool|null $charge_applicant_for_check For standard checks, applicants will be presented with a mandatory payment screen before they can submit the applicant form, if this is set to true. In this case, your account will not be charged. Write-only.
+     * @param bool|null $charge_applicant_for_check For standard checks, applicants will be presented with a mandatory payment screen before they can submit the applicant form, if this is set to true. In this case, your account will not be charged. Write-only. Defaults to false.
      *
      * @return $this
      */
@@ -664,25 +664,25 @@ class Check implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets async
+     * Gets asynchronous
      *
      * @return bool|null
      */
-    public function getAsync()
+    public function getAsynchronous()
     {
-        return $this->container['async'];
+        return $this->container['asynchronous'];
     }
 
     /**
-     * Sets async
+     * Sets asynchronous
      *
-     * @param bool|null $async If this is set to true, we will queue checks for processing and return a response immediately. You can configure webhooks to notify you when the report is complete. Write-only.
+     * @param bool|null $asynchronous If this is set to true, we will queue checks for processing and return a response immediately. You can configure webhooks to notify you when the report is complete. Write-only. Defaults to false.
      *
      * @return $this
      */
-    public function setAsync($async)
+    public function setAsynchronous($asynchronous)
     {
-        $this->container['async'] = $async;
+        $this->container['asynchronous'] = $asynchronous;
 
         return $this;
     }
