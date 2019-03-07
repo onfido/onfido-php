@@ -243,6 +243,16 @@ class DefaultApiTest extends TestCase
     }
 
     /**
+     * Test case for generateSdkToken
+     *
+     * Generate a SDK token.
+     *
+     */
+    public function testGenerateSdkToken()
+    {
+    }
+
+    /**
      * Test case for listApplicants
      *
      * List Applicants.
