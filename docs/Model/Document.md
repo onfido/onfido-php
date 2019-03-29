@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **file_type** | **string** | The file type of the uploaded file | [optional] 
 **type** | **string** | The type of document | [optional] 
 **side** | **string** | The side of the document, if applicable. The possible values are front and back | [optional] 
+**issuing_country** | **string** | The issuing country of the document, a 3-letter ISO code. | [optional] 
 **href** | **string** | The uri of this resource | [optional] 
 **download_href** | **string** | The uri that can be used to download the document | [optional] 
 

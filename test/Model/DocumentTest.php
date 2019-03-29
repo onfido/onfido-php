@@ -128,6 +128,13 @@ class DocumentTest extends TestCase
     }
 
     /**
+     * Test attribute "issuing_country"
+     */
+    public function testPropertyIssuingCountry()
+    {
+    }
+
+    /**
      * Test attribute "href"
      */
     public function testPropertyHref()

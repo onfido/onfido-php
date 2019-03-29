@@ -1618,7 +1618,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **uploadDocument**
-> \Onfido\Model\Document uploadDocument($applicant_id, $type, $file, $side)
+> \Onfido\Model\Document uploadDocument($applicant_id, $type, $file, $side, $issuing_country)
 
 Upload a document
 
@@ -1643,9 +1643,10 @@ $applicant_id = 'applicant_id_example'; // string |
 $type = 'type_example'; // string | The type of document.
 $file = "/path/to/file.txt"; // \SplFileObject | The file to be uploaded.
 $side = 'side_example'; // string | Either the `front` or `back` of the document.
+$issuing_country = 'issuing_country_example'; // string | The issuing country of the document, a 3-letter ISO code.
 
 try {
-    $result = $apiInstance->uploadDocument($applicant_id, $type, $file, $side);
+    $result = $apiInstance->uploadDocument($applicant_id, $type, $file, $side, $issuing_country);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->uploadDocument: ', $e->getMessage(), PHP_EOL;
@@ -1661,6 +1662,7 @@ Name | Type | Description  | Notes
  **type** | **string**| The type of document. |
  **file** | **\SplFileObject****\SplFileObject**| The file to be uploaded. |
  **side** | **string**| Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. | [optional]
+ **issuing_country** | **string**| The issuing country of the document, a 3-letter ISO code. | [optional]
 
 ### Return type
 

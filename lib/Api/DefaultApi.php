@@ -8809,14 +8809,15 @@ class DefaultApi
      * @param  string $type The type of document. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
+     * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Onfido\Model\Document|\Onfido\Model\Error
      */
-    public function uploadDocument($applicant_id, $type, $file, $side = null)
+    public function uploadDocument($applicant_id, $type, $file, $side = null, $issuing_country = null)
     {
-        list($response) = $this->uploadDocumentWithHttpInfo($applicant_id, $type, $file, $side);
+        list($response) = $this->uploadDocumentWithHttpInfo($applicant_id, $type, $file, $side, $issuing_country);
         return $response;
     }
 
@@ -8829,14 +8830,15 @@ class DefaultApi
      * @param  string $type The type of document. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
+     * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Onfido\Model\Document|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadDocumentWithHttpInfo($applicant_id, $type, $file, $side = null)
+    public function uploadDocumentWithHttpInfo($applicant_id, $type, $file, $side = null, $issuing_country = null)
     {
-        $request = $this->uploadDocumentRequest($applicant_id, $type, $file, $side);
+        $request = $this->uploadDocumentRequest($applicant_id, $type, $file, $side, $issuing_country);
 
         try {
             $options = $this->createHttpClientOption();
@@ -8940,13 +8942,14 @@ class DefaultApi
      * @param  string $type The type of document. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
+     * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadDocumentAsync($applicant_id, $type, $file, $side = null)
+    public function uploadDocumentAsync($applicant_id, $type, $file, $side = null, $issuing_country = null)
     {
-        return $this->uploadDocumentAsyncWithHttpInfo($applicant_id, $type, $file, $side)
+        return $this->uploadDocumentAsyncWithHttpInfo($applicant_id, $type, $file, $side, $issuing_country)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -8963,14 +8966,15 @@ class DefaultApi
      * @param  string $type The type of document. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
+     * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadDocumentAsyncWithHttpInfo($applicant_id, $type, $file, $side = null)
+    public function uploadDocumentAsyncWithHttpInfo($applicant_id, $type, $file, $side = null, $issuing_country = null)
     {
         $returnType = '\Onfido\Model\Document';
-        $request = $this->uploadDocumentRequest($applicant_id, $type, $file, $side);
+        $request = $this->uploadDocumentRequest($applicant_id, $type, $file, $side, $issuing_country);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -9013,11 +9017,12 @@ class DefaultApi
      * @param  string $type The type of document. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
+     * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function uploadDocumentRequest($applicant_id, $type, $file, $side = null)
+    protected function uploadDocumentRequest($applicant_id, $type, $file, $side = null, $issuing_country = null)
     {
         // verify the required parameter 'applicant_id' is set
         if ($applicant_id === null || (is_array($applicant_id) && count($applicant_id) === 0)) {
@@ -9060,13 +9065,17 @@ class DefaultApi
             $formParams['type'] = ObjectSerializer::toFormValue($type);
         }
         // form params
+        if ($file !== null) {
+            $multipart = true;
+            $formParams['file'] = \GuzzleHttp\Psr7\try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+        }
+        // form params
         if ($side !== null) {
             $formParams['side'] = ObjectSerializer::toFormValue($side);
         }
         // form params
-        if ($file !== null) {
-            $multipart = true;
-            $formParams['file'] = \GuzzleHttp\Psr7\try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+        if ($issuing_country !== null) {
+            $formParams['issuing_country'] = ObjectSerializer::toFormValue($issuing_country);
         }
         // body params
         $_tempBody = null;

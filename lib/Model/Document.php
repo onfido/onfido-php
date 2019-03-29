@@ -64,6 +64,7 @@ class Document implements ModelInterface, ArrayAccess
         'file_type' => 'string',
         'type' => 'string',
         'side' => 'string',
+        'issuing_country' => 'string',
         'href' => 'string',
         'download_href' => 'string'
     ];
@@ -81,6 +82,7 @@ class Document implements ModelInterface, ArrayAccess
         'file_type' => null,
         'type' => null,
         'side' => null,
+        'issuing_country' => null,
         'href' => null,
         'download_href' => null
     ];
@@ -119,6 +121,7 @@ class Document implements ModelInterface, ArrayAccess
         'file_type' => 'file_type',
         'type' => 'type',
         'side' => 'side',
+        'issuing_country' => 'issuing_country',
         'href' => 'href',
         'download_href' => 'download_href'
     ];
@@ -136,6 +139,7 @@ class Document implements ModelInterface, ArrayAccess
         'file_type' => 'setFileType',
         'type' => 'setType',
         'side' => 'setSide',
+        'issuing_country' => 'setIssuingCountry',
         'href' => 'setHref',
         'download_href' => 'setDownloadHref'
     ];
@@ -153,6 +157,7 @@ class Document implements ModelInterface, ArrayAccess
         'file_type' => 'getFileType',
         'type' => 'getType',
         'side' => 'getSide',
+        'issuing_country' => 'getIssuingCountry',
         'href' => 'getHref',
         'download_href' => 'getDownloadHref'
     ];
@@ -224,6 +229,7 @@ class Document implements ModelInterface, ArrayAccess
         $this->container['file_type'] = isset($data['file_type']) ? $data['file_type'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         $this->container['side'] = isset($data['side']) ? $data['side'] : null;
+        $this->container['issuing_country'] = isset($data['issuing_country']) ? $data['issuing_country'] : null;
         $this->container['href'] = isset($data['href']) ? $data['href'] : null;
         $this->container['download_href'] = isset($data['download_href']) ? $data['download_href'] : null;
     }
@@ -416,6 +422,30 @@ class Document implements ModelInterface, ArrayAccess
     public function setSide($side)
     {
         $this->container['side'] = $side;
+
+        return $this;
+    }
+
+    /**
+     * Gets issuing_country
+     *
+     * @return string|null
+     */
+    public function getIssuingCountry()
+    {
+        return $this->container['issuing_country'];
+    }
+
+    /**
+     * Sets issuing_country
+     *
+     * @param string|null $issuing_country The issuing country of the document, a 3-letter ISO code.
+     *
+     * @return $this
+     */
+    public function setIssuingCountry($issuing_country)
+    {
+        $this->container['issuing_country'] = $issuing_country;
 
         return $this;
     }
