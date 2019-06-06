@@ -113,6 +113,16 @@ class DefaultApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteWebhook
+     *
+     * Delete a webhook.
+     *
+     */
+    public function testDeleteWebhook()
+    {
+    }
+
+    /**
      * Test case for destroyApplicant
      *
      * Delete Applicant.
@@ -149,6 +159,16 @@ class DefaultApiTest extends TestCase
      *
      */
     public function testDownloadLiveVideo()
+    {
+    }
+
+    /**
+     * Test case for editWebhook
+     *
+     * Edit a webhook.
+     *
+     */
+    public function testEditWebhook()
     {
     }
 
