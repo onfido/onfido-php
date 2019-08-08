@@ -58,7 +58,8 @@ class SdkTokenRequest implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'applicant_id' => 'string',
-        'referrer' => 'string'
+        'referrer' => 'string',
+        'application_id' => 'string'
     ];
 
     /**
@@ -68,7 +69,8 @@ class SdkTokenRequest implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'applicant_id' => null,
-        'referrer' => null
+        'referrer' => null,
+        'application_id' => null
     ];
 
     /**
@@ -99,7 +101,8 @@ class SdkTokenRequest implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'applicant_id' => 'applicant_id',
-        'referrer' => 'referrer'
+        'referrer' => 'referrer',
+        'application_id' => 'application_id'
     ];
 
     /**
@@ -109,7 +112,8 @@ class SdkTokenRequest implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'applicant_id' => 'setApplicantId',
-        'referrer' => 'setReferrer'
+        'referrer' => 'setReferrer',
+        'application_id' => 'setApplicationId'
     ];
 
     /**
@@ -119,7 +123,8 @@ class SdkTokenRequest implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'applicant_id' => 'getApplicantId',
-        'referrer' => 'getReferrer'
+        'referrer' => 'getReferrer',
+        'application_id' => 'getApplicationId'
     ];
 
     /**
@@ -184,6 +189,7 @@ class SdkTokenRequest implements ModelInterface, ArrayAccess
     {
         $this->container['applicant_id'] = isset($data['applicant_id']) ? $data['applicant_id'] : null;
         $this->container['referrer'] = isset($data['referrer']) ? $data['referrer'] : null;
+        $this->container['application_id'] = isset($data['application_id']) ? $data['application_id'] : null;
     }
 
     /**
@@ -197,9 +203,6 @@ class SdkTokenRequest implements ModelInterface, ArrayAccess
 
         if ($this->container['applicant_id'] === null) {
             $invalidProperties[] = "'applicant_id' can't be null";
-        }
-        if ($this->container['referrer'] === null) {
-            $invalidProperties[] = "'referrer' can't be null";
         }
         return $invalidProperties;
     }
@@ -243,7 +246,7 @@ class SdkTokenRequest implements ModelInterface, ArrayAccess
     /**
      * Gets referrer
      *
-     * @return string
+     * @return string|null
      */
     public function getReferrer()
     {
@@ -253,13 +256,37 @@ class SdkTokenRequest implements ModelInterface, ArrayAccess
     /**
      * Sets referrer
      *
-     * @param string $referrer The referrer URL pattern
+     * @param string|null $referrer The referrer URL pattern
      *
      * @return $this
      */
     public function setReferrer($referrer)
     {
         $this->container['referrer'] = $referrer;
+
+        return $this;
+    }
+
+    /**
+     * Gets application_id
+     *
+     * @return string|null
+     */
+    public function getApplicationId()
+    {
+        return $this->container['application_id'];
+    }
+
+    /**
+     * Sets application_id
+     *
+     * @param string|null $application_id The application ID (iOS or Android)
+     *
+     * @return $this
+     */
+    public function setApplicationId($application_id)
+    {
+        $this->container['application_id'] = $application_id;
 
         return $this;
     }

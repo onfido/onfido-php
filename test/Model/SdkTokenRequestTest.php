@@ -91,4 +91,11 @@ class SdkTokenRequestTest extends TestCase
     public function testPropertyReferrer()
     {
     }
+
+    /**
+     * Test attribute "application_id"
+     */
+    public function testPropertyApplicationId()
+    {
+    }
 }
