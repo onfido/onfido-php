@@ -154,4 +154,25 @@ class AddressTest extends TestCase
     public function testPropertyState()
     {
     }
+
+    /**
+     * Test attribute "line1"
+     */
+    public function testPropertyLine1()
+    {
+    }
+
+    /**
+     * Test attribute "line2"
+     */
+    public function testPropertyLine2()
+    {
+    }
+
+    /**
+     * Test attribute "line3"
+     */
+    public function testPropertyLine3()
+    {
+    }
 }

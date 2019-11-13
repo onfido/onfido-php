@@ -67,7 +67,10 @@ class Address implements ModelInterface, ArrayAccess
         'country' => 'string',
         'start_date' => '\DateTime',
         'end_date' => '\DateTime',
-        'state' => 'string'
+        'state' => 'string',
+        'line1' => 'string',
+        'line2' => 'string',
+        'line3' => 'string'
     ];
 
     /**
@@ -86,7 +89,10 @@ class Address implements ModelInterface, ArrayAccess
         'country' => null,
         'start_date' => 'date',
         'end_date' => 'date',
-        'state' => null
+        'state' => null,
+        'line1' => null,
+        'line2' => null,
+        'line3' => null
     ];
 
     /**
@@ -126,7 +132,10 @@ class Address implements ModelInterface, ArrayAccess
         'country' => 'country',
         'start_date' => 'start_date',
         'end_date' => 'end_date',
-        'state' => 'state'
+        'state' => 'state',
+        'line1' => 'line1',
+        'line2' => 'line2',
+        'line3' => 'line3'
     ];
 
     /**
@@ -145,7 +154,10 @@ class Address implements ModelInterface, ArrayAccess
         'country' => 'setCountry',
         'start_date' => 'setStartDate',
         'end_date' => 'setEndDate',
-        'state' => 'setState'
+        'state' => 'setState',
+        'line1' => 'setLine1',
+        'line2' => 'setLine2',
+        'line3' => 'setLine3'
     ];
 
     /**
@@ -164,7 +176,10 @@ class Address implements ModelInterface, ArrayAccess
         'country' => 'getCountry',
         'start_date' => 'getStartDate',
         'end_date' => 'getEndDate',
-        'state' => 'getState'
+        'state' => 'getState',
+        'line1' => 'getLine1',
+        'line2' => 'getLine2',
+        'line3' => 'getLine3'
     ];
 
     /**
@@ -238,6 +253,9 @@ class Address implements ModelInterface, ArrayAccess
         $this->container['start_date'] = isset($data['start_date']) ? $data['start_date'] : null;
         $this->container['end_date'] = isset($data['end_date']) ? $data['end_date'] : null;
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['line1'] = isset($data['line1']) ? $data['line1'] : null;
+        $this->container['line2'] = isset($data['line2']) ? $data['line2'] : null;
+        $this->container['line3'] = isset($data['line3']) ? $data['line3'] : null;
     }
 
     /**
@@ -524,6 +542,78 @@ class Address implements ModelInterface, ArrayAccess
     public function setState($state)
     {
         $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets line1
+     *
+     * @return string|null
+     */
+    public function getLine1()
+    {
+        return $this->container['line1'];
+    }
+
+    /**
+     * Sets line1
+     *
+     * @param string|null $line1 Line 1 of the applicant's address
+     *
+     * @return $this
+     */
+    public function setLine1($line1)
+    {
+        $this->container['line1'] = $line1;
+
+        return $this;
+    }
+
+    /**
+     * Gets line2
+     *
+     * @return string|null
+     */
+    public function getLine2()
+    {
+        return $this->container['line2'];
+    }
+
+    /**
+     * Sets line2
+     *
+     * @param string|null $line2 Line 2 of the applicant's address
+     *
+     * @return $this
+     */
+    public function setLine2($line2)
+    {
+        $this->container['line2'] = $line2;
+
+        return $this;
+    }
+
+    /**
+     * Gets line3
+     *
+     * @return string|null
+     */
+    public function getLine3()
+    {
+        return $this->container['line3'];
+    }
+
+    /**
+     * Sets line3
+     *
+     * @param string|null $line3 Line 3 of the applicant's address
+     *
+     * @return $this
+     */
+    public function setLine3($line3)
+    {
+        $this->container['line3'] = $line3;
 
         return $this;
     }
