@@ -1,51 +1,52 @@
 # Onfido\DefaultApi
 
-All URIs are relative to *https://api.onfido.com/v2*
+All URIs are relative to *https://api.onfido.com/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancelReport**](DefaultApi.md#cancelReport) | **POST** /checks/{check_id}/reports/{report_id}/cancel | This endpoint is for cancelling individual paused reports.
+[**cancelReport**](DefaultApi.md#cancelReport) | **POST** /reports/{report_id}/cancel | This endpoint is for cancelling individual paused reports.
 [**createApplicant**](DefaultApi.md#createApplicant) | **POST** /applicants | Create Applicant
-[**createCheck**](DefaultApi.md#createCheck) | **POST** /applicants/{applicant_id}/checks | Create a check
+[**createCheck**](DefaultApi.md#createCheck) | **POST** /checks | Create a check
 [**createWebhook**](DefaultApi.md#createWebhook) | **POST** /webhooks | Create a webhook
 [**deleteWebhook**](DefaultApi.md#deleteWebhook) | **DELETE** /webhooks/{webhook_id} | Delete a webhook
 [**destroyApplicant**](DefaultApi.md#destroyApplicant) | **DELETE** /applicants/{applicant_id} | Delete Applicant
-[**downloadDocument**](DefaultApi.md#downloadDocument) | **GET** /applicants/{applicant_id}/documents/{document_id}/download | Download a documents raw data
+[**downloadDocument**](DefaultApi.md#downloadDocument) | **GET** /documents/{document_id}/download | Download a documents raw data
 [**downloadLivePhoto**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
 [**downloadLiveVideo**](DefaultApi.md#downloadLiveVideo) | **GET** /live_videos/{live_video_id}/download | Download live video
 [**editWebhook**](DefaultApi.md#editWebhook) | **PUT** /webhooks/{webhook_id} | Edit a webhook
 [**findAddresses**](DefaultApi.md#findAddresses) | **GET** /addresses/pick | Search for addresses by postcode
 [**findApplicant**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
-[**findCheck**](DefaultApi.md#findCheck) | **GET** /applicants/{applicant_id}/checks/{check_id} | Retrieve a Check
-[**findDocument**](DefaultApi.md#findDocument) | **GET** /applicants/{applicant_id}/documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
+[**findCheck**](DefaultApi.md#findCheck) | **GET** /checks/{check_id} | Retrieve a Check
+[**findDocument**](DefaultApi.md#findDocument) | **GET** /documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
 [**findLivePhoto**](DefaultApi.md#findLivePhoto) | **GET** /live_photos/{live_photo_id} | Retrieve live photo
 [**findLiveVideo**](DefaultApi.md#findLiveVideo) | **GET** /live_videos/{live_video_id} | Retrieve live video
-[**findReport**](DefaultApi.md#findReport) | **GET** /checks/{check_id}/reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
-[**findReportTypeGroup**](DefaultApi.md#findReportTypeGroup) | **GET** /report_type_groups/{report_type_group_id} | Retrieve single report type group object
+[**findReport**](DefaultApi.md#findReport) | **GET** /reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
 [**findWebhook**](DefaultApi.md#findWebhook) | **GET** /webhooks/{webhook_id} | Retrieve a Webhook
 [**generateSdkToken**](DefaultApi.md#generateSdkToken) | **POST** /sdk_token | Generate a SDK token
 [**listApplicants**](DefaultApi.md#listApplicants) | **GET** /applicants | List Applicants
-[**listChecks**](DefaultApi.md#listChecks) | **GET** /applicants/{applicant_id}/checks | Retrieve Checks
-[**listDocuments**](DefaultApi.md#listDocuments) | **GET** /applicants/{applicant_id}/documents | List documents
+[**listChecks**](DefaultApi.md#listChecks) | **GET** /checks | Retrieve Checks
+[**listDocuments**](DefaultApi.md#listDocuments) | **GET** /documents | List documents
 [**listLivePhotos**](DefaultApi.md#listLivePhotos) | **GET** /live_photos | List live photos
 [**listLiveVideos**](DefaultApi.md#listLiveVideos) | **GET** /live_videos | List live videos
-[**listReportTypeGroups**](DefaultApi.md#listReportTypeGroups) | **GET** /report_type_groups | Retrieve all report type groups
-[**listReports**](DefaultApi.md#listReports) | **GET** /checks/{check_id}/reports | All the reports belonging to a particular check can be listed from this endpoint.
+[**listReports**](DefaultApi.md#listReports) | **GET** /reports | All the reports belonging to a particular check can be listed from this endpoint.
 [**listWebhooks**](DefaultApi.md#listWebhooks) | **GET** /webhooks | List webhooks
 [**restoreApplicant**](DefaultApi.md#restoreApplicant) | **POST** /applicants/{applicant_id}/restore | Restore Applicant
 [**resumeCheck**](DefaultApi.md#resumeCheck) | **POST** /checks/{check_id}/resume | Resume a Check
-[**resumeReport**](DefaultApi.md#resumeReport) | **POST** /checks/{check_id}/reports/{report_id}/resume | This endpoint is for resuming individual paused reports.
+[**resumeReport**](DefaultApi.md#resumeReport) | **POST** /reports/{report_id}/resume | This endpoint is for resuming individual paused reports.
 [**updateApplicant**](DefaultApi.md#updateApplicant) | **PUT** /applicants/{applicant_id} | Update Applicant
-[**uploadDocument**](DefaultApi.md#uploadDocument) | **POST** /applicants/{applicant_id}/documents | Upload a document
+[**uploadDocument**](DefaultApi.md#uploadDocument) | **POST** /documents | Upload a document
 [**uploadLivePhoto**](DefaultApi.md#uploadLivePhoto) | **POST** /live_photos | Upload live photo
 
 
-# **cancelReport**
-> cancelReport($check_id, $report_id)
+
+## cancelReport
+
+> cancelReport($report_id)
 
 This endpoint is for cancelling individual paused reports.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -60,11 +61,10 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$check_id = 'check_id_example'; // string | 
 $report_id = 'report_id_example'; // string | 
 
 try {
-    $apiInstance->cancelReport($check_id, $report_id);
+    $apiInstance->cancelReport($report_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->cancelReport: ', $e->getMessage(), PHP_EOL;
 }
@@ -73,9 +73,9 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **check_id** | **string**|  |
  **report_id** | **string**|  |
 
 ### Return type
@@ -88,17 +88,22 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **createApplicant**
+
+## createApplicant
+
 > \Onfido\Model\Applicant createApplicant($applicant)
 
 Create Applicant
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -126,6 +131,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant** | [**\Onfido\Model\Applicant**](../Model/Applicant.md)|  |
@@ -140,17 +146,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **createCheck**
-> \Onfido\Model\Check createCheck($applicant_id, $check)
+
+## createCheck
+
+> \Onfido\Model\Check createCheck($check)
 
 Create a check
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -165,11 +176,10 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
 $check = new \Onfido\Model\Check(); // \Onfido\Model\Check | 
 
 try {
-    $result = $apiInstance->createCheck($applicant_id, $check);
+    $result = $apiInstance->createCheck($check);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->createCheck: ', $e->getMessage(), PHP_EOL;
@@ -179,9 +189,9 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **applicant_id** | **string**|  |
  **check** | [**\Onfido\Model\Check**](../Model/Check.md)|  |
 
 ### Return type
@@ -194,17 +204,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **createWebhook**
+
+## createWebhook
+
 > \Onfido\Model\Webhook createWebhook($webhook)
 
 Create a webhook
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -232,6 +247,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **webhook** | [**\Onfido\Model\Webhook**](../Model/Webhook.md)|  |
@@ -246,17 +262,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **deleteWebhook**
+
+## deleteWebhook
+
 > deleteWebhook($webhook_id)
 
 Delete a webhook
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -283,6 +304,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **webhook_id** | **string**|  |
@@ -297,17 +319,22 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **destroyApplicant**
+
+## destroyApplicant
+
 > destroyApplicant($applicant_id)
 
 Delete Applicant
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -334,6 +361,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
@@ -348,17 +376,22 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **downloadDocument**
-> \SplFileObject downloadDocument($applicant_id, $document_id)
+
+## downloadDocument
+
+> \SplFileObject downloadDocument($document_id)
 
 Download a documents raw data
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -373,11 +406,10 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
 $document_id = 'document_id_example'; // string | 
 
 try {
-    $result = $apiInstance->downloadDocument($applicant_id, $document_id);
+    $result = $apiInstance->downloadDocument($document_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->downloadDocument: ', $e->getMessage(), PHP_EOL;
@@ -387,9 +419,9 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **applicant_id** | **string**|  |
  **document_id** | **string**|  |
 
 ### Return type
@@ -402,12 +434,16 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: */*, application/json
+- **Content-Type**: Not defined
+- **Accept**: */*, application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **downloadLivePhoto**
+
+## downloadLivePhoto
+
 > \SplFileObject downloadLivePhoto($live_photo_id)
 
 Download live photo
@@ -415,6 +451,7 @@ Download live photo
 Live photos are downloaded using this endpoint.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -442,6 +479,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **live_photo_id** | **string**| The live photo’s unique identifier. |
@@ -456,12 +494,16 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: */*, application/json
+- **Content-Type**: Not defined
+- **Accept**: */*, application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **downloadLiveVideo**
+
+## downloadLiveVideo
+
 > \SplFileObject downloadLiveVideo($live_video_id)
 
 Download live video
@@ -469,6 +511,7 @@ Download live video
 Live videos are downloaded using this endpoint.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -496,6 +539,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **live_video_id** | **string**| The live video’s unique identifier. |
@@ -510,17 +554,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: */*, application/json
+- **Content-Type**: Not defined
+- **Accept**: */*, application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **editWebhook**
+
+## editWebhook
+
 > \Onfido\Model\Webhook editWebhook($webhook_id, $webhook)
 
 Edit a webhook
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -549,6 +598,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **webhook_id** | **string**|  |
@@ -564,17 +614,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **findAddresses**
-> \Onfido\Model\GenericAddressesList findAddresses($postcode)
+
+## findAddresses
+
+> \Onfido\Model\AddressesList findAddresses($postcode)
 
 Search for addresses by postcode
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -602,13 +657,14 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **postcode** | **string**|  |
 
 ### Return type
 
-[**\Onfido\Model\GenericAddressesList**](../Model/GenericAddressesList.md)
+[**\Onfido\Model\AddressesList**](../Model/AddressesList.md)
 
 ### Authorization
 
@@ -616,17 +672,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **findApplicant**
+
+## findApplicant
+
 > \Onfido\Model\Applicant findApplicant($applicant_id)
 
 Retrieve Applicant
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -654,6 +715,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
@@ -668,17 +730,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **findCheck**
-> \Onfido\Model\CheckWithReportIds findCheck($applicant_id, $check_id)
+
+## findCheck
+
+> \Onfido\Model\Check findCheck($check_id)
 
 Retrieve a Check
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -693,11 +760,10 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
 $check_id = 'check_id_example'; // string | 
 
 try {
-    $result = $apiInstance->findCheck($applicant_id, $check_id);
+    $result = $apiInstance->findCheck($check_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findCheck: ', $e->getMessage(), PHP_EOL;
@@ -707,14 +773,14 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **applicant_id** | **string**|  |
  **check_id** | **string**|  |
 
 ### Return type
 
-[**\Onfido\Model\CheckWithReportIds**](../Model/CheckWithReportIds.md)
+[**\Onfido\Model\Check**](../Model/Check.md)
 
 ### Authorization
 
@@ -722,17 +788,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **findDocument**
-> \Onfido\Model\Document findDocument($applicant_id, $document_id)
+
+## findDocument
+
+> \Onfido\Model\Document findDocument($document_id)
 
 A single document can be retrieved by calling this endpoint with the document’s unique identifier.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -747,11 +818,10 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
 $document_id = 'document_id_example'; // string | 
 
 try {
-    $result = $apiInstance->findDocument($applicant_id, $document_id);
+    $result = $apiInstance->findDocument($document_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findDocument: ', $e->getMessage(), PHP_EOL;
@@ -761,9 +831,9 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **applicant_id** | **string**|  |
  **document_id** | **string**|  |
 
 ### Return type
@@ -776,17 +846,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **findLivePhoto**
+
+## findLivePhoto
+
 > \Onfido\Model\LivePhoto findLivePhoto($live_photo_id)
 
 Retrieve live photo
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -814,6 +889,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **live_photo_id** | **string**| The live photo’s unique identifier. |
@@ -828,17 +904,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **findLiveVideo**
+
+## findLiveVideo
+
 > \Onfido\Model\LiveVideo findLiveVideo($live_video_id)
 
 Retrieve live video
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -866,6 +947,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **live_video_id** | **string**| The live video’s unique identifier. |
@@ -880,17 +962,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **findReport**
-> \Onfido\Model\Report findReport($check_id, $report_id)
+
+## findReport
+
+> \Onfido\Model\Report findReport($report_id)
 
 A single report can be retrieved using this endpoint with the corresponding unique identifier.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -905,11 +992,10 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$check_id = 'check_id_example'; // string | 
 $report_id = 'report_id_example'; // string | 
 
 try {
-    $result = $apiInstance->findReport($check_id, $report_id);
+    $result = $apiInstance->findReport($report_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findReport: ', $e->getMessage(), PHP_EOL;
@@ -919,9 +1005,9 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **check_id** | **string**|  |
  **report_id** | **string**|  |
 
 ### Return type
@@ -934,69 +1020,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **findReportTypeGroup**
-> \Onfido\Model\ReportTypeGroup findReportTypeGroup($report_type_group_id)
 
-Retrieve single report type group object
+## findWebhook
 
-### Example
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$config = Onfido\Configuration::getDefaultConfiguration();
-$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
-$config->setApiKeyPrefix('Authorization', 'Token');
-
-$apiInstance = new Onfido\Api\DefaultApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$report_type_group_id = 'report_type_group_id_example'; // string | 
-
-try {
-    $result = $apiInstance->findReportTypeGroup($report_type_group_id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->findReportTypeGroup: ', $e->getMessage(), PHP_EOL;
-}
-?>
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **report_type_group_id** | **string**|  |
-
-### Return type
-
-[**\Onfido\Model\ReportTypeGroup**](../Model/ReportTypeGroup.md)
-
-### Authorization
-
-[Token](../../README.md#Token)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-# **findWebhook**
 > \Onfido\Model\Webhook findWebhook($webhook_id)
 
 Retrieve a Webhook
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1024,6 +1063,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **webhook_id** | **string**|  |
@@ -1038,17 +1078,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **generateSdkToken**
-> \Onfido\Model\SdkTokenResponse generateSdkToken($sdk_token_request)
+
+## generateSdkToken
+
+> \Onfido\Model\SdkToken generateSdkToken($sdk_token)
 
 Generate a SDK token
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1063,10 +1108,10 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$sdk_token_request = new \Onfido\Model\SdkTokenRequest(); // \Onfido\Model\SdkTokenRequest | 
+$sdk_token = new \Onfido\Model\SdkToken(); // \Onfido\Model\SdkToken | 
 
 try {
-    $result = $apiInstance->generateSdkToken($sdk_token_request);
+    $result = $apiInstance->generateSdkToken($sdk_token);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->generateSdkToken: ', $e->getMessage(), PHP_EOL;
@@ -1076,13 +1121,14 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdk_token_request** | [**\Onfido\Model\SdkTokenRequest**](../Model/SdkTokenRequest.md)|  |
+ **sdk_token** | [**\Onfido\Model\SdkToken**](../Model/SdkToken.md)|  |
 
 ### Return type
 
-[**\Onfido\Model\SdkTokenResponse**](../Model/SdkTokenResponse.md)
+[**\Onfido\Model\SdkToken**](../Model/SdkToken.md)
 
 ### Authorization
 
@@ -1090,17 +1136,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **listApplicants**
+
+## listApplicants
+
 > \Onfido\Model\ApplicantsList listApplicants($page, $per_page, $include_deleted)
 
 List Applicants
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1130,6 +1181,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int**| The page to return. The first page is &#x60;page&#x3D;1&#x60; | [optional] [default to 1]
@@ -1146,17 +1198,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **listChecks**
-> \Onfido\Model\ChecksList listChecks($applicant_id, $page, $per_page)
+
+## listChecks
+
+> \Onfido\Model\ChecksList listChecks($applicant_id)
 
 Retrieve Checks
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1172,11 +1229,9 @@ $apiInstance = new Onfido\Api\DefaultApi(
     $config
 );
 $applicant_id = 'applicant_id_example'; // string | 
-$page = 1; // int | The page to return. The first page is `page=1`.
-$per_page = 20; // int | The number of objects per page.
 
 try {
-    $result = $apiInstance->listChecks($applicant_id, $page, $per_page);
+    $result = $apiInstance->listChecks($applicant_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->listChecks: ', $e->getMessage(), PHP_EOL;
@@ -1186,11 +1241,10 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
- **page** | **int**| The page to return. The first page is &#x60;page&#x3D;1&#x60;. | [optional] [default to 1]
- **per_page** | **int**| The number of objects per page. | [optional] [default to 20]
 
 ### Return type
 
@@ -1202,12 +1256,16 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **listDocuments**
+
+## listDocuments
+
 > \Onfido\Model\DocumentsList listDocuments($applicant_id)
 
 List documents
@@ -1215,6 +1273,7 @@ List documents
 All documents belonging to an applicant can be listed from this endpoint
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1242,6 +1301,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
@@ -1256,17 +1316,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **listLivePhotos**
+
+## listLivePhotos
+
 > \Onfido\Model\LivePhotosList listLivePhotos($applicant_id)
 
 List live photos
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1294,6 +1359,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**| The id of the applicant the live photos belong to. |
@@ -1308,17 +1374,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **listLiveVideos**
+
+## listLiveVideos
+
 > \Onfido\Model\LiveVideosList listLiveVideos($applicant_id)
 
 List live videos
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1346,6 +1417,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**| The id of the applicant the live videos belong to. |
@@ -1360,65 +1432,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **listReportTypeGroups**
-> \Onfido\Model\ReportTypeGroupsList listReportTypeGroups()
 
-Retrieve all report type groups
+## listReports
 
-### Example
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$config = Onfido\Configuration::getDefaultConfiguration();
-$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
-$config->setApiKeyPrefix('Authorization', 'Token');
-
-$apiInstance = new Onfido\Api\DefaultApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-
-try {
-    $result = $apiInstance->listReportTypeGroups();
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->listReportTypeGroups: ', $e->getMessage(), PHP_EOL;
-}
-?>
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**\Onfido\Model\ReportTypeGroupsList**](../Model/ReportTypeGroupsList.md)
-
-### Authorization
-
-[Token](../../README.md#Token)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-# **listReports**
 > \Onfido\Model\ReportsList listReports($check_id)
 
 All the reports belonging to a particular check can be listed from this endpoint.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1446,6 +1475,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **check_id** | **string**|  |
@@ -1460,17 +1490,22 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **listWebhooks**
+
+## listWebhooks
+
 > \Onfido\Model\WebhooksList listWebhooks()
 
 List webhooks
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1496,6 +1531,7 @@ try {
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -1508,17 +1544,22 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **restoreApplicant**
+
+## restoreApplicant
+
 > restoreApplicant($applicant_id)
 
 Restore Applicant
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1545,6 +1586,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
@@ -1559,17 +1601,22 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **resumeCheck**
+
+## resumeCheck
+
 > resumeCheck($check_id)
 
 Resume a Check
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1596,6 +1643,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **check_id** | **string**|  |
@@ -1610,17 +1658,22 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **resumeReport**
-> resumeReport($check_id, $report_id)
+
+## resumeReport
+
+> resumeReport($report_id)
 
 This endpoint is for resuming individual paused reports.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1635,11 +1688,10 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$check_id = 'check_id_example'; // string | 
 $report_id = 'report_id_example'; // string | 
 
 try {
-    $apiInstance->resumeReport($check_id, $report_id);
+    $apiInstance->resumeReport($report_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->resumeReport: ', $e->getMessage(), PHP_EOL;
 }
@@ -1648,9 +1700,9 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **check_id** | **string**|  |
  **report_id** | **string**|  |
 
 ### Return type
@@ -1663,12 +1715,16 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **updateApplicant**
+
+## updateApplicant
+
 > \Onfido\Model\Applicant updateApplicant($applicant_id, $applicant)
 
 Update Applicant
@@ -1676,6 +1732,7 @@ Update Applicant
 Allows updating of an applicant’s information before any checks are created. - Partial updates - Addresses and ID numbers present will replace existing ones - Same applicant validations to create applicant
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1704,6 +1761,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
@@ -1719,12 +1777,16 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **uploadDocument**
+
+## uploadDocument
+
 > \Onfido\Model\Document uploadDocument($applicant_id, $type, $file, $side, $issuing_country)
 
 Upload a document
@@ -1732,6 +1794,7 @@ Upload a document
 Documents are uploaded using this endpoint. Along with the file upload the relevant document type must be specified. Documents must be uploaded as a multipart form. The valid file types are: jpg, png and pdf. The file size must be between 2KB and 3MB.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1746,7 +1809,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
+$applicant_id = 'applicant_id_example'; // string | The ID of the applicant whose document is being uploaded.
 $type = 'type_example'; // string | The type of document.
 $file = "/path/to/file.txt"; // \SplFileObject | The file to be uploaded.
 $side = 'side_example'; // string | Either the `front` or `back` of the document.
@@ -1763,9 +1826,10 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **applicant_id** | **string**|  |
+ **applicant_id** | **string**| The ID of the applicant whose document is being uploaded. |
  **type** | **string**| The type of document. |
  **file** | **\SplFileObject****\SplFileObject**| The file to be uploaded. |
  **side** | **string**| Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. | [optional]
@@ -1781,12 +1845,16 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 
-# **uploadLivePhoto**
+
+## uploadLivePhoto
+
 > \Onfido\Model\LivePhoto uploadLivePhoto($applicant_id, $file, $advanced_validation)
 
 Upload live photo
@@ -1794,6 +1862,7 @@ Upload live photo
 You can upload live photos to this endpoint. Like document upload, files must be uploaded as a multipart form. Valid file types are jpg, png and pdf. The file size must be between 32KB and 10MB. Live photos are validated at the point of upload to check that they contain exactly one face. This validation can be disabled by setting the advanced_validation argument to false.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -1823,6 +1892,7 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
@@ -1839,8 +1909,10 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 

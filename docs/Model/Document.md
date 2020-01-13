@@ -1,6 +1,7 @@
-# Document
+# # Document
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The unique identifier for the document | [optional] 
@@ -14,6 +15,6 @@ Name | Type | Description | Notes
 **href** | **string** | The uri of this resource | [optional] 
 **download_href** | **string** | The uri that can be used to download the document | [optional] 
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 
 

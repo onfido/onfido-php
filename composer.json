@@ -1,17 +1,18 @@
 {
     "name": "onfido/api-php-client",
-    "version": "4.3.0",
+    "version": "5.0.0",
     "description": "The Onfido API is used to submit check requests.",
     "keywords": [
         "openapitools",
         "openapi-generator",
+        "openapi",
         "php",
         "sdk",
         "rest",
         "api"
     ],
-    "homepage": "http://openapi-generator.tech",
-    "license": "proprietary",
+    "homepage": "https://openapi-generator.tech",
+    "license": "unlicense",
     "authors": [
         {
             "name": "OpenAPI-Generator contributors",
