@@ -135,6 +135,13 @@ class ReportTest extends TestCase
     }
 
     /**
+     * Test attribute "check_id"
+     */
+    public function testPropertyCheckId()
+    {
+    }
+
+    /**
      * Test attribute "name"
      */
     public function testPropertyName()

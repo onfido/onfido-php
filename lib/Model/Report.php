@@ -65,6 +65,7 @@ class Report implements ModelInterface, ArrayAccess
         'sub_result' => 'string',
         'breakdown' => 'map[string,object]',
         'properties' => 'map[string,object]',
+        'check_id' => 'string',
         'name' => 'string',
         'documents' => '\Onfido\Model\ReportDocument[]'
     ];
@@ -83,6 +84,7 @@ class Report implements ModelInterface, ArrayAccess
         'sub_result' => null,
         'breakdown' => null,
         'properties' => null,
+        'check_id' => null,
         'name' => null,
         'documents' => null
     ];
@@ -122,6 +124,7 @@ class Report implements ModelInterface, ArrayAccess
         'sub_result' => 'sub_result',
         'breakdown' => 'breakdown',
         'properties' => 'properties',
+        'check_id' => 'check_id',
         'name' => 'name',
         'documents' => 'documents'
     ];
@@ -140,6 +143,7 @@ class Report implements ModelInterface, ArrayAccess
         'sub_result' => 'setSubResult',
         'breakdown' => 'setBreakdown',
         'properties' => 'setProperties',
+        'check_id' => 'setCheckId',
         'name' => 'setName',
         'documents' => 'setDocuments'
     ];
@@ -158,6 +162,7 @@ class Report implements ModelInterface, ArrayAccess
         'sub_result' => 'getSubResult',
         'breakdown' => 'getBreakdown',
         'properties' => 'getProperties',
+        'check_id' => 'getCheckId',
         'name' => 'getName',
         'documents' => 'getDocuments'
     ];
@@ -230,6 +235,7 @@ class Report implements ModelInterface, ArrayAccess
         $this->container['sub_result'] = isset($data['sub_result']) ? $data['sub_result'] : null;
         $this->container['breakdown'] = isset($data['breakdown']) ? $data['breakdown'] : null;
         $this->container['properties'] = isset($data['properties']) ? $data['properties'] : null;
+        $this->container['check_id'] = isset($data['check_id']) ? $data['check_id'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['documents'] = isset($data['documents']) ? $data['documents'] : null;
     }
@@ -449,6 +455,30 @@ class Report implements ModelInterface, ArrayAccess
     public function setProperties($properties)
     {
         $this->container['properties'] = $properties;
+
+        return $this;
+    }
+
+    /**
+     * Gets check_id
+     *
+     * @return string|null
+     */
+    public function getCheckId()
+    {
+        return $this->container['check_id'];
+    }
+
+    /**
+     * Sets check_id
+     *
+     * @param string|null $check_id The ID of the check to which the report belongs. Read-only.
+     *
+     * @return $this
+     */
+    public function setCheckId($check_id)
+    {
+        $this->container['check_id'] = $check_id;
 
         return $this;
     }

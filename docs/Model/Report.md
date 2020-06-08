@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **sub_result** | **string** | The sub_result of the report. It gives a more detailed result for document reports only, and will be null otherwise. Read-only. | [optional] 
 **breakdown** | **map[string,object]** | The details of the report. This is specific to each type of report. Read-only. | [optional] 
 **properties** | **map[string,object]** | The properties associated with the report, if any. Read-only. | [optional] 
+**check_id** | **string** | The ID of the check to which the report belongs. Read-only. | [optional] 
 **name** | **string** | The name of the report type. | 
 **documents** | [**\Onfido\Model\ReportDocument[]**](ReportDocument.md) | Array of objects with document ids that were used in the Onfido engine. [ONLY USED IN A DOCUMENT CHECK] | [optional] 
 
