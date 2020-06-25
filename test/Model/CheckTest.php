@@ -189,4 +189,11 @@ class CheckTest extends TestCase
     public function testPropertyReportIds()
     {
     }
+
+    /**
+     * Test attribute "document_ids"
+     */
+    public function testPropertyDocumentIds()
+    {
+    }
 }

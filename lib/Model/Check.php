@@ -72,7 +72,8 @@ class Check implements ModelInterface, ArrayAccess
         'applicant_provides_data' => 'bool',
         'suppress_form_emails' => 'bool',
         'asynchronous' => 'bool',
-        'report_ids' => 'string[]'
+        'report_ids' => 'string[]',
+        'document_ids' => 'string[]'
     ];
 
     /**
@@ -96,7 +97,8 @@ class Check implements ModelInterface, ArrayAccess
         'applicant_provides_data' => null,
         'suppress_form_emails' => null,
         'asynchronous' => null,
-        'report_ids' => null
+        'report_ids' => null,
+        'document_ids' => null
     ];
 
     /**
@@ -141,7 +143,8 @@ class Check implements ModelInterface, ArrayAccess
         'applicant_provides_data' => 'applicant_provides_data',
         'suppress_form_emails' => 'suppress_form_emails',
         'asynchronous' => 'asynchronous',
-        'report_ids' => 'report_ids'
+        'report_ids' => 'report_ids',
+        'document_ids' => 'document_ids'
     ];
 
     /**
@@ -165,7 +168,8 @@ class Check implements ModelInterface, ArrayAccess
         'applicant_provides_data' => 'setApplicantProvidesData',
         'suppress_form_emails' => 'setSuppressFormEmails',
         'asynchronous' => 'setAsynchronous',
-        'report_ids' => 'setReportIds'
+        'report_ids' => 'setReportIds',
+        'document_ids' => 'setDocumentIds'
     ];
 
     /**
@@ -189,7 +193,8 @@ class Check implements ModelInterface, ArrayAccess
         'applicant_provides_data' => 'getApplicantProvidesData',
         'suppress_form_emails' => 'getSuppressFormEmails',
         'asynchronous' => 'getAsynchronous',
-        'report_ids' => 'getReportIds'
+        'report_ids' => 'getReportIds',
+        'document_ids' => 'getDocumentIds'
     ];
 
     /**
@@ -268,6 +273,7 @@ class Check implements ModelInterface, ArrayAccess
         $this->container['suppress_form_emails'] = isset($data['suppress_form_emails']) ? $data['suppress_form_emails'] : null;
         $this->container['asynchronous'] = isset($data['asynchronous']) ? $data['asynchronous'] : null;
         $this->container['report_ids'] = isset($data['report_ids']) ? $data['report_ids'] : null;
+        $this->container['document_ids'] = isset($data['document_ids']) ? $data['document_ids'] : null;
     }
 
     /**
@@ -674,6 +680,30 @@ class Check implements ModelInterface, ArrayAccess
     public function setReportIds($report_ids)
     {
         $this->container['report_ids'] = $report_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets document_ids
+     *
+     * @return string[]|null
+     */
+    public function getDocumentIds()
+    {
+        return $this->container['document_ids'];
+    }
+
+    /**
+     * Sets document_ids
+     *
+     * @param string[]|null $document_ids Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default.
+     *
+     * @return $this
+     */
+    public function setDocumentIds($document_ids)
+    {
+        $this->container['document_ids'] = $document_ids;
 
         return $this;
     }
