@@ -156,6 +156,13 @@ class CheckTest extends TestCase
     }
 
     /**
+     * Test attribute "privacy_notices_read_consent_given"
+     */
+    public function testPropertyPrivacyNoticesReadConsentGiven()
+    {
+    }
+
+    /**
      * Test attribute "tags"
      */
     public function testPropertyTags()
@@ -194,6 +201,20 @@ class CheckTest extends TestCase
      * Test attribute "document_ids"
      */
     public function testPropertyDocumentIds()
+    {
+    }
+
+    /**
+     * Test attribute "consider"
+     */
+    public function testPropertyConsider()
+    {
+    }
+
+    /**
+     * Test attribute "sub_result"
+     */
+    public function testPropertySubResult()
     {
     }
 }

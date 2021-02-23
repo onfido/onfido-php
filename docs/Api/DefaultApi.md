@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**downloadDocument**](DefaultApi.md#downloadDocument) | **GET** /documents/{document_id}/download | Download a documents raw data
 [**downloadLivePhoto**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
 [**downloadLiveVideo**](DefaultApi.md#downloadLiveVideo) | **GET** /live_videos/{live_video_id}/download | Download live video
+[**downloadLiveVideoFrame**](DefaultApi.md#downloadLiveVideoFrame) | **GET** /live_videos/{live_video_id}/frame | Download live video frame
 [**editWebhook**](DefaultApi.md#editWebhook) | **PUT** /webhooks/{webhook_id} | Edit a webhook
 [**findAddresses**](DefaultApi.md#findAddresses) | **GET** /addresses/pick | Search for addresses by postcode
 [**findApplicant**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
@@ -533,6 +534,66 @@ try {
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->downloadLiveVideo: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **live_video_id** | **string**| The live video’s unique identifier. |
+
+### Return type
+
+[**\SplFileObject**](../Model/\SplFileObject.md)
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*, application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
+
+
+## downloadLiveVideoFrame
+
+> \SplFileObject downloadLiveVideoFrame($live_video_id)
+
+Download live video frame
+
+Live video frames are downloaded using this endpoint.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$live_video_id = 'live_video_id_example'; // string | The live video’s unique identifier.
+
+try {
+    $result = $apiInstance->downloadLiveVideoFrame($live_video_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->downloadLiveVideoFrame: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -1729,7 +1790,7 @@ void (empty response body)
 
 Update Applicant
 
-Allows updating of an applicant’s information before any checks are created. - Partial updates - Addresses and ID numbers present will replace existing ones - Same applicant validations to create applicant
+Applicant details can be updated between check creations. - Partial updates - Addresses and ID numbers present will replace existing ones - Same applicant validations to create applicant
 
 ### Example
 
