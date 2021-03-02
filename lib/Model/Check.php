@@ -68,12 +68,15 @@ class Check implements ModelInterface, ArrayAccess
         'results_uri' => 'string',
         'report_names' => 'string[]',
         'applicant_id' => 'string',
+        'privacy_notices_read_consent_given' => 'bool',
         'tags' => 'string[]',
         'applicant_provides_data' => 'bool',
         'suppress_form_emails' => 'bool',
         'asynchronous' => 'bool',
         'report_ids' => 'string[]',
-        'document_ids' => 'string[]'
+        'document_ids' => 'string[]',
+        'consider' => 'string[]',
+        'sub_result' => 'string'
     ];
 
     /**
@@ -93,12 +96,15 @@ class Check implements ModelInterface, ArrayAccess
         'results_uri' => null,
         'report_names' => null,
         'applicant_id' => null,
+        'privacy_notices_read_consent_given' => null,
         'tags' => null,
         'applicant_provides_data' => null,
         'suppress_form_emails' => null,
         'asynchronous' => null,
         'report_ids' => null,
-        'document_ids' => null
+        'document_ids' => null,
+        'consider' => null,
+        'sub_result' => null
     ];
 
     /**
@@ -139,12 +145,15 @@ class Check implements ModelInterface, ArrayAccess
         'results_uri' => 'results_uri',
         'report_names' => 'report_names',
         'applicant_id' => 'applicant_id',
+        'privacy_notices_read_consent_given' => 'privacy_notices_read_consent_given',
         'tags' => 'tags',
         'applicant_provides_data' => 'applicant_provides_data',
         'suppress_form_emails' => 'suppress_form_emails',
         'asynchronous' => 'asynchronous',
         'report_ids' => 'report_ids',
-        'document_ids' => 'document_ids'
+        'document_ids' => 'document_ids',
+        'consider' => 'consider',
+        'sub_result' => 'sub_result'
     ];
 
     /**
@@ -164,12 +173,15 @@ class Check implements ModelInterface, ArrayAccess
         'results_uri' => 'setResultsUri',
         'report_names' => 'setReportNames',
         'applicant_id' => 'setApplicantId',
+        'privacy_notices_read_consent_given' => 'setPrivacyNoticesReadConsentGiven',
         'tags' => 'setTags',
         'applicant_provides_data' => 'setApplicantProvidesData',
         'suppress_form_emails' => 'setSuppressFormEmails',
         'asynchronous' => 'setAsynchronous',
         'report_ids' => 'setReportIds',
-        'document_ids' => 'setDocumentIds'
+        'document_ids' => 'setDocumentIds',
+        'consider' => 'setConsider',
+        'sub_result' => 'setSubResult'
     ];
 
     /**
@@ -189,12 +201,15 @@ class Check implements ModelInterface, ArrayAccess
         'results_uri' => 'getResultsUri',
         'report_names' => 'getReportNames',
         'applicant_id' => 'getApplicantId',
+        'privacy_notices_read_consent_given' => 'getPrivacyNoticesReadConsentGiven',
         'tags' => 'getTags',
         'applicant_provides_data' => 'getApplicantProvidesData',
         'suppress_form_emails' => 'getSuppressFormEmails',
         'asynchronous' => 'getAsynchronous',
         'report_ids' => 'getReportIds',
-        'document_ids' => 'getDocumentIds'
+        'document_ids' => 'getDocumentIds',
+        'consider' => 'getConsider',
+        'sub_result' => 'getSubResult'
     ];
 
     /**
@@ -268,12 +283,15 @@ class Check implements ModelInterface, ArrayAccess
         $this->container['results_uri'] = isset($data['results_uri']) ? $data['results_uri'] : null;
         $this->container['report_names'] = isset($data['report_names']) ? $data['report_names'] : null;
         $this->container['applicant_id'] = isset($data['applicant_id']) ? $data['applicant_id'] : null;
+        $this->container['privacy_notices_read_consent_given'] = isset($data['privacy_notices_read_consent_given']) ? $data['privacy_notices_read_consent_given'] : null;
         $this->container['tags'] = isset($data['tags']) ? $data['tags'] : null;
         $this->container['applicant_provides_data'] = isset($data['applicant_provides_data']) ? $data['applicant_provides_data'] : null;
         $this->container['suppress_form_emails'] = isset($data['suppress_form_emails']) ? $data['suppress_form_emails'] : null;
         $this->container['asynchronous'] = isset($data['asynchronous']) ? $data['asynchronous'] : null;
         $this->container['report_ids'] = isset($data['report_ids']) ? $data['report_ids'] : null;
         $this->container['document_ids'] = isset($data['document_ids']) ? $data['document_ids'] : null;
+        $this->container['consider'] = isset($data['consider']) ? $data['consider'] : null;
+        $this->container['sub_result'] = isset($data['sub_result']) ? $data['sub_result'] : null;
     }
 
     /**
@@ -565,6 +583,30 @@ class Check implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets privacy_notices_read_consent_given
+     *
+     * @return bool|null
+     */
+    public function getPrivacyNoticesReadConsentGiven()
+    {
+        return $this->container['privacy_notices_read_consent_given'];
+    }
+
+    /**
+     * Sets privacy_notices_read_consent_given
+     *
+     * @param bool|null $privacy_notices_read_consent_given Indicates whether the privacy notices and terms of service have been read and, where specific laws require, that consent has been given for Onfido.
+     *
+     * @return $this
+     */
+    public function setPrivacyNoticesReadConsentGiven($privacy_notices_read_consent_given)
+    {
+        $this->container['privacy_notices_read_consent_given'] = $privacy_notices_read_consent_given;
+
+        return $this;
+    }
+
+    /**
      * Gets tags
      *
      * @return string[]|null
@@ -704,6 +746,54 @@ class Check implements ModelInterface, ArrayAccess
     public function setDocumentIds($document_ids)
     {
         $this->container['document_ids'] = $document_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets consider
+     *
+     * @return string[]|null
+     */
+    public function getConsider()
+    {
+        return $this->container['consider'];
+    }
+
+    /**
+     * Sets consider
+     *
+     * @param string[]|null $consider Returns a pre-determined consider sub-result in sandbox for the specific reports in the consider array.
+     *
+     * @return $this
+     */
+    public function setConsider($consider)
+    {
+        $this->container['consider'] = $consider;
+
+        return $this;
+    }
+
+    /**
+     * Gets sub_result
+     *
+     * @return string|null
+     */
+    public function getSubResult()
+    {
+        return $this->container['sub_result'];
+    }
+
+    /**
+     * Sets sub_result
+     *
+     * @param string|null $sub_result Triggers a pre-determined sub-result response for sandbox Document reports.
+     *
+     * @return $this
+     */
+    public function setSubResult($sub_result)
+    {
+        $this->container['sub_result'] = $sub_result;
 
         return $this;
     }

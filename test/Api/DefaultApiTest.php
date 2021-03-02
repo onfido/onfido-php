@@ -163,6 +163,16 @@ class DefaultApiTest extends TestCase
     }
 
     /**
+     * Test case for downloadLiveVideoFrame
+     *
+     * Download live video frame.
+     *
+     */
+    public function testDownloadLiveVideoFrame()
+    {
+    }
+
+    /**
      * Test case for editWebhook
      *
      * Edit a webhook.
