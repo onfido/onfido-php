@@ -81,14 +81,14 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://api.onfido.com/v3';
+    protected $host = 'https://api.onfido.com/v2';
 
     /**
      * User agent of the HTTP request, set to "OpenAPI-Generator/{version}/PHP" by default
      *
      * @var string
      */
-    protected $userAgent = 'OpenAPI-Generator/5.2.0/PHP';
+    protected $userAgent = 'OpenAPI-Generator/4.1.1/PHP';
 
     /**
      * Debug switch (default set to false)
@@ -397,7 +397,7 @@ class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    The version of the OpenAPI document: 3.0.0' . PHP_EOL;
-        $report .= '    SDK Package Version: 5.2.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 4.1.1' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;
@@ -437,18 +437,19 @@ class Configuration
     {
         return array(
           array(
-            "url" => "https://api.onfido.com/v3",
+            "url" => "https://api.onfido.com/v2",
             "description" => "No description provided",
           ),
           array(
-            "url" => "https://api.{region}.onfido.com/v3",
+            "url" => "https://api.{region}.onfido.com/v2",
             "description" => "No description provided",
             "variables" => array(
               "region" => array(
                   "description" => "No description provided",
                   "default_value" => "us",
                   "enum_values" => array(
-                    "us"
+                    "us",
+                    "ca"
                   )
                 )
               )

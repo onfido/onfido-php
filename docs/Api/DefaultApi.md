@@ -1,39 +1,38 @@
 # Onfido\DefaultApi
 
-All URIs are relative to *https://api.onfido.com/v3*
+All URIs are relative to *https://api.onfido.com/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancelReport**](DefaultApi.md#cancelReport) | **POST** /reports/{report_id}/cancel | This endpoint is for cancelling individual paused reports.
+[**cancelReport**](DefaultApi.md#cancelReport) | **POST** /checks/{check_id}/reports/{report_id}/cancel | This endpoint is for cancelling individual paused reports.
 [**createApplicant**](DefaultApi.md#createApplicant) | **POST** /applicants | Create Applicant
-[**createCheck**](DefaultApi.md#createCheck) | **POST** /checks | Create a check
+[**createCheck**](DefaultApi.md#createCheck) | **POST** /applicants/{applicant_id}/checks | Create a check
 [**createWebhook**](DefaultApi.md#createWebhook) | **POST** /webhooks | Create a webhook
 [**deleteWebhook**](DefaultApi.md#deleteWebhook) | **DELETE** /webhooks/{webhook_id} | Delete a webhook
 [**destroyApplicant**](DefaultApi.md#destroyApplicant) | **DELETE** /applicants/{applicant_id} | Delete Applicant
 [**downloadDocument**](DefaultApi.md#downloadDocument) | **GET** /documents/{document_id}/download | Download a documents raw data
 [**downloadLivePhoto**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
 [**downloadLiveVideo**](DefaultApi.md#downloadLiveVideo) | **GET** /live_videos/{live_video_id}/download | Download live video
-[**downloadLiveVideoFrame**](DefaultApi.md#downloadLiveVideoFrame) | **GET** /live_videos/{live_video_id}/frame | Download live video frame
 [**editWebhook**](DefaultApi.md#editWebhook) | **PUT** /webhooks/{webhook_id} | Edit a webhook
 [**findAddresses**](DefaultApi.md#findAddresses) | **GET** /addresses/pick | Search for addresses by postcode
 [**findApplicant**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
-[**findCheck**](DefaultApi.md#findCheck) | **GET** /checks/{check_id} | Retrieve a Check
+[**findCheck**](DefaultApi.md#findCheck) | **GET** /applicants/{applicant_id}/checks/{check_id} | Retrieve a Check
 [**findDocument**](DefaultApi.md#findDocument) | **GET** /documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
 [**findLivePhoto**](DefaultApi.md#findLivePhoto) | **GET** /live_photos/{live_photo_id} | Retrieve live photo
 [**findLiveVideo**](DefaultApi.md#findLiveVideo) | **GET** /live_videos/{live_video_id} | Retrieve live video
-[**findReport**](DefaultApi.md#findReport) | **GET** /reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
+[**findReport**](DefaultApi.md#findReport) | **GET** /checks/{check_id}/reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
 [**findWebhook**](DefaultApi.md#findWebhook) | **GET** /webhooks/{webhook_id} | Retrieve a Webhook
 [**generateSdkToken**](DefaultApi.md#generateSdkToken) | **POST** /sdk_token | Generate a SDK token
 [**listApplicants**](DefaultApi.md#listApplicants) | **GET** /applicants | List Applicants
-[**listChecks**](DefaultApi.md#listChecks) | **GET** /checks | Retrieve Checks
+[**listChecks**](DefaultApi.md#listChecks) | **GET** /applicants/{applicant_id}/checks | Retrieve Checks
 [**listDocuments**](DefaultApi.md#listDocuments) | **GET** /documents | List documents
 [**listLivePhotos**](DefaultApi.md#listLivePhotos) | **GET** /live_photos | List live photos
 [**listLiveVideos**](DefaultApi.md#listLiveVideos) | **GET** /live_videos | List live videos
-[**listReports**](DefaultApi.md#listReports) | **GET** /reports | All the reports belonging to a particular check can be listed from this endpoint.
+[**listReports**](DefaultApi.md#listReports) | **GET** /checks/{check_id}/reports | All the reports belonging to a particular check can be listed from this endpoint.
 [**listWebhooks**](DefaultApi.md#listWebhooks) | **GET** /webhooks | List webhooks
 [**restoreApplicant**](DefaultApi.md#restoreApplicant) | **POST** /applicants/{applicant_id}/restore | Restore Applicant
 [**resumeCheck**](DefaultApi.md#resumeCheck) | **POST** /checks/{check_id}/resume | Resume a Check
-[**resumeReport**](DefaultApi.md#resumeReport) | **POST** /reports/{report_id}/resume | This endpoint is for resuming individual paused reports.
+[**resumeReport**](DefaultApi.md#resumeReport) | **POST** /checks/{check_id}/reports/{report_id}/resume | This endpoint is for resuming individual paused reports.
 [**updateApplicant**](DefaultApi.md#updateApplicant) | **PUT** /applicants/{applicant_id} | Update Applicant
 [**uploadDocument**](DefaultApi.md#uploadDocument) | **POST** /documents | Upload a document
 [**uploadLivePhoto**](DefaultApi.md#uploadLivePhoto) | **POST** /live_photos | Upload live photo
@@ -42,7 +41,7 @@ Method | HTTP request | Description
 
 ## cancelReport
 
-> cancelReport($report_id)
+> cancelReport($check_id, $report_id)
 
 This endpoint is for cancelling individual paused reports.
 
@@ -62,10 +61,11 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
+$check_id = 'check_id_example'; // string | 
 $report_id = 'report_id_example'; // string | 
 
 try {
-    $apiInstance->cancelReport($report_id);
+    $apiInstance->cancelReport($check_id, $report_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->cancelReport: ', $e->getMessage(), PHP_EOL;
 }
@@ -77,6 +77,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **check_id** | **string**|  |
  **report_id** | **string**|  |
 
 ### Return type
@@ -157,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## createCheck
 
-> \Onfido\Model\Check createCheck($check)
+> \Onfido\Model\Check createCheck($applicant_id, $check)
 
 Create a check
 
@@ -177,10 +178,11 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
+$applicant_id = 'applicant_id_example'; // string | 
 $check = new \Onfido\Model\Check(); // \Onfido\Model\Check | 
 
 try {
-    $result = $apiInstance->createCheck($check);
+    $result = $apiInstance->createCheck($applicant_id, $check);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->createCheck: ', $e->getMessage(), PHP_EOL;
@@ -193,6 +195,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
  **check** | [**\Onfido\Model\Check**](../Model/Check.md)|  |
 
 ### Return type
@@ -563,66 +566,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../../README.md)
 
 
-## downloadLiveVideoFrame
-
-> \SplFileObject downloadLiveVideoFrame($live_video_id)
-
-Download live video frame
-
-Live video frames are downloaded using this endpoint.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$config = Onfido\Configuration::getDefaultConfiguration();
-$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
-$config->setApiKeyPrefix('Authorization', 'Token');
-
-$apiInstance = new Onfido\Api\DefaultApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$live_video_id = 'live_video_id_example'; // string | The live video’s unique identifier.
-
-try {
-    $result = $apiInstance->downloadLiveVideoFrame($live_video_id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->downloadLiveVideoFrame: ', $e->getMessage(), PHP_EOL;
-}
-?>
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **live_video_id** | **string**| The live video’s unique identifier. |
-
-### Return type
-
-[**\SplFileObject**](../Model/\SplFileObject.md)
-
-### Authorization
-
-[Token](../../README.md#Token)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*, application/json
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
-[[Back to README]](../../README.md)
-
-
 ## editWebhook
 
 > \Onfido\Model\Webhook editWebhook($webhook_id, $webhook)
@@ -801,7 +744,7 @@ Name | Type | Description  | Notes
 
 ## findCheck
 
-> \Onfido\Model\Check findCheck($check_id)
+> \Onfido\Model\Check findCheck($applicant_id, $check_id)
 
 Retrieve a Check
 
@@ -821,10 +764,11 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
+$applicant_id = 'applicant_id_example'; // string | 
 $check_id = 'check_id_example'; // string | 
 
 try {
-    $result = $apiInstance->findCheck($check_id);
+    $result = $apiInstance->findCheck($applicant_id, $check_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findCheck: ', $e->getMessage(), PHP_EOL;
@@ -837,6 +781,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**|  |
  **check_id** | **string**|  |
 
 ### Return type
@@ -1033,7 +978,7 @@ Name | Type | Description  | Notes
 
 ## findReport
 
-> \Onfido\Model\Report findReport($report_id)
+> \Onfido\Model\Report findReport($check_id, $report_id)
 
 A single report can be retrieved using this endpoint with the corresponding unique identifier.
 
@@ -1053,10 +998,11 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
+$check_id = 'check_id_example'; // string | 
 $report_id = 'report_id_example'; // string | 
 
 try {
-    $result = $apiInstance->findReport($report_id);
+    $result = $apiInstance->findReport($check_id, $report_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findReport: ', $e->getMessage(), PHP_EOL;
@@ -1069,6 +1015,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **check_id** | **string**|  |
  **report_id** | **string**|  |
 
 ### Return type
@@ -1729,7 +1676,7 @@ void (empty response body)
 
 ## resumeReport
 
-> resumeReport($report_id)
+> resumeReport($check_id, $report_id)
 
 This endpoint is for resuming individual paused reports.
 
@@ -1749,10 +1696,11 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
+$check_id = 'check_id_example'; // string | 
 $report_id = 'report_id_example'; // string | 
 
 try {
-    $apiInstance->resumeReport($report_id);
+    $apiInstance->resumeReport($check_id, $report_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->resumeReport: ', $e->getMessage(), PHP_EOL;
 }
@@ -1764,6 +1712,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **check_id** | **string**|  |
  **report_id** | **string**|  |
 
 ### Return type
@@ -1790,7 +1739,7 @@ void (empty response body)
 
 Update Applicant
 
-Applicant details can be updated between check creations. - Partial updates - Addresses and ID numbers present will replace existing ones - Same applicant validations to create applicant
+Allows updating of an applicant’s information before any checks are created. - Partial updates - Addresses and ID numbers present will replace existing ones - Same applicant validations to create applicant
 
 ### Example
 

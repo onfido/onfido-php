@@ -100,13 +100,6 @@ class SdkTokenTest extends TestCase
     }
 
     /**
-     * Test attribute "cross_device_url"
-     */
-    public function testPropertyCrossDeviceUrl()
-    {
-    }
-
-    /**
      * Test attribute "token"
      */
     public function testPropertyToken()

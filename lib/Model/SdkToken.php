@@ -60,7 +60,6 @@ class SdkToken implements ModelInterface, ArrayAccess
         'applicant_id' => 'string',
         'referrer' => 'string',
         'application_id' => 'string',
-        'cross_device_url' => 'string',
         'token' => 'string'
     ];
 
@@ -73,7 +72,6 @@ class SdkToken implements ModelInterface, ArrayAccess
         'applicant_id' => null,
         'referrer' => null,
         'application_id' => null,
-        'cross_device_url' => null,
         'token' => null
     ];
 
@@ -107,7 +105,6 @@ class SdkToken implements ModelInterface, ArrayAccess
         'applicant_id' => 'applicant_id',
         'referrer' => 'referrer',
         'application_id' => 'application_id',
-        'cross_device_url' => 'cross_device_url',
         'token' => 'token'
     ];
 
@@ -120,7 +117,6 @@ class SdkToken implements ModelInterface, ArrayAccess
         'applicant_id' => 'setApplicantId',
         'referrer' => 'setReferrer',
         'application_id' => 'setApplicationId',
-        'cross_device_url' => 'setCrossDeviceUrl',
         'token' => 'setToken'
     ];
 
@@ -133,7 +129,6 @@ class SdkToken implements ModelInterface, ArrayAccess
         'applicant_id' => 'getApplicantId',
         'referrer' => 'getReferrer',
         'application_id' => 'getApplicationId',
-        'cross_device_url' => 'getCrossDeviceUrl',
         'token' => 'getToken'
     ];
 
@@ -200,7 +195,6 @@ class SdkToken implements ModelInterface, ArrayAccess
         $this->container['applicant_id'] = isset($data['applicant_id']) ? $data['applicant_id'] : null;
         $this->container['referrer'] = isset($data['referrer']) ? $data['referrer'] : null;
         $this->container['application_id'] = isset($data['application_id']) ? $data['application_id'] : null;
-        $this->container['cross_device_url'] = isset($data['cross_device_url']) ? $data['cross_device_url'] : null;
         $this->container['token'] = isset($data['token']) ? $data['token'] : null;
     }
 
@@ -296,30 +290,6 @@ class SdkToken implements ModelInterface, ArrayAccess
     public function setApplicationId($application_id)
     {
         $this->container['application_id'] = $application_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets cross_device_url
-     *
-     * @return string|null
-     */
-    public function getCrossDeviceUrl()
-    {
-        return $this->container['cross_device_url'];
-    }
-
-    /**
-     * Sets cross_device_url
-     *
-     * @param string|null $cross_device_url Enterprise Feature - The URL to be used for the cross device flow of the Web SDK
-     *
-     * @return $this
-     */
-    public function setCrossDeviceUrl($cross_device_url)
-    {
-        $this->container['cross_device_url'] = $cross_device_url;
 
         return $this;
     }

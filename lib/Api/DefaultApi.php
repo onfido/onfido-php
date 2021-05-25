@@ -120,15 +120,16 @@ class DefaultApi
      *
      * This endpoint is for cancelling individual paused reports.
      *
+     * @param  string $check_id check_id (required)
      * @param  string $report_id report_id (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function cancelReport($report_id)
+    public function cancelReport($check_id, $report_id)
     {
-        $this->cancelReportWithHttpInfo($report_id);
+        $this->cancelReportWithHttpInfo($check_id, $report_id);
     }
 
     /**
@@ -136,15 +137,16 @@ class DefaultApi
      *
      * This endpoint is for cancelling individual paused reports.
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function cancelReportWithHttpInfo($report_id)
+    public function cancelReportWithHttpInfo($check_id, $report_id)
     {
-        $request = $this->cancelReportRequest($report_id);
+        $request = $this->cancelReportRequest($check_id, $report_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -196,14 +198,15 @@ class DefaultApi
      *
      * This endpoint is for cancelling individual paused reports.
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cancelReportAsync($report_id)
+    public function cancelReportAsync($check_id, $report_id)
     {
-        return $this->cancelReportAsyncWithHttpInfo($report_id)
+        return $this->cancelReportAsyncWithHttpInfo($check_id, $report_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -216,15 +219,16 @@ class DefaultApi
      *
      * This endpoint is for cancelling individual paused reports.
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function cancelReportAsyncWithHttpInfo($report_id)
+    public function cancelReportAsyncWithHttpInfo($check_id, $report_id)
     {
         $returnType = '';
-        $request = $this->cancelReportRequest($report_id);
+        $request = $this->cancelReportRequest($check_id, $report_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -252,13 +256,20 @@ class DefaultApi
     /**
      * Create request for operation 'cancelReport'
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function cancelReportRequest($report_id)
+    protected function cancelReportRequest($check_id, $report_id)
     {
+        // verify the required parameter 'check_id' is set
+        if ($check_id === null || (is_array($check_id) && count($check_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $check_id when calling cancelReport'
+            );
+        }
         // verify the required parameter 'report_id' is set
         if ($report_id === null || (is_array($report_id) && count($report_id) === 0)) {
             throw new \InvalidArgumentException(
@@ -266,7 +277,7 @@ class DefaultApi
             );
         }
 
-        $resourcePath = '/reports/{report_id}/cancel';
+        $resourcePath = '/checks/{check_id}/reports/{report_id}/cancel';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -274,6 +285,14 @@ class DefaultApi
         $multipart = false;
 
 
+        // path params
+        if ($check_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'check_id' . '}',
+                ObjectSerializer::toPathValue($check_id),
+                $resourcePath
+            );
+        }
         // path params
         if ($report_id !== null) {
             $resourcePath = str_replace(
@@ -649,15 +668,16 @@ class DefaultApi
      *
      * Create a check
      *
+     * @param  string $applicant_id applicant_id (required)
      * @param  \Onfido\Model\Check $check check (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Onfido\Model\Check|\Onfido\Model\Error
      */
-    public function createCheck($check)
+    public function createCheck($applicant_id, $check)
     {
-        list($response) = $this->createCheckWithHttpInfo($check);
+        list($response) = $this->createCheckWithHttpInfo($applicant_id, $check);
         return $response;
     }
 
@@ -666,15 +686,16 @@ class DefaultApi
      *
      * Create a check
      *
+     * @param  string $applicant_id (required)
      * @param  \Onfido\Model\Check $check (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Onfido\Model\Check|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createCheckWithHttpInfo($check)
+    public function createCheckWithHttpInfo($applicant_id, $check)
     {
-        $request = $this->createCheckRequest($check);
+        $request = $this->createCheckRequest($applicant_id, $check);
 
         try {
             $options = $this->createHttpClientOption();
@@ -774,14 +795,15 @@ class DefaultApi
      *
      * Create a check
      *
+     * @param  string $applicant_id (required)
      * @param  \Onfido\Model\Check $check (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createCheckAsync($check)
+    public function createCheckAsync($applicant_id, $check)
     {
-        return $this->createCheckAsyncWithHttpInfo($check)
+        return $this->createCheckAsyncWithHttpInfo($applicant_id, $check)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -794,15 +816,16 @@ class DefaultApi
      *
      * Create a check
      *
+     * @param  string $applicant_id (required)
      * @param  \Onfido\Model\Check $check (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createCheckAsyncWithHttpInfo($check)
+    public function createCheckAsyncWithHttpInfo($applicant_id, $check)
     {
         $returnType = '\Onfido\Model\Check';
-        $request = $this->createCheckRequest($check);
+        $request = $this->createCheckRequest($applicant_id, $check);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -841,13 +864,20 @@ class DefaultApi
     /**
      * Create request for operation 'createCheck'
      *
+     * @param  string $applicant_id (required)
      * @param  \Onfido\Model\Check $check (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function createCheckRequest($check)
+    protected function createCheckRequest($applicant_id, $check)
     {
+        // verify the required parameter 'applicant_id' is set
+        if ($applicant_id === null || (is_array($applicant_id) && count($applicant_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $applicant_id when calling createCheck'
+            );
+        }
         // verify the required parameter 'check' is set
         if ($check === null || (is_array($check) && count($check) === 0)) {
             throw new \InvalidArgumentException(
@@ -855,7 +885,7 @@ class DefaultApi
             );
         }
 
-        $resourcePath = '/checks';
+        $resourcePath = '/applicants/{applicant_id}/checks';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -863,6 +893,14 @@ class DefaultApi
         $multipart = false;
 
 
+        // path params
+        if ($applicant_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'applicant_id' . '}',
+                ObjectSerializer::toPathValue($applicant_id),
+                $resourcePath
+            );
+        }
 
         // body params
         $_tempBody = null;
@@ -2594,303 +2632,6 @@ class DefaultApi
     }
 
     /**
-     * Operation downloadLiveVideoFrame
-     *
-     * Download live video frame
-     *
-     * @param  string $live_video_id The live video’s unique identifier. (required)
-     *
-     * @throws \Onfido\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \SplFileObject|\Onfido\Model\Error
-     */
-    public function downloadLiveVideoFrame($live_video_id)
-    {
-        list($response) = $this->downloadLiveVideoFrameWithHttpInfo($live_video_id);
-        return $response;
-    }
-
-    /**
-     * Operation downloadLiveVideoFrameWithHttpInfo
-     *
-     * Download live video frame
-     *
-     * @param  string $live_video_id The live video’s unique identifier. (required)
-     *
-     * @throws \Onfido\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \SplFileObject|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function downloadLiveVideoFrameWithHttpInfo($live_video_id)
-    {
-        $request = $this->downloadLiveVideoFrameRequest($live_video_id);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            switch($statusCode) {
-                case 200:
-                    if ('\SplFileObject' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                default:
-                    if ('\Onfido\Model\Error' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\SplFileObject';
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Onfido\Model\Error',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation downloadLiveVideoFrameAsync
-     *
-     * Download live video frame
-     *
-     * @param  string $live_video_id The live video’s unique identifier. (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function downloadLiveVideoFrameAsync($live_video_id)
-    {
-        return $this->downloadLiveVideoFrameAsyncWithHttpInfo($live_video_id)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation downloadLiveVideoFrameAsyncWithHttpInfo
-     *
-     * Download live video frame
-     *
-     * @param  string $live_video_id The live video’s unique identifier. (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function downloadLiveVideoFrameAsyncWithHttpInfo($live_video_id)
-    {
-        $returnType = '\SplFileObject';
-        $request = $this->downloadLiveVideoFrameRequest($live_video_id);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'downloadLiveVideoFrame'
-     *
-     * @param  string $live_video_id The live video’s unique identifier. (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function downloadLiveVideoFrameRequest($live_video_id)
-    {
-        // verify the required parameter 'live_video_id' is set
-        if ($live_video_id === null || (is_array($live_video_id) && count($live_video_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $live_video_id when calling downloadLiveVideoFrame'
-            );
-        }
-
-        $resourcePath = '/live_videos/{live_video_id}/frame';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // path params
-        if ($live_video_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'live_video_id' . '}',
-                ObjectSerializer::toPathValue($live_video_id),
-                $resourcePath
-            );
-        }
-
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['*/*', 'application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['*/*', 'application/json'],
-                []
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
-            } else {
-                $httpBody = $_tempBody;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
-        if ($apiKey !== null) {
-            $headers['Authorization'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation editWebhook
      *
      * Edit a webhook
@@ -3796,15 +3537,16 @@ class DefaultApi
      *
      * Retrieve a Check
      *
+     * @param  string $applicant_id applicant_id (required)
      * @param  string $check_id check_id (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Onfido\Model\Check|\Onfido\Model\Error
      */
-    public function findCheck($check_id)
+    public function findCheck($applicant_id, $check_id)
     {
-        list($response) = $this->findCheckWithHttpInfo($check_id);
+        list($response) = $this->findCheckWithHttpInfo($applicant_id, $check_id);
         return $response;
     }
 
@@ -3813,15 +3555,16 @@ class DefaultApi
      *
      * Retrieve a Check
      *
+     * @param  string $applicant_id (required)
      * @param  string $check_id (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Onfido\Model\Check|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function findCheckWithHttpInfo($check_id)
+    public function findCheckWithHttpInfo($applicant_id, $check_id)
     {
-        $request = $this->findCheckRequest($check_id);
+        $request = $this->findCheckRequest($applicant_id, $check_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3921,14 +3664,15 @@ class DefaultApi
      *
      * Retrieve a Check
      *
+     * @param  string $applicant_id (required)
      * @param  string $check_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findCheckAsync($check_id)
+    public function findCheckAsync($applicant_id, $check_id)
     {
-        return $this->findCheckAsyncWithHttpInfo($check_id)
+        return $this->findCheckAsyncWithHttpInfo($applicant_id, $check_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3941,15 +3685,16 @@ class DefaultApi
      *
      * Retrieve a Check
      *
+     * @param  string $applicant_id (required)
      * @param  string $check_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findCheckAsyncWithHttpInfo($check_id)
+    public function findCheckAsyncWithHttpInfo($applicant_id, $check_id)
     {
         $returnType = '\Onfido\Model\Check';
-        $request = $this->findCheckRequest($check_id);
+        $request = $this->findCheckRequest($applicant_id, $check_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3988,13 +3733,20 @@ class DefaultApi
     /**
      * Create request for operation 'findCheck'
      *
+     * @param  string $applicant_id (required)
      * @param  string $check_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function findCheckRequest($check_id)
+    protected function findCheckRequest($applicant_id, $check_id)
     {
+        // verify the required parameter 'applicant_id' is set
+        if ($applicant_id === null || (is_array($applicant_id) && count($applicant_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $applicant_id when calling findCheck'
+            );
+        }
         // verify the required parameter 'check_id' is set
         if ($check_id === null || (is_array($check_id) && count($check_id) === 0)) {
             throw new \InvalidArgumentException(
@@ -4002,7 +3754,7 @@ class DefaultApi
             );
         }
 
-        $resourcePath = '/checks/{check_id}';
+        $resourcePath = '/applicants/{applicant_id}/checks/{check_id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -4010,6 +3762,14 @@ class DefaultApi
         $multipart = false;
 
 
+        // path params
+        if ($applicant_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'applicant_id' . '}',
+                ObjectSerializer::toPathValue($applicant_id),
+                $resourcePath
+            );
+        }
         // path params
         if ($check_id !== null) {
             $resourcePath = str_replace(
@@ -4984,15 +4744,16 @@ class DefaultApi
      *
      * A single report can be retrieved using this endpoint with the corresponding unique identifier.
      *
+     * @param  string $check_id check_id (required)
      * @param  string $report_id report_id (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Onfido\Model\Report|\Onfido\Model\Error
      */
-    public function findReport($report_id)
+    public function findReport($check_id, $report_id)
     {
-        list($response) = $this->findReportWithHttpInfo($report_id);
+        list($response) = $this->findReportWithHttpInfo($check_id, $report_id);
         return $response;
     }
 
@@ -5001,15 +4762,16 @@ class DefaultApi
      *
      * A single report can be retrieved using this endpoint with the corresponding unique identifier.
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Onfido\Model\Report|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function findReportWithHttpInfo($report_id)
+    public function findReportWithHttpInfo($check_id, $report_id)
     {
-        $request = $this->findReportRequest($report_id);
+        $request = $this->findReportRequest($check_id, $report_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -5109,14 +4871,15 @@ class DefaultApi
      *
      * A single report can be retrieved using this endpoint with the corresponding unique identifier.
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findReportAsync($report_id)
+    public function findReportAsync($check_id, $report_id)
     {
-        return $this->findReportAsyncWithHttpInfo($report_id)
+        return $this->findReportAsyncWithHttpInfo($check_id, $report_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5129,15 +4892,16 @@ class DefaultApi
      *
      * A single report can be retrieved using this endpoint with the corresponding unique identifier.
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findReportAsyncWithHttpInfo($report_id)
+    public function findReportAsyncWithHttpInfo($check_id, $report_id)
     {
         $returnType = '\Onfido\Model\Report';
-        $request = $this->findReportRequest($report_id);
+        $request = $this->findReportRequest($check_id, $report_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -5176,13 +4940,20 @@ class DefaultApi
     /**
      * Create request for operation 'findReport'
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function findReportRequest($report_id)
+    protected function findReportRequest($check_id, $report_id)
     {
+        // verify the required parameter 'check_id' is set
+        if ($check_id === null || (is_array($check_id) && count($check_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $check_id when calling findReport'
+            );
+        }
         // verify the required parameter 'report_id' is set
         if ($report_id === null || (is_array($report_id) && count($report_id) === 0)) {
             throw new \InvalidArgumentException(
@@ -5190,7 +4961,7 @@ class DefaultApi
             );
         }
 
-        $resourcePath = '/reports/{report_id}';
+        $resourcePath = '/checks/{check_id}/reports/{report_id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -5198,6 +4969,14 @@ class DefaultApi
         $multipart = false;
 
 
+        // path params
+        if ($check_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'check_id' . '}',
+                ObjectSerializer::toPathValue($check_id),
+                $resourcePath
+            );
+        }
         // path params
         if ($report_id !== null) {
             $resourcePath = str_replace(
@@ -6381,7 +6160,7 @@ class DefaultApi
             );
         }
 
-        $resourcePath = '/checks';
+        $resourcePath = '/applicants/{applicant_id}/checks';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -7553,7 +7332,7 @@ class DefaultApi
             );
         }
 
-        $resourcePath = '/reports';
+        $resourcePath = '/checks/{check_id}/reports';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -8392,15 +8171,16 @@ class DefaultApi
      *
      * This endpoint is for resuming individual paused reports.
      *
+     * @param  string $check_id check_id (required)
      * @param  string $report_id report_id (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function resumeReport($report_id)
+    public function resumeReport($check_id, $report_id)
     {
-        $this->resumeReportWithHttpInfo($report_id);
+        $this->resumeReportWithHttpInfo($check_id, $report_id);
     }
 
     /**
@@ -8408,15 +8188,16 @@ class DefaultApi
      *
      * This endpoint is for resuming individual paused reports.
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function resumeReportWithHttpInfo($report_id)
+    public function resumeReportWithHttpInfo($check_id, $report_id)
     {
-        $request = $this->resumeReportRequest($report_id);
+        $request = $this->resumeReportRequest($check_id, $report_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -8468,14 +8249,15 @@ class DefaultApi
      *
      * This endpoint is for resuming individual paused reports.
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function resumeReportAsync($report_id)
+    public function resumeReportAsync($check_id, $report_id)
     {
-        return $this->resumeReportAsyncWithHttpInfo($report_id)
+        return $this->resumeReportAsyncWithHttpInfo($check_id, $report_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -8488,15 +8270,16 @@ class DefaultApi
      *
      * This endpoint is for resuming individual paused reports.
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function resumeReportAsyncWithHttpInfo($report_id)
+    public function resumeReportAsyncWithHttpInfo($check_id, $report_id)
     {
         $returnType = '';
-        $request = $this->resumeReportRequest($report_id);
+        $request = $this->resumeReportRequest($check_id, $report_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -8524,13 +8307,20 @@ class DefaultApi
     /**
      * Create request for operation 'resumeReport'
      *
+     * @param  string $check_id (required)
      * @param  string $report_id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function resumeReportRequest($report_id)
+    protected function resumeReportRequest($check_id, $report_id)
     {
+        // verify the required parameter 'check_id' is set
+        if ($check_id === null || (is_array($check_id) && count($check_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $check_id when calling resumeReport'
+            );
+        }
         // verify the required parameter 'report_id' is set
         if ($report_id === null || (is_array($report_id) && count($report_id) === 0)) {
             throw new \InvalidArgumentException(
@@ -8538,7 +8328,7 @@ class DefaultApi
             );
         }
 
-        $resourcePath = '/reports/{report_id}/resume';
+        $resourcePath = '/checks/{check_id}/reports/{report_id}/resume';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -8546,6 +8336,14 @@ class DefaultApi
         $multipart = false;
 
 
+        // path params
+        if ($check_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'check_id' . '}',
+                ObjectSerializer::toPathValue($check_id),
+                $resourcePath
+            );
+        }
         // path params
         if ($report_id !== null) {
             $resourcePath = str_replace(

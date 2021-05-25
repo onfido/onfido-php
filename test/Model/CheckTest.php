@@ -149,16 +149,16 @@ class CheckTest extends TestCase
     }
 
     /**
-     * Test attribute "applicant_id"
+     * Test attribute "privacy_notices_read_consent_given"
      */
-    public function testPropertyApplicantId()
+    public function testPropertyPrivacyNoticesReadConsentGiven()
     {
     }
 
     /**
-     * Test attribute "privacy_notices_read_consent_given"
+     * Test attribute "applicant_id"
      */
-    public function testPropertyPrivacyNoticesReadConsentGiven()
+    public function testPropertyApplicantId()
     {
     }
 
@@ -201,20 +201,6 @@ class CheckTest extends TestCase
      * Test attribute "document_ids"
      */
     public function testPropertyDocumentIds()
-    {
-    }
-
-    /**
-     * Test attribute "consider"
-     */
-    public function testPropertyConsider()
-    {
-    }
-
-    /**
-     * Test attribute "sub_result"
-     */
-    public function testPropertySubResult()
     {
     }
 }
