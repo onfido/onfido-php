@@ -1,12 +1,10 @@
-# # ErrorProperties
+# # ReportTypeGroupsList
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **string** |  | [optional] 
-**message** | **string** |  | [optional] 
-**fields** | **map[string,object]** |  | [optional] 
+**report_type_groups** | [**\Onfido\Model\ReportTypeGroup[]**](ReportTypeGroup.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 
