@@ -9198,7 +9198,7 @@ class DefaultApi
         // form params
         if ($file !== null) {
             $multipart = true;
-            $formParams['file'] = \GuzzleHttp\Psr7\try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+            $formParams['file'] = \GuzzleHttp\Psr7\Utils::tryFopen(ObjectSerializer::toFormValue($file), 'rb');
         }
         // form params
         if ($side !== null) {
@@ -9520,7 +9520,7 @@ class DefaultApi
         // form params
         if ($file !== null) {
             $multipart = true;
-            $formParams['file'] = \GuzzleHttp\Psr7\try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+            $formParams['file'] = \GuzzleHttp\Psr7\Utils::tryFopen(ObjectSerializer::toFormValue($file), 'rb');
         }
         // form params
         if ($advanced_validation !== null) {
