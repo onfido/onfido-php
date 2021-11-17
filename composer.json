@@ -1,6 +1,6 @@
 {
     "name": "onfido/api-php-client",
-    "version": "5.2.0",
+    "version": "5.2.1",
     "description": "The Onfido API is used to submit check requests.",
     "keywords": [
         "openapitools",
