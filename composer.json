@@ -12,7 +12,7 @@
         "api"
     ],
     "homepage": "https://openapi-generator.tech",
-    "license": "unlicense",
+    "license": "MIT",
     "authors": [
         {
             "name": "OpenAPI-Generator contributors",
