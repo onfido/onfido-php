@@ -1,48 +1,49 @@
 # Onfido\DefaultApi
 
-All URIs are relative to *https://api.onfido.com/v3*
+All URIs are relative to https://api.eu.onfido.com/v3.1.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancelReport**](DefaultApi.md#cancelReport) | **POST** /reports/{report_id}/cancel | This endpoint is for cancelling individual paused reports.
-[**createApplicant**](DefaultApi.md#createApplicant) | **POST** /applicants | Create Applicant
-[**createCheck**](DefaultApi.md#createCheck) | **POST** /checks | Create a check
-[**createWebhook**](DefaultApi.md#createWebhook) | **POST** /webhooks | Create a webhook
-[**deleteWebhook**](DefaultApi.md#deleteWebhook) | **DELETE** /webhooks/{webhook_id} | Delete a webhook
-[**destroyApplicant**](DefaultApi.md#destroyApplicant) | **DELETE** /applicants/{applicant_id} | Delete Applicant
-[**downloadDocument**](DefaultApi.md#downloadDocument) | **GET** /documents/{document_id}/download | Download a documents raw data
-[**downloadLivePhoto**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
-[**downloadLiveVideo**](DefaultApi.md#downloadLiveVideo) | **GET** /live_videos/{live_video_id}/download | Download live video
-[**downloadLiveVideoFrame**](DefaultApi.md#downloadLiveVideoFrame) | **GET** /live_videos/{live_video_id}/frame | Download live video frame
-[**editWebhook**](DefaultApi.md#editWebhook) | **PUT** /webhooks/{webhook_id} | Edit a webhook
-[**findAddresses**](DefaultApi.md#findAddresses) | **GET** /addresses/pick | Search for addresses by postcode
-[**findApplicant**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
-[**findCheck**](DefaultApi.md#findCheck) | **GET** /checks/{check_id} | Retrieve a Check
-[**findDocument**](DefaultApi.md#findDocument) | **GET** /documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
-[**findLivePhoto**](DefaultApi.md#findLivePhoto) | **GET** /live_photos/{live_photo_id} | Retrieve live photo
-[**findLiveVideo**](DefaultApi.md#findLiveVideo) | **GET** /live_videos/{live_video_id} | Retrieve live video
-[**findReport**](DefaultApi.md#findReport) | **GET** /reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
-[**findWebhook**](DefaultApi.md#findWebhook) | **GET** /webhooks/{webhook_id} | Retrieve a Webhook
-[**generateSdkToken**](DefaultApi.md#generateSdkToken) | **POST** /sdk_token | Generate a SDK token
-[**listApplicants**](DefaultApi.md#listApplicants) | **GET** /applicants | List Applicants
-[**listChecks**](DefaultApi.md#listChecks) | **GET** /checks | Retrieve Checks
-[**listDocuments**](DefaultApi.md#listDocuments) | **GET** /documents | List documents
-[**listLivePhotos**](DefaultApi.md#listLivePhotos) | **GET** /live_photos | List live photos
-[**listLiveVideos**](DefaultApi.md#listLiveVideos) | **GET** /live_videos | List live videos
-[**listReports**](DefaultApi.md#listReports) | **GET** /reports | All the reports belonging to a particular check can be listed from this endpoint.
-[**listWebhooks**](DefaultApi.md#listWebhooks) | **GET** /webhooks | List webhooks
-[**restoreApplicant**](DefaultApi.md#restoreApplicant) | **POST** /applicants/{applicant_id}/restore | Restore Applicant
-[**resumeCheck**](DefaultApi.md#resumeCheck) | **POST** /checks/{check_id}/resume | Resume a Check
-[**resumeReport**](DefaultApi.md#resumeReport) | **POST** /reports/{report_id}/resume | This endpoint is for resuming individual paused reports.
-[**updateApplicant**](DefaultApi.md#updateApplicant) | **PUT** /applicants/{applicant_id} | Update Applicant
-[**uploadDocument**](DefaultApi.md#uploadDocument) | **POST** /documents | Upload a document
-[**uploadLivePhoto**](DefaultApi.md#uploadLivePhoto) | **POST** /live_photos | Upload live photo
+[**cancelReport()**](DefaultApi.md#cancelReport) | **POST** /reports/{report_id}/cancel | This endpoint is for cancelling individual paused reports.
+[**createApplicant()**](DefaultApi.md#createApplicant) | **POST** /applicants | Create Applicant
+[**createCheck()**](DefaultApi.md#createCheck) | **POST** /checks | Create a check
+[**createWebhook()**](DefaultApi.md#createWebhook) | **POST** /webhooks | Create a webhook
+[**deleteWebhook()**](DefaultApi.md#deleteWebhook) | **DELETE** /webhooks/{webhook_id} | Delete a webhook
+[**destroyApplicant()**](DefaultApi.md#destroyApplicant) | **DELETE** /applicants/{applicant_id} | Delete Applicant
+[**downloadDocument()**](DefaultApi.md#downloadDocument) | **GET** /documents/{document_id}/download | Download a documents raw data
+[**downloadLivePhoto()**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
+[**downloadLiveVideo()**](DefaultApi.md#downloadLiveVideo) | **GET** /live_videos/{live_video_id}/download | Download live video
+[**editWebhook()**](DefaultApi.md#editWebhook) | **PUT** /webhooks/{webhook_id} | Edit a webhook
+[**findAddresses()**](DefaultApi.md#findAddresses) | **GET** /addresses/pick | Search for addresses by postcode
+[**findApplicant()**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
+[**findCheck()**](DefaultApi.md#findCheck) | **GET** /checks/{check_id} | Retrieve a Check
+[**findDocument()**](DefaultApi.md#findDocument) | **GET** /documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
+[**findLivePhoto()**](DefaultApi.md#findLivePhoto) | **GET** /live_photos/{live_photo_id} | Retrieve live photo
+[**findLiveVideo()**](DefaultApi.md#findLiveVideo) | **GET** /live_videos/{live_video_id} | Retrieve live video
+[**findReport()**](DefaultApi.md#findReport) | **GET** /reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
+[**findWebhook()**](DefaultApi.md#findWebhook) | **GET** /webhooks/{webhook_id} | Retrieve a Webhook
+[**frameLiveVideo()**](DefaultApi.md#frameLiveVideo) | **GET** /live_videos/{live_video_id}/frame | Download live video frame
+[**generateSdkToken()**](DefaultApi.md#generateSdkToken) | **POST** /sdk_token | Generate a SDK token
+[**listApplicants()**](DefaultApi.md#listApplicants) | **GET** /applicants | List Applicants
+[**listChecks()**](DefaultApi.md#listChecks) | **GET** /checks | Retrieve Checks
+[**listDocuments()**](DefaultApi.md#listDocuments) | **GET** /documents | List documents
+[**listLivePhotos()**](DefaultApi.md#listLivePhotos) | **GET** /live_photos | List live photos
+[**listLiveVideos()**](DefaultApi.md#listLiveVideos) | **GET** /live_videos | List live videos
+[**listReports()**](DefaultApi.md#listReports) | **GET** /reports | All the reports belonging to a particular check can be listed from this endpoint.
+[**listWebhooks()**](DefaultApi.md#listWebhooks) | **GET** /webhooks | List webhooks
+[**restoreApplicant()**](DefaultApi.md#restoreApplicant) | **POST** /applicants/{applicant_id}/restore | Restore Applicant
+[**resumeCheck()**](DefaultApi.md#resumeCheck) | **POST** /checks/{check_id}/resume | Resume a Check
+[**resumeReport()**](DefaultApi.md#resumeReport) | **POST** /reports/{report_id}/resume | This endpoint is for resuming individual paused reports.
+[**updateApplicant()**](DefaultApi.md#updateApplicant) | **PUT** /applicants/{applicant_id} | Update Applicant
+[**uploadDocument()**](DefaultApi.md#uploadDocument) | **POST** /documents | Upload a document
+[**uploadLivePhoto()**](DefaultApi.md#uploadLivePhoto) | **POST** /live_photos | Upload live photo
 
 
+## `cancelReport()`
 
-## cancelReport
-
-> cancelReport($report_id)
+```php
+cancelReport($report_id)
+```
 
 This endpoint is for cancelling individual paused reports.
 
@@ -62,18 +63,16 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$report_id = 'report_id_example'; // string | 
+$report_id = 'report_id_example'; // string
 
 try {
     $apiInstance->cancelReport($report_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->cancelReport: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -90,16 +89,17 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `createApplicant()`
 
-## createApplicant
-
-> \Onfido\Model\Applicant createApplicant($applicant)
+```php
+createApplicant($applicant_request): \Onfido\Model\ApplicantResponse
+```
 
 Create Applicant
 
@@ -119,27 +119,25 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant = new \Onfido\Model\Applicant(); // \Onfido\Model\Applicant | 
+$applicant_request = new \Onfido\Model\ApplicantRequest(); // \Onfido\Model\ApplicantRequest
 
 try {
-    $result = $apiInstance->createApplicant($applicant);
+    $result = $apiInstance->createApplicant($applicant_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->createApplicant: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **applicant** | [**\Onfido\Model\Applicant**](../Model/Applicant.md)|  |
+ **applicant_request** | [**\Onfido\Model\ApplicantRequest**](../Model/ApplicantRequest.md)|  |
 
 ### Return type
 
-[**\Onfido\Model\Applicant**](../Model/Applicant.md)
+[**\Onfido\Model\ApplicantResponse**](../Model/ApplicantResponse.md)
 
 ### Authorization
 
@@ -147,17 +145,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `createCheck()`
 
-## createCheck
-
-> \Onfido\Model\Check createCheck($check)
+```php
+createCheck($check_request): \Onfido\Model\CheckResponse
+```
 
 Create a check
 
@@ -177,27 +176,25 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$check = new \Onfido\Model\Check(); // \Onfido\Model\Check | 
+$check_request = new \Onfido\Model\CheckRequest(); // \Onfido\Model\CheckRequest
 
 try {
-    $result = $apiInstance->createCheck($check);
+    $result = $apiInstance->createCheck($check_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->createCheck: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **check** | [**\Onfido\Model\Check**](../Model/Check.md)|  |
+ **check_request** | [**\Onfido\Model\CheckRequest**](../Model/CheckRequest.md)|  |
 
 ### Return type
 
-[**\Onfido\Model\Check**](../Model/Check.md)
+[**\Onfido\Model\CheckResponse**](../Model/CheckResponse.md)
 
 ### Authorization
 
@@ -205,17 +202,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `createWebhook()`
 
-## createWebhook
-
-> \Onfido\Model\Webhook createWebhook($webhook)
+```php
+createWebhook($webhook_request): \Onfido\Model\WebhookResponse
+```
 
 Create a webhook
 
@@ -235,27 +233,25 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$webhook = new \Onfido\Model\Webhook(); // \Onfido\Model\Webhook | 
+$webhook_request = new \Onfido\Model\WebhookRequest(); // \Onfido\Model\WebhookRequest
 
 try {
-    $result = $apiInstance->createWebhook($webhook);
+    $result = $apiInstance->createWebhook($webhook_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->createWebhook: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhook** | [**\Onfido\Model\Webhook**](../Model/Webhook.md)|  |
+ **webhook_request** | [**\Onfido\Model\WebhookRequest**](../Model/WebhookRequest.md)|  |
 
 ### Return type
 
-[**\Onfido\Model\Webhook**](../Model/Webhook.md)
+[**\Onfido\Model\WebhookResponse**](../Model/WebhookResponse.md)
 
 ### Authorization
 
@@ -263,17 +259,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `deleteWebhook()`
 
-## deleteWebhook
-
-> deleteWebhook($webhook_id)
+```php
+deleteWebhook($webhook_id)
+```
 
 Delete a webhook
 
@@ -293,18 +290,16 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$webhook_id = 'webhook_id_example'; // string | 
+$webhook_id = 'webhook_id_example'; // string
 
 try {
     $apiInstance->deleteWebhook($webhook_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->deleteWebhook: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -321,16 +316,17 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `destroyApplicant()`
 
-## destroyApplicant
-
-> destroyApplicant($applicant_id)
+```php
+destroyApplicant($applicant_id)
+```
 
 Delete Applicant
 
@@ -350,18 +346,16 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
+$applicant_id = 'applicant_id_example'; // string
 
 try {
     $apiInstance->destroyApplicant($applicant_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->destroyApplicant: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -378,16 +372,17 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `downloadDocument()`
 
-## downloadDocument
-
-> \SplFileObject downloadDocument($document_id)
+```php
+downloadDocument($document_id): \SplFileObject
+```
 
 Download a documents raw data
 
@@ -407,7 +402,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$document_id = 'document_id_example'; // string | 
+$document_id = 'document_id_example'; // string
 
 try {
     $result = $apiInstance->downloadDocument($document_id);
@@ -415,11 +410,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->downloadDocument: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -427,7 +420,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -436,16 +429,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*, application/json
+- **Accept**: `*/*`, `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `downloadLivePhoto()`
 
-## downloadLivePhoto
-
-> \SplFileObject downloadLivePhoto($live_photo_id)
+```php
+downloadLivePhoto($live_photo_id): \SplFileObject
+```
 
 Download live photo
 
@@ -475,11 +469,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->downloadLivePhoto: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -487,7 +479,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -496,16 +488,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*, application/json
+- **Accept**: `*/*`, `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `downloadLiveVideo()`
 
-## downloadLiveVideo
-
-> \SplFileObject downloadLiveVideo($live_video_id)
+```php
+downloadLiveVideo($live_video_id): \SplFileObject
+```
 
 Download live video
 
@@ -535,11 +528,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->downloadLiveVideo: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -547,7 +538,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -556,76 +547,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*, application/json
+- **Accept**: `*/*`, `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-
-## downloadLiveVideoFrame
-
-> \SplFileObject downloadLiveVideoFrame($live_video_id)
-
-Download live video frame
-
-Live video frames are downloaded using this endpoint.
-
-### Example
+## `editWebhook()`
 
 ```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$config = Onfido\Configuration::getDefaultConfiguration();
-$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
-$config->setApiKeyPrefix('Authorization', 'Token');
-
-$apiInstance = new Onfido\Api\DefaultApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$live_video_id = 'live_video_id_example'; // string | The live video’s unique identifier.
-
-try {
-    $result = $apiInstance->downloadLiveVideoFrame($live_video_id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->downloadLiveVideoFrame: ', $e->getMessage(), PHP_EOL;
-}
-?>
+editWebhook($webhook_id, $webhook_request): \Onfido\Model\WebhookResponse
 ```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **live_video_id** | **string**| The live video’s unique identifier. |
-
-### Return type
-
-[**\SplFileObject**](../Model/\SplFileObject.md)
-
-### Authorization
-
-[Token](../../README.md#Token)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*, application/json
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
-[[Back to README]](../../README.md)
-
-
-## editWebhook
-
-> \Onfido\Model\Webhook editWebhook($webhook_id, $webhook)
 
 Edit a webhook
 
@@ -645,29 +577,27 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$webhook_id = 'webhook_id_example'; // string | 
-$webhook = new \Onfido\Model\Webhook(); // \Onfido\Model\Webhook | 
+$webhook_id = 'webhook_id_example'; // string
+$webhook_request = new \Onfido\Model\WebhookRequest(); // \Onfido\Model\WebhookRequest
 
 try {
-    $result = $apiInstance->editWebhook($webhook_id, $webhook);
+    $result = $apiInstance->editWebhook($webhook_id, $webhook_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->editWebhook: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **webhook_id** | **string**|  |
- **webhook** | [**\Onfido\Model\Webhook**](../Model/Webhook.md)|  |
+ **webhook_request** | [**\Onfido\Model\WebhookRequest**](../Model/WebhookRequest.md)|  |
 
 ### Return type
 
-[**\Onfido\Model\Webhook**](../Model/Webhook.md)
+[**\Onfido\Model\WebhookResponse**](../Model/WebhookResponse.md)
 
 ### Authorization
 
@@ -675,17 +605,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `findAddresses()`
 
-## findAddresses
-
-> \Onfido\Model\AddressesList findAddresses($postcode)
+```php
+findAddresses($postcode): \Onfido\Model\AddressesList
+```
 
 Search for addresses by postcode
 
@@ -705,7 +636,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$postcode = 'postcode_example'; // string | 
+$postcode = 'postcode_example'; // string
 
 try {
     $result = $apiInstance->findAddresses($postcode);
@@ -713,11 +644,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findAddresses: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -734,16 +663,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `findApplicant()`
 
-## findApplicant
-
-> \Onfido\Model\Applicant findApplicant($applicant_id)
+```php
+findApplicant($applicant_id): \Onfido\Model\ApplicantResponse
+```
 
 Retrieve Applicant
 
@@ -763,7 +693,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
+$applicant_id = 'applicant_id_example'; // string
 
 try {
     $result = $apiInstance->findApplicant($applicant_id);
@@ -771,11 +701,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findApplicant: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -783,7 +711,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Onfido\Model\Applicant**](../Model/Applicant.md)
+[**\Onfido\Model\ApplicantResponse**](../Model/ApplicantResponse.md)
 
 ### Authorization
 
@@ -792,16 +720,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `findCheck()`
 
-## findCheck
-
-> \Onfido\Model\Check findCheck($check_id)
+```php
+findCheck($check_id): \Onfido\Model\CheckResponse
+```
 
 Retrieve a Check
 
@@ -821,7 +750,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$check_id = 'check_id_example'; // string | 
+$check_id = 'check_id_example'; // string
 
 try {
     $result = $apiInstance->findCheck($check_id);
@@ -829,11 +758,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findCheck: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -841,7 +768,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Onfido\Model\Check**](../Model/Check.md)
+[**\Onfido\Model\CheckResponse**](../Model/CheckResponse.md)
 
 ### Authorization
 
@@ -850,16 +777,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `findDocument()`
 
-## findDocument
-
-> \Onfido\Model\Document findDocument($document_id)
+```php
+findDocument($document_id): \Onfido\Model\DocumentResponse
+```
 
 A single document can be retrieved by calling this endpoint with the document’s unique identifier.
 
@@ -879,7 +807,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$document_id = 'document_id_example'; // string | 
+$document_id = 'document_id_example'; // string
 
 try {
     $result = $apiInstance->findDocument($document_id);
@@ -887,11 +815,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findDocument: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -899,7 +825,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Onfido\Model\Document**](../Model/Document.md)
+[**\Onfido\Model\DocumentResponse**](../Model/DocumentResponse.md)
 
 ### Authorization
 
@@ -908,16 +834,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `findLivePhoto()`
 
-## findLivePhoto
-
-> \Onfido\Model\LivePhoto findLivePhoto($live_photo_id)
+```php
+findLivePhoto($live_photo_id): \Onfido\Model\LivePhotoResponse
+```
 
 Retrieve live photo
 
@@ -945,11 +872,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findLivePhoto: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -957,7 +882,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Onfido\Model\LivePhoto**](../Model/LivePhoto.md)
+[**\Onfido\Model\LivePhotoResponse**](../Model/LivePhotoResponse.md)
 
 ### Authorization
 
@@ -966,16 +891,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `findLiveVideo()`
 
-## findLiveVideo
-
-> \Onfido\Model\LiveVideo findLiveVideo($live_video_id)
+```php
+findLiveVideo($live_video_id): \Onfido\Model\LiveVideo
+```
 
 Retrieve live video
 
@@ -1003,11 +929,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findLiveVideo: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1024,16 +948,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `findReport()`
 
-## findReport
-
-> \Onfido\Model\Report findReport($report_id)
+```php
+findReport($report_id): \Onfido\Model\Report
+```
 
 A single report can be retrieved using this endpoint with the corresponding unique identifier.
 
@@ -1053,7 +978,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$report_id = 'report_id_example'; // string | 
+$report_id = 'report_id_example'; // string
 
 try {
     $result = $apiInstance->findReport($report_id);
@@ -1061,11 +986,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findReport: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1082,16 +1005,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `findWebhook()`
 
-## findWebhook
-
-> \Onfido\Model\Webhook findWebhook($webhook_id)
+```php
+findWebhook($webhook_id): \Onfido\Model\WebhookResponse
+```
 
 Retrieve a Webhook
 
@@ -1111,7 +1035,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$webhook_id = 'webhook_id_example'; // string | 
+$webhook_id = 'webhook_id_example'; // string
 
 try {
     $result = $apiInstance->findWebhook($webhook_id);
@@ -1119,11 +1043,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->findWebhook: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1131,7 +1053,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Onfido\Model\Webhook**](../Model/Webhook.md)
+[**\Onfido\Model\WebhookResponse**](../Model/WebhookResponse.md)
 
 ### Authorization
 
@@ -1140,16 +1062,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `frameLiveVideo()`
 
-## generateSdkToken
+```php
+frameLiveVideo($live_video_id): \SplFileObject
+```
 
-> \Onfido\Model\SdkToken generateSdkToken($sdk_token)
+Download live video frame
+
+Instead of the whole video, a single frame can be downloaded using this endpoint. Returns the binary data representing the frame.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$live_video_id = 'live_video_id_example'; // string | The live video’s unique identifier.
+
+try {
+    $result = $apiInstance->frameLiveVideo($live_video_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->frameLiveVideo: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **live_video_id** | **string**| The live video’s unique identifier. |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `*/*`, `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `generateSdkToken()`
+
+```php
+generateSdkToken($sdk_token_request): \Onfido\Model\SdkTokenResponse
+```
 
 Generate a SDK token
 
@@ -1169,27 +1151,25 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$sdk_token = new \Onfido\Model\SdkToken(); // \Onfido\Model\SdkToken | 
+$sdk_token_request = new \Onfido\Model\SdkTokenRequest(); // \Onfido\Model\SdkTokenRequest
 
 try {
-    $result = $apiInstance->generateSdkToken($sdk_token);
+    $result = $apiInstance->generateSdkToken($sdk_token_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->generateSdkToken: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdk_token** | [**\Onfido\Model\SdkToken**](../Model/SdkToken.md)|  |
+ **sdk_token_request** | [**\Onfido\Model\SdkTokenRequest**](../Model/SdkTokenRequest.md)|  |
 
 ### Return type
 
-[**\Onfido\Model\SdkToken**](../Model/SdkToken.md)
+[**\Onfido\Model\SdkTokenResponse**](../Model/SdkTokenResponse.md)
 
 ### Authorization
 
@@ -1197,17 +1177,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listApplicants()`
 
-## listApplicants
-
-> \Onfido\Model\ApplicantsList listApplicants($page, $per_page, $include_deleted)
+```php
+listApplicants($page, $per_page, $include_deleted): \Onfido\Model\ApplicantsList
+```
 
 List Applicants
 
@@ -1237,11 +1218,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->listApplicants: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1260,16 +1239,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listChecks()`
 
-## listChecks
-
-> \Onfido\Model\ChecksList listChecks($applicant_id)
+```php
+listChecks($applicant_id): \Onfido\Model\ChecksList
+```
 
 Retrieve Checks
 
@@ -1289,7 +1269,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
+$applicant_id = 'applicant_id_example'; // string
 
 try {
     $result = $apiInstance->listChecks($applicant_id);
@@ -1297,11 +1277,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->listChecks: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1318,16 +1296,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listDocuments()`
 
-## listDocuments
-
-> \Onfido\Model\DocumentsList listDocuments($applicant_id)
+```php
+listDocuments($applicant_id): \Onfido\Model\DocumentsList
+```
 
 List documents
 
@@ -1349,7 +1328,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
+$applicant_id = 'applicant_id_example'; // string
 
 try {
     $result = $apiInstance->listDocuments($applicant_id);
@@ -1357,11 +1336,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->listDocuments: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1378,16 +1355,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listLivePhotos()`
 
-## listLivePhotos
-
-> \Onfido\Model\LivePhotosList listLivePhotos($applicant_id)
+```php
+listLivePhotos($applicant_id): \Onfido\Model\LivePhotosList
+```
 
 List live photos
 
@@ -1415,11 +1393,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->listLivePhotos: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1436,16 +1412,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listLiveVideos()`
 
-## listLiveVideos
-
-> \Onfido\Model\LiveVideosList listLiveVideos($applicant_id)
+```php
+listLiveVideos($applicant_id): \Onfido\Model\LiveVideosList
+```
 
 List live videos
 
@@ -1473,11 +1450,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->listLiveVideos: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1494,16 +1469,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listReports()`
 
-## listReports
-
-> \Onfido\Model\ReportsList listReports($check_id)
+```php
+listReports($check_id): \Onfido\Model\ReportsList
+```
 
 All the reports belonging to a particular check can be listed from this endpoint.
 
@@ -1523,7 +1499,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$check_id = 'check_id_example'; // string | 
+$check_id = 'check_id_example'; // string
 
 try {
     $result = $apiInstance->listReports($check_id);
@@ -1531,11 +1507,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->listReports: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1552,16 +1526,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listWebhooks()`
 
-## listWebhooks
-
-> \Onfido\Model\WebhooksList listWebhooks()
+```php
+listWebhooks(): \Onfido\Model\WebhooksList
+```
 
 List webhooks
 
@@ -1588,7 +1563,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->listWebhooks: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -1606,16 +1580,17 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `restoreApplicant()`
 
-## restoreApplicant
-
-> restoreApplicant($applicant_id)
+```php
+restoreApplicant($applicant_id)
+```
 
 Restore Applicant
 
@@ -1635,18 +1610,16 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
+$applicant_id = 'applicant_id_example'; // string
 
 try {
     $apiInstance->restoreApplicant($applicant_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->restoreApplicant: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1663,16 +1636,17 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `resumeCheck()`
 
-## resumeCheck
-
-> resumeCheck($check_id)
+```php
+resumeCheck($check_id)
+```
 
 Resume a Check
 
@@ -1692,18 +1666,16 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$check_id = 'check_id_example'; // string | 
+$check_id = 'check_id_example'; // string
 
 try {
     $apiInstance->resumeCheck($check_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->resumeCheck: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1720,16 +1692,17 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `resumeReport()`
 
-## resumeReport
-
-> resumeReport($report_id)
+```php
+resumeReport($report_id)
+```
 
 This endpoint is for resuming individual paused reports.
 
@@ -1749,18 +1722,16 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$report_id = 'report_id_example'; // string | 
+$report_id = 'report_id_example'; // string
 
 try {
     $apiInstance->resumeReport($report_id);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->resumeReport: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1777,20 +1748,21 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `updateApplicant()`
 
-## updateApplicant
-
-> \Onfido\Model\Applicant updateApplicant($applicant_id, $applicant)
+```php
+updateApplicant($applicant_id, $applicant_request): \Onfido\Model\ApplicantResponse
+```
 
 Update Applicant
 
-Applicant details can be updated between check creations. - Partial updates - Addresses and ID numbers present will replace existing ones - Same applicant validations to create applicant
+Allows updating of an applicant’s information before any checks are created. - Partial updates - Addresses and ID numbers present will replace existing ones - Same applicant validations to create applicant
 
 ### Example
 
@@ -1808,29 +1780,27 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
-$applicant = new \Onfido\Model\Applicant(); // \Onfido\Model\Applicant | 
+$applicant_id = 'applicant_id_example'; // string
+$applicant_request = new \Onfido\Model\ApplicantRequest(); // \Onfido\Model\ApplicantRequest
 
 try {
-    $result = $apiInstance->updateApplicant($applicant_id, $applicant);
+    $result = $apiInstance->updateApplicant($applicant_id, $applicant_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->updateApplicant: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
 
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **applicant_id** | **string**|  |
- **applicant** | [**\Onfido\Model\Applicant**](../Model/Applicant.md)|  |
+ **applicant_request** | [**\Onfido\Model\ApplicantRequest**](../Model/ApplicantRequest.md)|  |
 
 ### Return type
 
-[**\Onfido\Model\Applicant**](../Model/Applicant.md)
+[**\Onfido\Model\ApplicantResponse**](../Model/ApplicantResponse.md)
 
 ### Authorization
 
@@ -1838,17 +1808,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `uploadDocument()`
 
-## uploadDocument
-
-> \Onfido\Model\Document uploadDocument($applicant_id, $type, $file, $side, $issuing_country)
+```php
+uploadDocument($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality): \Onfido\Model\DocumentResponse
+```
 
 Upload a document
 
@@ -1875,18 +1846,17 @@ $type = 'type_example'; // string | The type of document.
 $file = "/path/to/file.txt"; // \SplFileObject | The file to be uploaded.
 $side = 'side_example'; // string | Either the `front` or `back` of the document.
 $issuing_country = 'issuing_country_example'; // string | The issuing country of the document, a 3-letter ISO code.
+$validate_image_quality = True; // bool | Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds.
 
 try {
-    $result = $apiInstance->uploadDocument($applicant_id, $type, $file, $side, $issuing_country);
+    $result = $apiInstance->uploadDocument($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->uploadDocument: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1895,10 +1865,11 @@ Name | Type | Description  | Notes
  **file** | **\SplFileObject****\SplFileObject**| The file to be uploaded. |
  **side** | **string**| Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. | [optional]
  **issuing_country** | **string**| The issuing country of the document, a 3-letter ISO code. | [optional]
+ **validate_image_quality** | **bool**| Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds. | [optional]
 
 ### Return type
 
-[**\Onfido\Model\Document**](../Model/Document.md)
+[**\Onfido\Model\DocumentResponse**](../Model/DocumentResponse.md)
 
 ### Authorization
 
@@ -1906,17 +1877,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
+- **Content-Type**: `multipart/form-data`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `uploadLivePhoto()`
 
-## uploadLivePhoto
-
-> \Onfido\Model\LivePhoto uploadLivePhoto($applicant_id, $file, $advanced_validation)
+```php
+uploadLivePhoto($applicant_id, $file, $advanced_validation): \Onfido\Model\LivePhotoResponse
+```
 
 Upload live photo
 
@@ -1938,7 +1910,7 @@ $apiInstance = new Onfido\Api\DefaultApi(
     new GuzzleHttp\Client(),
     $config
 );
-$applicant_id = 'applicant_id_example'; // string | 
+$applicant_id = 'applicant_id_example'; // string
 $file = "/path/to/file.txt"; // \SplFileObject | The file to be uploaded.
 $advanced_validation = true; // bool | Validates that the live photo contains exactly one face.
 
@@ -1948,11 +1920,9 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->uploadLivePhoto: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -1962,7 +1932,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Onfido\Model\LivePhoto**](../Model/LivePhoto.md)
+[**\Onfido\Model\LivePhotoResponse**](../Model/LivePhotoResponse.md)
 
 ### Authorization
 
@@ -1970,10 +1940,9 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
+- **Content-Type**: `multipart/form-data`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
-
