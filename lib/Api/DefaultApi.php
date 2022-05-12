@@ -8978,14 +8978,15 @@ class DefaultApi
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
      * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      * @param  bool $validate_image_quality Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds. (optional)
+     * @param  \Onfido\Model\Location $location location (optional)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Onfido\Model\DocumentResponse|\Onfido\Model\Error
      */
-    public function uploadDocument($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null)
+    public function uploadDocument($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null, $location = null)
     {
-        list($response) = $this->uploadDocumentWithHttpInfo($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality);
+        list($response) = $this->uploadDocumentWithHttpInfo($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality, $location);
         return $response;
     }
 
@@ -9000,14 +9001,15 @@ class DefaultApi
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
      * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      * @param  bool $validate_image_quality Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds. (optional)
+     * @param  \Onfido\Model\Location $location (optional)
      *
      * @throws \Onfido\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Onfido\Model\DocumentResponse|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadDocumentWithHttpInfo($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null)
+    public function uploadDocumentWithHttpInfo($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null, $location = null)
     {
-        $request = $this->uploadDocumentRequest($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality);
+        $request = $this->uploadDocumentRequest($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality, $location);
 
         try {
             $options = $this->createHttpClientOption();
@@ -9118,13 +9120,14 @@ class DefaultApi
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
      * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      * @param  bool $validate_image_quality Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds. (optional)
+     * @param  \Onfido\Model\Location $location (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadDocumentAsync($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null)
+    public function uploadDocumentAsync($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null, $location = null)
     {
-        return $this->uploadDocumentAsyncWithHttpInfo($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality)
+        return $this->uploadDocumentAsyncWithHttpInfo($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality, $location)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -9143,14 +9146,15 @@ class DefaultApi
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
      * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      * @param  bool $validate_image_quality Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds. (optional)
+     * @param  \Onfido\Model\Location $location (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadDocumentAsyncWithHttpInfo($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null)
+    public function uploadDocumentAsyncWithHttpInfo($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null, $location = null)
     {
         $returnType = '\Onfido\Model\DocumentResponse';
-        $request = $this->uploadDocumentRequest($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality);
+        $request = $this->uploadDocumentRequest($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality, $location);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -9194,11 +9198,12 @@ class DefaultApi
      * @param  string $side Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. (optional)
      * @param  string $issuing_country The issuing country of the document, a 3-letter ISO code. (optional)
      * @param  bool $validate_image_quality Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds. (optional)
+     * @param  \Onfido\Model\Location $location (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function uploadDocumentRequest($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null)
+    public function uploadDocumentRequest($applicant_id, $type, $file, $side = null, $issuing_country = null, $validate_image_quality = null, $location = null)
     {
         // verify the required parameter 'applicant_id' is set
         if ($applicant_id === null || (is_array($applicant_id) && count($applicant_id) === 0)) {
@@ -9260,6 +9265,10 @@ class DefaultApi
         // form params
         if ($validate_image_quality !== null) {
             $formParams['validate_image_quality'] = ObjectSerializer::toFormValue($validate_image_quality);
+        }
+        // form params
+        if ($location !== null) {
+            $formParams['location'] = ObjectSerializer::toFormValue($location);
         }
 
         if ($multipart) {

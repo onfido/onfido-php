@@ -98,15 +98,6 @@ class CheckRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "privacy_notices_read_consent_given"
-     */
-    public function testPropertyPrivacyNoticesReadConsentGiven()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "document_ids"
      */
     public function testPropertyDocumentIds()

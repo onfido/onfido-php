@@ -1,6 +1,6 @@
 <?php
 /**
- * ApplicantRequest
+ * Location
  *
  * PHP version 7.3
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * ApplicantRequest Class Doc Comment
+ * Location Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -42,7 +42,7 @@ use \Onfido\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class Location implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'applicant_request';
+    protected static $openAPIModelName = 'location';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,15 +59,8 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'first_name' => 'string',
-        'last_name' => 'string',
-        'email' => 'string',
-        'dob' => '\DateTime',
-        'address' => '\Onfido\Model\Address',
-        'id_numbers' => '\Onfido\Model\IdNumber[]',
-        'phone_number' => 'string',
-        'location' => '\Onfido\Model\Location',
-        'consents' => 'array<string,object>[]'
+        'ip_address' => 'string',
+        'country_of_residence' => 'string'
     ];
 
     /**
@@ -78,15 +71,8 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'first_name' => null,
-        'last_name' => null,
-        'email' => null,
-        'dob' => 'date',
-        'address' => null,
-        'id_numbers' => null,
-        'phone_number' => null,
-        'location' => null,
-        'consents' => null
+        'ip_address' => null,
+        'country_of_residence' => null
     ];
 
     /**
@@ -116,15 +102,8 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'first_name' => 'first_name',
-        'last_name' => 'last_name',
-        'email' => 'email',
-        'dob' => 'dob',
-        'address' => 'address',
-        'id_numbers' => 'id_numbers',
-        'phone_number' => 'phone_number',
-        'location' => 'location',
-        'consents' => 'consents'
+        'ip_address' => 'ip_address',
+        'country_of_residence' => 'country_of_residence'
     ];
 
     /**
@@ -133,15 +112,8 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'first_name' => 'setFirstName',
-        'last_name' => 'setLastName',
-        'email' => 'setEmail',
-        'dob' => 'setDob',
-        'address' => 'setAddress',
-        'id_numbers' => 'setIdNumbers',
-        'phone_number' => 'setPhoneNumber',
-        'location' => 'setLocation',
-        'consents' => 'setConsents'
+        'ip_address' => 'setIpAddress',
+        'country_of_residence' => 'setCountryOfResidence'
     ];
 
     /**
@@ -150,15 +122,8 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'first_name' => 'getFirstName',
-        'last_name' => 'getLastName',
-        'email' => 'getEmail',
-        'dob' => 'getDob',
-        'address' => 'getAddress',
-        'id_numbers' => 'getIdNumbers',
-        'phone_number' => 'getPhoneNumber',
-        'location' => 'getLocation',
-        'consents' => 'getConsents'
+        'ip_address' => 'getIpAddress',
+        'country_of_residence' => 'getCountryOfResidence'
     ];
 
     /**
@@ -218,15 +183,8 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['first_name'] = $data['first_name'] ?? null;
-        $this->container['last_name'] = $data['last_name'] ?? null;
-        $this->container['email'] = $data['email'] ?? null;
-        $this->container['dob'] = $data['dob'] ?? null;
-        $this->container['address'] = $data['address'] ?? null;
-        $this->container['id_numbers'] = $data['id_numbers'] ?? null;
-        $this->container['phone_number'] = $data['phone_number'] ?? null;
-        $this->container['location'] = $data['location'] ?? null;
-        $this->container['consents'] = $data['consents'] ?? null;
+        $this->container['ip_address'] = $data['ip_address'] ?? null;
+        $this->container['country_of_residence'] = $data['country_of_residence'] ?? null;
     }
 
     /**
@@ -254,217 +212,49 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets first_name
+     * Gets ip_address
      *
      * @return string|null
      */
-    public function getFirstName()
+    public function getIpAddress()
     {
-        return $this->container['first_name'];
+        return $this->container['ip_address'];
     }
 
     /**
-     * Sets first_name
+     * Sets ip_address
      *
-     * @param string|null $first_name The applicant’s first name
+     * @param string|null $ip_address The applicant's ip address
      *
      * @return self
      */
-    public function setFirstName($first_name)
+    public function setIpAddress($ip_address)
     {
-        $this->container['first_name'] = $first_name;
+        $this->container['ip_address'] = $ip_address;
 
         return $this;
     }
 
     /**
-     * Gets last_name
+     * Gets country_of_residence
      *
      * @return string|null
      */
-    public function getLastName()
+    public function getCountryOfResidence()
     {
-        return $this->container['last_name'];
+        return $this->container['country_of_residence'];
     }
 
     /**
-     * Sets last_name
+     * Sets country_of_residence
      *
-     * @param string|null $last_name The applicant’s surname
+     * @param string|null $country_of_residence The applicant's country of residence
      *
      * @return self
      */
-    public function setLastName($last_name)
+    public function setCountryOfResidence($country_of_residence)
     {
-        $this->container['last_name'] = $last_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string|null
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string|null $email The applicant’s email address. Required if doing a US check, or a UK check for which `applicant_provides_data` is `true`.
-     *
-     * @return self
-     */
-    public function setEmail($email)
-    {
-        $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
-     * Gets dob
-     *
-     * @return \DateTime|null
-     */
-    public function getDob()
-    {
-        return $this->container['dob'];
-    }
-
-    /**
-     * Sets dob
-     *
-     * @param \DateTime|null $dob The applicant’s date of birth
-     *
-     * @return self
-     */
-    public function setDob($dob)
-    {
-        $this->container['dob'] = $dob;
-
-        return $this;
-    }
-
-    /**
-     * Gets address
-     *
-     * @return \Onfido\Model\Address|null
-     */
-    public function getAddress()
-    {
-        return $this->container['address'];
-    }
-
-    /**
-     * Sets address
-     *
-     * @param \Onfido\Model\Address|null $address address
-     *
-     * @return self
-     */
-    public function setAddress($address)
-    {
-        $this->container['address'] = $address;
-
-        return $this;
-    }
-
-    /**
-     * Gets id_numbers
-     *
-     * @return \Onfido\Model\IdNumber[]|null
-     */
-    public function getIdNumbers()
-    {
-        return $this->container['id_numbers'];
-    }
-
-    /**
-     * Sets id_numbers
-     *
-     * @param \Onfido\Model\IdNumber[]|null $id_numbers id_numbers
-     *
-     * @return self
-     */
-    public function setIdNumbers($id_numbers)
-    {
-        $this->container['id_numbers'] = $id_numbers;
-
-        return $this;
-    }
-
-    /**
-     * Gets phone_number
-     *
-     * @return string|null
-     */
-    public function getPhoneNumber()
-    {
-        return $this->container['phone_number'];
-    }
-
-    /**
-     * Sets phone_number
-     *
-     * @param string|null $phone_number The applicant’s phone number
-     *
-     * @return self
-     */
-    public function setPhoneNumber($phone_number)
-    {
-        $this->container['phone_number'] = $phone_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets location
-     *
-     * @return \Onfido\Model\Location|null
-     */
-    public function getLocation()
-    {
-        return $this->container['location'];
-    }
-
-    /**
-     * Sets location
-     *
-     * @param \Onfido\Model\Location|null $location location
-     *
-     * @return self
-     */
-    public function setLocation($location)
-    {
-        $this->container['location'] = $location;
-
-        return $this;
-    }
-
-    /**
-     * Gets consents
-     *
-     * @return array<string,object>[]|null
-     */
-    public function getConsents()
-    {
-        return $this->container['consents'];
-    }
-
-    /**
-     * Sets consents
-     *
-     * @param array<string,object>[]|null $consents consents
-     *
-     * @return self
-     */
-    public function setConsents($consents)
-    {
-        $this->container['consents'] = $consents;
+        $this->container['country_of_residence'] = $country_of_residence;
 
         return $this;
     }

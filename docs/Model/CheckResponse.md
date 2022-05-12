@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | The unique identifier for the check. | [optional]
 **created_at** | **\DateTime** | The date and time when this check was created. | [optional]
-**privacy_notices_read_consent_given** | **bool** | Indicates that the privacy notices and terms of service have been read and, where specific laws require, that consent has been given for Onfido. This will be true if specified during check creation, otherwise it will be null. | [optional]
 **webhook_ids** | **string[]** | An array of webhook ids describing which webhooks to trigger for this check. | [optional]
 **href** | **string** | The uri of this resource. | [optional]
 **applicant_provides_data** | **bool** | Send an applicant form to applicant to complete to proceed with check. Defaults to false. | [optional]
