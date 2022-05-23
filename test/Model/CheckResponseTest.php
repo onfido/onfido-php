@@ -98,15 +98,6 @@ class CheckResponseTest extends TestCase
     }
 
     /**
-     * Test attribute "privacy_notices_read_consent_given"
-     */
-    public function testPropertyPrivacyNoticesReadConsentGiven()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "webhook_ids"
      */
     public function testPropertyWebhookIds()

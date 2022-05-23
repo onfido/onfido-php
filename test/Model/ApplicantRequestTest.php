@@ -132,4 +132,31 @@ class ApplicantRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "phone_number"
+     */
+    public function testPropertyPhoneNumber()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "location"
+     */
+    public function testPropertyLocation()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "consents"
+     */
+    public function testPropertyConsents()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

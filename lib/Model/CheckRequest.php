@@ -61,7 +61,6 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'applicant_id' => 'string',
         'report_names' => 'string[]',
-        'privacy_notices_read_consent_given' => 'bool',
         'document_ids' => 'string[]',
         'applicant_provides_data' => 'bool',
         'asynchronous' => 'bool',
@@ -83,7 +82,6 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'applicant_id' => null,
         'report_names' => null,
-        'privacy_notices_read_consent_given' => null,
         'document_ids' => null,
         'applicant_provides_data' => null,
         'asynchronous' => null,
@@ -124,7 +122,6 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'applicant_id' => 'applicant_id',
         'report_names' => 'report_names',
-        'privacy_notices_read_consent_given' => 'privacy_notices_read_consent_given',
         'document_ids' => 'document_ids',
         'applicant_provides_data' => 'applicant_provides_data',
         'asynchronous' => 'asynchronous',
@@ -144,7 +141,6 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'applicant_id' => 'setApplicantId',
         'report_names' => 'setReportNames',
-        'privacy_notices_read_consent_given' => 'setPrivacyNoticesReadConsentGiven',
         'document_ids' => 'setDocumentIds',
         'applicant_provides_data' => 'setApplicantProvidesData',
         'asynchronous' => 'setAsynchronous',
@@ -164,7 +160,6 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'applicant_id' => 'getApplicantId',
         'report_names' => 'getReportNames',
-        'privacy_notices_read_consent_given' => 'getPrivacyNoticesReadConsentGiven',
         'document_ids' => 'getDocumentIds',
         'applicant_provides_data' => 'getApplicantProvidesData',
         'asynchronous' => 'getAsynchronous',
@@ -235,7 +230,6 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->container['applicant_id'] = $data['applicant_id'] ?? null;
         $this->container['report_names'] = $data['report_names'] ?? null;
-        $this->container['privacy_notices_read_consent_given'] = $data['privacy_notices_read_consent_given'] ?? null;
         $this->container['document_ids'] = $data['document_ids'] ?? null;
         $this->container['applicant_provides_data'] = $data['applicant_provides_data'] ?? null;
         $this->container['asynchronous'] = $data['asynchronous'] ?? true;
@@ -315,30 +309,6 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setReportNames($report_names)
     {
         $this->container['report_names'] = $report_names;
-
-        return $this;
-    }
-
-    /**
-     * Gets privacy_notices_read_consent_given
-     *
-     * @return bool|null
-     */
-    public function getPrivacyNoticesReadConsentGiven()
-    {
-        return $this->container['privacy_notices_read_consent_given'];
-    }
-
-    /**
-     * Sets privacy_notices_read_consent_given
-     *
-     * @param bool|null $privacy_notices_read_consent_given Boolean to indicate that the privacy notices and terms of service have been read and, where specific laws require, that consent has been given for Onfido.
-     *
-     * @return self
-     */
-    public function setPrivacyNoticesReadConsentGiven($privacy_notices_read_consent_given)
-    {
-        $this->container['privacy_notices_read_consent_given'] = $privacy_notices_read_consent_given;
 
         return $this;
     }

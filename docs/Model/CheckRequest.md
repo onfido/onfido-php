@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **applicant_id** | **string** | The ID of the applicant to do the check on. | [optional]
 **report_names** | **string[]** | An array of report names (strings). | [optional]
-**privacy_notices_read_consent_given** | **bool** | Boolean to indicate that the privacy notices and terms of service have been read and, where specific laws require, that consent has been given for Onfido. | [optional]
 **document_ids** | **string[]** | Optional. An array of document ids, for use with Document reports only. If omitted, the Document report will use the most recently uploaded document by default. | [optional]
 **applicant_provides_data** | **bool** | Send an applicant form to applicant to complete to proceed with check. Defaults to false. | [optional]
 **asynchronous** | **bool** | Defaults to &#x60;true&#x60;. If set to &#x60;false&#x60;, you will only receive a response when all reports in your check have completed. | [optional] [default to true]

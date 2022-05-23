@@ -1,6 +1,6 @@
 # Onfido\DefaultApi
 
-All URIs are relative to https://api.eu.onfido.com/v3.3.
+All URIs are relative to https://api.eu.onfido.com/v3.4.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -1818,7 +1818,7 @@ Name | Type | Description  | Notes
 ## `uploadDocument()`
 
 ```php
-uploadDocument($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality): \Onfido\Model\DocumentResponse
+uploadDocument($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality, $location): \Onfido\Model\DocumentResponse
 ```
 
 Upload a document
@@ -1847,9 +1847,10 @@ $file = "/path/to/file.txt"; // \SplFileObject | The file to be uploaded.
 $side = 'side_example'; // string | Either the `front` or `back` of the document.
 $issuing_country = 'issuing_country_example'; // string | The issuing country of the document, a 3-letter ISO code.
 $validate_image_quality = True; // bool | Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds.
+$location = new \Onfido\Model\Location(); // \Onfido\Model\Location
 
 try {
-    $result = $apiInstance->uploadDocument($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality);
+    $result = $apiInstance->uploadDocument($applicant_id, $type, $file, $side, $issuing_country, $validate_image_quality, $location);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DefaultApi->uploadDocument: ', $e->getMessage(), PHP_EOL;
@@ -1866,6 +1867,7 @@ Name | Type | Description  | Notes
  **side** | **string**| Either the &#x60;front&#x60; or &#x60;back&#x60; of the document. | [optional]
  **issuing_country** | **string**| The issuing country of the document, a 3-letter ISO code. | [optional]
  **validate_image_quality** | **bool**| Defaults to false. When true the submitted image will undergo an image quality validation which may take up to 5 seconds. | [optional]
+ **location** | [**\Onfido\Model\Location**](../Model/Location.md)|  | [optional]
 
 ### Return type
 

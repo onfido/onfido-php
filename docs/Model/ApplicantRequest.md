@@ -10,5 +10,8 @@ Name | Type | Description | Notes
 **dob** | **\DateTime** | The applicant’s date of birth | [optional]
 **address** | [**\Onfido\Model\Address**](Address.md) |  | [optional]
 **id_numbers** | [**\Onfido\Model\IdNumber[]**](IdNumber.md) |  | [optional]
+**phone_number** | **string** | The applicant’s phone number | [optional]
+**location** | [**\Onfido\Model\Location**](Location.md) |  | [optional]
+**consents** | **array<string,object>[]** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

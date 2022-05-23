@@ -69,7 +69,9 @@ class ApplicantResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
         'dob' => '\DateTime',
         'address' => '\Onfido\Model\Address',
         'id_numbers' => '\Onfido\Model\IdNumber[]',
-        'sandbox' => 'bool'
+        'sandbox' => 'bool',
+        'phone_number' => 'string',
+        'location' => '\Onfido\Model\Location'
     ];
 
     /**
@@ -90,7 +92,9 @@ class ApplicantResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
         'dob' => 'date',
         'address' => null,
         'id_numbers' => null,
-        'sandbox' => null
+        'sandbox' => null,
+        'phone_number' => null,
+        'location' => null
     ];
 
     /**
@@ -130,7 +134,9 @@ class ApplicantResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
         'dob' => 'dob',
         'address' => 'address',
         'id_numbers' => 'id_numbers',
-        'sandbox' => 'sandbox'
+        'sandbox' => 'sandbox',
+        'phone_number' => 'phone_number',
+        'location' => 'location'
     ];
 
     /**
@@ -149,7 +155,9 @@ class ApplicantResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
         'dob' => 'setDob',
         'address' => 'setAddress',
         'id_numbers' => 'setIdNumbers',
-        'sandbox' => 'setSandbox'
+        'sandbox' => 'setSandbox',
+        'phone_number' => 'setPhoneNumber',
+        'location' => 'setLocation'
     ];
 
     /**
@@ -168,7 +176,9 @@ class ApplicantResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
         'dob' => 'getDob',
         'address' => 'getAddress',
         'id_numbers' => 'getIdNumbers',
-        'sandbox' => 'getSandbox'
+        'sandbox' => 'getSandbox',
+        'phone_number' => 'getPhoneNumber',
+        'location' => 'getLocation'
     ];
 
     /**
@@ -239,6 +249,8 @@ class ApplicantResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->container['address'] = $data['address'] ?? null;
         $this->container['id_numbers'] = $data['id_numbers'] ?? null;
         $this->container['sandbox'] = $data['sandbox'] ?? null;
+        $this->container['phone_number'] = $data['phone_number'] ?? null;
+        $this->container['location'] = $data['location'] ?? null;
     }
 
     /**
@@ -525,6 +537,54 @@ class ApplicantResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setSandbox($sandbox)
     {
         $this->container['sandbox'] = $sandbox;
+
+        return $this;
+    }
+
+    /**
+     * Gets phone_number
+     *
+     * @return string|null
+     */
+    public function getPhoneNumber()
+    {
+        return $this->container['phone_number'];
+    }
+
+    /**
+     * Sets phone_number
+     *
+     * @param string|null $phone_number The applicant’s phone number
+     *
+     * @return self
+     */
+    public function setPhoneNumber($phone_number)
+    {
+        $this->container['phone_number'] = $phone_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets location
+     *
+     * @return \Onfido\Model\Location|null
+     */
+    public function getLocation()
+    {
+        return $this->container['location'];
+    }
+
+    /**
+     * Sets location
+     *
+     * @param \Onfido\Model\Location|null $location location
+     *
+     * @return self
+     */
+    public function setLocation($location)
+    {
+        $this->container['location'] = $location;
 
         return $this;
     }
