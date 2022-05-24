@@ -61,6 +61,7 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'string',
         'created_at' => '\DateTime',
+        'privacy_notices_read_consent_given' => 'bool',
         'webhook_ids' => 'string[]',
         'href' => 'string',
         'applicant_provides_data' => 'bool',
@@ -85,6 +86,7 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => null,
         'created_at' => 'date-time',
+        'privacy_notices_read_consent_given' => null,
         'webhook_ids' => null,
         'href' => null,
         'applicant_provides_data' => null,
@@ -128,6 +130,7 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'created_at' => 'created_at',
+        'privacy_notices_read_consent_given' => 'privacy_notices_read_consent_given',
         'webhook_ids' => 'webhook_ids',
         'href' => 'href',
         'applicant_provides_data' => 'applicant_provides_data',
@@ -150,6 +153,7 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'created_at' => 'setCreatedAt',
+        'privacy_notices_read_consent_given' => 'setPrivacyNoticesReadConsentGiven',
         'webhook_ids' => 'setWebhookIds',
         'href' => 'setHref',
         'applicant_provides_data' => 'setApplicantProvidesData',
@@ -172,6 +176,7 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'created_at' => 'getCreatedAt',
+        'privacy_notices_read_consent_given' => 'getPrivacyNoticesReadConsentGiven',
         'webhook_ids' => 'getWebhookIds',
         'href' => 'getHref',
         'applicant_provides_data' => 'getApplicantProvidesData',
@@ -245,6 +250,7 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->container['id'] = $data['id'] ?? null;
         $this->container['created_at'] = $data['created_at'] ?? null;
+        $this->container['privacy_notices_read_consent_given'] = $data['privacy_notices_read_consent_given'] ?? null;
         $this->container['webhook_ids'] = $data['webhook_ids'] ?? null;
         $this->container['href'] = $data['href'] ?? null;
         $this->container['applicant_provides_data'] = $data['applicant_provides_data'] ?? null;
@@ -327,6 +333,30 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCreatedAt($created_at)
     {
         $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets privacy_notices_read_consent_given
+     *
+     * @return bool|null
+     */
+    public function getPrivacyNoticesReadConsentGiven()
+    {
+        return $this->container['privacy_notices_read_consent_given'];
+    }
+
+    /**
+     * Sets privacy_notices_read_consent_given
+     *
+     * @param bool|null $privacy_notices_read_consent_given Indicates that the privacy notices and terms of service have been read and, where specific laws require, that consent has been given for Onfido. This will be true if specified during check creation, otherwise it will be null.
+     *
+     * @return self
+     */
+    public function setPrivacyNoticesReadConsentGiven($privacy_notices_read_consent_given)
+    {
+        $this->container['privacy_notices_read_consent_given'] = $privacy_notices_read_consent_given;
 
         return $this;
     }
