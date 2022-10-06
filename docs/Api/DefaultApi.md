@@ -1,6 +1,6 @@
 # Onfido\DefaultApi
 
-All URIs are relative to https://api.eu.onfido.com/v3.4.
+All URIs are relative to https://api.eu.onfido.com/v3.5.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
