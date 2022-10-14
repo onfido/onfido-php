@@ -230,7 +230,7 @@ class IdNumber implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets type
      *
-     * @param string|null $type Type of ID number. Valid values are `ssn`, `social_insurance`, `tax_id`, `identity_card`, `passport` and `driving_license`
+     * @param string|null $type Type of ID number. Valid values are `ssn`, `social_insurance`, `tax_id`, `identity_card`, `passport`, `driving_license`, `share_code`, `voter_id` and `other`
      *
      * @return self
      */
