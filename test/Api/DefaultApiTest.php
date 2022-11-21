@@ -180,6 +180,18 @@ class DefaultApiTest extends TestCase
     }
 
     /**
+     * Test case for downloadMotionCapture
+     *
+     * Download motion capture.
+     *
+     */
+    public function testDownloadMotionCapture()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for editWebhook
      *
      * Edit a webhook.
@@ -264,6 +276,18 @@ class DefaultApiTest extends TestCase
     }
 
     /**
+     * Test case for findMotionCapture
+     *
+     * Retrieve motion capture.
+     *
+     */
+    public function testFindMotionCapture()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for findReport
      *
      * A single report can be retrieved using this endpoint with the corresponding unique identifier..
@@ -294,6 +318,18 @@ class DefaultApiTest extends TestCase
      *
      */
     public function testFrameLiveVideo()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for frameMotionCapture
+     *
+     * Download motion capture frame.
+     *
+     */
+    public function testFrameMotionCapture()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -366,6 +402,18 @@ class DefaultApiTest extends TestCase
      *
      */
     public function testListLiveVideos()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listMotionCaptures
+     *
+     * List motion captures.
+     *
+     */
+    public function testListMotionCaptures()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

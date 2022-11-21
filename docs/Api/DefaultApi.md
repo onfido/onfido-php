@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**downloadDocument()**](DefaultApi.md#downloadDocument) | **GET** /documents/{document_id}/download | Download a documents raw data
 [**downloadLivePhoto()**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
 [**downloadLiveVideo()**](DefaultApi.md#downloadLiveVideo) | **GET** /live_videos/{live_video_id}/download | Download live video
+[**downloadMotionCapture()**](DefaultApi.md#downloadMotionCapture) | **GET** /motion_captures/{motion_capture_id}/download | Download motion capture
 [**editWebhook()**](DefaultApi.md#editWebhook) | **PUT** /webhooks/{webhook_id} | Edit a webhook
 [**findAddresses()**](DefaultApi.md#findAddresses) | **GET** /addresses/pick | Search for addresses by postcode
 [**findApplicant()**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
@@ -20,15 +21,18 @@ Method | HTTP request | Description
 [**findDocument()**](DefaultApi.md#findDocument) | **GET** /documents/{document_id} | A single document can be retrieved by calling this endpoint with the document’s unique identifier.
 [**findLivePhoto()**](DefaultApi.md#findLivePhoto) | **GET** /live_photos/{live_photo_id} | Retrieve live photo
 [**findLiveVideo()**](DefaultApi.md#findLiveVideo) | **GET** /live_videos/{live_video_id} | Retrieve live video
+[**findMotionCapture()**](DefaultApi.md#findMotionCapture) | **GET** /motion_captures/{motion_capture_id} | Retrieve motion capture
 [**findReport()**](DefaultApi.md#findReport) | **GET** /reports/{report_id} | A single report can be retrieved using this endpoint with the corresponding unique identifier.
 [**findWebhook()**](DefaultApi.md#findWebhook) | **GET** /webhooks/{webhook_id} | Retrieve a Webhook
 [**frameLiveVideo()**](DefaultApi.md#frameLiveVideo) | **GET** /live_videos/{live_video_id}/frame | Download live video frame
+[**frameMotionCapture()**](DefaultApi.md#frameMotionCapture) | **GET** /motion_captures/{motion_capture_id}/frame | Download motion capture frame
 [**generateSdkToken()**](DefaultApi.md#generateSdkToken) | **POST** /sdk_token | Generate a SDK token
 [**listApplicants()**](DefaultApi.md#listApplicants) | **GET** /applicants | List Applicants
 [**listChecks()**](DefaultApi.md#listChecks) | **GET** /checks | Retrieve Checks
 [**listDocuments()**](DefaultApi.md#listDocuments) | **GET** /documents | List documents
 [**listLivePhotos()**](DefaultApi.md#listLivePhotos) | **GET** /live_photos | List live photos
 [**listLiveVideos()**](DefaultApi.md#listLiveVideos) | **GET** /live_videos | List live videos
+[**listMotionCaptures()**](DefaultApi.md#listMotionCaptures) | **GET** /motion_captures | List motion captures
 [**listReports()**](DefaultApi.md#listReports) | **GET** /reports | All the reports belonging to a particular check can be listed from this endpoint.
 [**listWebhooks()**](DefaultApi.md#listWebhooks) | **GET** /webhooks | List webhooks
 [**restoreApplicant()**](DefaultApi.md#restoreApplicant) | **POST** /applicants/{applicant_id}/restore | Restore Applicant
@@ -553,6 +557,65 @@ Name | Type | Description  | Notes
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `downloadMotionCapture()`
+
+```php
+downloadMotionCapture($motion_capture_id): \SplFileObject
+```
+
+Download motion capture
+
+Motion captures are downloaded using this endpoint.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$motion_capture_id = 'motion_capture_id_example'; // string | The motion capture’s unique identifier.
+
+try {
+    $result = $apiInstance->downloadMotionCapture($motion_capture_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->downloadMotionCapture: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **motion_capture_id** | **string**| The motion capture’s unique identifier. |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `*/*`, `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `editWebhook()`
 
 ```php
@@ -954,6 +1017,63 @@ Name | Type | Description  | Notes
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `findMotionCapture()`
+
+```php
+findMotionCapture($motion_capture_id): \Onfido\Model\MotionCapture
+```
+
+Retrieve motion capture
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$motion_capture_id = 'motion_capture_id_example'; // string | The motion capture’s unique identifier.
+
+try {
+    $result = $apiInstance->findMotionCapture($motion_capture_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->findMotionCapture: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **motion_capture_id** | **string**| The motion capture’s unique identifier. |
+
+### Return type
+
+[**\Onfido\Model\MotionCapture**](../Model/MotionCapture.md)
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `findReport()`
 
 ```php
@@ -1109,6 +1229,65 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **live_video_id** | **string**| The live video’s unique identifier. |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `*/*`, `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `frameMotionCapture()`
+
+```php
+frameMotionCapture($motion_capture_id): \SplFileObject
+```
+
+Download motion capture frame
+
+Instead of the whole capture binary, a single frame can be downloaded using this endpoint. Returns the binary data representing the frame.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$motion_capture_id = 'motion_capture_id_example'; // string | The motion capture’s unique identifier.
+
+try {
+    $result = $apiInstance->frameMotionCapture($motion_capture_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->frameMotionCapture: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **motion_capture_id** | **string**| The motion capture’s unique identifier. |
 
 ### Return type
 
@@ -1461,6 +1640,63 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Onfido\Model\LiveVideosList**](../Model/LiveVideosList.md)
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listMotionCaptures()`
+
+```php
+listMotionCaptures($applicant_id): \Onfido\Model\MotionCapturesList
+```
+
+List motion captures
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$applicant_id = 'applicant_id_example'; // string | The id of the applicant the motion captures belong to.
+
+try {
+    $result = $apiInstance->listMotionCaptures($applicant_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->listMotionCaptures: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applicant_id** | **string**| The id of the applicant the motion captures belong to. |
+
+### Return type
+
+[**\Onfido\Model\MotionCapturesList**](../Model/MotionCapturesList.md)
 
 ### Authorization
 
