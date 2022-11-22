@@ -445,7 +445,7 @@ class LiveVideo implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset) : bool
     {
         return isset($this->container[$offset]);
     }
@@ -457,7 +457,7 @@ class LiveVideo implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset) : mixed
     {
         return $this->container[$offset] ?? null;
     }
@@ -470,7 +470,7 @@ class LiveVideo implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value) : void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -486,7 +486,7 @@ class LiveVideo implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset) : void
     {
         unset($this->container[$offset]);
     }
@@ -498,7 +498,7 @@ class LiveVideo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    public function jsonSerialize()
+    public function jsonSerialize() : mixed 
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
