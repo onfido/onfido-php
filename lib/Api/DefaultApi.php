@@ -2603,6 +2603,302 @@ class DefaultApi
     }
 
     /**
+     * Operation downloadMotionCapture
+     *
+     * Download motion capture
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject|\Onfido\Model\Error
+     */
+    public function downloadMotionCapture($motion_capture_id)
+    {
+        list($response) = $this->downloadMotionCaptureWithHttpInfo($motion_capture_id);
+        return $response;
+    }
+
+    /**
+     * Operation downloadMotionCaptureWithHttpInfo
+     *
+     * Download motion capture
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function downloadMotionCaptureWithHttpInfo($motion_capture_id)
+    {
+        $request = $this->downloadMotionCaptureRequest($motion_capture_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation downloadMotionCaptureAsync
+     *
+     * Download motion capture
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function downloadMotionCaptureAsync($motion_capture_id)
+    {
+        return $this->downloadMotionCaptureAsyncWithHttpInfo($motion_capture_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation downloadMotionCaptureAsyncWithHttpInfo
+     *
+     * Download motion capture
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function downloadMotionCaptureAsyncWithHttpInfo($motion_capture_id)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->downloadMotionCaptureRequest($motion_capture_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'downloadMotionCapture'
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function downloadMotionCaptureRequest($motion_capture_id)
+    {
+        // verify the required parameter 'motion_capture_id' is set
+        if ($motion_capture_id === null || (is_array($motion_capture_id) && count($motion_capture_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $motion_capture_id when calling downloadMotionCapture'
+            );
+        }
+
+        $resourcePath = '/motion_captures/{motion_capture_id}/download';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($motion_capture_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'motion_capture_id' . '}',
+                ObjectSerializer::toPathValue($motion_capture_id),
+                $resourcePath
+            );
+        }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['*/*', 'application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['*/*', 'application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\Query::build($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation editWebhook
      *
      * Edit a webhook
@@ -4691,6 +4987,302 @@ class DefaultApi
     }
 
     /**
+     * Operation findMotionCapture
+     *
+     * Retrieve motion capture
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\MotionCapture|\Onfido\Model\Error
+     */
+    public function findMotionCapture($motion_capture_id)
+    {
+        list($response) = $this->findMotionCaptureWithHttpInfo($motion_capture_id);
+        return $response;
+    }
+
+    /**
+     * Operation findMotionCaptureWithHttpInfo
+     *
+     * Retrieve motion capture
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\MotionCapture|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function findMotionCaptureWithHttpInfo($motion_capture_id)
+    {
+        $request = $this->findMotionCaptureRequest($motion_capture_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Onfido\Model\MotionCapture' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\MotionCapture', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Onfido\Model\MotionCapture';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\MotionCapture',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation findMotionCaptureAsync
+     *
+     * Retrieve motion capture
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findMotionCaptureAsync($motion_capture_id)
+    {
+        return $this->findMotionCaptureAsyncWithHttpInfo($motion_capture_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation findMotionCaptureAsyncWithHttpInfo
+     *
+     * Retrieve motion capture
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findMotionCaptureAsyncWithHttpInfo($motion_capture_id)
+    {
+        $returnType = '\Onfido\Model\MotionCapture';
+        $request = $this->findMotionCaptureRequest($motion_capture_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'findMotionCapture'
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function findMotionCaptureRequest($motion_capture_id)
+    {
+        // verify the required parameter 'motion_capture_id' is set
+        if ($motion_capture_id === null || (is_array($motion_capture_id) && count($motion_capture_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $motion_capture_id when calling findMotionCapture'
+            );
+        }
+
+        $resourcePath = '/motion_captures/{motion_capture_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($motion_capture_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'motion_capture_id' . '}',
+                ObjectSerializer::toPathValue($motion_capture_id),
+                $resourcePath
+            );
+        }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\Query::build($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation findReport
      *
      * A single report can be retrieved using this endpoint with the corresponding unique identifier.
@@ -5511,6 +6103,302 @@ class DefaultApi
             $resourcePath = str_replace(
                 '{' . 'live_video_id' . '}',
                 ObjectSerializer::toPathValue($live_video_id),
+                $resourcePath
+            );
+        }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['*/*', 'application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['*/*', 'application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\Query::build($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation frameMotionCapture
+     *
+     * Download motion capture frame
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject|\Onfido\Model\Error
+     */
+    public function frameMotionCapture($motion_capture_id)
+    {
+        list($response) = $this->frameMotionCaptureWithHttpInfo($motion_capture_id);
+        return $response;
+    }
+
+    /**
+     * Operation frameMotionCaptureWithHttpInfo
+     *
+     * Download motion capture frame
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function frameMotionCaptureWithHttpInfo($motion_capture_id)
+    {
+        $request = $this->frameMotionCaptureRequest($motion_capture_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation frameMotionCaptureAsync
+     *
+     * Download motion capture frame
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function frameMotionCaptureAsync($motion_capture_id)
+    {
+        return $this->frameMotionCaptureAsyncWithHttpInfo($motion_capture_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation frameMotionCaptureAsyncWithHttpInfo
+     *
+     * Download motion capture frame
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function frameMotionCaptureAsyncWithHttpInfo($motion_capture_id)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->frameMotionCaptureRequest($motion_capture_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'frameMotionCapture'
+     *
+     * @param  string $motion_capture_id The motion capture’s unique identifier. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function frameMotionCaptureRequest($motion_capture_id)
+    {
+        // verify the required parameter 'motion_capture_id' is set
+        if ($motion_capture_id === null || (is_array($motion_capture_id) && count($motion_capture_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $motion_capture_id when calling frameMotionCapture'
+            );
+        }
+
+        $resourcePath = '/motion_captures/{motion_capture_id}/frame';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($motion_capture_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'motion_capture_id' . '}',
+                ObjectSerializer::toPathValue($motion_capture_id),
                 $resourcePath
             );
         }
@@ -7286,6 +8174,301 @@ class DefaultApi
         }
 
         $resourcePath = '/live_videos';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if (is_array($applicant_id)) {
+            $applicant_id = ObjectSerializer::serializeCollection($applicant_id, '', true);
+        }
+        if ($applicant_id !== null) {
+            $queryParams['applicant_id'] = $applicant_id;
+        }
+
+
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\Query::build($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listMotionCaptures
+     *
+     * List motion captures
+     *
+     * @param  string $applicant_id The id of the applicant the motion captures belong to. (required)
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\MotionCapturesList|\Onfido\Model\Error
+     */
+    public function listMotionCaptures($applicant_id)
+    {
+        list($response) = $this->listMotionCapturesWithHttpInfo($applicant_id);
+        return $response;
+    }
+
+    /**
+     * Operation listMotionCapturesWithHttpInfo
+     *
+     * List motion captures
+     *
+     * @param  string $applicant_id The id of the applicant the motion captures belong to. (required)
+     *
+     * @throws \Onfido\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\MotionCapturesList|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listMotionCapturesWithHttpInfo($applicant_id)
+    {
+        $request = $this->listMotionCapturesRequest($applicant_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Onfido\Model\MotionCapturesList' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\MotionCapturesList', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Onfido\Model\MotionCapturesList';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\MotionCapturesList',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listMotionCapturesAsync
+     *
+     * List motion captures
+     *
+     * @param  string $applicant_id The id of the applicant the motion captures belong to. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listMotionCapturesAsync($applicant_id)
+    {
+        return $this->listMotionCapturesAsyncWithHttpInfo($applicant_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listMotionCapturesAsyncWithHttpInfo
+     *
+     * List motion captures
+     *
+     * @param  string $applicant_id The id of the applicant the motion captures belong to. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listMotionCapturesAsyncWithHttpInfo($applicant_id)
+    {
+        $returnType = '\Onfido\Model\MotionCapturesList';
+        $request = $this->listMotionCapturesRequest($applicant_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listMotionCaptures'
+     *
+     * @param  string $applicant_id The id of the applicant the motion captures belong to. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listMotionCapturesRequest($applicant_id)
+    {
+        // verify the required parameter 'applicant_id' is set
+        if ($applicant_id === null || (is_array($applicant_id) && count($applicant_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $applicant_id when calling listMotionCaptures'
+            );
+        }
+
+        $resourcePath = '/motion_captures';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
