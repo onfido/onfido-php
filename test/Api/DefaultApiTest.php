@@ -144,6 +144,18 @@ class DefaultApiTest extends TestCase
     }
 
     /**
+     * Test case for downloadCheck
+     *
+     * Download a check raw data.
+     *
+     */
+    public function testDownloadCheck()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for downloadDocument
      *
      * Download a documents raw data.

@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**createWebhook()**](DefaultApi.md#createWebhook) | **POST** /webhooks | Create a webhook
 [**deleteWebhook()**](DefaultApi.md#deleteWebhook) | **DELETE** /webhooks/{webhook_id} | Delete a webhook
 [**destroyApplicant()**](DefaultApi.md#destroyApplicant) | **DELETE** /applicants/{applicant_id} | Delete Applicant
+[**downloadCheck()**](DefaultApi.md#downloadCheck) | **GET** /checks/{check_id}/download | Download a check raw data
 [**downloadDocument()**](DefaultApi.md#downloadDocument) | **GET** /documents/{document_id}/download | Download a documents raw data
 [**downloadLivePhoto()**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
 [**downloadLiveVideo()**](DefaultApi.md#downloadLiveVideo) | **GET** /live_videos/{live_video_id}/download | Download live video
@@ -377,6 +378,63 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `downloadCheck()`
+
+```php
+downloadCheck($check_id): \SplFileObject
+```
+
+Download a check raw data
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$check_id = 'check_id_example'; // string
+
+try {
+    $result = $apiInstance->downloadCheck($check_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->downloadCheck: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **check_id** | **string**|  |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `*/*`, `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
