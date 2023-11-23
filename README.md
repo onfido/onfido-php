@@ -186,15 +186,18 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-## Token
+### Token
 
 - **Type**: API key
 - **API key parameter name**: Authorization
 - **Location**: HTTP header
 
+## Support
 
-## Author
+Should you encounter any technical issues during integration, please contact Onfido’s Customer Support team
+via [email](mailto:support@onfido.com), including the word ISSUE: at the start of the subject line.
 
+Alternatively, you can search the support documentation available via the customer experience
+portal, [public.support.onfido.com](http://public.support.onfido.com).
 
 
