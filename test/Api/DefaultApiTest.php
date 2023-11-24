@@ -204,6 +204,18 @@ class DefaultApiTest extends TestCase
     }
 
     /**
+     * Test case for downloadSignedEvidenceFile
+     *
+     * Retrieves the signed evidence file for the designated Workflow Run.
+     *
+     */
+    public function testDownloadSignedEvidenceFile()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for editWebhook
      *
      * Edit a webhook.
