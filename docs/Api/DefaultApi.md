@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**downloadLivePhoto()**](DefaultApi.md#downloadLivePhoto) | **GET** /live_photos/{live_photo_id}/download | Download live photo
 [**downloadLiveVideo()**](DefaultApi.md#downloadLiveVideo) | **GET** /live_videos/{live_video_id}/download | Download live video
 [**downloadMotionCapture()**](DefaultApi.md#downloadMotionCapture) | **GET** /motion_captures/{motion_capture_id}/download | Download motion capture
+[**downloadSignedEvidenceFile()**](DefaultApi.md#downloadSignedEvidenceFile) | **GET** /workflow_runs/{workflow_run_id}/signed_evidence_file | Retrieves the signed evidence file for the designated Workflow Run
 [**editWebhook()**](DefaultApi.md#editWebhook) | **PUT** /webhooks/{webhook_id} | Edit a webhook
 [**findAddresses()**](DefaultApi.md#findAddresses) | **GET** /addresses/pick | Search for addresses by postcode
 [**findApplicant()**](DefaultApi.md#findApplicant) | **GET** /applicants/{applicant_id} | Retrieve Applicant
@@ -660,6 +661,63 @@ Name | Type | Description  | Notes
 ### Return type
 
 **\SplFileObject**
+
+### Authorization
+
+[Token](../../README.md#Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `*/*`, `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `downloadSignedEvidenceFile()`
+
+```php
+downloadSignedEvidenceFile($workflow_run_id): \Onfido\Model\Error
+```
+
+Retrieves the signed evidence file for the designated Workflow Run
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = Onfido\Configuration::getDefaultConfiguration();
+$config->setApiKey('Authorization', 'token=' . 'YOUR API KEY');
+$config->setApiKeyPrefix('Authorization', 'Token');
+
+$apiInstance = new Onfido\Api\DefaultApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$workflow_run_id = 'workflow_run_id_example'; // string | Workflow Run ID
+
+try {
+    $result = $apiInstance->downloadSignedEvidenceFile($workflow_run_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->downloadSignedEvidenceFile: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workflow_run_id** | **string**| Workflow Run ID |
+
+### Return type
+
+[**\Onfido\Model\Error**](../Model/Error.md)
 
 ### Authorization
 
