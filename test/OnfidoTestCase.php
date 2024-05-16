@@ -86,6 +86,53 @@ abstract class OnfidoTestCase extends TestCase
             }
         }
     }
+
+    protected function uploadDocument(string $applicantId): Onfido\Model\Document
+    {
+        return self::$onfido->uploadDocument(
+            "passport",
+            $applicantId,
+            new \SplFileObject("test/media/sample_driving_licence.png")
+        );
+    }
+
+    protected function createCheck(
+        $checkBuilder = null,
+        string $applicantId = null,
+        string $documentId = null,
+        array $reportNames = null
+    ): Onfido\Model\Check
+    {
+        if($checkBuilder != null) {
+            return self::$onfido->createCheck($checkBuilder);
+        }
+
+        return self::$onfido->createCheck(
+            new Onfido\Model\CheckBuilder([
+                "applicant_id" => $applicantId,
+                "document_ids" => [$documentId],
+                "report_names" => $reportNames
+            ]
+        ));
+    }
+
+    protected function createWorkflowRun(
+        $workflowRunBuilder = null,
+        $applicantId = null,
+        $workflowId = null
+    ): Onfido\Model\WorkflowRun
+    {
+        if($workflowRunBuilder != null) {
+            return self::$onfido->createWorkflowRun($workflowRunBuilder);
+        }
+
+        return self::$onfido->createWorkflowRun(
+            new Onfido\Model\WorkflowRunBuilder([
+                "applicant_id" => $applicantId,
+                "workflow_id" => $workflowId
+            ])
+        );
+    }
 }
 
 ?>
