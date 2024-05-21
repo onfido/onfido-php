@@ -35,9 +35,7 @@ class TasksTest extends OnfidoTestCase
     public function testCompleteTask(): void
     {
         $tasks = self::$onfido->listTasks($this->workflowRunId);
-        $profileDataTaskId = array_filter($tasks, function($task) {
-            return strpos($task->getId(), 'profile') !== false;
-        })[0]->getId();
+        $profileDataTaskId = $this->getTaskIdByPartialId($tasks, 'profile');
 
         $completeTaskBuilder = new CompleteTaskBuilder(['data' => [
             'first_name' => 'Jane',

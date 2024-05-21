@@ -46,7 +46,7 @@ abstract class OnfidoTestCase extends TestCase
                 [
                     'first_name' => 'Test',
                     'last_name' => 'Applicant',
-                    'dob' => new DateTime("1980-01-22"),
+                    'dob' => new DateTime('1980-01-22'),
                     'location' => new Onfido\Model\Location([
                         'ip_address' => '127.0.0.1',
                         'country_of_residence' => Onfido\Model\CountryCodes::DEU
@@ -90,14 +90,22 @@ abstract class OnfidoTestCase extends TestCase
     protected function uploadDocument(string $applicantId): Onfido\Model\Document
     {
         return self::$onfido->uploadDocument(
-            "passport",
+            'passport',
             $applicantId,
-            new \SplFileObject("test/media/sample_driving_licence.png")
+            new \SplFileObject('test/media/sample_driving_licence.png')
+        );
+    }
+
+    protected function uploadLivePhoto(string $applicantId): Onfido\Model\LivePhoto
+    {
+        return self::$onfido->uploadLivePhoto(
+            $applicantId,
+            new \SplFileObject('test/media/sample_photo.png')
         );
     }
 
     protected function createCheck(
-        $checkBuilder = null,
+        Onfido\Model\CheckBuilder $checkBuilder = null,
         string $applicantId = null,
         string $documentId = null,
         array $reportNames = null
@@ -109,17 +117,17 @@ abstract class OnfidoTestCase extends TestCase
 
         return self::$onfido->createCheck(
             new Onfido\Model\CheckBuilder([
-                "applicant_id" => $applicantId,
-                "document_ids" => [$documentId],
-                "report_names" => $reportNames
+                'applicant_id' => $applicantId,
+                'document_ids' => [$documentId],
+                'report_names' => $reportNames
             ]
         ));
     }
 
     protected function createWorkflowRun(
-        $workflowRunBuilder = null,
-        $applicantId = null,
-        $workflowId = null
+        Onfido\Model\WorkflowRunBuilder $workflowRunBuilder = null,
+        string $applicantId = null,
+        string $workflowId = null
     ): Onfido\Model\WorkflowRun
     {
         if($workflowRunBuilder != null) {
@@ -128,10 +136,42 @@ abstract class OnfidoTestCase extends TestCase
 
         return self::$onfido->createWorkflowRun(
             new Onfido\Model\WorkflowRunBuilder([
-                "applicant_id" => $applicantId,
-                "workflow_id" => $workflowId
+                'applicant_id' => $applicantId,
+                'workflow_id' => $workflowId
             ])
         );
+    }
+
+    protected function getTaskIdByPartialId($tasks, string $partialId): string {
+        foreach ($tasks as $task) {
+            if (strpos($task->getId(), $partialId) !== false) {
+                return $task->getId();
+            }
+        }
+    }
+
+    protected function waitUntilStatus(
+        callable $function,
+        string $instanceId,
+        string $status,
+        $maxRetries = 10,
+        $sleepTime = 1
+    )
+    {
+        $instance = $function($instanceId);
+        $iteration = 0;
+
+        while($instance->getStatus() !== $status) {
+            if($iteration > $maxRetries) {
+                $this->fail('Status did not change in time');
+            }
+
+            $iteration =+ 1;
+            sleep($sleepTime);
+
+            $instance = $function($instanceId);
+        }
+        return $instance;
     }
 }
 
