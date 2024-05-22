@@ -15385,7 +15385,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Onfido\Model\Task[]|\Onfido\Model\Error
+     * @return \Onfido\Model\TaskItem[]|\Onfido\Model\Error
      */
     public function listTasks($workflow_run_id, string $contentType = self::contentTypes['listTasks'][0])
     {
@@ -15403,7 +15403,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Onfido\Model\Task[]|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Onfido\Model\TaskItem[]|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function listTasksWithHttpInfo($workflow_run_id, string $contentType = self::contentTypes['listTasks'][0])
     {
@@ -15446,11 +15446,11 @@ class DefaultApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Onfido\Model\Task[]' === '\SplFileObject') {
+                    if ('\Onfido\Model\TaskItem[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Onfido\Model\Task[]' !== 'string') {
+                        if ('\Onfido\Model\TaskItem[]' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -15468,7 +15468,7 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Onfido\Model\Task[]', []),
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\TaskItem[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -15501,7 +15501,7 @@ class DefaultApi
                     ];
             }
 
-            $returnType = '\Onfido\Model\Task[]';
+            $returnType = '\Onfido\Model\TaskItem[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -15534,7 +15534,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Onfido\Model\Task[]',
+                        '\Onfido\Model\TaskItem[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -15586,7 +15586,7 @@ class DefaultApi
      */
     public function listTasksAsyncWithHttpInfo($workflow_run_id, string $contentType = self::contentTypes['listTasks'][0])
     {
-        $returnType = '\Onfido\Model\Task[]';
+        $returnType = '\Onfido\Model\TaskItem[]';
         $request = $this->listTasksRequest($workflow_run_id, $contentType);
 
         return $this->client

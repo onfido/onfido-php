@@ -1,6 +1,6 @@
 <?php
 /**
- * CompleteTaskBuilder
+ * CompleteTaskDataBuilder
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * CompleteTaskBuilder Class Doc Comment
+ * CompleteTaskDataBuilder Class Doc Comment
  *
  * @category Class
+ * @description The Task completion payload.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
+class CompleteTaskDataBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'complete_task_builder';
+    protected static $openAPIModelName = 'Complete_Task_Data_Builder';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +58,7 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => '\Onfido\Model\CompleteTaskDataBuilder'
+        
     ];
 
     /**
@@ -68,7 +69,7 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'data' => null
+        
     ];
 
     /**
@@ -77,7 +78,7 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'data' => false
+        
     ];
 
     /**
@@ -166,7 +167,7 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data'
+        
     ];
 
     /**
@@ -175,7 +176,7 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData'
+        
     ];
 
     /**
@@ -184,7 +185,7 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData'
+        
     ];
 
     /**
@@ -244,7 +245,6 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('data', $data ?? [], null);
     }
 
     /**
@@ -274,9 +274,6 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['data'] === null) {
-            $invalidProperties[] = "'data' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -291,33 +288,6 @@ class CompleteTaskBuilder implements ModelInterface, ArrayAccess, \JsonSerializa
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets data
-     *
-     * @return \Onfido\Model\CompleteTaskDataBuilder
-     */
-    public function getData()
-    {
-        return $this->container['data'];
-    }
-
-    /**
-     * Sets data
-     *
-     * @param \Onfido\Model\CompleteTaskDataBuilder $data data
-     *
-     * @return self
-     */
-    public function setData($data)
-    {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
-        }
-        $this->container['data'] = $data;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *
