@@ -49,7 +49,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Task';
+    protected static $openAPIModelName = 'task';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +58,11 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
+        'workflow_run_id' => 'string',
         'task_def_id' => 'string',
+        'task_def_version' => 'string',
+        'input' => 'object',
+        'output' => 'object',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -72,7 +76,11 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
+        'workflow_run_id' => 'uuid',
         'task_def_id' => null,
+        'task_def_version' => null,
+        'input' => null,
+        'output' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -84,7 +92,11 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
+        'workflow_run_id' => false,
         'task_def_id' => false,
+        'task_def_version' => true,
+        'input' => false,
+        'output' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -176,7 +188,11 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'workflow_run_id' => 'workflow_run_id',
         'task_def_id' => 'task_def_id',
+        'task_def_version' => 'task_def_version',
+        'input' => 'input',
+        'output' => 'output',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -188,7 +204,11 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
+        'workflow_run_id' => 'setWorkflowRunId',
         'task_def_id' => 'setTaskDefId',
+        'task_def_version' => 'setTaskDefVersion',
+        'input' => 'setInput',
+        'output' => 'setOutput',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -200,7 +220,11 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
+        'workflow_run_id' => 'getWorkflowRunId',
         'task_def_id' => 'getTaskDefId',
+        'task_def_version' => 'getTaskDefVersion',
+        'input' => 'getInput',
+        'output' => 'getOutput',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -263,7 +287,11 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('workflow_run_id', $data ?? [], null);
         $this->setIfExists('task_def_id', $data ?? [], null);
+        $this->setIfExists('task_def_version', $data ?? [], null);
+        $this->setIfExists('input', $data ?? [], null);
+        $this->setIfExists('output', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -351,6 +379,33 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets workflow_run_id
+     *
+     * @return string|null
+     */
+    public function getWorkflowRunId()
+    {
+        return $this->container['workflow_run_id'];
+    }
+
+    /**
+     * Sets workflow_run_id
+     *
+     * @param string|null $workflow_run_id The workflow run id the task belongs to.
+     *
+     * @return self
+     */
+    public function setWorkflowRunId($workflow_run_id)
+    {
+        if (is_null($workflow_run_id)) {
+            throw new \InvalidArgumentException('non-nullable workflow_run_id cannot be null');
+        }
+        $this->container['workflow_run_id'] = $workflow_run_id;
+
+        return $this;
+    }
+
+    /**
      * Gets task_def_id
      *
      * @return string|null
@@ -378,6 +433,101 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['task_def_id'] = $task_def_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets task_def_version
+     *
+     * @return string|null
+     */
+    public function getTaskDefVersion()
+    {
+        return $this->container['task_def_version'];
+    }
+
+    /**
+     * Sets task_def_version
+     *
+     * @param string|null $task_def_version The task definition version.
+     *
+     * @return self
+     */
+    public function setTaskDefVersion($task_def_version)
+    {
+        if (is_null($task_def_version)) {
+            array_push($this->openAPINullablesSetToNull, 'task_def_version');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('task_def_version', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['task_def_version'] = $task_def_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets input
+     *
+     * @return object|null
+     */
+    public function getInput()
+    {
+        return $this->container['input'];
+    }
+
+    /**
+     * Sets input
+     *
+     * @param object|null $input Input object with the fields used by the Task to execute.
+     *
+     * @return self
+     */
+    public function setInput($input)
+    {
+        if (is_null($input)) {
+            throw new \InvalidArgumentException('non-nullable input cannot be null');
+        }
+        $this->container['input'] = $input;
+
+        return $this;
+    }
+
+    /**
+     * Gets output
+     *
+     * @return object|null
+     */
+    public function getOutput()
+    {
+        return $this->container['output'];
+    }
+
+    /**
+     * Sets output
+     *
+     * @param object|null $output Output object with the fields produced by the Task execution.
+     *
+     * @return self
+     */
+    public function setOutput($output)
+    {
+        if (is_null($output)) {
+            array_push($this->openAPINullablesSetToNull, 'output');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('output', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['output'] = $output;
 
         return $this;
     }
