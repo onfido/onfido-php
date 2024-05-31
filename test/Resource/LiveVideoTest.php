@@ -25,7 +25,7 @@ class LiveVideoTest extends OnfidoTestCase
 
     public function testDownloadInexistentLiveVideo()
     {
-        $inexistentLiveVideoId = "00000000-0000-0000-0000-000000000000";
+        $inexistentLiveVideoId = '00000000-0000-0000-0000-000000000000';
 
         $this->expectException(ApiException::class);
         self::$onfido->downloadLiveVideo($inexistentLiveVideoId);

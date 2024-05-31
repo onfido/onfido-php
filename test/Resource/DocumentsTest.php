@@ -25,7 +25,6 @@ class DocumentsTest extends OnfidoTestCase
     {
         $this->assertSame($this->applicantId, $this->document->getApplicantId());
         $this->assertSame(DocumentTypes::PASSPORT, $this->document->getType());
-        $this->assertSame($this->applicantId, $this->document->getApplicantId());
     }
 
     public function testListDocuments(): void

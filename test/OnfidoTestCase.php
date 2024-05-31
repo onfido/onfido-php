@@ -37,6 +37,7 @@ abstract class OnfidoTestCase extends TestCase
     public static function tearDownAfterClass(): void
     {
         self::cleanUpApplicants();
+        self::cleanUpWebhooks();
     }
 
     protected function createApplicant(): Onfido\Model\Applicant
@@ -79,6 +80,21 @@ abstract class OnfidoTestCase extends TestCase
                 catch (\Onfido\ApiException $ex) {
                     // Ignore errors during clean-up
                 }
+            }
+        }
+    }
+
+    protected static function cleanUpWebhooks(): void
+    {
+        $webhooks = self::$onfido->listWebhooks()->getWebhooks();
+
+        foreach($webhooks as $webhook)
+        {
+            try {
+                self::$onfido->deleteWebhook($webhook->getId());
+            }
+            catch (\Onfido\ApiException) {
+                // Ignore errors
             }
         }
     }

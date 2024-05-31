@@ -26,7 +26,7 @@ class MotionCaptureTest extends OnfidoTestCase
 
     public function testDownloadInexistentMotionCapture()
     {
-        $inexistentMotionCaptureId = "00000000-0000-0000-0000-000000000000";
+        $inexistentMotionCaptureId = '00000000-0000-0000-0000-000000000000';
 
         $this->expectException(ApiException::class);
         self::$onfido->downloadMotionCapture($inexistentMotionCaptureId);
