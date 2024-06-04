@@ -47,7 +47,8 @@ class LiveVideoTest extends OnfidoTestCase
 
     public function testListLiveVideos()
     {
-        $listOfLiveVideos = self::$onfido->listLiveVideos($this->applicantId)['live_videos'];
+        $listOfLiveVideos = self::$onfido->listLiveVideos($this->applicantId)
+            ->getLiveVideos();
 
         $this->assertGreaterThan(0, sizeOf($listOfLiveVideos));
     }

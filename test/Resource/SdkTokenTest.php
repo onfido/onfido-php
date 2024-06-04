@@ -21,7 +21,7 @@ class SdkTokenTest extends OnfidoTestCase
     {
         $token = self::$onfido->generateSdkToken(
           new SdkTokenBuilder(['applicant_id' => $this->applicantId])
-        )['token'];
+        )->getToken();
 
         $this->assertGreaterThan(0, strlen($token));
     }

@@ -27,7 +27,7 @@ class IdPhotoTest extends OnfidoTestCase
 
     public function testListIdPhotos()
     {
-        $listOfIdPhotos = self::$onfido->listIdPhotos($this->applicantId)['id_photos'];
+        $listOfIdPhotos = self::$onfido->listIdPhotos($this->applicantId)->getIdPhotos();
         $this->assertGreaterThan(0, sizeOf($listOfIdPhotos));
     }
 

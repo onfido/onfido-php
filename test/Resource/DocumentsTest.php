@@ -29,7 +29,7 @@ class DocumentsTest extends OnfidoTestCase
 
     public function testListDocuments(): void
     {
-        $listOfDocuments = self::$onfido->listDocuments($this->applicantId)['documents'];
+        $listOfDocuments = self::$onfido->listDocuments($this->applicantId)->getDocuments();
         $this->assertGreaterThan(0, sizeOf($listOfDocuments));
     }
 

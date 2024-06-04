@@ -4,7 +4,6 @@ namespace Onfido\Test\Resource;
 
 use Onfido\Test\OnfidoTestCase as OnfidoTestCase;
 use Onfido\Model\WorkflowRun as WorkflowRun;
-use Onfido\Model\WorkflowRunBuilder as WorkflowRunBuilder;
 use Onfido\Model\CompleteTaskBuilder as CompleteTaskBuilder;
 
 class WorkflowRunOutputsTest extends OnfidoTestCase

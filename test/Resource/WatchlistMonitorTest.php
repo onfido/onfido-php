@@ -51,7 +51,7 @@ class WatchlistMonitorTest extends OnfidoTestCase
     {
         $listOfWatchlistMonitors = self::$onfido->listWatchlistMonitors(
             $this->applicantId
-        )['monitors'];
+        )->getMonitors();
 
         $this->assertGreaterThan(0, sizeOf($listOfWatchlistMonitors));
     }
@@ -78,7 +78,7 @@ class WatchlistMonitorTest extends OnfidoTestCase
     {
         $listOfWatchlistMonitorMatches = self::$onfido->listWatchlistMonitorMatches(
             $this->watchlistMonitor->getId()
-        )['matches'];
+        )->getMatches();
 
         $this->assertEquals(0, sizeOf($listOfWatchlistMonitorMatches));
     }
@@ -89,7 +89,7 @@ class WatchlistMonitorTest extends OnfidoTestCase
             $this->watchlistMonitor->getId()
         );
 
-        $checks = self::$onfido->listChecks($this->applicantId)['checks'];
+        $checks = self::$onfido->listChecks($this->applicantId)->getChecks();
         $this->assertEquals(2, sizeOf($checks));
     }
 }

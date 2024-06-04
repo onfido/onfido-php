@@ -24,7 +24,8 @@ class LivePhotoTest extends OnfidoTestCase
 
     public function testListLivePhotos()
     {
-        $listOfLivePhotos = self::$onfido->listLivePhotos($this->applicantId)['live_photos'];
+        $listOfLivePhotos = self::$onfido->listLivePhotos($this->applicantId)
+            ->getLivePhotos();
         $this->assertGreaterThan(0, sizeOf($listOfLivePhotos));
     }
 

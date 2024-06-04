@@ -48,7 +48,8 @@ class MotionCaptureTest extends OnfidoTestCase
 
     public function testListMotionCaptures()
     {
-        $listOfMotionCaptures = self::$onfido->listMotionCaptures($this->applicantId)['motion_captures'];
+        $listOfMotionCaptures = self::$onfido->listMotionCaptures($this->applicantId)
+            ->getMotionCaptures();
 
         $this->assertGreaterThan(0, sizeOf($listOfMotionCaptures));
     }
