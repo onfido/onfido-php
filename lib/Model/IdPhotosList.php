@@ -1,6 +1,6 @@
 <?php
 /**
- * IDPhotosList
+ * IdPhotosList
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * IDPhotosList Class Doc Comment
+ * IdPhotosList Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class IDPhotosList implements ModelInterface, ArrayAccess, \JsonSerializable
+class IdPhotosList implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class IDPhotosList implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ID_Photos_list';
+    protected static $openAPIModelName = 'Id_Photos_list';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

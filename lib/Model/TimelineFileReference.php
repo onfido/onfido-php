@@ -1,6 +1,6 @@
 <?php
 /**
- * TaskItem
+ * TimelineFileReference
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * TaskItem Class Doc Comment
+ * TimelineFileReference Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
+class TimelineFileReference implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'TaskItem';
+    protected static $openAPIModelName = 'timeline_file_reference';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,8 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'task_def_id' => 'string',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'workflow_timeline_file_id' => 'string',
+        'href' => 'string'
     ];
 
     /**
@@ -71,10 +69,8 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'task_def_id' => null,
-        'created_at' => 'date-time',
-        'updated_at' => 'date-time'
+        'workflow_timeline_file_id' => 'uuid',
+        'href' => null
     ];
 
     /**
@@ -83,10 +79,8 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'task_def_id' => false,
-        'created_at' => false,
-        'updated_at' => false
+        'workflow_timeline_file_id' => false,
+        'href' => false
     ];
 
     /**
@@ -175,10 +169,8 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'task_def_id' => 'task_def_id',
-        'created_at' => 'created_at',
-        'updated_at' => 'updated_at'
+        'workflow_timeline_file_id' => 'workflow_timeline_file_id',
+        'href' => 'href'
     ];
 
     /**
@@ -187,10 +179,8 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'task_def_id' => 'setTaskDefId',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'workflow_timeline_file_id' => 'setWorkflowTimelineFileId',
+        'href' => 'setHref'
     ];
 
     /**
@@ -199,10 +189,8 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'task_def_id' => 'getTaskDefId',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'workflow_timeline_file_id' => 'getWorkflowTimelineFileId',
+        'href' => 'getHref'
     ];
 
     /**
@@ -262,10 +250,8 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('task_def_id', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('workflow_timeline_file_id', $data ?? [], null);
+        $this->setIfExists('href', $data ?? [], null);
     }
 
     /**
@@ -295,14 +281,12 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && !preg_match("/^[0-9a-z_-]+$/", $this->container['id'])) {
-            $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^[0-9a-z_-]+$/.";
+        if ($this->container['workflow_timeline_file_id'] === null) {
+            $invalidProperties[] = "'workflow_timeline_file_id' can't be null";
         }
-
-        if (!is_null($this->container['task_def_id']) && !preg_match("/^[0-9a-z_-]+$/", $this->container['task_def_id'])) {
-            $invalidProperties[] = "invalid value for 'task_def_id', must be conform to the pattern /^[0-9a-z_-]+$/.";
+        if ($this->container['href'] === null) {
+            $invalidProperties[] = "'href' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -319,119 +303,55 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets workflow_timeline_file_id
      *
-     * @return string|null
+     * @return string
      */
-    public function getId()
+    public function getWorkflowTimelineFileId()
     {
-        return $this->container['id'];
+        return $this->container['workflow_timeline_file_id'];
     }
 
     /**
-     * Sets id
+     * Sets workflow_timeline_file_id
      *
-     * @param string|null $id The identifier for the Task.
+     * @param string $workflow_timeline_file_id The unique identifier for the Timefile File that will be created.
      *
      * @return self
      */
-    public function setId($id)
+    public function setWorkflowTimelineFileId($workflow_timeline_file_id)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($workflow_timeline_file_id)) {
+            throw new \InvalidArgumentException('non-nullable workflow_timeline_file_id cannot be null');
         }
-
-        if ((!preg_match("/^[0-9a-z_-]+$/", ObjectSerializer::toString($id)))) {
-            throw new \InvalidArgumentException("invalid value for \$id when calling TaskItem., must conform to the pattern /^[0-9a-z_-]+$/.");
-        }
-
-        $this->container['id'] = $id;
+        $this->container['workflow_timeline_file_id'] = $workflow_timeline_file_id;
 
         return $this;
     }
 
     /**
-     * Gets task_def_id
+     * Gets href
      *
-     * @return string|null
+     * @return string
      */
-    public function getTaskDefId()
+    public function getHref()
     {
-        return $this->container['task_def_id'];
+        return $this->container['href'];
     }
 
     /**
-     * Sets task_def_id
+     * Sets href
      *
-     * @param string|null $task_def_id The identifier for the Task Definition.
+     * @param string $href Link to access the Timefile File that will be created.
      *
      * @return self
      */
-    public function setTaskDefId($task_def_id)
+    public function setHref($href)
     {
-        if (is_null($task_def_id)) {
-            throw new \InvalidArgumentException('non-nullable task_def_id cannot be null');
+        if (is_null($href)) {
+            throw new \InvalidArgumentException('non-nullable href cannot be null');
         }
-
-        if ((!preg_match("/^[0-9a-z_-]+$/", ObjectSerializer::toString($task_def_id)))) {
-            throw new \InvalidArgumentException("invalid value for \$task_def_id when calling TaskItem., must conform to the pattern /^[0-9a-z_-]+$/.");
-        }
-
-        $this->container['task_def_id'] = $task_def_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at The date and time when the Task was created.
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated_at
-     *
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updated_at'];
-    }
-
-    /**
-     * Sets updated_at
-     *
-     * @param \DateTime|null $updated_at The date and time when the Task was last updated.
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updated_at)
-    {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
-        }
-        $this->container['updated_at'] = $updated_at;
+        $this->container['href'] = $href;
 
         return $this;
     }

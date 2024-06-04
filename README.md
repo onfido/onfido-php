@@ -94,7 +94,7 @@ Webhook events payload needs to be verified before it can be accessed. Library a
 
 ```php
 try {
-  $verifier = new Onfido\WebhookEventVerifier('_ABC123abc...3ABC123_');
+  $verifier = new Onfido\WebhookEventVerifier(getenv('ONFIDO_WEBHOOK_SECRET_TOKEN'));
 
   $signature = 'a0...760e';
 

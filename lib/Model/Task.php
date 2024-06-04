@@ -323,12 +323,12 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && !preg_match("/^[0-9a-z-_]+$/", $this->container['id'])) {
-            $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^[0-9a-z-_]+$/.";
+        if (!is_null($this->container['id']) && !preg_match("/^[0-9a-z_-]+$/", $this->container['id'])) {
+            $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^[0-9a-z_-]+$/.";
         }
 
-        if (!is_null($this->container['task_def_id']) && !preg_match("/^[0-9a-z-_]+$/", $this->container['task_def_id'])) {
-            $invalidProperties[] = "invalid value for 'task_def_id', must be conform to the pattern /^[0-9a-z-_]+$/.";
+        if (!is_null($this->container['task_def_id']) && !preg_match("/^[0-9a-z_-]+$/", $this->container['task_def_id'])) {
+            $invalidProperties[] = "invalid value for 'task_def_id', must be conform to the pattern /^[0-9a-z_-]+$/.";
         }
 
         return $invalidProperties;
@@ -369,8 +369,8 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
-        if ((!preg_match("/^[0-9a-z-_]+$/", ObjectSerializer::toString($id)))) {
-            throw new \InvalidArgumentException("invalid value for \$id when calling Task., must conform to the pattern /^[0-9a-z-_]+$/.");
+        if ((!preg_match("/^[0-9a-z_-]+$/", ObjectSerializer::toString($id)))) {
+            throw new \InvalidArgumentException("invalid value for \$id when calling Task., must conform to the pattern /^[0-9a-z_-]+$/.");
         }
 
         $this->container['id'] = $id;
@@ -428,8 +428,8 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable task_def_id cannot be null');
         }
 
-        if ((!preg_match("/^[0-9a-z-_]+$/", ObjectSerializer::toString($task_def_id)))) {
-            throw new \InvalidArgumentException("invalid value for \$task_def_id when calling Task., must conform to the pattern /^[0-9a-z-_]+$/.");
+        if ((!preg_match("/^[0-9a-z_-]+$/", ObjectSerializer::toString($task_def_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$task_def_id when calling Task., must conform to the pattern /^[0-9a-z_-]+$/.");
         }
 
         $this->container['task_def_id'] = $task_def_id;
