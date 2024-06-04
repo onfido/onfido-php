@@ -67,7 +67,7 @@ abstract class OnfidoTestCase extends TestCase
         if ( strlen(self::$sampleapplicant_id) != 36 )
             return;
 
-        $applicants = self::$onfido->listApplicants()->getApplicants();
+        $applicants = self::$onfido->listApplicants(1, 100, false)->getApplicants();
 
         foreach($applicants as $applicant)
         {
@@ -77,11 +77,7 @@ abstract class OnfidoTestCase extends TestCase
                     self::$onfido->deleteApplicant($applicant->getId());
                 }
                 catch (\Onfido\ApiException $ex) {
-                    // Only ignore "Applicants with checks in progress cannot be deleted." error
-                    if( ! str_contains($ex->getResponseBody(), 'deletion_incomplete_checks') )
-                    {
-                        throw $ex;
-                    }
+                    // Ignore errors during clean-up
                 }
             }
         }

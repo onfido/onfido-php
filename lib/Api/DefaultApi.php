@@ -83,6 +83,9 @@ class DefaultApi
         'createCheck' => [
             'application/json',
         ],
+        'createTimelineFile' => [
+            'application/json',
+        ],
         'createWatchlistMonitor' => [
             'application/json',
         ],
@@ -162,6 +165,9 @@ class DefaultApi
             'application/json',
         ],
         'findTask' => [
+            'application/json',
+        ],
+        'findTimelineFile' => [
             'application/json',
         ],
         'findWatchlistMonitor' => [
@@ -1470,6 +1476,353 @@ class DefaultApi
                 $httpBody = $check_builder;
             }
         } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createTimelineFile
+     *
+     * Create Timeline File for Workflow Run
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\TimelineFileReference|\Onfido\Model\Error
+     */
+    public function createTimelineFile($workflow_run_id, string $contentType = self::contentTypes['createTimelineFile'][0])
+    {
+        list($response) = $this->createTimelineFileWithHttpInfo($workflow_run_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createTimelineFileWithHttpInfo
+     *
+     * Create Timeline File for Workflow Run
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\TimelineFileReference|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createTimelineFileWithHttpInfo($workflow_run_id, string $contentType = self::contentTypes['createTimelineFile'][0])
+    {
+        $request = $this->createTimelineFileRequest($workflow_run_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 202:
+                    if ('\Onfido\Model\TimelineFileReference' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\TimelineFileReference' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\TimelineFileReference', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Onfido\Model\TimelineFileReference';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 202:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\TimelineFileReference',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createTimelineFileAsync
+     *
+     * Create Timeline File for Workflow Run
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createTimelineFileAsync($workflow_run_id, string $contentType = self::contentTypes['createTimelineFile'][0])
+    {
+        return $this->createTimelineFileAsyncWithHttpInfo($workflow_run_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createTimelineFileAsyncWithHttpInfo
+     *
+     * Create Timeline File for Workflow Run
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createTimelineFileAsyncWithHttpInfo($workflow_run_id, string $contentType = self::contentTypes['createTimelineFile'][0])
+    {
+        $returnType = '\Onfido\Model\TimelineFileReference';
+        $request = $this->createTimelineFileRequest($workflow_run_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createTimelineFile'
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createTimelineFileRequest($workflow_run_id, string $contentType = self::contentTypes['createTimelineFile'][0])
+    {
+
+        // verify the required parameter 'workflow_run_id' is set
+        if ($workflow_run_id === null || (is_array($workflow_run_id) && count($workflow_run_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $workflow_run_id when calling createTimelineFile'
+            );
+        }
+
+
+        $resourcePath = '/workflow_runs/{workflow_run_id}/timeline_file';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($workflow_run_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'workflow_run_id' . '}',
+                ObjectSerializer::toPathValue($workflow_run_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -6417,7 +6770,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SplFileObject|\Onfido\Model\Error
+     * @return |\SplFileObject|\Onfido\Model\Error
      */
     public function downloadSignedEvidenceFile($workflow_run_id, string $contentType = self::contentTypes['downloadSignedEvidenceFile'][0])
     {
@@ -6435,7 +6788,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of |\SplFileObject|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function downloadSignedEvidenceFileWithHttpInfo($workflow_run_id, string $contentType = self::contentTypes['downloadSignedEvidenceFile'][0])
     {
@@ -6697,7 +7050,7 @@ class DefaultApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['binary/octet-stream', 'application/json', ],
+            ['application/pdf', 'application/json', ],
             $contentType,
             $multipart
         );
@@ -10592,6 +10945,373 @@ class DefaultApi
     }
 
     /**
+     * Operation findTimelineFile
+     *
+     * Retrieve Timeline File for Workflow Run
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $timeline_file_id The unique identifier for the Timefile File. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return |\SplFileObject|\Onfido\Model\Error
+     */
+    public function findTimelineFile($workflow_run_id, $timeline_file_id, string $contentType = self::contentTypes['findTimelineFile'][0])
+    {
+        list($response) = $this->findTimelineFileWithHttpInfo($workflow_run_id, $timeline_file_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation findTimelineFileWithHttpInfo
+     *
+     * Retrieve Timeline File for Workflow Run
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $timeline_file_id The unique identifier for the Timefile File. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of |\SplFileObject|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function findTimelineFileWithHttpInfo($workflow_run_id, $timeline_file_id, string $contentType = self::contentTypes['findTimelineFile'][0])
+    {
+        $request = $this->findTimelineFileRequest($workflow_run_id, $timeline_file_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation findTimelineFileAsync
+     *
+     * Retrieve Timeline File for Workflow Run
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $timeline_file_id The unique identifier for the Timefile File. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findTimelineFileAsync($workflow_run_id, $timeline_file_id, string $contentType = self::contentTypes['findTimelineFile'][0])
+    {
+        return $this->findTimelineFileAsyncWithHttpInfo($workflow_run_id, $timeline_file_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation findTimelineFileAsyncWithHttpInfo
+     *
+     * Retrieve Timeline File for Workflow Run
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $timeline_file_id The unique identifier for the Timefile File. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findTimelineFileAsyncWithHttpInfo($workflow_run_id, $timeline_file_id, string $contentType = self::contentTypes['findTimelineFile'][0])
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->findTimelineFileRequest($workflow_run_id, $timeline_file_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'findTimelineFile'
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run. (required)
+     * @param  string $timeline_file_id The unique identifier for the Timefile File. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findTimelineFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function findTimelineFileRequest($workflow_run_id, $timeline_file_id, string $contentType = self::contentTypes['findTimelineFile'][0])
+    {
+
+        // verify the required parameter 'workflow_run_id' is set
+        if ($workflow_run_id === null || (is_array($workflow_run_id) && count($workflow_run_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $workflow_run_id when calling findTimelineFile'
+            );
+        }
+
+        // verify the required parameter 'timeline_file_id' is set
+        if ($timeline_file_id === null || (is_array($timeline_file_id) && count($timeline_file_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $timeline_file_id when calling findTimelineFile'
+            );
+        }
+
+
+        $resourcePath = '/workflow_runs/{workflow_run_id}/timeline_file/{timeline_file_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($workflow_run_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'workflow_run_id' . '}',
+                ObjectSerializer::toPathValue($workflow_run_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($timeline_file_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'timeline_file_id' . '}',
+                ObjectSerializer::toPathValue($timeline_file_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/pdf', 'application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation findWatchlistMonitor
      *
      * Retrieve monitor
@@ -13298,7 +14018,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Onfido\Model\IDPhotosList|\Onfido\Model\Error
+     * @return \Onfido\Model\IdPhotosList|\Onfido\Model\Error
      */
     public function listIdPhotos($applicant_id, string $contentType = self::contentTypes['listIdPhotos'][0])
     {
@@ -13316,7 +14036,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Onfido\Model\IDPhotosList|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Onfido\Model\IdPhotosList|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function listIdPhotosWithHttpInfo($applicant_id, string $contentType = self::contentTypes['listIdPhotos'][0])
     {
@@ -13359,11 +14079,11 @@ class DefaultApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Onfido\Model\IDPhotosList' === '\SplFileObject') {
+                    if ('\Onfido\Model\IdPhotosList' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Onfido\Model\IDPhotosList' !== 'string') {
+                        if ('\Onfido\Model\IdPhotosList' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -13381,7 +14101,7 @@ class DefaultApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Onfido\Model\IDPhotosList', []),
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\IdPhotosList', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -13414,7 +14134,7 @@ class DefaultApi
                     ];
             }
 
-            $returnType = '\Onfido\Model\IDPhotosList';
+            $returnType = '\Onfido\Model\IdPhotosList';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -13447,7 +14167,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Onfido\Model\IDPhotosList',
+                        '\Onfido\Model\IdPhotosList',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -13499,7 +14219,7 @@ class DefaultApi
      */
     public function listIdPhotosAsyncWithHttpInfo($applicant_id, string $contentType = self::contentTypes['listIdPhotos'][0])
     {
-        $returnType = '\Onfido\Model\IDPhotosList';
+        $returnType = '\Onfido\Model\IdPhotosList';
         $request = $this->listIdPhotosRequest($applicant_id, $contentType);
 
         return $this->client
