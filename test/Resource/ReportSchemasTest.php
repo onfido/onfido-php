@@ -36,9 +36,15 @@ class ReportSchemasTest extends OnfidoTestCase
             $this->findReportFn,
             [$documentReportId],
             ReportStatus::COMPLETE
-        )->getActualInstance();
+        );
 
         $this->assertInstanceOf(DocumentReport::class, $documentReport);
+
+        $this->assertSame($documentReport->getName(), "document");
+        $this->assertSame($documentReport->getBreakdown()->getDataComparison()
+                            ->getBreakdown()->getIssuingCountry()->getResult(), "clear");
+        $this->assertSame($documentReport->getProperties()
+                            ->getDateOfBirth()->format('Y-m-d'), "1990-01-01");
     }
 
     public function testSchemaOfFacialSimilarityReportIsValid(): void
@@ -55,12 +61,18 @@ class ReportSchemasTest extends OnfidoTestCase
             $this->findReportFn,
             [$facialSimilarityReportId],
             ReportStatus::COMPLETE
-        )->getActualInstance();
+        );
 
         $this->assertInstanceOf(
             FacialSimilarityPhotoReport::class,
             $facialSimilarityReport
         );
+
+        $this->assertSame($facialSimilarityReport->getName(), "facial_similarity_photo");
+        $this->assertSame($facialSimilarityReport->getBreakdown()->getFaceComparison()
+                            ->getBreakdown()->getFaceMatch()->getResult(), "clear");
+        $this->assertSame($facialSimilarityReport->getBreakdown()->getVisualAuthenticity()
+                            ->getBreakdown()->getSpoofingDetection()->getProperties()->getScore(), 0.9512);
     }
 }
 

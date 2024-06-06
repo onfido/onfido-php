@@ -51,7 +51,7 @@ class ApplicantsTest extends OnfidoTestCase
 
     public function testListApplicants()
     {
-        $listOfApplicants = self::$onfido->listApplicants()['applicants'];
+        $listOfApplicants = self::$onfido->listApplicants()->getApplicants();
         $this->assertGreaterThan(0, sizeOf($listOfApplicants));
     }
 

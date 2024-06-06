@@ -43,6 +43,50 @@ use \Onfido\ObjectSerializer;
 class Report implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = 'name';
+    public const MAPPING = array(
+        "device_intelligence" => '\Onfido\Model\DeviceIntelligenceReport',
+        "document" => '\Onfido\Model\DocumentReport',
+        "document_video" => '\Onfido\Model\DocumentVideoReport',
+        "document_video_with_address_information" => '\Onfido\Model\DocumentVideoWithAddressInformationReport',
+        "document_with_address_information" => '\Onfido\Model\DocumentWithAddressInformationReport',
+        "document_with_driver_verification" => '\Onfido\Model\DocumentWithDriverVerificationReport',
+        "document_with_driving_licence_information" => '\Onfido\Model\DocumentWithDrivingLicenceInformationReport',
+        "facial_similarity_motion" => '\Onfido\Model\FacialSimilarityMotionReport',
+        "facial_similarity_photo" => '\Onfido\Model\FacialSimilarityPhotoReport',
+        "facial_similarity_photo_fully_auto" => '\Onfido\Model\FacialSimilarityPhotoFullyAutoReport',
+        "facial_similarity_video" => '\Onfido\Model\FacialSimilarityVideoReport',
+        "identity_enhanced" => '\Onfido\Model\IdentityEnhancedReport',
+        "india_pan" => '\Onfido\Model\IndiaPanReport',
+        "known_faces" => '\Onfido\Model\KnownFacesReport',
+        "proof_of_address" => '\Onfido\Model\ProofOfAddressReport',
+        "us_driving_licence" => '\Onfido\Model\UsDrivingLicenceReport',
+        "watchlist_aml" => '\Onfido\Model\WatchlistAmlReport',
+        "watchlist_enhanced" => '\Onfido\Model\WatchlistEnhancedReport',
+        "watchlist_peps_only" => '\Onfido\Model\WatchlistPepsOnlyReport',
+        "watchlist_sanctions_only" => '\Onfido\Model\WatchlistSanctionsOnlyReport',
+        "watchlist_standard" => '\Onfido\Model\WatchlistStandardReport',
+        "device_intelligence_report" => '\Onfido\Model\DeviceIntelligenceReport',
+        "document_report" => '\Onfido\Model\DocumentReport',
+        "document_video_report" => '\Onfido\Model\DocumentVideoReport',
+        "document_video_with_address_information_report" => '\Onfido\Model\DocumentVideoWithAddressInformationReport',
+        "document_with_address_information_report" => '\Onfido\Model\DocumentWithAddressInformationReport',
+        "document_with_driver_verification_report" => '\Onfido\Model\DocumentWithDriverVerificationReport',
+        "document_with_driving_licence_information_report" => '\Onfido\Model\DocumentWithDrivingLicenceInformationReport',
+        "facial_similarity_motion_report" => '\Onfido\Model\FacialSimilarityMotionReport',
+        "facial_similarity_photo_fully_auto_report" => '\Onfido\Model\FacialSimilarityPhotoFullyAutoReport',
+        "facial_similarity_photo_report" => '\Onfido\Model\FacialSimilarityPhotoReport',
+        "facial_similarity_video_report" => '\Onfido\Model\FacialSimilarityVideoReport',
+        "identity_enhanced_report" => '\Onfido\Model\IdentityEnhancedReport',
+        "india_pan_report" => '\Onfido\Model\IndiaPanReport',
+        "known_faces_report" => '\Onfido\Model\KnownFacesReport',
+        "proof_of_address_report" => '\Onfido\Model\ProofOfAddressReport',
+        "us_driving_licence_report" => '\Onfido\Model\UsDrivingLicenceReport',
+        "watchlist_aml_report" => '\Onfido\Model\WatchlistAmlReport',
+        "watchlist_enhanced_report" => '\Onfido\Model\WatchlistEnhancedReport',
+        "watchlist_peps_only_report" => '\Onfido\Model\WatchlistPepsOnlyReport',
+        "watchlist_sanctions_only_report" => '\Onfido\Model\WatchlistSanctionsOnlyReport',
+        "watchlist_standard_report" => '\Onfido\Model\WatchlistStandardReport',
+    );
 
     /**
       * The original name of the model.
@@ -754,145 +798,6 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 
-    /**
-     * Get actual object instance while waiting for native support in generator.
-     *
-     * @return object
-     */
-    public function getActualInstance()
-    {
-        switch( $this->getName() )
-        {
-            case "device_intelligence":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DeviceIntelligenceReport', []);
-            break;
-            case "document":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentReport', []);
-            break;
-            case "document_video":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentVideoReport', []);
-            break;
-            case "document_video_with_address_information":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentVideoWithAddressInformationReport', []);
-            break;
-            case "document_with_address_information":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentWithAddressInformationReport', []);
-            break;
-            case "document_with_driver_verification":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentWithDriverVerificationReport', []);
-            break;
-            case "document_with_driving_licence_information":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentWithDrivingLicenceInformationReport', []);
-            break;
-            case "facial_similarity_motion":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\FacialSimilarityMotionReport', []);
-            break;
-            case "facial_similarity_photo":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\FacialSimilarityPhotoReport', []);
-            break;
-            case "facial_similarity_photo_fully_auto":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\FacialSimilarityPhotoFullyAutoReport', []);
-            break;
-            case "facial_similarity_video":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\FacialSimilarityVideoReport', []);
-            break;
-            case "identity_enhanced":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\IdentityEnhancedReport', []);
-            break;
-            case "india_pan":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\IndiaPanReport', []);
-            break;
-            case "known_faces":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\KnownFacesReport', []);
-            break;
-            case "proof_of_address":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\ProofOfAddressReport', []);
-            break;
-            case "us_driving_licence":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\UsDrivingLicenceReport', []);
-            break;
-            case "watchlist_aml":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistAmlReport', []);
-            break;
-            case "watchlist_enhanced":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistEnhancedReport', []);
-            break;
-            case "watchlist_peps_only":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistPepsOnlyReport', []);
-            break;
-            case "watchlist_sanctions_only":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistSanctionsOnlyReport', []);
-            break;
-            case "watchlist_standard":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistStandardReport', []);
-            break;
-            case "device_intelligence_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DeviceIntelligenceReport', []);
-            break;
-            case "document_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentReport', []);
-            break;
-            case "document_video_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentVideoReport', []);
-            break;
-            case "document_video_with_address_information_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentVideoWithAddressInformationReport', []);
-            break;
-            case "document_with_address_information_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentWithAddressInformationReport', []);
-            break;
-            case "document_with_driver_verification_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentWithDriverVerificationReport', []);
-            break;
-            case "document_with_driving_licence_information_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\DocumentWithDrivingLicenceInformationReport', []);
-            break;
-            case "facial_similarity_motion_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\FacialSimilarityMotionReport', []);
-            break;
-            case "facial_similarity_photo_fully_auto_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\FacialSimilarityPhotoFullyAutoReport', []);
-            break;
-            case "facial_similarity_photo_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\FacialSimilarityPhotoReport', []);
-            break;
-            case "facial_similarity_video_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\FacialSimilarityVideoReport', []);
-            break;
-            case "identity_enhanced_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\IdentityEnhancedReport', []);
-            break;
-            case "india_pan_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\IndiaPanReport', []);
-            break;
-            case "known_faces_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\KnownFacesReport', []);
-            break;
-            case "proof_of_address_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\ProofOfAddressReport', []);
-            break;
-            case "us_driving_licence_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\UsDrivingLicenceReport', []);
-            break;
-            case "watchlist_aml_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistAmlReport', []);
-            break;
-            case "watchlist_enhanced_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistEnhancedReport', []);
-            break;
-            case "watchlist_peps_only_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistPepsOnlyReport', []);
-            break;
-            case "watchlist_sanctions_only_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistSanctionsOnlyReport', []);
-            break;
-            case "watchlist_standard_report":
-                return ObjectSerializer::deserialize($this->jsonSerialize(), '\Onfido\Model\WatchlistStandardReport', []);
-            break;
-            default:
-                return $this;
-        }
-    }
 }
 
 
