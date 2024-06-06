@@ -32,9 +32,9 @@ class ReportSchemasTest extends OnfidoTestCase
             [ReportName::DOCUMENT]
         )->getReportIds()[0];
 
-        $documentReport = $this->waitUntilStatus(
+        $documentReport = $this->repeatRequestUntilStatusChanges(
             $this->findReportFn,
-            $documentReportId,
+            [$documentReportId],
             ReportStatus::COMPLETE
         )->getActualInstance();
 
@@ -51,9 +51,9 @@ class ReportSchemasTest extends OnfidoTestCase
             [ReportName::FACIAL_SIMILARITY_PHOTO]
         )->getReportIds()[0];
 
-        $facialSimilarityReport = $this->waitUntilStatus(
+        $facialSimilarityReport = $this->repeatRequestUntilStatusChanges(
             $this->findReportFn,
-            $facialSimilarityReportId,
+            [$facialSimilarityReportId],
             ReportStatus::COMPLETE
         )->getActualInstance();
 

@@ -64,7 +64,7 @@ class ApplicantsTest extends OnfidoTestCase
 
     public function testUpdateApplicant()
     {
-        $updatedApplicantData = new Onfido\Model\ApplicantBuilder([
+        $updatedApplicantData = new Onfido\Model\ApplicantUpdater([
             'first_name' => 'Jane',
             'last_name' => 'Doe',
         ]);

@@ -26,7 +26,7 @@ class MotionCaptureTest extends OnfidoTestCase
 
     public function testDownloadInexistentMotionCapture()
     {
-        $inexistentMotionCaptureId = "00000000-0000-0000-0000-000000000000";
+        $inexistentMotionCaptureId = '00000000-0000-0000-0000-000000000000';
 
         $this->expectException(ApiException::class);
         self::$onfido->downloadMotionCapture($inexistentMotionCaptureId);
@@ -48,7 +48,8 @@ class MotionCaptureTest extends OnfidoTestCase
 
     public function testListMotionCaptures()
     {
-        $listOfMotionCaptures = self::$onfido->listMotionCaptures($this->applicantId)['motion_captures'];
+        $listOfMotionCaptures = self::$onfido->listMotionCaptures($this->applicantId)
+            ->getMotionCaptures();
 
         $this->assertGreaterThan(0, sizeOf($listOfMotionCaptures));
     }

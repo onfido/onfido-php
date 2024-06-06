@@ -69,7 +69,7 @@ class ChecksTest extends OnfidoTestCase
 
     public function testListChecks(): void
     {
-        $listOfChecks = self::$onfido->listChecks($this->applicantId)["checks"];
+        $listOfChecks = self::$onfido->listChecks($this->applicantId)->getChecks();
 
         $this->assertGreaterThan(0, sizeOf($listOfChecks));
     }

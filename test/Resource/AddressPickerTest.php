@@ -12,7 +12,7 @@ class AddressPickerTest extends OnfidoTestCase
 
     $postCode = 'S2 2DF';
     
-    $addressesWithPostCode = self::$onfido->findAddresses($postCode)['addresses'];
-    $this->assertSame($postCode, $addressesWithPostCode[0]['postcode']);
+    $addressesWithPostCode = self::$onfido->findAddresses($postCode)->getAddresses();
+    $this->assertSame($postCode, $addressesWithPostCode[0]->getPostcode());
   }
 }

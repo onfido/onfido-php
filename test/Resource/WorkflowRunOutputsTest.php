@@ -4,7 +4,6 @@ namespace Onfido\Test\Resource;
 
 use Onfido\Test\OnfidoTestCase as OnfidoTestCase;
 use Onfido\Model\WorkflowRun as WorkflowRun;
-use Onfido\Model\WorkflowRunBuilder as WorkflowRunBuilder;
 use Onfido\Model\CompleteTaskBuilder as CompleteTaskBuilder;
 
 class WorkflowRunOutputsTest extends OnfidoTestCase
@@ -54,9 +53,9 @@ class WorkflowRunOutputsTest extends OnfidoTestCase
         $completeTaskBuilder = new CompleteTaskBuilder(['data' => $this->profileData]);
 
         self::$onfido->completeTask($workflowRunId, $profileDataTaskId, $completeTaskBuilder);
-        $workflowRunOutputs = $this->waitUntilStatus(
+        $workflowRunOutputs = $this->repeatRequestUntilStatusChanges(
             $this->findWorkflowRunFn,
-            $workflowRunId,
+            [$workflowRunId],
             WorkflowRun::STATUS_APPROVED
         )->getOutput();
 
@@ -118,9 +117,9 @@ class WorkflowRunOutputsTest extends OnfidoTestCase
             ]]])
         );
 
-        $workflowRunOutputs = $this->waitUntilStatus(
+        $workflowRunOutputs = $this->repeatRequestUntilStatusChanges(
             $this->findWorkflowRunFn,
-            $workflowRunId,
+            [$workflowRunId],
             WorkflowRun::STATUS_APPROVED
         )->getOutput();
 

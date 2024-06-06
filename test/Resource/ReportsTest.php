@@ -24,7 +24,9 @@ class ReportsTest extends OnfidoTestCase
           $documentId,
           [ReportName::DOCUMENT, ReportName::IDENTITY_ENHANCED]
         );
-        $this->sortedReports = $this->sortReports(self::$onfido->listReports($check->getId())['reports']);
+        $this->sortedReports = $this->sortReports(
+            self::$onfido->listReports($check->getId())->getReports()
+        );
         $this->documentReportId = $this->sortedReports[0]->getId();
         $this->identityReportId = $this->sortedReports[1]->getId();
     }

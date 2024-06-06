@@ -25,12 +25,11 @@ class DocumentsTest extends OnfidoTestCase
     {
         $this->assertSame($this->applicantId, $this->document->getApplicantId());
         $this->assertSame(DocumentTypes::PASSPORT, $this->document->getType());
-        $this->assertSame($this->applicantId, $this->document->getApplicantId());
     }
 
     public function testListDocuments(): void
     {
-        $listOfDocuments = self::$onfido->listDocuments($this->applicantId)['documents'];
+        $listOfDocuments = self::$onfido->listDocuments($this->applicantId)->getDocuments();
         $this->assertGreaterThan(0, sizeOf($listOfDocuments));
     }
 

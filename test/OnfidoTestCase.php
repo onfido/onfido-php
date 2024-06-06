@@ -37,6 +37,7 @@ abstract class OnfidoTestCase extends TestCase
     public static function tearDownAfterClass(): void
     {
         self::cleanUpApplicants();
+        self::cleanUpWebhooks();
     }
 
     protected function createApplicant(): Onfido\Model\Applicant
@@ -79,6 +80,21 @@ abstract class OnfidoTestCase extends TestCase
                 catch (\Onfido\ApiException $ex) {
                     // Ignore errors during clean-up
                 }
+            }
+        }
+    }
+
+    protected static function cleanUpWebhooks(): void
+    {
+        $webhooks = self::$onfido->listWebhooks()->getWebhooks();
+
+        foreach($webhooks as $webhook)
+        {
+            try {
+                self::$onfido->deleteWebhook($webhook->getId());
+            }
+            catch (\Onfido\ApiException) {
+                // Ignore errors
             }
         }
     }
@@ -146,15 +162,15 @@ abstract class OnfidoTestCase extends TestCase
         }
     }
 
-    protected function waitUntilStatus(
+    protected function repeatRequestUntilStatusChanges(
         callable $function,
-        string $instanceId,
+        array $params,
         string $status,
         $maxRetries = 10,
         $sleepTime = 1
     )
     {
-        $instance = $function($instanceId);
+        $instance = call_user_func_array($function, $params);
         $iteration = 0;
 
         while($instance->getStatus() !== $status) {
@@ -162,10 +178,30 @@ abstract class OnfidoTestCase extends TestCase
                 $this->fail('Status did not change in time');
             }
 
-            $iteration =+ 1;
+            $iteration += 1;
             sleep($sleepTime);
 
-            $instance = $function($instanceId);
+            $instance = call_user_func_array($function, $params);
+        }
+        return $instance;
+    }
+
+    protected function repeatRequestUntilHttpCodeChanges(
+        callable $function,
+        array $params,
+        $maxRetries = 10,
+        $sleepTime = 1
+    )
+    {
+        $iteration = 0;
+        while($iteration <= $maxRetries) {
+            try {
+                $instance = call_user_func_array($function, $params);
+                break;
+            } catch (Onfido\ApiException) {
+                sleep($sleepTime);
+                $iteration += 1;
+            }
         }
         return $instance;
     }
