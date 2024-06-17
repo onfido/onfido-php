@@ -66,7 +66,8 @@ class FacialSimilarityPhotoFullyAutoReport implements ModelInterface, ArrayAcces
         'check_id' => 'string',
         'documents' => '\Onfido\Model\ReportDocument[]',
         'name' => '\Onfido\Model\ReportName',
-        'breakdown' => '\Onfido\Model\FacialSimilarityPhotoFullyAutoBreakdown'
+        'breakdown' => '\Onfido\Model\FacialSimilarityPhotoFullyAutoBreakdown',
+        'properties' => '\Onfido\Model\FacialSimilarityPhotoFullyAutoProperties'
     ];
 
     /**
@@ -86,7 +87,8 @@ class FacialSimilarityPhotoFullyAutoReport implements ModelInterface, ArrayAcces
         'check_id' => 'uuid',
         'documents' => null,
         'name' => null,
-        'breakdown' => null
+        'breakdown' => null,
+        'properties' => null
     ];
 
     /**
@@ -104,7 +106,8 @@ class FacialSimilarityPhotoFullyAutoReport implements ModelInterface, ArrayAcces
         'check_id' => false,
         'documents' => false,
         'name' => false,
-        'breakdown' => false
+        'breakdown' => false,
+        'properties' => false
     ];
 
     /**
@@ -202,7 +205,8 @@ class FacialSimilarityPhotoFullyAutoReport implements ModelInterface, ArrayAcces
         'check_id' => 'check_id',
         'documents' => 'documents',
         'name' => 'name',
-        'breakdown' => 'breakdown'
+        'breakdown' => 'breakdown',
+        'properties' => 'properties'
     ];
 
     /**
@@ -220,7 +224,8 @@ class FacialSimilarityPhotoFullyAutoReport implements ModelInterface, ArrayAcces
         'check_id' => 'setCheckId',
         'documents' => 'setDocuments',
         'name' => 'setName',
-        'breakdown' => 'setBreakdown'
+        'breakdown' => 'setBreakdown',
+        'properties' => 'setProperties'
     ];
 
     /**
@@ -238,7 +243,8 @@ class FacialSimilarityPhotoFullyAutoReport implements ModelInterface, ArrayAcces
         'check_id' => 'getCheckId',
         'documents' => 'getDocuments',
         'name' => 'getName',
-        'breakdown' => 'getBreakdown'
+        'breakdown' => 'getBreakdown',
+        'properties' => 'getProperties'
     ];
 
     /**
@@ -308,6 +314,7 @@ class FacialSimilarityPhotoFullyAutoReport implements ModelInterface, ArrayAcces
         $this->setIfExists('documents', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('breakdown', $data ?? [], null);
+        $this->setIfExists('properties', $data ?? [], null);
     }
 
     /**
@@ -624,6 +631,33 @@ class FacialSimilarityPhotoFullyAutoReport implements ModelInterface, ArrayAcces
             throw new \InvalidArgumentException('non-nullable breakdown cannot be null');
         }
         $this->container['breakdown'] = $breakdown;
+
+        return $this;
+    }
+
+    /**
+     * Gets properties
+     *
+     * @return \Onfido\Model\FacialSimilarityPhotoFullyAutoProperties|null
+     */
+    public function getProperties()
+    {
+        return $this->container['properties'];
+    }
+
+    /**
+     * Sets properties
+     *
+     * @param \Onfido\Model\FacialSimilarityPhotoFullyAutoProperties|null $properties properties
+     *
+     * @return self
+     */
+    public function setProperties($properties)
+    {
+        if (is_null($properties)) {
+            throw new \InvalidArgumentException('non-nullable properties cannot be null');
+        }
+        $this->container['properties'] = $properties;
 
         return $this;
     }
