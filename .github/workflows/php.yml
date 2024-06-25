@@ -55,6 +55,7 @@ jobs:
           curl -XPOST -H'content-type:application/json' \
             "https://packagist.org/api/update-package?username=${PACKAGIST_API_USER}&apiToken=${PACKAGIST_API_TOKEN}" \
             -d'{"repository":{"url":"${{ github.server_url }}/${{ github.repository }}"}}'
+
         env:
           PACKAGIST_API_USER: ${{ secrets.PACKAGIST_API_USER }}
           PACKAGIST_API_TOKEN: ${{ secrets.PACKAGIST_API_TOKEN }}
