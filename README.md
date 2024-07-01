@@ -13,6 +13,9 @@ This version uses Onfido API v3.6. Refer to our [API versioning guide](https://d
 PHP 7.4 and later.
 Should also work with PHP 8.0.
 
+[![Latest release](https://badge.fury.io/ph/onfido%2Fonfido-php.svg)](https://badge.fury.io/ph/onfido%2Fonfido-php)
+![Build Status](https://github.com/onfido/onfido-php/actions/workflows/php.yml/badge.svg)
+
 ### Installation
 
 #### Composer

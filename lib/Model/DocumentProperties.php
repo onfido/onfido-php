@@ -59,6 +59,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPITypes = [
         'date_of_birth' => '\DateTime',
         'date_of_expiry' => '\DateTime',
+        'personal_number' => 'string',
         'document_numbers' => '\Onfido\Model\DocumentPropertiesDocumentNumbersInner[]',
         'document_type' => 'string',
         'first_name' => 'string',
@@ -78,7 +79,22 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'widow_name' => 'string',
         'alias_name' => 'string',
         'issuing_authority' => 'string',
+        'remarks' => 'string',
+        'civil_state' => 'string',
+        'expatriation' => 'string',
+        'father_name' => 'string',
+        'mother_name' => 'string',
+        'religion' => 'string',
+        'type_of_permit' => 'string',
+        'version_number' => 'string',
+        'document_subtype' => 'string',
+        'profession' => 'string',
+        'security_document_number' => 'string',
+        'tax_number' => 'string',
+        'nist_identity_evidence_strength' => 'string',
+        'has_issuance_confirmation' => 'string',
         'real_id_compliance' => 'bool',
+        'security_tier' => 'string',
         'address_lines' => '\Onfido\Model\DocumentPropertiesAddressLines',
         'barcode' => '\Onfido\Model\DocumentPropertiesBarcodeInner[]',
         'nfc' => '\Onfido\Model\DocumentPropertiesNfc',
@@ -97,6 +113,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPIFormats = [
         'date_of_birth' => 'date',
         'date_of_expiry' => 'date',
+        'personal_number' => null,
         'document_numbers' => null,
         'document_type' => null,
         'first_name' => null,
@@ -116,7 +133,22 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'widow_name' => null,
         'alias_name' => null,
         'issuing_authority' => null,
+        'remarks' => null,
+        'civil_state' => null,
+        'expatriation' => null,
+        'father_name' => null,
+        'mother_name' => null,
+        'religion' => null,
+        'type_of_permit' => null,
+        'version_number' => null,
+        'document_subtype' => null,
+        'profession' => null,
+        'security_document_number' => null,
+        'tax_number' => null,
+        'nist_identity_evidence_strength' => null,
+        'has_issuance_confirmation' => null,
         'real_id_compliance' => null,
+        'security_tier' => null,
         'address_lines' => null,
         'barcode' => null,
         'nfc' => null,
@@ -133,6 +165,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static array $openAPINullables = [
         'date_of_birth' => false,
         'date_of_expiry' => false,
+        'personal_number' => false,
         'document_numbers' => false,
         'document_type' => false,
         'first_name' => false,
@@ -152,7 +185,22 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'widow_name' => false,
         'alias_name' => false,
         'issuing_authority' => false,
+        'remarks' => false,
+        'civil_state' => false,
+        'expatriation' => false,
+        'father_name' => false,
+        'mother_name' => false,
+        'religion' => false,
+        'type_of_permit' => false,
+        'version_number' => false,
+        'document_subtype' => false,
+        'profession' => false,
+        'security_document_number' => false,
+        'tax_number' => false,
+        'nist_identity_evidence_strength' => false,
+        'has_issuance_confirmation' => false,
         'real_id_compliance' => false,
+        'security_tier' => false,
         'address_lines' => false,
         'barcode' => false,
         'nfc' => false,
@@ -249,6 +297,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $attributeMap = [
         'date_of_birth' => 'date_of_birth',
         'date_of_expiry' => 'date_of_expiry',
+        'personal_number' => 'personal_number',
         'document_numbers' => 'document_numbers',
         'document_type' => 'document_type',
         'first_name' => 'first_name',
@@ -268,7 +317,22 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'widow_name' => 'widow_name',
         'alias_name' => 'alias_name',
         'issuing_authority' => 'issuing_authority',
+        'remarks' => 'remarks',
+        'civil_state' => 'civil_state',
+        'expatriation' => 'expatriation',
+        'father_name' => 'father_name',
+        'mother_name' => 'mother_name',
+        'religion' => 'religion',
+        'type_of_permit' => 'type_of_permit',
+        'version_number' => 'version_number',
+        'document_subtype' => 'document_subtype',
+        'profession' => 'profession',
+        'security_document_number' => 'security_document_number',
+        'tax_number' => 'tax_number',
+        'nist_identity_evidence_strength' => 'nist_identity_evidence_strength',
+        'has_issuance_confirmation' => 'has_issuance_confirmation',
         'real_id_compliance' => 'real_id_compliance',
+        'security_tier' => 'security_tier',
         'address_lines' => 'address_lines',
         'barcode' => 'barcode',
         'nfc' => 'nfc',
@@ -285,6 +349,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $setters = [
         'date_of_birth' => 'setDateOfBirth',
         'date_of_expiry' => 'setDateOfExpiry',
+        'personal_number' => 'setPersonalNumber',
         'document_numbers' => 'setDocumentNumbers',
         'document_type' => 'setDocumentType',
         'first_name' => 'setFirstName',
@@ -304,7 +369,22 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'widow_name' => 'setWidowName',
         'alias_name' => 'setAliasName',
         'issuing_authority' => 'setIssuingAuthority',
+        'remarks' => 'setRemarks',
+        'civil_state' => 'setCivilState',
+        'expatriation' => 'setExpatriation',
+        'father_name' => 'setFatherName',
+        'mother_name' => 'setMotherName',
+        'religion' => 'setReligion',
+        'type_of_permit' => 'setTypeOfPermit',
+        'version_number' => 'setVersionNumber',
+        'document_subtype' => 'setDocumentSubtype',
+        'profession' => 'setProfession',
+        'security_document_number' => 'setSecurityDocumentNumber',
+        'tax_number' => 'setTaxNumber',
+        'nist_identity_evidence_strength' => 'setNistIdentityEvidenceStrength',
+        'has_issuance_confirmation' => 'setHasIssuanceConfirmation',
         'real_id_compliance' => 'setRealIdCompliance',
+        'security_tier' => 'setSecurityTier',
         'address_lines' => 'setAddressLines',
         'barcode' => 'setBarcode',
         'nfc' => 'setNfc',
@@ -321,6 +401,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $getters = [
         'date_of_birth' => 'getDateOfBirth',
         'date_of_expiry' => 'getDateOfExpiry',
+        'personal_number' => 'getPersonalNumber',
         'document_numbers' => 'getDocumentNumbers',
         'document_type' => 'getDocumentType',
         'first_name' => 'getFirstName',
@@ -340,7 +421,22 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'widow_name' => 'getWidowName',
         'alias_name' => 'getAliasName',
         'issuing_authority' => 'getIssuingAuthority',
+        'remarks' => 'getRemarks',
+        'civil_state' => 'getCivilState',
+        'expatriation' => 'getExpatriation',
+        'father_name' => 'getFatherName',
+        'mother_name' => 'getMotherName',
+        'religion' => 'getReligion',
+        'type_of_permit' => 'getTypeOfPermit',
+        'version_number' => 'getVersionNumber',
+        'document_subtype' => 'getDocumentSubtype',
+        'profession' => 'getProfession',
+        'security_document_number' => 'getSecurityDocumentNumber',
+        'tax_number' => 'getTaxNumber',
+        'nist_identity_evidence_strength' => 'getNistIdentityEvidenceStrength',
+        'has_issuance_confirmation' => 'getHasIssuanceConfirmation',
         'real_id_compliance' => 'getRealIdCompliance',
+        'security_tier' => 'getSecurityTier',
         'address_lines' => 'getAddressLines',
         'barcode' => 'getBarcode',
         'nfc' => 'getNfc',
@@ -390,6 +486,75 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         return self::$openAPIModelName;
     }
 
+    public const NIST_IDENTITY_EVIDENCE_STRENGTH_SUPERIOR = 'superior';
+    public const NIST_IDENTITY_EVIDENCE_STRENGTH_STRONG = 'strong';
+    public const NIST_IDENTITY_EVIDENCE_STRENGTH_FAIR = 'fair';
+    public const NIST_IDENTITY_EVIDENCE_STRENGTH_WEAK = 'weak';
+    public const NIST_IDENTITY_EVIDENCE_STRENGTH_UNACCEPTABLE = 'unacceptable';
+    public const NIST_IDENTITY_EVIDENCE_STRENGTH_UNSPECIFIED_IDENTITY_EVIDENCE_STRENGTH = 'unspecified_identity_evidence_strength';
+    public const NIST_IDENTITY_EVIDENCE_STRENGTH_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+    public const HAS_ISSUANCE_CONFIRMATION_TRUE = 'true';
+    public const HAS_ISSUANCE_CONFIRMATION_FALSE = 'false';
+    public const HAS_ISSUANCE_CONFIRMATION_UNSPECIFIED = 'unspecified';
+    public const HAS_ISSUANCE_CONFIRMATION_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+    public const SECURITY_TIER_TIER_1 = 'tier_1';
+    public const SECURITY_TIER_TIER_2 = 'tier_2';
+    public const SECURITY_TIER_TIER_3 = 'tier_3';
+    public const SECURITY_TIER_TIER_4 = 'tier_4';
+    public const SECURITY_TIER_TIER_5 = 'tier_5';
+    public const SECURITY_TIER_UNSPECIFIED_SECURITY_TIER = 'unspecified_security_tier';
+    public const SECURITY_TIER_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getNistIdentityEvidenceStrengthAllowableValues()
+    {
+        return [
+            self::NIST_IDENTITY_EVIDENCE_STRENGTH_SUPERIOR,
+            self::NIST_IDENTITY_EVIDENCE_STRENGTH_STRONG,
+            self::NIST_IDENTITY_EVIDENCE_STRENGTH_FAIR,
+            self::NIST_IDENTITY_EVIDENCE_STRENGTH_WEAK,
+            self::NIST_IDENTITY_EVIDENCE_STRENGTH_UNACCEPTABLE,
+            self::NIST_IDENTITY_EVIDENCE_STRENGTH_UNSPECIFIED_IDENTITY_EVIDENCE_STRENGTH,
+            self::NIST_IDENTITY_EVIDENCE_STRENGTH_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getHasIssuanceConfirmationAllowableValues()
+    {
+        return [
+            self::HAS_ISSUANCE_CONFIRMATION_TRUE,
+            self::HAS_ISSUANCE_CONFIRMATION_FALSE,
+            self::HAS_ISSUANCE_CONFIRMATION_UNSPECIFIED,
+            self::HAS_ISSUANCE_CONFIRMATION_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSecurityTierAllowableValues()
+    {
+        return [
+            self::SECURITY_TIER_TIER_1,
+            self::SECURITY_TIER_TIER_2,
+            self::SECURITY_TIER_TIER_3,
+            self::SECURITY_TIER_TIER_4,
+            self::SECURITY_TIER_TIER_5,
+            self::SECURITY_TIER_UNSPECIFIED_SECURITY_TIER,
+            self::SECURITY_TIER_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -408,6 +573,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $this->setIfExists('date_of_birth', $data ?? [], null);
         $this->setIfExists('date_of_expiry', $data ?? [], null);
+        $this->setIfExists('personal_number', $data ?? [], null);
         $this->setIfExists('document_numbers', $data ?? [], null);
         $this->setIfExists('document_type', $data ?? [], null);
         $this->setIfExists('first_name', $data ?? [], null);
@@ -427,7 +593,22 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('widow_name', $data ?? [], null);
         $this->setIfExists('alias_name', $data ?? [], null);
         $this->setIfExists('issuing_authority', $data ?? [], null);
+        $this->setIfExists('remarks', $data ?? [], null);
+        $this->setIfExists('civil_state', $data ?? [], null);
+        $this->setIfExists('expatriation', $data ?? [], null);
+        $this->setIfExists('father_name', $data ?? [], null);
+        $this->setIfExists('mother_name', $data ?? [], null);
+        $this->setIfExists('religion', $data ?? [], null);
+        $this->setIfExists('type_of_permit', $data ?? [], null);
+        $this->setIfExists('version_number', $data ?? [], null);
+        $this->setIfExists('document_subtype', $data ?? [], null);
+        $this->setIfExists('profession', $data ?? [], null);
+        $this->setIfExists('security_document_number', $data ?? [], null);
+        $this->setIfExists('tax_number', $data ?? [], null);
+        $this->setIfExists('nist_identity_evidence_strength', $data ?? [], null);
+        $this->setIfExists('has_issuance_confirmation', $data ?? [], null);
         $this->setIfExists('real_id_compliance', $data ?? [], null);
+        $this->setIfExists('security_tier', $data ?? [], null);
         $this->setIfExists('address_lines', $data ?? [], null);
         $this->setIfExists('barcode', $data ?? [], null);
         $this->setIfExists('nfc', $data ?? [], null);
@@ -462,6 +643,33 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getNistIdentityEvidenceStrengthAllowableValues();
+        if (!is_null($this->container['nist_identity_evidence_strength']) && !in_array($this->container['nist_identity_evidence_strength'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'nist_identity_evidence_strength', must be one of '%s'",
+                $this->container['nist_identity_evidence_strength'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getHasIssuanceConfirmationAllowableValues();
+        if (!is_null($this->container['has_issuance_confirmation']) && !in_array($this->container['has_issuance_confirmation'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'has_issuance_confirmation', must be one of '%s'",
+                $this->container['has_issuance_confirmation'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getSecurityTierAllowableValues();
+        if (!is_null($this->container['security_tier']) && !in_array($this->container['security_tier'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'security_tier', must be one of '%s'",
+                $this->container['security_tier'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -528,6 +736,33 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable date_of_expiry cannot be null');
         }
         $this->container['date_of_expiry'] = $date_of_expiry;
+
+        return $this;
+    }
+
+    /**
+     * Gets personal_number
+     *
+     * @return string|null
+     */
+    public function getPersonalNumber()
+    {
+        return $this->container['personal_number'];
+    }
+
+    /**
+     * Sets personal_number
+     *
+     * @param string|null $personal_number personal_number
+     *
+     * @return self
+     */
+    public function setPersonalNumber($personal_number)
+    {
+        if (is_null($personal_number)) {
+            throw new \InvalidArgumentException('non-nullable personal_number cannot be null');
+        }
+        $this->container['personal_number'] = $personal_number;
 
         return $this;
     }
@@ -1046,6 +1281,404 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
+     * Gets remarks
+     *
+     * @return string|null
+     */
+    public function getRemarks()
+    {
+        return $this->container['remarks'];
+    }
+
+    /**
+     * Sets remarks
+     *
+     * @param string|null $remarks remarks
+     *
+     * @return self
+     */
+    public function setRemarks($remarks)
+    {
+        if (is_null($remarks)) {
+            throw new \InvalidArgumentException('non-nullable remarks cannot be null');
+        }
+        $this->container['remarks'] = $remarks;
+
+        return $this;
+    }
+
+    /**
+     * Gets civil_state
+     *
+     * @return string|null
+     */
+    public function getCivilState()
+    {
+        return $this->container['civil_state'];
+    }
+
+    /**
+     * Sets civil_state
+     *
+     * @param string|null $civil_state civil_state
+     *
+     * @return self
+     */
+    public function setCivilState($civil_state)
+    {
+        if (is_null($civil_state)) {
+            throw new \InvalidArgumentException('non-nullable civil_state cannot be null');
+        }
+        $this->container['civil_state'] = $civil_state;
+
+        return $this;
+    }
+
+    /**
+     * Gets expatriation
+     *
+     * @return string|null
+     */
+    public function getExpatriation()
+    {
+        return $this->container['expatriation'];
+    }
+
+    /**
+     * Sets expatriation
+     *
+     * @param string|null $expatriation expatriation
+     *
+     * @return self
+     */
+    public function setExpatriation($expatriation)
+    {
+        if (is_null($expatriation)) {
+            throw new \InvalidArgumentException('non-nullable expatriation cannot be null');
+        }
+        $this->container['expatriation'] = $expatriation;
+
+        return $this;
+    }
+
+    /**
+     * Gets father_name
+     *
+     * @return string|null
+     */
+    public function getFatherName()
+    {
+        return $this->container['father_name'];
+    }
+
+    /**
+     * Sets father_name
+     *
+     * @param string|null $father_name father_name
+     *
+     * @return self
+     */
+    public function setFatherName($father_name)
+    {
+        if (is_null($father_name)) {
+            throw new \InvalidArgumentException('non-nullable father_name cannot be null');
+        }
+        $this->container['father_name'] = $father_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets mother_name
+     *
+     * @return string|null
+     */
+    public function getMotherName()
+    {
+        return $this->container['mother_name'];
+    }
+
+    /**
+     * Sets mother_name
+     *
+     * @param string|null $mother_name mother_name
+     *
+     * @return self
+     */
+    public function setMotherName($mother_name)
+    {
+        if (is_null($mother_name)) {
+            throw new \InvalidArgumentException('non-nullable mother_name cannot be null');
+        }
+        $this->container['mother_name'] = $mother_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets religion
+     *
+     * @return string|null
+     */
+    public function getReligion()
+    {
+        return $this->container['religion'];
+    }
+
+    /**
+     * Sets religion
+     *
+     * @param string|null $religion religion
+     *
+     * @return self
+     */
+    public function setReligion($religion)
+    {
+        if (is_null($religion)) {
+            throw new \InvalidArgumentException('non-nullable religion cannot be null');
+        }
+        $this->container['religion'] = $religion;
+
+        return $this;
+    }
+
+    /**
+     * Gets type_of_permit
+     *
+     * @return string|null
+     */
+    public function getTypeOfPermit()
+    {
+        return $this->container['type_of_permit'];
+    }
+
+    /**
+     * Sets type_of_permit
+     *
+     * @param string|null $type_of_permit type_of_permit
+     *
+     * @return self
+     */
+    public function setTypeOfPermit($type_of_permit)
+    {
+        if (is_null($type_of_permit)) {
+            throw new \InvalidArgumentException('non-nullable type_of_permit cannot be null');
+        }
+        $this->container['type_of_permit'] = $type_of_permit;
+
+        return $this;
+    }
+
+    /**
+     * Gets version_number
+     *
+     * @return string|null
+     */
+    public function getVersionNumber()
+    {
+        return $this->container['version_number'];
+    }
+
+    /**
+     * Sets version_number
+     *
+     * @param string|null $version_number version_number
+     *
+     * @return self
+     */
+    public function setVersionNumber($version_number)
+    {
+        if (is_null($version_number)) {
+            throw new \InvalidArgumentException('non-nullable version_number cannot be null');
+        }
+        $this->container['version_number'] = $version_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets document_subtype
+     *
+     * @return string|null
+     */
+    public function getDocumentSubtype()
+    {
+        return $this->container['document_subtype'];
+    }
+
+    /**
+     * Sets document_subtype
+     *
+     * @param string|null $document_subtype document_subtype
+     *
+     * @return self
+     */
+    public function setDocumentSubtype($document_subtype)
+    {
+        if (is_null($document_subtype)) {
+            throw new \InvalidArgumentException('non-nullable document_subtype cannot be null');
+        }
+        $this->container['document_subtype'] = $document_subtype;
+
+        return $this;
+    }
+
+    /**
+     * Gets profession
+     *
+     * @return string|null
+     */
+    public function getProfession()
+    {
+        return $this->container['profession'];
+    }
+
+    /**
+     * Sets profession
+     *
+     * @param string|null $profession profession
+     *
+     * @return self
+     */
+    public function setProfession($profession)
+    {
+        if (is_null($profession)) {
+            throw new \InvalidArgumentException('non-nullable profession cannot be null');
+        }
+        $this->container['profession'] = $profession;
+
+        return $this;
+    }
+
+    /**
+     * Gets security_document_number
+     *
+     * @return string|null
+     */
+    public function getSecurityDocumentNumber()
+    {
+        return $this->container['security_document_number'];
+    }
+
+    /**
+     * Sets security_document_number
+     *
+     * @param string|null $security_document_number security_document_number
+     *
+     * @return self
+     */
+    public function setSecurityDocumentNumber($security_document_number)
+    {
+        if (is_null($security_document_number)) {
+            throw new \InvalidArgumentException('non-nullable security_document_number cannot be null');
+        }
+        $this->container['security_document_number'] = $security_document_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets tax_number
+     *
+     * @return string|null
+     */
+    public function getTaxNumber()
+    {
+        return $this->container['tax_number'];
+    }
+
+    /**
+     * Sets tax_number
+     *
+     * @param string|null $tax_number tax_number
+     *
+     * @return self
+     */
+    public function setTaxNumber($tax_number)
+    {
+        if (is_null($tax_number)) {
+            throw new \InvalidArgumentException('non-nullable tax_number cannot be null');
+        }
+        $this->container['tax_number'] = $tax_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets nist_identity_evidence_strength
+     *
+     * @return string|null
+     */
+    public function getNistIdentityEvidenceStrength()
+    {
+        return $this->container['nist_identity_evidence_strength'];
+    }
+
+    /**
+     * Sets nist_identity_evidence_strength
+     *
+     * @param string|null $nist_identity_evidence_strength nist_identity_evidence_strength
+     *
+     * @return self
+     */
+    public function setNistIdentityEvidenceStrength($nist_identity_evidence_strength)
+    {
+        if (is_null($nist_identity_evidence_strength)) {
+            throw new \InvalidArgumentException('non-nullable nist_identity_evidence_strength cannot be null');
+        }
+        $allowedValues = $this->getNistIdentityEvidenceStrengthAllowableValues();
+        if (!in_array($nist_identity_evidence_strength, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'nist_identity_evidence_strength', must be one of '%s'",
+                    $nist_identity_evidence_strength,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['nist_identity_evidence_strength'] = $nist_identity_evidence_strength;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_issuance_confirmation
+     *
+     * @return string|null
+     */
+    public function getHasIssuanceConfirmation()
+    {
+        return $this->container['has_issuance_confirmation'];
+    }
+
+    /**
+     * Sets has_issuance_confirmation
+     *
+     * @param string|null $has_issuance_confirmation has_issuance_confirmation
+     *
+     * @return self
+     */
+    public function setHasIssuanceConfirmation($has_issuance_confirmation)
+    {
+        if (is_null($has_issuance_confirmation)) {
+            throw new \InvalidArgumentException('non-nullable has_issuance_confirmation cannot be null');
+        }
+        $allowedValues = $this->getHasIssuanceConfirmationAllowableValues();
+        if (!in_array($has_issuance_confirmation, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'has_issuance_confirmation', must be one of '%s'",
+                    $has_issuance_confirmation,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['has_issuance_confirmation'] = $has_issuance_confirmation;
+
+        return $this;
+    }
+
+    /**
      * Gets real_id_compliance
      *
      * @return bool|null
@@ -1068,6 +1701,43 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable real_id_compliance cannot be null');
         }
         $this->container['real_id_compliance'] = $real_id_compliance;
+
+        return $this;
+    }
+
+    /**
+     * Gets security_tier
+     *
+     * @return string|null
+     */
+    public function getSecurityTier()
+    {
+        return $this->container['security_tier'];
+    }
+
+    /**
+     * Sets security_tier
+     *
+     * @param string|null $security_tier security_tier
+     *
+     * @return self
+     */
+    public function setSecurityTier($security_tier)
+    {
+        if (is_null($security_tier)) {
+            throw new \InvalidArgumentException('non-nullable security_tier cannot be null');
+        }
+        $allowedValues = $this->getSecurityTierAllowableValues();
+        if (!in_array($security_tier, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'security_tier', must be one of '%s'",
+                    $security_tier,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['security_tier'] = $security_tier;
 
         return $this;
     }
