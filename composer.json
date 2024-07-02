@@ -1,6 +1,6 @@
 {
     "name": "onfido/onfido-php",
-    "version": "7.0.0",
+    "version": "7.1.0",
     "description": "The Onfido API (v3.6)",
     "keywords": [
         "openapitools",
