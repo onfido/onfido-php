@@ -45,6 +45,7 @@ class ReportSchemasTest extends OnfidoTestCase
                             ->getBreakdown()->getIssuingCountry()->getResult(), "clear");
         $this->assertSame($documentReport->getProperties()
                             ->getDateOfBirth()->format('Y-m-d'), "1990-01-01");
+        $this->assertNull($documentReport->getProperties()->getDocumentSubtype());
     }
 
     public function testSchemaOfFacialSimilarityReportIsValid(): void
