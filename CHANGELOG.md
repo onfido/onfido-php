@@ -1,8 +1,7 @@
 # Changelog
 
-## v7.1.0 5th July 2024
+## v7.1.0 3rd July 2024
 
-- Release based on Onfido OpenAPI spec version [v3.1.0](https://github.com/onfido/onfido-openapi-spec/releases/tag/v3.1.0):
 - Release based on Onfido OpenAPI spec version [v3.1.0](https://github.com/onfido/onfido-openapi-spec/releases/tag/v3.1.0):
   - Add missing fields in document report's properties
 
