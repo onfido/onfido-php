@@ -72,7 +72,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
+        'id' => null,
         'status' => null,
         'completed_at_iso8601' => 'date-time',
         'href' => null
