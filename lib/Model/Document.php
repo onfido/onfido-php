@@ -289,6 +289,7 @@ class Document implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     public const FILE_TYPE_JPG = 'jpg';
+    public const FILE_TYPE_JPEG = 'jpeg';
     public const FILE_TYPE_PNG = 'png';
     public const FILE_TYPE_PDF = 'pdf';
     public const FILE_TYPE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
@@ -305,6 +306,7 @@ class Document implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         return [
             self::FILE_TYPE_JPG,
+            self::FILE_TYPE_JPEG,
             self::FILE_TYPE_PNG,
             self::FILE_TYPE_PDF,
             self::FILE_TYPE_UNKNOWN_DEFAULT_OPEN_API,

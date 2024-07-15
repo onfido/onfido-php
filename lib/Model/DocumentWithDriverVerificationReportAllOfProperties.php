@@ -63,9 +63,10 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'document_numbers' => '\Onfido\Model\DocumentPropertiesDocumentNumbersInner[]',
         'document_type' => 'string',
         'first_name' => 'string',
+        'middle_name' => 'string',
+        'last_name' => 'string',
         'gender' => 'string',
         'issuing_country' => 'string',
-        'last_name' => 'string',
         'nationality' => 'string',
         'issuing_state' => 'string',
         'issuing_date' => '\DateTime',
@@ -123,9 +124,10 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'document_numbers' => null,
         'document_type' => null,
         'first_name' => null,
+        'middle_name' => null,
+        'last_name' => null,
         'gender' => null,
         'issuing_country' => null,
-        'last_name' => null,
         'nationality' => null,
         'issuing_state' => null,
         'issuing_date' => 'date',
@@ -181,9 +183,10 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'document_numbers' => false,
         'document_type' => false,
         'first_name' => false,
+        'middle_name' => false,
+        'last_name' => false,
         'gender' => false,
         'issuing_country' => false,
-        'last_name' => false,
         'nationality' => false,
         'issuing_state' => false,
         'issuing_date' => false,
@@ -319,9 +322,10 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'document_numbers' => 'document_numbers',
         'document_type' => 'document_type',
         'first_name' => 'first_name',
+        'middle_name' => 'middle_name',
+        'last_name' => 'last_name',
         'gender' => 'gender',
         'issuing_country' => 'issuing_country',
-        'last_name' => 'last_name',
         'nationality' => 'nationality',
         'issuing_state' => 'issuing_state',
         'issuing_date' => 'issuing_date',
@@ -377,9 +381,10 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'document_numbers' => 'setDocumentNumbers',
         'document_type' => 'setDocumentType',
         'first_name' => 'setFirstName',
+        'middle_name' => 'setMiddleName',
+        'last_name' => 'setLastName',
         'gender' => 'setGender',
         'issuing_country' => 'setIssuingCountry',
-        'last_name' => 'setLastName',
         'nationality' => 'setNationality',
         'issuing_state' => 'setIssuingState',
         'issuing_date' => 'setIssuingDate',
@@ -435,9 +440,10 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'document_numbers' => 'getDocumentNumbers',
         'document_type' => 'getDocumentType',
         'first_name' => 'getFirstName',
+        'middle_name' => 'getMiddleName',
+        'last_name' => 'getLastName',
         'gender' => 'getGender',
         'issuing_country' => 'getIssuingCountry',
-        'last_name' => 'getLastName',
         'nationality' => 'getNationality',
         'issuing_state' => 'getIssuingState',
         'issuing_date' => 'getIssuingDate',
@@ -613,9 +619,10 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         $this->setIfExists('document_numbers', $data ?? [], null);
         $this->setIfExists('document_type', $data ?? [], null);
         $this->setIfExists('first_name', $data ?? [], null);
+        $this->setIfExists('middle_name', $data ?? [], null);
+        $this->setIfExists('last_name', $data ?? [], null);
         $this->setIfExists('gender', $data ?? [], null);
         $this->setIfExists('issuing_country', $data ?? [], null);
-        $this->setIfExists('last_name', $data ?? [], null);
         $this->setIfExists('nationality', $data ?? [], null);
         $this->setIfExists('issuing_state', $data ?? [], null);
         $this->setIfExists('issuing_date', $data ?? [], null);
@@ -891,6 +898,60 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
     }
 
     /**
+     * Gets middle_name
+     *
+     * @return string|null
+     */
+    public function getMiddleName()
+    {
+        return $this->container['middle_name'];
+    }
+
+    /**
+     * Sets middle_name
+     *
+     * @param string|null $middle_name middle_name
+     *
+     * @return self
+     */
+    public function setMiddleName($middle_name)
+    {
+        if (is_null($middle_name)) {
+            throw new \InvalidArgumentException('non-nullable middle_name cannot be null');
+        }
+        $this->container['middle_name'] = $middle_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_name
+     *
+     * @return string|null
+     */
+    public function getLastName()
+    {
+        return $this->container['last_name'];
+    }
+
+    /**
+     * Sets last_name
+     *
+     * @param string|null $last_name last_name
+     *
+     * @return self
+     */
+    public function setLastName($last_name)
+    {
+        if (is_null($last_name)) {
+            throw new \InvalidArgumentException('non-nullable last_name cannot be null');
+        }
+        $this->container['last_name'] = $last_name;
+
+        return $this;
+    }
+
+    /**
      * Gets gender
      *
      * @return string|null
@@ -940,33 +1001,6 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
             throw new \InvalidArgumentException('non-nullable issuing_country cannot be null');
         }
         $this->container['issuing_country'] = $issuing_country;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_name
-     *
-     * @return string|null
-     */
-    public function getLastName()
-    {
-        return $this->container['last_name'];
-    }
-
-    /**
-     * Sets last_name
-     *
-     * @param string|null $last_name last_name
-     *
-     * @return self
-     */
-    public function setLastName($last_name)
-    {
-        if (is_null($last_name)) {
-            throw new \InvalidArgumentException('non-nullable last_name cannot be null');
-        }
-        $this->container['last_name'] = $last_name;
 
         return $this;
     }
