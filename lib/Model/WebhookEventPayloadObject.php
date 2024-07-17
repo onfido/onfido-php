@@ -60,6 +60,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     protected static $openAPITypes = [
         'id' => 'string',
         'status' => 'string',
+        'started_at_iso8601' => '\DateTime',
         'completed_at_iso8601' => '\DateTime',
         'href' => 'string'
     ];
@@ -72,8 +73,9 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
+        'id' => null,
         'status' => null,
+        'started_at_iso8601' => 'date-time',
         'completed_at_iso8601' => 'date-time',
         'href' => null
     ];
@@ -86,6 +88,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     protected static array $openAPINullables = [
         'id' => false,
         'status' => false,
+        'started_at_iso8601' => false,
         'completed_at_iso8601' => false,
         'href' => false
     ];
@@ -178,6 +181,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     protected static $attributeMap = [
         'id' => 'id',
         'status' => 'status',
+        'started_at_iso8601' => 'started_at_iso8601',
         'completed_at_iso8601' => 'completed_at_iso8601',
         'href' => 'href'
     ];
@@ -190,6 +194,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     protected static $setters = [
         'id' => 'setId',
         'status' => 'setStatus',
+        'started_at_iso8601' => 'setStartedAtIso8601',
         'completed_at_iso8601' => 'setCompletedAtIso8601',
         'href' => 'setHref'
     ];
@@ -202,6 +207,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     protected static $getters = [
         'id' => 'getId',
         'status' => 'getStatus',
+        'started_at_iso8601' => 'getStartedAtIso8601',
         'completed_at_iso8601' => 'getCompletedAtIso8601',
         'href' => 'getHref'
     ];
@@ -265,6 +271,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('started_at_iso8601', $data ?? [], null);
         $this->setIfExists('completed_at_iso8601', $data ?? [], null);
         $this->setIfExists('href', $data ?? [], null);
     }
@@ -367,6 +374,33 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets started_at_iso8601
+     *
+     * @return \DateTime|null
+     */
+    public function getStartedAtIso8601()
+    {
+        return $this->container['started_at_iso8601'];
+    }
+
+    /**
+     * Sets started_at_iso8601
+     *
+     * @param \DateTime|null $started_at_iso8601 The date and time when the operation was started, if available.
+     *
+     * @return self
+     */
+    public function setStartedAtIso8601($started_at_iso8601)
+    {
+        if (is_null($started_at_iso8601)) {
+            throw new \InvalidArgumentException('non-nullable started_at_iso8601 cannot be null');
+        }
+        $this->container['started_at_iso8601'] = $started_at_iso8601;
 
         return $this;
     }

@@ -58,9 +58,13 @@ abstract class OnfidoTestCase extends TestCase
                         'town' => 'London',
                         'postcode' => 'SW4 6EH',
                         'country' => Onfido\Model\CountryCodes::GBR,
-                        'line1' => 'My wonderful address'])
-                    ])
-                );
+                        'line1' => 'My wonderful address'
+                    ]),
+                    'email' => 'first.last@gmail.com',
+                    'phone_number' => '351911111111',
+                ]
+            ),
+        );
     }
 
     protected static function cleanUpApplicants(): void
@@ -176,6 +180,29 @@ abstract class OnfidoTestCase extends TestCase
         while($instance->getStatus() !== $status) {
             if($iteration > $maxRetries) {
                 $this->fail('Status did not change in time');
+            }
+
+            $iteration += 1;
+            sleep($sleepTime);
+
+            $instance = call_user_func_array($function, $params);
+        }
+        return $instance;
+    }
+
+    protected function repeatRequestUntilTaskOutputChanges(
+        callable $function,
+        array $params,
+        $maxRetries = 10,
+        $sleepTime = 1
+    )
+    {
+        $instance = call_user_func_array($function, $params);
+        $iteration = 0;
+
+        while($instance["output"] == NULL) {
+            if($iteration > $maxRetries) {
+                $this->fail('Output did not change in time');
             }
 
             $iteration += 1;
