@@ -60,6 +60,7 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'string',
         'workflow_id' => 'string',
         'tags' => 'string[]',
+        'customer_user_id' => 'string',
         'link' => '\Onfido\Model\WorkflowRunSharedLink',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
@@ -69,7 +70,8 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'string',
         'output' => 'object',
         'reasons' => 'string[]',
-        'error' => '\Onfido\Model\WorkflowRunResponseError'
+        'error' => '\Onfido\Model\WorkflowRunResponseError',
+        'sdk_token' => 'string'
     ];
 
     /**
@@ -83,6 +85,7 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'uuid',
         'workflow_id' => 'uuid',
         'tags' => null,
+        'customer_user_id' => null,
         'link' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
@@ -92,7 +95,8 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => null,
         'output' => null,
         'reasons' => null,
-        'error' => null
+        'error' => null,
+        'sdk_token' => null
     ];
 
     /**
@@ -104,6 +108,7 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => false,
         'workflow_id' => false,
         'tags' => true,
+        'customer_user_id' => false,
         'link' => false,
         'created_at' => false,
         'updated_at' => false,
@@ -113,7 +118,8 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => false,
         'output' => false,
         'reasons' => false,
-        'error' => false
+        'error' => false,
+        'sdk_token' => true
     ];
 
     /**
@@ -205,6 +211,7 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'applicant_id',
         'workflow_id' => 'workflow_id',
         'tags' => 'tags',
+        'customer_user_id' => 'customer_user_id',
         'link' => 'link',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at',
@@ -214,7 +221,8 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'status',
         'output' => 'output',
         'reasons' => 'reasons',
-        'error' => 'error'
+        'error' => 'error',
+        'sdk_token' => 'sdk_token'
     ];
 
     /**
@@ -226,6 +234,7 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'setApplicantId',
         'workflow_id' => 'setWorkflowId',
         'tags' => 'setTags',
+        'customer_user_id' => 'setCustomerUserId',
         'link' => 'setLink',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
@@ -235,7 +244,8 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'setStatus',
         'output' => 'setOutput',
         'reasons' => 'setReasons',
-        'error' => 'setError'
+        'error' => 'setError',
+        'sdk_token' => 'setSdkToken'
     ];
 
     /**
@@ -247,6 +257,7 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'getApplicantId',
         'workflow_id' => 'getWorkflowId',
         'tags' => 'getTags',
+        'customer_user_id' => 'getCustomerUserId',
         'link' => 'getLink',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
@@ -256,7 +267,8 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'getStatus',
         'output' => 'getOutput',
         'reasons' => 'getReasons',
-        'error' => 'getError'
+        'error' => 'getError',
+        'sdk_token' => 'getSdkToken'
     ];
 
     /**
@@ -346,6 +358,7 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('applicant_id', $data ?? [], null);
         $this->setIfExists('workflow_id', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
+        $this->setIfExists('customer_user_id', $data ?? [], null);
         $this->setIfExists('link', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -356,6 +369,7 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('output', $data ?? [], null);
         $this->setIfExists('reasons', $data ?? [], null);
         $this->setIfExists('error', $data ?? [], null);
+        $this->setIfExists('sdk_token', $data ?? [], null);
     }
 
     /**
@@ -393,6 +407,10 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if (!is_null($this->container['tags']) && (count($this->container['tags']) > 30)) {
             $invalidProperties[] = "invalid value for 'tags', number of items must be less than or equal to 30.";
+        }
+
+        if (!is_null($this->container['customer_user_id']) && (mb_strlen($this->container['customer_user_id']) > 256)) {
+            $invalidProperties[] = "invalid value for 'customer_user_id', the character length must be smaller than or equal to 256.";
         }
 
         if ($this->container['id'] === null) {
@@ -510,6 +528,37 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('invalid value for $tags when calling WorkflowRun., number of items must be less than or equal to 30.');
         }
         $this->container['tags'] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_user_id
+     *
+     * @return string|null
+     */
+    public function getCustomerUserId()
+    {
+        return $this->container['customer_user_id'];
+    }
+
+    /**
+     * Sets customer_user_id
+     *
+     * @param string|null $customer_user_id Customer-provided user identifier.
+     *
+     * @return self
+     */
+    public function setCustomerUserId($customer_user_id)
+    {
+        if (is_null($customer_user_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_user_id cannot be null');
+        }
+        if ((mb_strlen($customer_user_id) > 256)) {
+            throw new \InvalidArgumentException('invalid length for $customer_user_id when calling WorkflowRun., must be smaller than or equal to 256.');
+        }
+
+        $this->container['customer_user_id'] = $customer_user_id;
 
         return $this;
     }
@@ -790,6 +839,40 @@ class WorkflowRun implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable error cannot be null');
         }
         $this->container['error'] = $error;
+
+        return $this;
+    }
+
+    /**
+     * Gets sdk_token
+     *
+     * @return string|null
+     */
+    public function getSdkToken()
+    {
+        return $this->container['sdk_token'];
+    }
+
+    /**
+     * Sets sdk_token
+     *
+     * @param string|null $sdk_token Client token to use when loading this workflow run in the Onfido SDK.
+     *
+     * @return self
+     */
+    public function setSdkToken($sdk_token)
+    {
+        if (is_null($sdk_token)) {
+            array_push($this->openAPINullablesSetToNull, 'sdk_token');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sdk_token', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['sdk_token'] = $sdk_token;
 
         return $this;
     }
