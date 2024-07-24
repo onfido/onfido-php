@@ -63,7 +63,8 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         'status' => 'string',
         'output' => 'object',
         'reasons' => 'string[]',
-        'error' => '\Onfido\Model\WorkflowRunResponseError'
+        'error' => '\Onfido\Model\WorkflowRunResponseError',
+        'sdk_token' => 'string'
     ];
 
     /**
@@ -80,7 +81,8 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         'status' => null,
         'output' => null,
         'reasons' => null,
-        'error' => null
+        'error' => null,
+        'sdk_token' => null
     ];
 
     /**
@@ -95,7 +97,8 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         'status' => false,
         'output' => false,
         'reasons' => false,
-        'error' => false
+        'error' => false,
+        'sdk_token' => true
     ];
 
     /**
@@ -190,7 +193,8 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         'status' => 'status',
         'output' => 'output',
         'reasons' => 'reasons',
-        'error' => 'error'
+        'error' => 'error',
+        'sdk_token' => 'sdk_token'
     ];
 
     /**
@@ -205,7 +209,8 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         'status' => 'setStatus',
         'output' => 'setOutput',
         'reasons' => 'setReasons',
-        'error' => 'setError'
+        'error' => 'setError',
+        'sdk_token' => 'setSdkToken'
     ];
 
     /**
@@ -220,7 +225,8 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         'status' => 'getStatus',
         'output' => 'getOutput',
         'reasons' => 'getReasons',
-        'error' => 'getError'
+        'error' => 'getError',
+        'sdk_token' => 'getSdkToken'
     ];
 
     /**
@@ -314,6 +320,7 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('output', $data ?? [], null);
         $this->setIfExists('reasons', $data ?? [], null);
         $this->setIfExists('error', $data ?? [], null);
+        $this->setIfExists('sdk_token', $data ?? [], null);
     }
 
     /**
@@ -565,6 +572,40 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable error cannot be null');
         }
         $this->container['error'] = $error;
+
+        return $this;
+    }
+
+    /**
+     * Gets sdk_token
+     *
+     * @return string|null
+     */
+    public function getSdkToken()
+    {
+        return $this->container['sdk_token'];
+    }
+
+    /**
+     * Sets sdk_token
+     *
+     * @param string|null $sdk_token Client token to use when loading this workflow run in the Onfido SDK.
+     *
+     * @return self
+     */
+    public function setSdkToken($sdk_token)
+    {
+        if (is_null($sdk_token)) {
+            array_push($this->openAPINullablesSetToNull, 'sdk_token');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sdk_token', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['sdk_token'] = $sdk_token;
 
         return $this;
     }

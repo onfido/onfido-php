@@ -60,6 +60,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
         'applicant_id' => 'string',
         'workflow_id' => 'string',
         'tags' => 'string[]',
+        'customer_user_id' => 'string',
         'link' => '\Onfido\Model\WorkflowRunSharedLink',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
@@ -76,6 +77,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
         'applicant_id' => 'uuid',
         'workflow_id' => 'uuid',
         'tags' => null,
+        'customer_user_id' => null,
         'link' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
@@ -90,6 +92,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
         'applicant_id' => false,
         'workflow_id' => false,
         'tags' => true,
+        'customer_user_id' => false,
         'link' => false,
         'created_at' => false,
         'updated_at' => false
@@ -184,6 +187,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
         'applicant_id' => 'applicant_id',
         'workflow_id' => 'workflow_id',
         'tags' => 'tags',
+        'customer_user_id' => 'customer_user_id',
         'link' => 'link',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
@@ -198,6 +202,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
         'applicant_id' => 'setApplicantId',
         'workflow_id' => 'setWorkflowId',
         'tags' => 'setTags',
+        'customer_user_id' => 'setCustomerUserId',
         'link' => 'setLink',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
@@ -212,6 +217,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
         'applicant_id' => 'getApplicantId',
         'workflow_id' => 'getWorkflowId',
         'tags' => 'getTags',
+        'customer_user_id' => 'getCustomerUserId',
         'link' => 'getLink',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
@@ -277,6 +283,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('applicant_id', $data ?? [], null);
         $this->setIfExists('workflow_id', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
+        $this->setIfExists('customer_user_id', $data ?? [], null);
         $this->setIfExists('link', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -317,6 +324,10 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
         if (!is_null($this->container['tags']) && (count($this->container['tags']) > 30)) {
             $invalidProperties[] = "invalid value for 'tags', number of items must be less than or equal to 30.";
+        }
+
+        if (!is_null($this->container['customer_user_id']) && (mb_strlen($this->container['customer_user_id']) > 256)) {
+            $invalidProperties[] = "invalid value for 'customer_user_id', the character length must be smaller than or equal to 256.";
         }
 
         return $invalidProperties;
@@ -422,6 +433,37 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
             throw new \InvalidArgumentException('invalid value for $tags when calling WorkflowRunShared., number of items must be less than or equal to 30.');
         }
         $this->container['tags'] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_user_id
+     *
+     * @return string|null
+     */
+    public function getCustomerUserId()
+    {
+        return $this->container['customer_user_id'];
+    }
+
+    /**
+     * Sets customer_user_id
+     *
+     * @param string|null $customer_user_id Customer-provided user identifier.
+     *
+     * @return self
+     */
+    public function setCustomerUserId($customer_user_id)
+    {
+        if (is_null($customer_user_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_user_id cannot be null');
+        }
+        if ((mb_strlen($customer_user_id) > 256)) {
+            throw new \InvalidArgumentException('invalid length for $customer_user_id when calling WorkflowRunShared., must be smaller than or equal to 256.');
+        }
+
+        $this->container['customer_user_id'] = $customer_user_id;
 
         return $this;
     }
