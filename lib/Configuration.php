@@ -87,7 +87,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'onfido-php/7.3.0';
+    protected $userAgent = 'onfido-php/7.3.1';
 
     /**
      * Debug switch (default set to false)
@@ -134,7 +134,7 @@ class Configuration
     /**
      * Sets Region
      *
-     * @param string $region           Region to target
+     * @param Region $region           Region to target
      *
      * @return $this
      */
@@ -404,7 +404,7 @@ class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    The version of the OpenAPI document: v3.6' . PHP_EOL;
-        $report .= '    SDK Package Version: 7.3.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 7.3.1' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;
