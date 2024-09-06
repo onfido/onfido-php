@@ -73,7 +73,7 @@ class SdkTokenBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'applicant_id' => 'uuid',
         'referrer' => null,
-        'application_id' => 'uuid',
+        'application_id' => null,
         'cross_device_url' => null
     ];
 
