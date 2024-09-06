@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.4.0 6th September 2024
+
+- Release based on Onfido OpenAPI spec version [v3.4.0](https://github.com/onfido/onfido-openapi-spec/releases/tag/v3.4.0):
+  - SDK Token: Remove UUID format from application_id.
+
 ## v7.3.1 22nd August 2024
 
 - Release based on Onfido OpenAPI spec version [v3.3.1](https://github.com/onfido/onfido-openapi-spec/releases/tag/v3.3.1):
