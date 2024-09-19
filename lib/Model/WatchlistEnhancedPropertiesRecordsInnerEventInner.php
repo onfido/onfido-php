@@ -1,6 +1,6 @@
 <?php
 /**
- * WatchlistEnhancedProperties
+ * WatchlistEnhancedPropertiesRecordsInnerEventInner
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WatchlistEnhancedProperties Class Doc Comment
+ * WatchlistEnhancedPropertiesRecordsInnerEventInner Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonSerializable
+class WatchlistEnhancedPropertiesRecordsInnerEventInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'watchlist_enhanced_properties';
+    protected static $openAPIModelName = 'watchlist_enhanced_properties_records_inner_event_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,11 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'records' => '\Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]'
+        'category' => 'string',
+        'event_date' => '\DateTime',
+        'event_description' => 'string',
+        'source' => '\Onfido\Model\WatchlistEnhancedPropertiesRecordsInnerEventInnerSource',
+        'sub_category' => 'string'
     ];
 
     /**
@@ -68,7 +72,11 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'records' => null
+        'category' => null,
+        'event_date' => 'date',
+        'event_description' => null,
+        'source' => null,
+        'sub_category' => null
     ];
 
     /**
@@ -77,7 +85,11 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'records' => false
+        'category' => false,
+        'event_date' => false,
+        'event_description' => false,
+        'source' => false,
+        'sub_category' => false
     ];
 
     /**
@@ -166,7 +178,11 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'records' => 'records'
+        'category' => 'category',
+        'event_date' => 'event_date',
+        'event_description' => 'event_description',
+        'source' => 'source',
+        'sub_category' => 'sub_category'
     ];
 
     /**
@@ -175,7 +191,11 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'records' => 'setRecords'
+        'category' => 'setCategory',
+        'event_date' => 'setEventDate',
+        'event_description' => 'setEventDescription',
+        'source' => 'setSource',
+        'sub_category' => 'setSubCategory'
     ];
 
     /**
@@ -184,7 +204,11 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'records' => 'getRecords'
+        'category' => 'getCategory',
+        'event_date' => 'getEventDate',
+        'event_description' => 'getEventDescription',
+        'source' => 'getSource',
+        'sub_category' => 'getSubCategory'
     ];
 
     /**
@@ -244,7 +268,11 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('records', $data ?? [], null);
+        $this->setIfExists('category', $data ?? [], null);
+        $this->setIfExists('event_date', $data ?? [], null);
+        $this->setIfExists('event_description', $data ?? [], null);
+        $this->setIfExists('source', $data ?? [], null);
+        $this->setIfExists('sub_category', $data ?? [], null);
     }
 
     /**
@@ -290,28 +318,136 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets records
+     * Gets category
      *
-     * @return \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null
+     * @return string|null
      */
-    public function getRecords()
+    public function getCategory()
     {
-        return $this->container['records'];
+        return $this->container['category'];
     }
 
     /**
-     * Sets records
+     * Sets category
      *
-     * @param \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null $records Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.
+     * @param string|null $category category
      *
      * @return self
      */
-    public function setRecords($records)
+    public function setCategory($category)
     {
-        if (is_null($records)) {
-            throw new \InvalidArgumentException('non-nullable records cannot be null');
+        if (is_null($category)) {
+            throw new \InvalidArgumentException('non-nullable category cannot be null');
         }
-        $this->container['records'] = $records;
+        $this->container['category'] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Gets event_date
+     *
+     * @return \DateTime|null
+     */
+    public function getEventDate()
+    {
+        return $this->container['event_date'];
+    }
+
+    /**
+     * Sets event_date
+     *
+     * @param \DateTime|null $event_date event_date
+     *
+     * @return self
+     */
+    public function setEventDate($event_date)
+    {
+        if (is_null($event_date)) {
+            throw new \InvalidArgumentException('non-nullable event_date cannot be null');
+        }
+        $this->container['event_date'] = $event_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets event_description
+     *
+     * @return string|null
+     */
+    public function getEventDescription()
+    {
+        return $this->container['event_description'];
+    }
+
+    /**
+     * Sets event_description
+     *
+     * @param string|null $event_description event_description
+     *
+     * @return self
+     */
+    public function setEventDescription($event_description)
+    {
+        if (is_null($event_description)) {
+            throw new \InvalidArgumentException('non-nullable event_description cannot be null');
+        }
+        $this->container['event_description'] = $event_description;
+
+        return $this;
+    }
+
+    /**
+     * Gets source
+     *
+     * @return \Onfido\Model\WatchlistEnhancedPropertiesRecordsInnerEventInnerSource|null
+     */
+    public function getSource()
+    {
+        return $this->container['source'];
+    }
+
+    /**
+     * Sets source
+     *
+     * @param \Onfido\Model\WatchlistEnhancedPropertiesRecordsInnerEventInnerSource|null $source source
+     *
+     * @return self
+     */
+    public function setSource($source)
+    {
+        if (is_null($source)) {
+            throw new \InvalidArgumentException('non-nullable source cannot be null');
+        }
+        $this->container['source'] = $source;
+
+        return $this;
+    }
+
+    /**
+     * Gets sub_category
+     *
+     * @return string|null
+     */
+    public function getSubCategory()
+    {
+        return $this->container['sub_category'];
+    }
+
+    /**
+     * Sets sub_category
+     *
+     * @param string|null $sub_category sub_category
+     *
+     * @return self
+     */
+    public function setSubCategory($sub_category)
+    {
+        if (is_null($sub_category)) {
+            throw new \InvalidArgumentException('non-nullable sub_category cannot be null');
+        }
+        $this->container['sub_category'] = $sub_category;
 
         return $this;
     }

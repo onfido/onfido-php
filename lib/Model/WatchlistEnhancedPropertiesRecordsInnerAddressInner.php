@@ -1,6 +1,6 @@
 <?php
 /**
- * WatchlistEnhancedProperties
+ * WatchlistEnhancedPropertiesRecordsInnerAddressInner
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WatchlistEnhancedProperties Class Doc Comment
+ * WatchlistEnhancedPropertiesRecordsInnerAddressInner Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonSerializable
+class WatchlistEnhancedPropertiesRecordsInnerAddressInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'watchlist_enhanced_properties';
+    protected static $openAPIModelName = 'watchlist_enhanced_properties_records_inner_address_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,12 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'records' => '\Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]'
+        'address_line1' => 'string',
+        'country' => '\Onfido\Model\CountryCodes',
+        'postal_code' => 'string',
+        'state_province' => 'string',
+        'town' => 'string',
+        'locator_type' => 'string'
     ];
 
     /**
@@ -68,7 +73,12 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'records' => null
+        'address_line1' => null,
+        'country' => null,
+        'postal_code' => null,
+        'state_province' => null,
+        'town' => null,
+        'locator_type' => null
     ];
 
     /**
@@ -77,7 +87,12 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'records' => false
+        'address_line1' => false,
+        'country' => false,
+        'postal_code' => false,
+        'state_province' => false,
+        'town' => false,
+        'locator_type' => false
     ];
 
     /**
@@ -166,7 +181,12 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'records' => 'records'
+        'address_line1' => 'address_line1',
+        'country' => 'country',
+        'postal_code' => 'postal_code',
+        'state_province' => 'state_province',
+        'town' => 'town',
+        'locator_type' => 'locator_type'
     ];
 
     /**
@@ -175,7 +195,12 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'records' => 'setRecords'
+        'address_line1' => 'setAddressLine1',
+        'country' => 'setCountry',
+        'postal_code' => 'setPostalCode',
+        'state_province' => 'setStateProvince',
+        'town' => 'setTown',
+        'locator_type' => 'setLocatorType'
     ];
 
     /**
@@ -184,7 +209,12 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'records' => 'getRecords'
+        'address_line1' => 'getAddressLine1',
+        'country' => 'getCountry',
+        'postal_code' => 'getPostalCode',
+        'state_province' => 'getStateProvince',
+        'town' => 'getTown',
+        'locator_type' => 'getLocatorType'
     ];
 
     /**
@@ -244,7 +274,12 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('records', $data ?? [], null);
+        $this->setIfExists('address_line1', $data ?? [], null);
+        $this->setIfExists('country', $data ?? [], null);
+        $this->setIfExists('postal_code', $data ?? [], null);
+        $this->setIfExists('state_province', $data ?? [], null);
+        $this->setIfExists('town', $data ?? [], null);
+        $this->setIfExists('locator_type', $data ?? [], null);
     }
 
     /**
@@ -290,28 +325,163 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets records
+     * Gets address_line1
      *
-     * @return \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null
+     * @return string|null
      */
-    public function getRecords()
+    public function getAddressLine1()
     {
-        return $this->container['records'];
+        return $this->container['address_line1'];
     }
 
     /**
-     * Sets records
+     * Sets address_line1
      *
-     * @param \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null $records Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.
+     * @param string|null $address_line1 address_line1
      *
      * @return self
      */
-    public function setRecords($records)
+    public function setAddressLine1($address_line1)
     {
-        if (is_null($records)) {
-            throw new \InvalidArgumentException('non-nullable records cannot be null');
+        if (is_null($address_line1)) {
+            throw new \InvalidArgumentException('non-nullable address_line1 cannot be null');
         }
-        $this->container['records'] = $records;
+        $this->container['address_line1'] = $address_line1;
+
+        return $this;
+    }
+
+    /**
+     * Gets country
+     *
+     * @return \Onfido\Model\CountryCodes|null
+     */
+    public function getCountry()
+    {
+        return $this->container['country'];
+    }
+
+    /**
+     * Sets country
+     *
+     * @param \Onfido\Model\CountryCodes|null $country country
+     *
+     * @return self
+     */
+    public function setCountry($country)
+    {
+        if (is_null($country)) {
+            throw new \InvalidArgumentException('non-nullable country cannot be null');
+        }
+        $this->container['country'] = $country;
+
+        return $this;
+    }
+
+    /**
+     * Gets postal_code
+     *
+     * @return string|null
+     */
+    public function getPostalCode()
+    {
+        return $this->container['postal_code'];
+    }
+
+    /**
+     * Sets postal_code
+     *
+     * @param string|null $postal_code postal_code
+     *
+     * @return self
+     */
+    public function setPostalCode($postal_code)
+    {
+        if (is_null($postal_code)) {
+            throw new \InvalidArgumentException('non-nullable postal_code cannot be null');
+        }
+        $this->container['postal_code'] = $postal_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets state_province
+     *
+     * @return string|null
+     */
+    public function getStateProvince()
+    {
+        return $this->container['state_province'];
+    }
+
+    /**
+     * Sets state_province
+     *
+     * @param string|null $state_province state_province
+     *
+     * @return self
+     */
+    public function setStateProvince($state_province)
+    {
+        if (is_null($state_province)) {
+            throw new \InvalidArgumentException('non-nullable state_province cannot be null');
+        }
+        $this->container['state_province'] = $state_province;
+
+        return $this;
+    }
+
+    /**
+     * Gets town
+     *
+     * @return string|null
+     */
+    public function getTown()
+    {
+        return $this->container['town'];
+    }
+
+    /**
+     * Sets town
+     *
+     * @param string|null $town town
+     *
+     * @return self
+     */
+    public function setTown($town)
+    {
+        if (is_null($town)) {
+            throw new \InvalidArgumentException('non-nullable town cannot be null');
+        }
+        $this->container['town'] = $town;
+
+        return $this;
+    }
+
+    /**
+     * Gets locator_type
+     *
+     * @return string|null
+     */
+    public function getLocatorType()
+    {
+        return $this->container['locator_type'];
+    }
+
+    /**
+     * Sets locator_type
+     *
+     * @param string|null $locator_type locator_type
+     *
+     * @return self
+     */
+    public function setLocatorType($locator_type)
+    {
+        if (is_null($locator_type)) {
+            throw new \InvalidArgumentException('non-nullable locator_type cannot be null');
+        }
+        $this->container['locator_type'] = $locator_type;
 
         return $this;
     }

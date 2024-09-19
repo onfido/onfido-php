@@ -1,6 +1,6 @@
 <?php
 /**
- * WatchlistEnhancedProperties
+ * WatchlistEnhancedPropertiesRecordsInnerSourceInner
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WatchlistEnhancedProperties Class Doc Comment
+ * WatchlistEnhancedPropertiesRecordsInnerSourceInner Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonSerializable
+class WatchlistEnhancedPropertiesRecordsInnerSourceInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'watchlist_enhanced_properties';
+    protected static $openAPIModelName = 'watchlist_enhanced_properties_records_inner_source_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,10 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'records' => '\Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]'
+        'source_headline' => 'string',
+        'source_name' => 'string',
+        'source_url' => 'string',
+        'source_format' => 'string'
     ];
 
     /**
@@ -68,7 +71,10 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'records' => null
+        'source_headline' => null,
+        'source_name' => null,
+        'source_url' => null,
+        'source_format' => null
     ];
 
     /**
@@ -77,7 +83,10 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'records' => false
+        'source_headline' => false,
+        'source_name' => false,
+        'source_url' => false,
+        'source_format' => false
     ];
 
     /**
@@ -166,7 +175,10 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'records' => 'records'
+        'source_headline' => 'source_headline',
+        'source_name' => 'source_name',
+        'source_url' => 'source_url',
+        'source_format' => 'source_format'
     ];
 
     /**
@@ -175,7 +187,10 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'records' => 'setRecords'
+        'source_headline' => 'setSourceHeadline',
+        'source_name' => 'setSourceName',
+        'source_url' => 'setSourceUrl',
+        'source_format' => 'setSourceFormat'
     ];
 
     /**
@@ -184,7 +199,10 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'records' => 'getRecords'
+        'source_headline' => 'getSourceHeadline',
+        'source_name' => 'getSourceName',
+        'source_url' => 'getSourceUrl',
+        'source_format' => 'getSourceFormat'
     ];
 
     /**
@@ -244,7 +262,10 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('records', $data ?? [], null);
+        $this->setIfExists('source_headline', $data ?? [], null);
+        $this->setIfExists('source_name', $data ?? [], null);
+        $this->setIfExists('source_url', $data ?? [], null);
+        $this->setIfExists('source_format', $data ?? [], null);
     }
 
     /**
@@ -290,28 +311,109 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets records
+     * Gets source_headline
      *
-     * @return \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null
+     * @return string|null
      */
-    public function getRecords()
+    public function getSourceHeadline()
     {
-        return $this->container['records'];
+        return $this->container['source_headline'];
     }
 
     /**
-     * Sets records
+     * Sets source_headline
      *
-     * @param \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null $records Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.
+     * @param string|null $source_headline source_headline
      *
      * @return self
      */
-    public function setRecords($records)
+    public function setSourceHeadline($source_headline)
     {
-        if (is_null($records)) {
-            throw new \InvalidArgumentException('non-nullable records cannot be null');
+        if (is_null($source_headline)) {
+            throw new \InvalidArgumentException('non-nullable source_headline cannot be null');
         }
-        $this->container['records'] = $records;
+        $this->container['source_headline'] = $source_headline;
+
+        return $this;
+    }
+
+    /**
+     * Gets source_name
+     *
+     * @return string|null
+     */
+    public function getSourceName()
+    {
+        return $this->container['source_name'];
+    }
+
+    /**
+     * Sets source_name
+     *
+     * @param string|null $source_name source_name
+     *
+     * @return self
+     */
+    public function setSourceName($source_name)
+    {
+        if (is_null($source_name)) {
+            throw new \InvalidArgumentException('non-nullable source_name cannot be null');
+        }
+        $this->container['source_name'] = $source_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets source_url
+     *
+     * @return string|null
+     */
+    public function getSourceUrl()
+    {
+        return $this->container['source_url'];
+    }
+
+    /**
+     * Sets source_url
+     *
+     * @param string|null $source_url source_url
+     *
+     * @return self
+     */
+    public function setSourceUrl($source_url)
+    {
+        if (is_null($source_url)) {
+            throw new \InvalidArgumentException('non-nullable source_url cannot be null');
+        }
+        $this->container['source_url'] = $source_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets source_format
+     *
+     * @return string|null
+     */
+    public function getSourceFormat()
+    {
+        return $this->container['source_format'];
+    }
+
+    /**
+     * Sets source_format
+     *
+     * @param string|null $source_format source_format
+     *
+     * @return self
+     */
+    public function setSourceFormat($source_format)
+    {
+        if (is_null($source_format)) {
+            throw new \InvalidArgumentException('non-nullable source_format cannot be null');
+        }
+        $this->container['source_format'] = $source_format;
 
         return $this;
     }
