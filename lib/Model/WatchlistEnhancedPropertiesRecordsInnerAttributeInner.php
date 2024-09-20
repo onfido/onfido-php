@@ -1,6 +1,6 @@
 <?php
 /**
- * WatchlistEnhancedProperties
+ * WatchlistEnhancedPropertiesRecordsInnerAttributeInner
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WatchlistEnhancedProperties Class Doc Comment
+ * WatchlistEnhancedPropertiesRecordsInnerAttributeInner Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonSerializable
+class WatchlistEnhancedPropertiesRecordsInnerAttributeInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'watchlist_enhanced_properties';
+    protected static $openAPIModelName = 'watchlist_enhanced_properties_records_inner_attribute_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,8 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'records' => '\Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]'
+        'attribute_type' => 'string',
+        'attribute_value' => 'string'
     ];
 
     /**
@@ -68,7 +69,8 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'records' => null
+        'attribute_type' => null,
+        'attribute_value' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'records' => false
+        'attribute_type' => false,
+        'attribute_value' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'records' => 'records'
+        'attribute_type' => 'attribute_type',
+        'attribute_value' => 'attribute_value'
     ];
 
     /**
@@ -175,7 +179,8 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'records' => 'setRecords'
+        'attribute_type' => 'setAttributeType',
+        'attribute_value' => 'setAttributeValue'
     ];
 
     /**
@@ -184,7 +189,8 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'records' => 'getRecords'
+        'attribute_type' => 'getAttributeType',
+        'attribute_value' => 'getAttributeValue'
     ];
 
     /**
@@ -244,7 +250,8 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('records', $data ?? [], null);
+        $this->setIfExists('attribute_type', $data ?? [], null);
+        $this->setIfExists('attribute_value', $data ?? [], null);
     }
 
     /**
@@ -290,28 +297,55 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets records
+     * Gets attribute_type
      *
-     * @return \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null
+     * @return string|null
      */
-    public function getRecords()
+    public function getAttributeType()
     {
-        return $this->container['records'];
+        return $this->container['attribute_type'];
     }
 
     /**
-     * Sets records
+     * Sets attribute_type
      *
-     * @param \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null $records Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.
+     * @param string|null $attribute_type attribute_type
      *
      * @return self
      */
-    public function setRecords($records)
+    public function setAttributeType($attribute_type)
     {
-        if (is_null($records)) {
-            throw new \InvalidArgumentException('non-nullable records cannot be null');
+        if (is_null($attribute_type)) {
+            throw new \InvalidArgumentException('non-nullable attribute_type cannot be null');
         }
-        $this->container['records'] = $records;
+        $this->container['attribute_type'] = $attribute_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets attribute_value
+     *
+     * @return string|null
+     */
+    public function getAttributeValue()
+    {
+        return $this->container['attribute_value'];
+    }
+
+    /**
+     * Sets attribute_value
+     *
+     * @param string|null $attribute_value attribute_value
+     *
+     * @return self
+     */
+    public function setAttributeValue($attribute_value)
+    {
+        if (is_null($attribute_value)) {
+            throw new \InvalidArgumentException('non-nullable attribute_value cannot be null');
+        }
+        $this->container['attribute_value'] = $attribute_value;
 
         return $this;
     }

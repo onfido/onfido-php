@@ -1,6 +1,6 @@
 <?php
 /**
- * WatchlistEnhancedProperties
+ * WatchlistEnhancedPropertiesRecordsInnerAssociateInner
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WatchlistEnhancedProperties Class Doc Comment
+ * WatchlistEnhancedPropertiesRecordsInnerAssociateInner Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonSerializable
+class WatchlistEnhancedPropertiesRecordsInnerAssociateInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'watchlist_enhanced_properties';
+    protected static $openAPIModelName = 'watchlist_enhanced_properties_records_inner_associate_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,9 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'records' => '\Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]'
+        'entity_name' => 'string',
+        'relationship_direction' => 'string',
+        'relationship_type' => 'string'
     ];
 
     /**
@@ -68,7 +70,9 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'records' => null
+        'entity_name' => null,
+        'relationship_direction' => null,
+        'relationship_type' => null
     ];
 
     /**
@@ -77,7 +81,9 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'records' => false
+        'entity_name' => false,
+        'relationship_direction' => false,
+        'relationship_type' => false
     ];
 
     /**
@@ -166,7 +172,9 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'records' => 'records'
+        'entity_name' => 'entity_name',
+        'relationship_direction' => 'relationship_direction',
+        'relationship_type' => 'relationship_type'
     ];
 
     /**
@@ -175,7 +183,9 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'records' => 'setRecords'
+        'entity_name' => 'setEntityName',
+        'relationship_direction' => 'setRelationshipDirection',
+        'relationship_type' => 'setRelationshipType'
     ];
 
     /**
@@ -184,7 +194,9 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'records' => 'getRecords'
+        'entity_name' => 'getEntityName',
+        'relationship_direction' => 'getRelationshipDirection',
+        'relationship_type' => 'getRelationshipType'
     ];
 
     /**
@@ -244,7 +256,9 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('records', $data ?? [], null);
+        $this->setIfExists('entity_name', $data ?? [], null);
+        $this->setIfExists('relationship_direction', $data ?? [], null);
+        $this->setIfExists('relationship_type', $data ?? [], null);
     }
 
     /**
@@ -290,28 +304,82 @@ class WatchlistEnhancedProperties implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets records
+     * Gets entity_name
      *
-     * @return \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null
+     * @return string|null
      */
-    public function getRecords()
+    public function getEntityName()
     {
-        return $this->container['records'];
+        return $this->container['entity_name'];
     }
 
     /**
-     * Sets records
+     * Sets entity_name
      *
-     * @param \Onfido\Model\WatchlistEnhancedPropertiesRecordsInner[]|null $records Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.
+     * @param string|null $entity_name entity_name
      *
      * @return self
      */
-    public function setRecords($records)
+    public function setEntityName($entity_name)
     {
-        if (is_null($records)) {
-            throw new \InvalidArgumentException('non-nullable records cannot be null');
+        if (is_null($entity_name)) {
+            throw new \InvalidArgumentException('non-nullable entity_name cannot be null');
         }
-        $this->container['records'] = $records;
+        $this->container['entity_name'] = $entity_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets relationship_direction
+     *
+     * @return string|null
+     */
+    public function getRelationshipDirection()
+    {
+        return $this->container['relationship_direction'];
+    }
+
+    /**
+     * Sets relationship_direction
+     *
+     * @param string|null $relationship_direction relationship_direction
+     *
+     * @return self
+     */
+    public function setRelationshipDirection($relationship_direction)
+    {
+        if (is_null($relationship_direction)) {
+            throw new \InvalidArgumentException('non-nullable relationship_direction cannot be null');
+        }
+        $this->container['relationship_direction'] = $relationship_direction;
+
+        return $this;
+    }
+
+    /**
+     * Gets relationship_type
+     *
+     * @return string|null
+     */
+    public function getRelationshipType()
+    {
+        return $this->container['relationship_type'];
+    }
+
+    /**
+     * Sets relationship_type
+     *
+     * @param string|null $relationship_type relationship_type
+     *
+     * @return self
+     */
+    public function setRelationshipType($relationship_type)
+    {
+        if (is_null($relationship_type)) {
+            throw new \InvalidArgumentException('non-nullable relationship_type cannot be null');
+        }
+        $this->container['relationship_type'] = $relationship_type;
 
         return $this;
     }
