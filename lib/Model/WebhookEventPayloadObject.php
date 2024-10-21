@@ -59,7 +59,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'status' => 'string',
+        'status' => '\Onfido\Model\WebhookEventObjectStatus',
         'started_at_iso8601' => '\DateTime',
         'completed_at_iso8601' => '\DateTime',
         'href' => 'string'
@@ -354,7 +354,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets status
      *
-     * @return string|null
+     * @return \Onfido\Model\WebhookEventObjectStatus|null
      */
     public function getStatus()
     {
@@ -364,7 +364,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets status
      *
-     * @param string|null $status The current state of the object, if available.
+     * @param \Onfido\Model\WebhookEventObjectStatus|null $status status
      *
      * @return self
      */

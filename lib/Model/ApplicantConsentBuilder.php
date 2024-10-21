@@ -1,6 +1,6 @@
 <?php
 /**
- * WorkflowRunResponseError
+ * ApplicantConsentBuilder
  *
  * PHP version 7.4
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WorkflowRunResponseError Class Doc Comment
+ * ApplicantConsentBuilder Class Doc Comment
  *
  * @category Class
- * @description Error object. Only set when the Workflow Run status is &#39;error&#39;.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSerializable
+class ApplicantConsentBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = 'workflow_run_response_error';
+    protected static $openAPIModelName = 'applicant_consent_builder';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +57,8 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'type' => 'string',
-        'message' => 'string'
+        'name' => '\Onfido\Model\ApplicantConsentName',
+        'granted' => 'bool'
     ];
 
     /**
@@ -70,8 +69,8 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'type' => null,
-        'message' => null
+        'name' => null,
+        'granted' => null
     ];
 
     /**
@@ -80,8 +79,8 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'type' => false,
-        'message' => false
+        'name' => false,
+        'granted' => false
     ];
 
     /**
@@ -170,8 +169,8 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
-        'message' => 'message'
+        'name' => 'name',
+        'granted' => 'granted'
     ];
 
     /**
@@ -180,8 +179,8 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
-        'message' => 'setMessage'
+        'name' => 'setName',
+        'granted' => 'setGranted'
     ];
 
     /**
@@ -190,8 +189,8 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
-        'message' => 'getMessage'
+        'name' => 'getName',
+        'granted' => 'getGranted'
     ];
 
     /**
@@ -251,8 +250,8 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('granted', $data ?? [], null);
     }
 
     /**
@@ -282,6 +281,12 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
     {
         $invalidProperties = [];
 
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['granted'] === null) {
+            $invalidProperties[] = "'granted' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -298,55 +303,55 @@ class WorkflowRunResponseError implements ModelInterface, ArrayAccess, \JsonSeri
 
 
     /**
-     * Gets type
+     * Gets name
      *
-     * @return string|null
+     * @return \Onfido\Model\ApplicantConsentName
      */
-    public function getType()
+    public function getName()
     {
-        return $this->container['type'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets type
+     * Sets name
      *
-     * @param string|null $type The type of error.
+     * @param \Onfido\Model\ApplicantConsentName $name name
      *
      * @return self
      */
-    public function setType($type)
+    public function setName($name)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['type'] = $type;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets granted
      *
-     * @return string|null
+     * @return bool
      */
-    public function getMessage()
+    public function getGranted()
     {
-        return $this->container['message'];
+        return $this->container['granted'];
     }
 
     /**
-     * Sets message
+     * Sets granted
      *
-     * @param string|null $message A textual description of the error.
+     * @param bool $granted granted
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setGranted($granted)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($granted)) {
+            throw new \InvalidArgumentException('non-nullable granted cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['granted'] = $granted;
 
         return $this;
     }

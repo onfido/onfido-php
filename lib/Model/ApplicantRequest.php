@@ -57,7 +57,7 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'consents' => '\Onfido\Model\ConsentsBuilder',
+        'consents' => '\Onfido\Model\ApplicantConsentBuilder[]',
         'address' => '\Onfido\Model\AddressBuilder',
         'location' => '\Onfido\Model\LocationBuilder'
     ];
@@ -306,7 +306,7 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets consents
      *
-     * @return \Onfido\Model\ConsentsBuilder|null
+     * @return \Onfido\Model\ApplicantConsentBuilder[]|null
      */
     public function getConsents()
     {
@@ -316,7 +316,7 @@ class ApplicantRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets consents
      *
-     * @param \Onfido\Model\ConsentsBuilder|null $consents consents
+     * @param \Onfido\Model\ApplicantConsentBuilder[]|null $consents The applicant's consents
      *
      * @return self
      */

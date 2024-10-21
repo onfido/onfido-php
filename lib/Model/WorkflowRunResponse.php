@@ -60,10 +60,10 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         'id' => 'string',
         'workflow_version_id' => 'int',
         'dashboard_url' => 'string',
-        'status' => 'string',
+        'status' => '\Onfido\Model\WorkflowRunStatus',
         'output' => 'object',
         'reasons' => 'string[]',
-        'error' => '\Onfido\Model\WorkflowRunResponseError',
+        'error' => '\Onfido\Model\WorkflowRunError',
         'sdk_token' => 'string'
     ];
 
@@ -270,33 +270,6 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         return self::$openAPIModelName;
     }
 
-    public const STATUS_AWAITING_INPUT = 'awaiting_input';
-    public const STATUS_PROCESSING = 'processing';
-    public const STATUS_ABANDONED = 'abandoned';
-    public const STATUS_ERROR = 'error';
-    public const STATUS_APPROVED = 'approved';
-    public const STATUS_REVIEW = 'review';
-    public const STATUS_DECLINED = 'declined';
-    public const STATUS_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStatusAllowableValues()
-    {
-        return [
-            self::STATUS_AWAITING_INPUT,
-            self::STATUS_PROCESSING,
-            self::STATUS_ABANDONED,
-            self::STATUS_ERROR,
-            self::STATUS_APPROVED,
-            self::STATUS_REVIEW,
-            self::STATUS_DECLINED,
-            self::STATUS_UNKNOWN_DEFAULT_OPEN_API,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -353,15 +326,6 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'status', must be one of '%s'",
-                $this->container['status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -461,7 +425,7 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets status
      *
-     * @return string|null
+     * @return \Onfido\Model\WorkflowRunStatus|null
      */
     public function getStatus()
     {
@@ -471,7 +435,7 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets status
      *
-     * @param string|null $status The status of the Workflow Run.
+     * @param \Onfido\Model\WorkflowRunStatus|null $status The status of the Workflow Run.
      *
      * @return self
      */
@@ -479,16 +443,6 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         if (is_null($status)) {
             throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'status', must be one of '%s'",
-                    $status,
-                    implode("', '", $allowedValues)
-                )
-            );
         }
         $this->container['status'] = $status;
 
@@ -552,7 +506,7 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets error
      *
-     * @return \Onfido\Model\WorkflowRunResponseError|null
+     * @return \Onfido\Model\WorkflowRunError|null
      */
     public function getError()
     {
@@ -562,7 +516,7 @@ class WorkflowRunResponse implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets error
      *
-     * @param \Onfido\Model\WorkflowRunResponseError|null $error error
+     * @param \Onfido\Model\WorkflowRunError|null $error Error object. Only set when the Workflow Run status is 'error'.
      *
      * @return self
      */
