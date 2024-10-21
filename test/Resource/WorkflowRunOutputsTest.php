@@ -4,6 +4,7 @@ namespace Onfido\Test\Resource;
 
 use Onfido\Test\OnfidoTestCase as OnfidoTestCase;
 use Onfido\Model\WorkflowRun as WorkflowRun;
+use Onfido\Model\WorkflowRunStatus as WorkflowRunStatus;
 use Onfido\Model\CompleteTaskBuilder as CompleteTaskBuilder;
 
 class WorkflowRunOutputsTest extends OnfidoTestCase
@@ -56,13 +57,13 @@ class WorkflowRunOutputsTest extends OnfidoTestCase
         $workflowRunOutputs = $this->repeatRequestUntilStatusChanges(
             $this->findWorkflowRunFn,
             [$workflowRunId],
-            WorkflowRun::STATUS_APPROVED
+            WorkflowRunStatus::APPROVED
         )->getOutput();
 
         // Can't compare output with profileData directly due to issues with types,
         // so converting the output into array and comparing key by key value
         // (without the address which also causes issues and is compared separately)
-        $keysExceptAddress = array_filter(array_keys($this->profileData), 
+        $keysExceptAddress = array_filter(array_keys($this->profileData),
             function($key) {
                 return $key !== 'address';
             }
@@ -96,7 +97,7 @@ class WorkflowRunOutputsTest extends OnfidoTestCase
                 'last_name' => 'Last'
             ]])
         );
-        
+
         $tasks = self::$onfido->listTasks($workflowRunId);
         $documentCaptureTaskId = $this->getTaskIdByPartialId($tasks, 'document');
         self::$onfido->completeTask(
@@ -120,7 +121,7 @@ class WorkflowRunOutputsTest extends OnfidoTestCase
         $workflowRunOutputs = $this->repeatRequestUntilStatusChanges(
             $this->findWorkflowRunFn,
             [$workflowRunId],
-            WorkflowRun::STATUS_APPROVED
+            WorkflowRunStatus::APPROVED
         )->getOutput();
 
         $documentReportOutput = (array) $workflowRunOutputs['doc'];
