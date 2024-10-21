@@ -61,7 +61,7 @@ class ApplicantBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
         'dob' => '\DateTime',
         'id_numbers' => '\Onfido\Model\IdNumber[]',
         'phone_number' => 'string',
-        'consents' => '\Onfido\Model\ConsentsBuilder',
+        'consents' => '\Onfido\Model\ApplicantConsentBuilder[]',
         'address' => '\Onfido\Model\AddressBuilder',
         'location' => '\Onfido\Model\LocationBuilder',
         'first_name' => 'string',
@@ -470,7 +470,7 @@ class ApplicantBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets consents
      *
-     * @return \Onfido\Model\ConsentsBuilder|null
+     * @return \Onfido\Model\ApplicantConsentBuilder[]|null
      */
     public function getConsents()
     {
@@ -480,7 +480,7 @@ class ApplicantBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets consents
      *
-     * @param \Onfido\Model\ConsentsBuilder|null $consents consents
+     * @param \Onfido\Model\ApplicantConsentBuilder[]|null $consents The applicant's consents
      *
      * @return self
      */

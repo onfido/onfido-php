@@ -1,6 +1,6 @@
 <?php
 /**
- * TaskItem
+ * WebhookEventPayloadResource
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * TaskItem Class Doc Comment
+ * WebhookEventPayloadResource Class Doc Comment
  *
  * @category Class
+ * @description The resource affected by this event.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
+class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'TaskItem';
+    protected static $openAPIModelName = 'webhook_event_payload_resource';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +59,20 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
+        'applicant_id' => 'string',
+        'created_at' => '\DateTime',
+        'updated_at' => '\DateTime',
+        'dashboard_url' => 'string',
+        'workflow_id' => 'string',
         'workflow_run_id' => 'string',
+        'workflow_version_id' => 'int',
         'task_def_id' => 'string',
         'task_def_version' => 'string',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'input' => 'object',
+        'output' => 'object',
+        'reasons' => 'string[]',
+        'link' => '\Onfido\Model\WorkflowRunLink',
+        'error' => '\Onfido\Model\WorkflowRunError'
     ];
 
     /**
@@ -74,11 +84,20 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
+        'applicant_id' => 'uuid',
+        'created_at' => 'date-time',
+        'updated_at' => 'date-time',
+        'dashboard_url' => null,
+        'workflow_id' => 'uuid',
         'workflow_run_id' => 'uuid',
+        'workflow_version_id' => null,
         'task_def_id' => null,
         'task_def_version' => null,
-        'created_at' => 'date-time',
-        'updated_at' => 'date-time'
+        'input' => null,
+        'output' => null,
+        'reasons' => null,
+        'link' => null,
+        'error' => null
     ];
 
     /**
@@ -88,11 +107,20 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
+        'applicant_id' => false,
+        'created_at' => false,
+        'updated_at' => false,
+        'dashboard_url' => false,
+        'workflow_id' => false,
         'workflow_run_id' => false,
+        'workflow_version_id' => false,
         'task_def_id' => false,
         'task_def_version' => true,
-        'created_at' => false,
-        'updated_at' => false
+        'input' => false,
+        'output' => true,
+        'reasons' => false,
+        'link' => false,
+        'error' => false
     ];
 
     /**
@@ -182,11 +210,20 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'applicant_id' => 'applicant_id',
+        'created_at' => 'created_at',
+        'updated_at' => 'updated_at',
+        'dashboard_url' => 'dashboard_url',
+        'workflow_id' => 'workflow_id',
         'workflow_run_id' => 'workflow_run_id',
+        'workflow_version_id' => 'workflow_version_id',
         'task_def_id' => 'task_def_id',
         'task_def_version' => 'task_def_version',
-        'created_at' => 'created_at',
-        'updated_at' => 'updated_at'
+        'input' => 'input',
+        'output' => 'output',
+        'reasons' => 'reasons',
+        'link' => 'link',
+        'error' => 'error'
     ];
 
     /**
@@ -196,11 +233,20 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
+        'applicant_id' => 'setApplicantId',
+        'created_at' => 'setCreatedAt',
+        'updated_at' => 'setUpdatedAt',
+        'dashboard_url' => 'setDashboardUrl',
+        'workflow_id' => 'setWorkflowId',
         'workflow_run_id' => 'setWorkflowRunId',
+        'workflow_version_id' => 'setWorkflowVersionId',
         'task_def_id' => 'setTaskDefId',
         'task_def_version' => 'setTaskDefVersion',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'input' => 'setInput',
+        'output' => 'setOutput',
+        'reasons' => 'setReasons',
+        'link' => 'setLink',
+        'error' => 'setError'
     ];
 
     /**
@@ -210,11 +256,20 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
+        'applicant_id' => 'getApplicantId',
+        'created_at' => 'getCreatedAt',
+        'updated_at' => 'getUpdatedAt',
+        'dashboard_url' => 'getDashboardUrl',
+        'workflow_id' => 'getWorkflowId',
         'workflow_run_id' => 'getWorkflowRunId',
+        'workflow_version_id' => 'getWorkflowVersionId',
         'task_def_id' => 'getTaskDefId',
         'task_def_version' => 'getTaskDefVersion',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'input' => 'getInput',
+        'output' => 'getOutput',
+        'reasons' => 'getReasons',
+        'link' => 'getLink',
+        'error' => 'getError'
     ];
 
     /**
@@ -275,11 +330,20 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('workflow_run_id', $data ?? [], null);
-        $this->setIfExists('task_def_id', $data ?? [], null);
-        $this->setIfExists('task_def_version', $data ?? [], null);
+        $this->setIfExists('applicant_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('dashboard_url', $data ?? [], null);
+        $this->setIfExists('workflow_id', $data ?? [], null);
+        $this->setIfExists('workflow_run_id', $data ?? [], null);
+        $this->setIfExists('workflow_version_id', $data ?? [], null);
+        $this->setIfExists('task_def_id', $data ?? [], null);
+        $this->setIfExists('task_def_version', $data ?? [], null);
+        $this->setIfExists('input', $data ?? [], null);
+        $this->setIfExists('output', $data ?? [], null);
+        $this->setIfExists('reasons', $data ?? [], null);
+        $this->setIfExists('link', $data ?? [], null);
+        $this->setIfExists('error', $data ?? [], null);
     }
 
     /**
@@ -308,10 +372,6 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!is_null($this->container['id']) && !preg_match("/^[0-9a-z_-]+$/", $this->container['id'])) {
-            $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^[0-9a-z_-]+$/.";
-        }
 
         if (!is_null($this->container['task_def_id']) && !preg_match("/^[0-9a-z_-]+$/", $this->container['task_def_id'])) {
             $invalidProperties[] = "invalid value for 'task_def_id', must be conform to the pattern /^[0-9a-z_-]+$/.";
@@ -345,7 +405,7 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id The identifier for the Task.
+     * @param string|null $id The identifier of the resource.
      *
      * @return self
      */
@@ -354,12 +414,142 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
         if (is_null($id)) {
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-
-        if ((!preg_match("/^[0-9a-z_-]+$/", ObjectSerializer::toString($id)))) {
-            throw new \InvalidArgumentException("invalid value for \$id when calling TaskItem., must conform to the pattern /^[0-9a-z_-]+$/.");
-        }
-
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets applicant_id
+     *
+     * @return string|null
+     */
+    public function getApplicantId()
+    {
+        return $this->container['applicant_id'];
+    }
+
+    /**
+     * Sets applicant_id
+     *
+     * @param string|null $applicant_id The unique identifier for the Applicant.
+     *
+     * @return self
+     */
+    public function setApplicantId($applicant_id)
+    {
+        if (is_null($applicant_id)) {
+            throw new \InvalidArgumentException('non-nullable applicant_id cannot be null');
+        }
+        $this->container['applicant_id'] = $applicant_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_at
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['created_at'];
+    }
+
+    /**
+     * Sets created_at
+     *
+     * @param \DateTime|null $created_at The date and time when the resource was created.
+     *
+     * @return self
+     */
+    public function setCreatedAt($created_at)
+    {
+        if (is_null($created_at)) {
+            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        }
+        $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets updated_at
+     *
+     * @return \DateTime|null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updated_at'];
+    }
+
+    /**
+     * Sets updated_at
+     *
+     * @param \DateTime|null $updated_at The date and time when the resource was last updated.
+     *
+     * @return self
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        if (is_null($updated_at)) {
+            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
+        }
+        $this->container['updated_at'] = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets dashboard_url
+     *
+     * @return string|null
+     */
+    public function getDashboardUrl()
+    {
+        return $this->container['dashboard_url'];
+    }
+
+    /**
+     * Sets dashboard_url
+     *
+     * @param string|null $dashboard_url The URL for viewing the resource on Onfido Dashboard.
+     *
+     * @return self
+     */
+    public function setDashboardUrl($dashboard_url)
+    {
+        if (is_null($dashboard_url)) {
+            throw new \InvalidArgumentException('non-nullable dashboard_url cannot be null');
+        }
+        $this->container['dashboard_url'] = $dashboard_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets workflow_id
+     *
+     * @return string|null
+     */
+    public function getWorkflowId()
+    {
+        return $this->container['workflow_id'];
+    }
+
+    /**
+     * Sets workflow_id
+     *
+     * @param string|null $workflow_id The unique identifier for the Workflow.
+     *
+     * @return self
+     */
+    public function setWorkflowId($workflow_id)
+    {
+        if (is_null($workflow_id)) {
+            throw new \InvalidArgumentException('non-nullable workflow_id cannot be null');
+        }
+        $this->container['workflow_id'] = $workflow_id;
 
         return $this;
     }
@@ -377,7 +567,7 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets workflow_run_id
      *
-     * @param string|null $workflow_run_id The workflow run id the task belongs to.
+     * @param string|null $workflow_run_id workflow_run_id
      *
      * @return self
      */
@@ -387,6 +577,33 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable workflow_run_id cannot be null');
         }
         $this->container['workflow_run_id'] = $workflow_run_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets workflow_version_id
+     *
+     * @return int|null
+     */
+    public function getWorkflowVersionId()
+    {
+        return $this->container['workflow_version_id'];
+    }
+
+    /**
+     * Sets workflow_version_id
+     *
+     * @param int|null $workflow_version_id The identifier for the Workflow version.
+     *
+     * @return self
+     */
+    public function setWorkflowVersionId($workflow_version_id)
+    {
+        if (is_null($workflow_version_id)) {
+            throw new \InvalidArgumentException('non-nullable workflow_version_id cannot be null');
+        }
+        $this->container['workflow_version_id'] = $workflow_version_id;
 
         return $this;
     }
@@ -415,7 +632,7 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         if ((!preg_match("/^[0-9a-z_-]+$/", ObjectSerializer::toString($task_def_id)))) {
-            throw new \InvalidArgumentException("invalid value for \$task_def_id when calling TaskItem., must conform to the pattern /^[0-9a-z_-]+$/.");
+            throw new \InvalidArgumentException("invalid value for \$task_def_id when calling WebhookEventPayloadResource., must conform to the pattern /^[0-9a-z_-]+$/.");
         }
 
         $this->container['task_def_id'] = $task_def_id;
@@ -458,55 +675,143 @@ class TaskItem implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets created_at
+     * Gets input
      *
-     * @return \DateTime|null
+     * @return object|null
      */
-    public function getCreatedAt()
+    public function getInput()
     {
-        return $this->container['created_at'];
+        return $this->container['input'];
     }
 
     /**
-     * Sets created_at
+     * Sets input
      *
-     * @param \DateTime|null $created_at The date and time when the Task was created.
+     * @param object|null $input Input object with the fields used by the Task execution.
      *
      * @return self
      */
-    public function setCreatedAt($created_at)
+    public function setInput($input)
     {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        if (is_null($input)) {
+            throw new \InvalidArgumentException('non-nullable input cannot be null');
         }
-        $this->container['created_at'] = $created_at;
+        $this->container['input'] = $input;
 
         return $this;
     }
 
     /**
-     * Gets updated_at
+     * Gets output
      *
-     * @return \DateTime|null
+     * @return object|null
      */
-    public function getUpdatedAt()
+    public function getOutput()
     {
-        return $this->container['updated_at'];
+        return $this->container['output'];
     }
 
     /**
-     * Sets updated_at
+     * Sets output
      *
-     * @param \DateTime|null $updated_at The date and time when the Task was last updated.
+     * @param object|null $output Output object with the fields produced by the Task execution.
      *
      * @return self
      */
-    public function setUpdatedAt($updated_at)
+    public function setOutput($output)
     {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
+        if (is_null($output)) {
+            array_push($this->openAPINullablesSetToNull, 'output');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('output', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['updated_at'] = $updated_at;
+        $this->container['output'] = $output;
+
+        return $this;
+    }
+
+    /**
+     * Gets reasons
+     *
+     * @return string[]|null
+     */
+    public function getReasons()
+    {
+        return $this->container['reasons'];
+    }
+
+    /**
+     * Sets reasons
+     *
+     * @param string[]|null $reasons The reasons the Workflow Run outcome was reached. Configurable when creating the Workflow Version.
+     *
+     * @return self
+     */
+    public function setReasons($reasons)
+    {
+        if (is_null($reasons)) {
+            throw new \InvalidArgumentException('non-nullable reasons cannot be null');
+        }
+        $this->container['reasons'] = $reasons;
+
+        return $this;
+    }
+
+    /**
+     * Gets link
+     *
+     * @return \Onfido\Model\WorkflowRunLink|null
+     */
+    public function getLink()
+    {
+        return $this->container['link'];
+    }
+
+    /**
+     * Sets link
+     *
+     * @param \Onfido\Model\WorkflowRunLink|null $link Object for the configuration of the Workflow Run link.
+     *
+     * @return self
+     */
+    public function setLink($link)
+    {
+        if (is_null($link)) {
+            throw new \InvalidArgumentException('non-nullable link cannot be null');
+        }
+        $this->container['link'] = $link;
+
+        return $this;
+    }
+
+    /**
+     * Gets error
+     *
+     * @return \Onfido\Model\WorkflowRunError|null
+     */
+    public function getError()
+    {
+        return $this->container['error'];
+    }
+
+    /**
+     * Sets error
+     *
+     * @param \Onfido\Model\WorkflowRunError|null $error Error object that details why a Workflow Run is in Error status.
+     *
+     * @return self
+     */
+    public function setError($error)
+    {
+        if (is_null($error)) {
+            throw new \InvalidArgumentException('non-nullable error cannot be null');
+        }
+        $this->container['error'] = $error;
 
         return $this;
     }

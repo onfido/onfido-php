@@ -293,6 +293,7 @@ class WatchlistAmlProperties implements ModelInterface, ArrayAccess, \JsonSerial
      * Gets records
      *
      * @return string[]|null
+     * @deprecated
      */
     public function getRecords()
     {
@@ -305,6 +306,7 @@ class WatchlistAmlProperties implements ModelInterface, ArrayAccess, \JsonSerial
      * @param string[]|null $records Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.
      *
      * @return self
+     * @deprecated
      */
     public function setRecords($records)
     {

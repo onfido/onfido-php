@@ -62,6 +62,12 @@ abstract class OnfidoTestCase extends TestCase
                     ]),
                     'email' => 'first.last@gmail.com',
                     'phone_number' => '351911111111',
+                    'consents' => [
+                        new Onfido\Model\ApplicantConsentBuilder([
+                            'name' => Onfido\Model\ApplicantConsentName::PRIVACY_NOTICES_READ,
+                            'granted' => true
+                        ])
+                    ]
                 ]
             ),
         );
@@ -106,7 +112,7 @@ abstract class OnfidoTestCase extends TestCase
     protected function uploadDocument(string $applicantId): Onfido\Model\Document
     {
         return self::$onfido->uploadDocument(
-            'passport',
+            Onfido\Model\DocumentTypes::PASSPORT,
             $applicantId,
             new \SplFileObject('test/media/sample_driving_licence.png')
         );
@@ -220,6 +226,7 @@ abstract class OnfidoTestCase extends TestCase
         $sleepTime = 1
     )
     {
+        $instance = null;
         $iteration = 0;
         while($iteration <= $maxRetries) {
             try {

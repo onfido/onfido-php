@@ -25,8 +25,8 @@ class QualifiedElectronicSignatureTest extends OnfidoTestCase
           ]
         ]);
         $workflowRun = $this->createWorkflowRun($workflowRunBuilder);
-  
-        $task = self::$onfido->listTasks($workflowRun["id"])[0];
+
+        $task = self::$onfido->listTasks($workflowRun["id"])[1];
         $workflowRunId = $workflowRun["id"];
         $taskId = $task->getId();
 

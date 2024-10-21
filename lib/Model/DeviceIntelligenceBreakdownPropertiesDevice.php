@@ -66,10 +66,6 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
         'emulator' => 'bool',
         'randomized_device' => 'bool',
         'fake_network_request' => 'bool',
-        'true_os' => 'string',
-        'os_anomaly' => 'string',
-        'rooted' => 'bool',
-        'remote_software' => 'bool',
         'ip_reputation' => 'string',
         'device_fingerprint_reuse' => 'int',
         'single_device_used' => 'bool',
@@ -94,10 +90,6 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
         'emulator' => null,
         'randomized_device' => null,
         'fake_network_request' => null,
-        'true_os' => null,
-        'os_anomaly' => null,
-        'rooted' => null,
-        'remote_software' => null,
         'ip_reputation' => null,
         'device_fingerprint_reuse' => null,
         'single_device_used' => null,
@@ -120,10 +112,6 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
         'emulator' => false,
         'randomized_device' => false,
         'fake_network_request' => false,
-        'true_os' => false,
-        'os_anomaly' => false,
-        'rooted' => false,
-        'remote_software' => false,
         'ip_reputation' => false,
         'device_fingerprint_reuse' => false,
         'single_device_used' => true,
@@ -226,10 +214,6 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
         'emulator' => 'emulator',
         'randomized_device' => 'randomized_device',
         'fake_network_request' => 'fake_network_request',
-        'true_os' => 'true_os',
-        'os_anomaly' => 'os_anomaly',
-        'rooted' => 'rooted',
-        'remote_software' => 'remote_software',
         'ip_reputation' => 'ip_reputation',
         'device_fingerprint_reuse' => 'device_fingerprint_reuse',
         'single_device_used' => 'single_device_used',
@@ -252,10 +236,6 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
         'emulator' => 'setEmulator',
         'randomized_device' => 'setRandomizedDevice',
         'fake_network_request' => 'setFakeNetworkRequest',
-        'true_os' => 'setTrueOs',
-        'os_anomaly' => 'setOsAnomaly',
-        'rooted' => 'setRooted',
-        'remote_software' => 'setRemoteSoftware',
         'ip_reputation' => 'setIpReputation',
         'device_fingerprint_reuse' => 'setDeviceFingerprintReuse',
         'single_device_used' => 'setSingleDeviceUsed',
@@ -278,10 +258,6 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
         'emulator' => 'getEmulator',
         'randomized_device' => 'getRandomizedDevice',
         'fake_network_request' => 'getFakeNetworkRequest',
-        'true_os' => 'getTrueOs',
-        'os_anomaly' => 'getOsAnomaly',
-        'rooted' => 'getRooted',
-        'remote_software' => 'getRemoteSoftware',
         'ip_reputation' => 'getIpReputation',
         'device_fingerprint_reuse' => 'getDeviceFingerprintReuse',
         'single_device_used' => 'getSingleDeviceUsed',
@@ -446,10 +422,6 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
         $this->setIfExists('emulator', $data ?? [], null);
         $this->setIfExists('randomized_device', $data ?? [], null);
         $this->setIfExists('fake_network_request', $data ?? [], null);
-        $this->setIfExists('true_os', $data ?? [], null);
-        $this->setIfExists('os_anomaly', $data ?? [], null);
-        $this->setIfExists('rooted', $data ?? [], null);
-        $this->setIfExists('remote_software', $data ?? [], null);
         $this->setIfExists('ip_reputation', $data ?? [], null);
         $this->setIfExists('device_fingerprint_reuse', $data ?? [], null);
         $this->setIfExists('single_device_used', $data ?? [], null);
@@ -803,122 +775,6 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
             throw new \InvalidArgumentException('non-nullable fake_network_request cannot be null');
         }
         $this->container['fake_network_request'] = $fake_network_request;
-
-        return $this;
-    }
-
-    /**
-     * Gets true_os
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getTrueOs()
-    {
-        return $this->container['true_os'];
-    }
-
-    /**
-     * Sets true_os
-     *
-     * @param string|null $true_os The true operating system of the device.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setTrueOs($true_os)
-    {
-        if (is_null($true_os)) {
-            throw new \InvalidArgumentException('non-nullable true_os cannot be null');
-        }
-        $this->container['true_os'] = $true_os;
-
-        return $this;
-    }
-
-    /**
-     * Gets os_anomaly
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getOsAnomaly()
-    {
-        return $this->container['os_anomaly'];
-    }
-
-    /**
-     * Sets os_anomaly
-     *
-     * @param string|null $os_anomaly The likelihood of an operating system anomaly between the true OS and the OS sent by the device.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setOsAnomaly($os_anomaly)
-    {
-        if (is_null($os_anomaly)) {
-            throw new \InvalidArgumentException('non-nullable os_anomaly cannot be null');
-        }
-        $this->container['os_anomaly'] = $os_anomaly;
-
-        return $this;
-    }
-
-    /**
-     * Gets rooted
-     *
-     * @return bool|null
-     * @deprecated
-     */
-    public function getRooted()
-    {
-        return $this->container['rooted'];
-    }
-
-    /**
-     * Sets rooted
-     *
-     * @param bool|null $rooted Whether the device is rooted.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setRooted($rooted)
-    {
-        if (is_null($rooted)) {
-            throw new \InvalidArgumentException('non-nullable rooted cannot be null');
-        }
-        $this->container['rooted'] = $rooted;
-
-        return $this;
-    }
-
-    /**
-     * Gets remote_software
-     *
-     * @return bool|null
-     * @deprecated
-     */
-    public function getRemoteSoftware()
-    {
-        return $this->container['remote_software'];
-    }
-
-    /**
-     * Sets remote_software
-     *
-     * @param bool|null $remote_software Whether the device is controlled via remote software.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setRemoteSoftware($remote_software)
-    {
-        if (is_null($remote_software)) {
-            throw new \InvalidArgumentException('non-nullable remote_software cannot be null');
-        }
-        $this->container['remote_software'] = $remote_software;
 
         return $this;
     }

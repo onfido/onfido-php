@@ -62,6 +62,7 @@ class CheckBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => 'bool',
         'tags' => 'string[]',
         'redirect_uri' => 'string',
+        'privacy_notices_read_consent_given' => 'bool',
         'report_names' => '\Onfido\Model\ReportName[]',
         'document_ids' => 'string[]',
         'asynchronous' => 'bool',
@@ -84,6 +85,7 @@ class CheckBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => null,
         'tags' => null,
         'redirect_uri' => null,
+        'privacy_notices_read_consent_given' => null,
         'report_names' => null,
         'document_ids' => 'uuid',
         'asynchronous' => null,
@@ -104,6 +106,7 @@ class CheckBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => false,
         'tags' => false,
         'redirect_uri' => false,
+        'privacy_notices_read_consent_given' => false,
         'report_names' => false,
         'document_ids' => false,
         'asynchronous' => false,
@@ -204,6 +207,7 @@ class CheckBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => 'applicant_provides_data',
         'tags' => 'tags',
         'redirect_uri' => 'redirect_uri',
+        'privacy_notices_read_consent_given' => 'privacy_notices_read_consent_given',
         'report_names' => 'report_names',
         'document_ids' => 'document_ids',
         'asynchronous' => 'asynchronous',
@@ -224,6 +228,7 @@ class CheckBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => 'setApplicantProvidesData',
         'tags' => 'setTags',
         'redirect_uri' => 'setRedirectUri',
+        'privacy_notices_read_consent_given' => 'setPrivacyNoticesReadConsentGiven',
         'report_names' => 'setReportNames',
         'document_ids' => 'setDocumentIds',
         'asynchronous' => 'setAsynchronous',
@@ -244,6 +249,7 @@ class CheckBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => 'getApplicantProvidesData',
         'tags' => 'getTags',
         'redirect_uri' => 'getRedirectUri',
+        'privacy_notices_read_consent_given' => 'getPrivacyNoticesReadConsentGiven',
         'report_names' => 'getReportNames',
         'document_ids' => 'getDocumentIds',
         'asynchronous' => 'getAsynchronous',
@@ -315,6 +321,7 @@ class CheckBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('applicant_provides_data', $data ?? [], false);
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('redirect_uri', $data ?? [], null);
+        $this->setIfExists('privacy_notices_read_consent_given', $data ?? [], null);
         $this->setIfExists('report_names', $data ?? [], null);
         $this->setIfExists('document_ids', $data ?? [], null);
         $this->setIfExists('asynchronous', $data ?? [], true);
@@ -503,6 +510,33 @@ class CheckBuilder implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable redirect_uri cannot be null');
         }
         $this->container['redirect_uri'] = $redirect_uri;
+
+        return $this;
+    }
+
+    /**
+     * Gets privacy_notices_read_consent_given
+     *
+     * @return bool|null
+     */
+    public function getPrivacyNoticesReadConsentGiven()
+    {
+        return $this->container['privacy_notices_read_consent_given'];
+    }
+
+    /**
+     * Sets privacy_notices_read_consent_given
+     *
+     * @param bool|null $privacy_notices_read_consent_given privacy_notices_read_consent_given
+     *
+     * @return self
+     */
+    public function setPrivacyNoticesReadConsentGiven($privacy_notices_read_consent_given)
+    {
+        if (is_null($privacy_notices_read_consent_given)) {
+            throw new \InvalidArgumentException('non-nullable privacy_notices_read_consent_given cannot be null');
+        }
+        $this->container['privacy_notices_read_consent_given'] = $privacy_notices_read_consent_given;
 
         return $this;
     }
