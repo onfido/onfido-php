@@ -20961,7 +20961,7 @@ class DefaultApi
      *
      * Upload a document
      *
-     * @param  string $type The type of document (required)
+     * @param  \Onfido\Model\DocumentTypes $type The type of document (required)
      * @param  string $applicant_id The ID of the applicant whose document is being uploaded. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $file_type The file type of the uploaded file (optional)
@@ -20986,7 +20986,7 @@ class DefaultApi
      *
      * Upload a document
      *
-     * @param  string $type The type of document (required)
+     * @param  \Onfido\Model\DocumentTypes $type The type of document (required)
      * @param  string $applicant_id The ID of the applicant whose document is being uploaded. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $file_type The file type of the uploaded file (optional)
@@ -21152,7 +21152,7 @@ class DefaultApi
      *
      * Upload a document
      *
-     * @param  string $type The type of document (required)
+     * @param  \Onfido\Model\DocumentTypes $type The type of document (required)
      * @param  string $applicant_id The ID of the applicant whose document is being uploaded. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $file_type The file type of the uploaded file (optional)
@@ -21180,7 +21180,7 @@ class DefaultApi
      *
      * Upload a document
      *
-     * @param  string $type The type of document (required)
+     * @param  \Onfido\Model\DocumentTypes $type The type of document (required)
      * @param  string $applicant_id The ID of the applicant whose document is being uploaded. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $file_type The file type of the uploaded file (optional)
@@ -21237,7 +21237,7 @@ class DefaultApi
     /**
      * Create request for operation 'uploadDocument'
      *
-     * @param  string $type The type of document (required)
+     * @param  \Onfido\Model\DocumentTypes $type The type of document (required)
      * @param  string $applicant_id The ID of the applicant whose document is being uploaded. (required)
      * @param  \SplFileObject $file The file to be uploaded. (required)
      * @param  string $file_type The file type of the uploaded file (optional)

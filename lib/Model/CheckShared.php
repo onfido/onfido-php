@@ -61,7 +61,8 @@ class CheckShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'string',
         'applicant_provides_data' => 'bool',
         'tags' => 'string[]',
-        'redirect_uri' => 'string'
+        'redirect_uri' => 'string',
+        'privacy_notices_read_consent_given' => 'bool'
     ];
 
     /**
@@ -76,7 +77,8 @@ class CheckShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'uuid',
         'applicant_provides_data' => null,
         'tags' => null,
-        'redirect_uri' => null
+        'redirect_uri' => null,
+        'privacy_notices_read_consent_given' => null
     ];
 
     /**
@@ -89,7 +91,8 @@ class CheckShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => false,
         'applicant_provides_data' => false,
         'tags' => false,
-        'redirect_uri' => false
+        'redirect_uri' => false,
+        'privacy_notices_read_consent_given' => false
     ];
 
     /**
@@ -182,7 +185,8 @@ class CheckShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'applicant_id',
         'applicant_provides_data' => 'applicant_provides_data',
         'tags' => 'tags',
-        'redirect_uri' => 'redirect_uri'
+        'redirect_uri' => 'redirect_uri',
+        'privacy_notices_read_consent_given' => 'privacy_notices_read_consent_given'
     ];
 
     /**
@@ -195,7 +199,8 @@ class CheckShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'setApplicantId',
         'applicant_provides_data' => 'setApplicantProvidesData',
         'tags' => 'setTags',
-        'redirect_uri' => 'setRedirectUri'
+        'redirect_uri' => 'setRedirectUri',
+        'privacy_notices_read_consent_given' => 'setPrivacyNoticesReadConsentGiven'
     ];
 
     /**
@@ -208,7 +213,8 @@ class CheckShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_id' => 'getApplicantId',
         'applicant_provides_data' => 'getApplicantProvidesData',
         'tags' => 'getTags',
-        'redirect_uri' => 'getRedirectUri'
+        'redirect_uri' => 'getRedirectUri',
+        'privacy_notices_read_consent_given' => 'getPrivacyNoticesReadConsentGiven'
     ];
 
     /**
@@ -273,6 +279,7 @@ class CheckShared implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('applicant_provides_data', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('redirect_uri', $data ?? [], null);
+        $this->setIfExists('privacy_notices_read_consent_given', $data ?? [], null);
     }
 
     /**
@@ -451,6 +458,33 @@ class CheckShared implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable redirect_uri cannot be null');
         }
         $this->container['redirect_uri'] = $redirect_uri;
+
+        return $this;
+    }
+
+    /**
+     * Gets privacy_notices_read_consent_given
+     *
+     * @return bool|null
+     */
+    public function getPrivacyNoticesReadConsentGiven()
+    {
+        return $this->container['privacy_notices_read_consent_given'];
+    }
+
+    /**
+     * Sets privacy_notices_read_consent_given
+     *
+     * @param bool|null $privacy_notices_read_consent_given privacy_notices_read_consent_given
+     *
+     * @return self
+     */
+    public function setPrivacyNoticesReadConsentGiven($privacy_notices_read_consent_given)
+    {
+        if (is_null($privacy_notices_read_consent_given)) {
+            throw new \InvalidArgumentException('non-nullable privacy_notices_read_consent_given cannot be null');
+        }
+        $this->container['privacy_notices_read_consent_given'] = $privacy_notices_read_consent_given;
 
         return $this;
     }

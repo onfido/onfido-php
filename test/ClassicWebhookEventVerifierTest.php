@@ -6,14 +6,12 @@ use PHPUnit\Framework\TestCase;
 
 use Onfido as Onfido;
 
-class WebhookEventVerifierTest extends TestCase
+class ClassicWebhookEventVerifierTest extends TestCase
 {
     private static $rawEvent = "{\"payload\":{\"resource_type\":\"check\",\"action\":\"check.completed\",\"object\":{\"id\":\"f2302f45-227d-413d-ad61-09ec077a086a\",\"status\":\"complete\",\"completed_at_iso8601\":\"2024-04-04T09:21:21Z\",\"href\":\"https://api.onfido.com/v3.6/checks/f2302f45-227d-413d-ad61-09ec077a086a\"}}}";
     private static $webhookToken = "wU99mE6jJ7nXOLFwZ0tJymM1lpI15pZh";
 
     private static $webhookEventVerifier;
-
-    private static $expectedEvent;
 
     /**
      * Setup before running any test case
@@ -21,18 +19,6 @@ class WebhookEventVerifierTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         self::$webhookEventVerifier = new Onfido\WebhookEventVerifier(self::$webhookToken);
-
-        self::$expectedEvent = new Onfido\Model\WebhookEvent(
-            [ 'payload' => new Onfido\Model\WebhookEventPayload(
-                [ 'action' => Onfido\Model\WebhookEventType::CHECK_COMPLETED,
-                    'resource_type' => 'check',
-                  'object' => new Onfido\Model\WebhookEventPayloadObject(
-                    [ 'id' => 'f2302f45-227d-413d-ad61-09ec077a086a',
-                        'href' => 'https://api.onfido.com/v3.6/checks/f2302f45-227d-413d-ad61-09ec077a086a',
-                        'status' => 'complete',
-                        'completed_at_iso8601' => '2024-04-04T09:21:21Z' ])
-                ])
-            ]);
     }
 
     public function testValidSignature(): void
@@ -44,10 +30,10 @@ class WebhookEventVerifierTest extends TestCase
         $object = $payload->getObject();
 
         $this->assertSame(Onfido\Model\WebhookEventType::CHECK_COMPLETED, $payload->getAction());
-        $this->assertSame('check', $payload->getResourceType());
+        $this->assertSame(Onfido\Model\WebhookEventResourceType::CHECK, $payload->getResourceType());
         $this->assertSame('f2302f45-227d-413d-ad61-09ec077a086a', $object->getId());
         $this->assertSame('https://api.onfido.com/v3.6/checks/f2302f45-227d-413d-ad61-09ec077a086a', $object->getHref());
-        $this->assertSame('complete', $object->getStatus());
+        $this->assertSame(Onfido\Model\WebhookEventObjectStatus::COMPLETE, $object->getStatus());
         $this->assertSame('2024-04-04T09:21:21+00:00', $object->getCompletedAtIso8601()->format('c'));
     }
 

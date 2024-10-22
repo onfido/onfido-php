@@ -57,10 +57,7 @@ class DeviceIntelligenceBreakdownPropertiesIp implements ModelInterface, ArrayAc
       * @var string[]
       */
     protected static $openAPITypes = [
-        'address' => 'string',
-        'vpn_detection' => 'string',
-        'proxy_detection' => 'string',
-        'type' => 'string'
+        'address' => 'string'
     ];
 
     /**
@@ -71,10 +68,7 @@ class DeviceIntelligenceBreakdownPropertiesIp implements ModelInterface, ArrayAc
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'address' => null,
-        'vpn_detection' => null,
-        'proxy_detection' => null,
-        'type' => null
+        'address' => null
     ];
 
     /**
@@ -83,10 +77,7 @@ class DeviceIntelligenceBreakdownPropertiesIp implements ModelInterface, ArrayAc
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'address' => false,
-        'vpn_detection' => false,
-        'proxy_detection' => false,
-        'type' => false
+        'address' => false
     ];
 
     /**
@@ -175,10 +166,7 @@ class DeviceIntelligenceBreakdownPropertiesIp implements ModelInterface, ArrayAc
      * @var string[]
      */
     protected static $attributeMap = [
-        'address' => 'address',
-        'vpn_detection' => 'vpn_detection',
-        'proxy_detection' => 'proxy_detection',
-        'type' => 'type'
+        'address' => 'address'
     ];
 
     /**
@@ -187,10 +175,7 @@ class DeviceIntelligenceBreakdownPropertiesIp implements ModelInterface, ArrayAc
      * @var string[]
      */
     protected static $setters = [
-        'address' => 'setAddress',
-        'vpn_detection' => 'setVpnDetection',
-        'proxy_detection' => 'setProxyDetection',
-        'type' => 'setType'
+        'address' => 'setAddress'
     ];
 
     /**
@@ -199,10 +184,7 @@ class DeviceIntelligenceBreakdownPropertiesIp implements ModelInterface, ArrayAc
      * @var string[]
      */
     protected static $getters = [
-        'address' => 'getAddress',
-        'vpn_detection' => 'getVpnDetection',
-        'proxy_detection' => 'getProxyDetection',
-        'type' => 'getType'
+        'address' => 'getAddress'
     ];
 
     /**
@@ -263,9 +245,6 @@ class DeviceIntelligenceBreakdownPropertiesIp implements ModelInterface, ArrayAc
     public function __construct(array $data = null)
     {
         $this->setIfExists('address', $data ?? [], null);
-        $this->setIfExists('vpn_detection', $data ?? [], null);
-        $this->setIfExists('proxy_detection', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
     }
 
     /**
@@ -333,93 +312,6 @@ class DeviceIntelligenceBreakdownPropertiesIp implements ModelInterface, ArrayAc
             throw new \InvalidArgumentException('non-nullable address cannot be null');
         }
         $this->container['address'] = $address;
-
-        return $this;
-    }
-
-    /**
-     * Gets vpn_detection
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getVpnDetection()
-    {
-        return $this->container['vpn_detection'];
-    }
-
-    /**
-     * Sets vpn_detection
-     *
-     * @param string|null $vpn_detection The likelihood of the network connection being a VPN.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setVpnDetection($vpn_detection)
-    {
-        if (is_null($vpn_detection)) {
-            throw new \InvalidArgumentException('non-nullable vpn_detection cannot be null');
-        }
-        $this->container['vpn_detection'] = $vpn_detection;
-
-        return $this;
-    }
-
-    /**
-     * Gets proxy_detection
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getProxyDetection()
-    {
-        return $this->container['proxy_detection'];
-    }
-
-    /**
-     * Sets proxy_detection
-     *
-     * @param string|null $proxy_detection The likelihood of the network connection being a Proxy.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setProxyDetection($proxy_detection)
-    {
-        if (is_null($proxy_detection)) {
-            throw new \InvalidArgumentException('non-nullable proxy_detection cannot be null');
-        }
-        $this->container['proxy_detection'] = $proxy_detection;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string|null $type The type of organization that owns this IP address.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setType($type)
-    {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-        $this->container['type'] = $type;
 
         return $this;
     }

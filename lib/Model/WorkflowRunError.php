@@ -1,6 +1,6 @@
 <?php
 /**
- * WorkflowRunSharedLink
+ * WorkflowRunError
  *
  * PHP version 7.4
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WorkflowRunSharedLink Class Doc Comment
+ * WorkflowRunError Class Doc Comment
  *
  * @category Class
- * @description Object for the configuration of the Workflow Run link.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSerializable
+class WorkflowRunError implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'workflow_run_shared_link';
+    protected static $openAPIModelName = 'workflow_run_error';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +57,8 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'url' => 'string',
-        'completed_redirect_url' => 'string',
-        'expired_redirect_url' => 'string',
-        'expires_at' => '\DateTime',
-        'language' => 'string'
+        'type' => 'string',
+        'message' => 'string'
     ];
 
     /**
@@ -73,11 +69,8 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'url' => null,
-        'completed_redirect_url' => null,
-        'expired_redirect_url' => null,
-        'expires_at' => 'date-time',
-        'language' => null
+        'type' => null,
+        'message' => null
     ];
 
     /**
@@ -86,11 +79,8 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'url' => false,
-        'completed_redirect_url' => false,
-        'expired_redirect_url' => false,
-        'expires_at' => false,
-        'language' => false
+        'type' => false,
+        'message' => false
     ];
 
     /**
@@ -179,11 +169,8 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'url' => 'url',
-        'completed_redirect_url' => 'completed_redirect_url',
-        'expired_redirect_url' => 'expired_redirect_url',
-        'expires_at' => 'expires_at',
-        'language' => 'language'
+        'type' => 'type',
+        'message' => 'message'
     ];
 
     /**
@@ -192,11 +179,8 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'url' => 'setUrl',
-        'completed_redirect_url' => 'setCompletedRedirectUrl',
-        'expired_redirect_url' => 'setExpiredRedirectUrl',
-        'expires_at' => 'setExpiresAt',
-        'language' => 'setLanguage'
+        'type' => 'setType',
+        'message' => 'setMessage'
     ];
 
     /**
@@ -205,11 +189,8 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'url' => 'getUrl',
-        'completed_redirect_url' => 'getCompletedRedirectUrl',
-        'expired_redirect_url' => 'getExpiredRedirectUrl',
-        'expires_at' => 'getExpiresAt',
-        'language' => 'getLanguage'
+        'type' => 'getType',
+        'message' => 'getMessage'
     ];
 
     /**
@@ -253,33 +234,6 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
         return self::$openAPIModelName;
     }
 
-    public const LANGUAGE_EN_US = 'en_US';
-    public const LANGUAGE_DE_DE = 'de_DE';
-    public const LANGUAGE_ES_ES = 'es_ES';
-    public const LANGUAGE_FR_FR = 'fr_FR';
-    public const LANGUAGE_IT_IT = 'it_IT';
-    public const LANGUAGE_PT_PT = 'pt_PT';
-    public const LANGUAGE_NL_NL = 'nl_NL';
-    public const LANGUAGE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getLanguageAllowableValues()
-    {
-        return [
-            self::LANGUAGE_EN_US,
-            self::LANGUAGE_DE_DE,
-            self::LANGUAGE_ES_ES,
-            self::LANGUAGE_FR_FR,
-            self::LANGUAGE_IT_IT,
-            self::LANGUAGE_PT_PT,
-            self::LANGUAGE_NL_NL,
-            self::LANGUAGE_UNKNOWN_DEFAULT_OPEN_API,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -296,11 +250,8 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('url', $data ?? [], null);
-        $this->setIfExists('completed_redirect_url', $data ?? [], null);
-        $this->setIfExists('expired_redirect_url', $data ?? [], null);
-        $this->setIfExists('expires_at', $data ?? [], null);
-        $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
     }
 
     /**
@@ -330,15 +281,6 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getLanguageAllowableValues();
-        if (!is_null($this->container['language']) && !in_array($this->container['language'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'language', must be one of '%s'",
-                $this->container['language'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -355,146 +297,55 @@ class WorkflowRunSharedLink implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets url
+     * Gets type
      *
      * @return string|null
      */
-    public function getUrl()
+    public function getType()
     {
-        return $this->container['url'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets url
+     * Sets type
      *
-     * @param string|null $url Link to access the Workflow Run without the need to integrate with Onfido's SDKs.
+     * @param string|null $type The type of error.
      *
      * @return self
      */
-    public function setUrl($url)
+    public function setType($type)
     {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
-        $this->container['url'] = $url;
+        $this->container['type'] = $type;
 
         return $this;
     }
 
     /**
-     * Gets completed_redirect_url
+     * Gets message
      *
      * @return string|null
      */
-    public function getCompletedRedirectUrl()
+    public function getMessage()
     {
-        return $this->container['completed_redirect_url'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets completed_redirect_url
+     * Sets message
      *
-     * @param string|null $completed_redirect_url When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.
+     * @param string|null $message A textual description of the error.
      *
      * @return self
      */
-    public function setCompletedRedirectUrl($completed_redirect_url)
+    public function setMessage($message)
     {
-        if (is_null($completed_redirect_url)) {
-            throw new \InvalidArgumentException('non-nullable completed_redirect_url cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $this->container['completed_redirect_url'] = $completed_redirect_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets expired_redirect_url
-     *
-     * @return string|null
-     */
-    public function getExpiredRedirectUrl()
-    {
-        return $this->container['expired_redirect_url'];
-    }
-
-    /**
-     * Sets expired_redirect_url
-     *
-     * @param string|null $expired_redirect_url When the link has expired, the user will be immediately redirected to this URL instead of seeing the default Onfido error message.
-     *
-     * @return self
-     */
-    public function setExpiredRedirectUrl($expired_redirect_url)
-    {
-        if (is_null($expired_redirect_url)) {
-            throw new \InvalidArgumentException('non-nullable expired_redirect_url cannot be null');
-        }
-        $this->container['expired_redirect_url'] = $expired_redirect_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets expires_at
-     *
-     * @return \DateTime|null
-     */
-    public function getExpiresAt()
-    {
-        return $this->container['expires_at'];
-    }
-
-    /**
-     * Sets expires_at
-     *
-     * @param \DateTime|null $expires_at Date and time when the link will expire.
-     *
-     * @return self
-     */
-    public function setExpiresAt($expires_at)
-    {
-        if (is_null($expires_at)) {
-            throw new \InvalidArgumentException('non-nullable expires_at cannot be null');
-        }
-        $this->container['expires_at'] = $expires_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets language
-     *
-     * @return string|null
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string|null $language The code for the language when the workflow run is acessed using the link.
-     *
-     * @return self
-     */
-    public function setLanguage($language)
-    {
-        if (is_null($language)) {
-            throw new \InvalidArgumentException('non-nullable language cannot be null');
-        }
-        $allowedValues = $this->getLanguageAllowableValues();
-        if (!in_array($language, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'language', must be one of '%s'",
-                    $language,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['language'] = $language;
+        $this->container['message'] = $message;
 
         return $this;
     }

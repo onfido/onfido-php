@@ -60,12 +60,14 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'created_at' => '\DateTime',
         'href' => 'string',
-        'status' => 'string',
+        'status' => '\Onfido\Model\CheckStatus',
         'result' => 'string',
         'form_uri' => 'string',
         'results_uri' => 'string',
         'report_ids' => 'string[]',
-        'sandbox' => 'bool'
+        'sandbox' => 'bool',
+        'paused' => 'bool',
+        'version' => 'string'
     ];
 
     /**
@@ -84,7 +86,9 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => null,
         'results_uri' => null,
         'report_ids' => 'uuid',
-        'sandbox' => null
+        'sandbox' => null,
+        'paused' => null,
+        'version' => null
     ];
 
     /**
@@ -101,7 +105,9 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => false,
         'results_uri' => false,
         'report_ids' => false,
-        'sandbox' => false
+        'sandbox' => false,
+        'paused' => false,
+        'version' => false
     ];
 
     /**
@@ -198,7 +204,9 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => 'form_uri',
         'results_uri' => 'results_uri',
         'report_ids' => 'report_ids',
-        'sandbox' => 'sandbox'
+        'sandbox' => 'sandbox',
+        'paused' => 'paused',
+        'version' => 'version'
     ];
 
     /**
@@ -215,7 +223,9 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => 'setFormUri',
         'results_uri' => 'setResultsUri',
         'report_ids' => 'setReportIds',
-        'sandbox' => 'setSandbox'
+        'sandbox' => 'setSandbox',
+        'paused' => 'setPaused',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -232,7 +242,9 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => 'getFormUri',
         'results_uri' => 'getResultsUri',
         'report_ids' => 'getReportIds',
-        'sandbox' => 'getSandbox'
+        'sandbox' => 'getSandbox',
+        'paused' => 'getPaused',
+        'version' => 'getVersion'
     ];
 
     /**
@@ -276,34 +288,9 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const STATUS_IN_PROGRESS = 'in_progress';
-    public const STATUS_AWAITING_APPLICANT = 'awaiting_applicant';
-    public const STATUS_COMPLETE = 'complete';
-    public const STATUS_WITHDRAWN = 'withdrawn';
-    public const STATUS_PAUSED = 'paused';
-    public const STATUS_REOPENED = 'reopened';
-    public const STATUS_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
     public const RESULT_CLEAR = 'clear';
     public const RESULT_CONSIDER = 'consider';
     public const RESULT_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStatusAllowableValues()
-    {
-        return [
-            self::STATUS_IN_PROGRESS,
-            self::STATUS_AWAITING_APPLICANT,
-            self::STATUS_COMPLETE,
-            self::STATUS_WITHDRAWN,
-            self::STATUS_PAUSED,
-            self::STATUS_REOPENED,
-            self::STATUS_UNKNOWN_DEFAULT_OPEN_API,
-        ];
-    }
 
     /**
      * Gets allowable values of the enum
@@ -343,6 +330,8 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('results_uri', $data ?? [], null);
         $this->setIfExists('report_ids', $data ?? [], null);
         $this->setIfExists('sandbox', $data ?? [], null);
+        $this->setIfExists('paused', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
     }
 
     /**
@@ -375,15 +364,6 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'status', must be one of '%s'",
-                $this->container['status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         $allowedValues = $this->getResultAllowableValues();
         if (!is_null($this->container['result']) && !in_array($this->container['result'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -492,7 +472,7 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets status
      *
-     * @return string|null
+     * @return \Onfido\Model\CheckStatus|null
      */
     public function getStatus()
     {
@@ -502,7 +482,7 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status The current state of the check in the checking process.
+     * @param \Onfido\Model\CheckStatus|null $status status
      *
      * @return self
      */
@@ -510,16 +490,6 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         if (is_null($status)) {
             throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'status', must be one of '%s'",
-                    $status,
-                    implode("', '", $allowedValues)
-                )
-            );
         }
         $this->container['status'] = $status;
 
@@ -667,6 +637,60 @@ class CheckResponse implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable sandbox cannot be null');
         }
         $this->container['sandbox'] = $sandbox;
+
+        return $this;
+    }
+
+    /**
+     * Gets paused
+     *
+     * @return bool|null
+     */
+    public function getPaused()
+    {
+        return $this->container['paused'];
+    }
+
+    /**
+     * Sets paused
+     *
+     * @param bool|null $paused paused
+     *
+     * @return self
+     */
+    public function setPaused($paused)
+    {
+        if (is_null($paused)) {
+            throw new \InvalidArgumentException('non-nullable paused cannot be null');
+        }
+        $this->container['paused'] = $paused;
+
+        return $this;
+    }
+
+    /**
+     * Gets version
+     *
+     * @return string|null
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param string|null $version version
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
+        $this->container['version'] = $version;
 
         return $this;
     }

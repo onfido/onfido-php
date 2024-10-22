@@ -62,15 +62,18 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => 'bool',
         'tags' => 'string[]',
         'redirect_uri' => 'string',
+        'privacy_notices_read_consent_given' => 'bool',
         'id' => 'string',
         'created_at' => '\DateTime',
         'href' => 'string',
-        'status' => 'string',
+        'status' => '\Onfido\Model\CheckStatus',
         'result' => 'string',
         'form_uri' => 'string',
         'results_uri' => 'string',
         'report_ids' => 'string[]',
-        'sandbox' => 'bool'
+        'sandbox' => 'bool',
+        'paused' => 'bool',
+        'version' => 'string'
     ];
 
     /**
@@ -86,6 +89,7 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => null,
         'tags' => null,
         'redirect_uri' => null,
+        'privacy_notices_read_consent_given' => null,
         'id' => 'uuid',
         'created_at' => 'date-time',
         'href' => null,
@@ -94,7 +98,9 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => null,
         'results_uri' => null,
         'report_ids' => 'uuid',
-        'sandbox' => null
+        'sandbox' => null,
+        'paused' => null,
+        'version' => null
     ];
 
     /**
@@ -108,6 +114,7 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => false,
         'tags' => false,
         'redirect_uri' => false,
+        'privacy_notices_read_consent_given' => false,
         'id' => false,
         'created_at' => false,
         'href' => false,
@@ -116,7 +123,9 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => false,
         'results_uri' => false,
         'report_ids' => false,
-        'sandbox' => false
+        'sandbox' => false,
+        'paused' => false,
+        'version' => false
     ];
 
     /**
@@ -210,6 +219,7 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => 'applicant_provides_data',
         'tags' => 'tags',
         'redirect_uri' => 'redirect_uri',
+        'privacy_notices_read_consent_given' => 'privacy_notices_read_consent_given',
         'id' => 'id',
         'created_at' => 'created_at',
         'href' => 'href',
@@ -218,7 +228,9 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => 'form_uri',
         'results_uri' => 'results_uri',
         'report_ids' => 'report_ids',
-        'sandbox' => 'sandbox'
+        'sandbox' => 'sandbox',
+        'paused' => 'paused',
+        'version' => 'version'
     ];
 
     /**
@@ -232,6 +244,7 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => 'setApplicantProvidesData',
         'tags' => 'setTags',
         'redirect_uri' => 'setRedirectUri',
+        'privacy_notices_read_consent_given' => 'setPrivacyNoticesReadConsentGiven',
         'id' => 'setId',
         'created_at' => 'setCreatedAt',
         'href' => 'setHref',
@@ -240,7 +253,9 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => 'setFormUri',
         'results_uri' => 'setResultsUri',
         'report_ids' => 'setReportIds',
-        'sandbox' => 'setSandbox'
+        'sandbox' => 'setSandbox',
+        'paused' => 'setPaused',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -254,6 +269,7 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'applicant_provides_data' => 'getApplicantProvidesData',
         'tags' => 'getTags',
         'redirect_uri' => 'getRedirectUri',
+        'privacy_notices_read_consent_given' => 'getPrivacyNoticesReadConsentGiven',
         'id' => 'getId',
         'created_at' => 'getCreatedAt',
         'href' => 'getHref',
@@ -262,7 +278,9 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         'form_uri' => 'getFormUri',
         'results_uri' => 'getResultsUri',
         'report_ids' => 'getReportIds',
-        'sandbox' => 'getSandbox'
+        'sandbox' => 'getSandbox',
+        'paused' => 'getPaused',
+        'version' => 'getVersion'
     ];
 
     /**
@@ -306,34 +324,9 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const STATUS_IN_PROGRESS = 'in_progress';
-    public const STATUS_AWAITING_APPLICANT = 'awaiting_applicant';
-    public const STATUS_COMPLETE = 'complete';
-    public const STATUS_WITHDRAWN = 'withdrawn';
-    public const STATUS_PAUSED = 'paused';
-    public const STATUS_REOPENED = 'reopened';
-    public const STATUS_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
     public const RESULT_CLEAR = 'clear';
     public const RESULT_CONSIDER = 'consider';
     public const RESULT_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStatusAllowableValues()
-    {
-        return [
-            self::STATUS_IN_PROGRESS,
-            self::STATUS_AWAITING_APPLICANT,
-            self::STATUS_COMPLETE,
-            self::STATUS_WITHDRAWN,
-            self::STATUS_PAUSED,
-            self::STATUS_REOPENED,
-            self::STATUS_UNKNOWN_DEFAULT_OPEN_API,
-        ];
-    }
 
     /**
      * Gets allowable values of the enum
@@ -369,6 +362,7 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('applicant_provides_data', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('redirect_uri', $data ?? [], null);
+        $this->setIfExists('privacy_notices_read_consent_given', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('href', $data ?? [], null);
@@ -378,6 +372,8 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('results_uri', $data ?? [], null);
         $this->setIfExists('report_ids', $data ?? [], null);
         $this->setIfExists('sandbox', $data ?? [], null);
+        $this->setIfExists('paused', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
     }
 
     /**
@@ -413,15 +409,6 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'status', must be one of '%s'",
-                $this->container['status'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         $allowedValues = $this->getResultAllowableValues();
         if (!is_null($this->container['result']) && !in_array($this->container['result'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -582,6 +569,33 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets privacy_notices_read_consent_given
+     *
+     * @return bool|null
+     */
+    public function getPrivacyNoticesReadConsentGiven()
+    {
+        return $this->container['privacy_notices_read_consent_given'];
+    }
+
+    /**
+     * Sets privacy_notices_read_consent_given
+     *
+     * @param bool|null $privacy_notices_read_consent_given privacy_notices_read_consent_given
+     *
+     * @return self
+     */
+    public function setPrivacyNoticesReadConsentGiven($privacy_notices_read_consent_given)
+    {
+        if (is_null($privacy_notices_read_consent_given)) {
+            throw new \InvalidArgumentException('non-nullable privacy_notices_read_consent_given cannot be null');
+        }
+        $this->container['privacy_notices_read_consent_given'] = $privacy_notices_read_consent_given;
+
+        return $this;
+    }
+
+    /**
      * Gets id
      *
      * @return string
@@ -665,7 +679,7 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets status
      *
-     * @return string|null
+     * @return \Onfido\Model\CheckStatus|null
      */
     public function getStatus()
     {
@@ -675,7 +689,7 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string|null $status The current state of the check in the checking process.
+     * @param \Onfido\Model\CheckStatus|null $status status
      *
      * @return self
      */
@@ -683,16 +697,6 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         if (is_null($status)) {
             throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'status', must be one of '%s'",
-                    $status,
-                    implode("', '", $allowedValues)
-                )
-            );
         }
         $this->container['status'] = $status;
 
@@ -840,6 +844,60 @@ class Check implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable sandbox cannot be null');
         }
         $this->container['sandbox'] = $sandbox;
+
+        return $this;
+    }
+
+    /**
+     * Gets paused
+     *
+     * @return bool|null
+     */
+    public function getPaused()
+    {
+        return $this->container['paused'];
+    }
+
+    /**
+     * Sets paused
+     *
+     * @param bool|null $paused paused
+     *
+     * @return self
+     */
+    public function setPaused($paused)
+    {
+        if (is_null($paused)) {
+            throw new \InvalidArgumentException('non-nullable paused cannot be null');
+        }
+        $this->container['paused'] = $paused;
+
+        return $this;
+    }
+
+    /**
+     * Gets version
+     *
+     * @return string|null
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param string|null $version version
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
+        $this->container['version'] = $version;
 
         return $this;
     }

@@ -61,7 +61,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
         'workflow_id' => 'string',
         'tags' => 'string[]',
         'customer_user_id' => 'string',
-        'link' => '\Onfido\Model\WorkflowRunSharedLink',
+        'link' => '\Onfido\Model\WorkflowRunLink',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -471,7 +471,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets link
      *
-     * @return \Onfido\Model\WorkflowRunSharedLink|null
+     * @return \Onfido\Model\WorkflowRunLink|null
      */
     public function getLink()
     {
@@ -481,7 +481,7 @@ class WorkflowRunShared implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets link
      *
-     * @param \Onfido\Model\WorkflowRunSharedLink|null $link link
+     * @param \Onfido\Model\WorkflowRunLink|null $link Object for the configuration of the Workflow Run link.
      *
      * @return self
      */

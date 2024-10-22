@@ -57,10 +57,10 @@ class WebhookEventPayload implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'resource_type' => 'string',
+        'resource_type' => '\Onfido\Model\WebhookEventResourceType',
         'action' => '\Onfido\Model\WebhookEventType',
         'object' => '\Onfido\Model\WebhookEventPayloadObject',
-        'resource' => 'object'
+        'resource' => '\Onfido\Model\WebhookEventPayloadResource'
     ];
 
     /**
@@ -316,7 +316,7 @@ class WebhookEventPayload implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets resource_type
      *
-     * @return string
+     * @return \Onfido\Model\WebhookEventResourceType
      */
     public function getResourceType()
     {
@@ -326,7 +326,7 @@ class WebhookEventPayload implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets resource_type
      *
-     * @param string $resource_type Indicates the resource affected by this event.
+     * @param \Onfido\Model\WebhookEventResourceType $resource_type Indicates the resource affected by this event.
      *
      * @return self
      */
@@ -397,7 +397,7 @@ class WebhookEventPayload implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets resource
      *
-     * @return object|null
+     * @return \Onfido\Model\WebhookEventPayloadResource|null
      */
     public function getResource()
     {
@@ -407,7 +407,7 @@ class WebhookEventPayload implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets resource
      *
-     * @param object|null $resource The resource affected by this event.
+     * @param \Onfido\Model\WebhookEventPayloadResource|null $resource resource
      *
      * @return self
      */

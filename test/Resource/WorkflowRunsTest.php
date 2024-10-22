@@ -4,6 +4,7 @@ namespace Onfido\Test\Resource;
 
 use Onfido\Test\OnfidoTestCase as OnfidoTestCase;
 use Onfido\Model\WorkflowRun as WorkflowRun;
+use Onfido\Model\WorkflowRunStatus as WorkflowRunStatus;
 use Onfido\Model\WorkflowRunBuilder as WorkflowRunBuilder;
 
 class WorkflowRunsTest extends OnfidoTestCase
@@ -22,7 +23,7 @@ class WorkflowRunsTest extends OnfidoTestCase
     public function testCreateWorkflowRun(): void
     {
         $this->assertSame($this->workflowId, $this->workflowRun->getWorkflowId());
-        $this->assertSame(WorkflowRun::STATUS_AWAITING_INPUT, $this->workflowRun->getStatus());
+        $this->assertSame(WorkflowRunStatus::AWAITING_INPUT, $this->workflowRun->getStatus());
     }
 
     public function testCreateWorkflowRunWithCustomInputs(): void
@@ -40,7 +41,7 @@ class WorkflowRunsTest extends OnfidoTestCase
         $workflowRun = $this->createWorkflowRun($workflowRunBuilder);
 
         $this->assertSame($workflowId, $workflowRun->getWorkflowId());
-        $this->assertSame(WorkflowRun::STATUS_APPROVED, $workflowRun->getStatus());
+        $this->assertSame(WorkflowRunStatus::APPROVED, $workflowRun->getStatus());
     }
 
     public function testListWorkflowRuns(): void
@@ -72,7 +73,7 @@ class WorkflowRunsTest extends OnfidoTestCase
         $this->repeatRequestUntilStatusChanges(
           $findWorkflowRunFn,
           [$workflowRunId],
-          WorkflowRun::STATUS_APPROVED
+          WorkflowRunStatus::APPROVED
         )->getOutput();
 
         $workflowTimelineFileData = self::$onfido->createTimelineFile($workflowRunId);
@@ -96,7 +97,7 @@ class WorkflowRunsTest extends OnfidoTestCase
         $this->repeatRequestUntilStatusChanges(
           $findWorkflowRunFn,
           [$workflowRunId],
-          WorkflowRun::STATUS_APPROVED
+          WorkflowRunStatus::APPROVED
         )->getOutput();
 
         $workflowTimelineFileId = self::$onfido->createTimelineFile($workflowRunId)
@@ -106,7 +107,7 @@ class WorkflowRunsTest extends OnfidoTestCase
           $getTimelineFileFn,
           [$workflowRunId, $workflowTimelineFileId]
         );
-          
+
         $this->assertGreaterThan(0, $file->getSize());
     }
 }

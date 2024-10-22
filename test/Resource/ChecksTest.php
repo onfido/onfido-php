@@ -5,6 +5,7 @@ namespace Onfido\Test\Resource;
 use Onfido\Test\OnfidoTestCase as OnfidoTestCase;
 use Onfido\Model\ReportName as ReportName;
 use Onfido\Model\Check as Check;
+use Onfido\Model\CheckStatus as CheckStatus;
 use Onfido\Model\CheckBuilder as CheckBuilder;
 use Onfido\Model\UsDrivingLicenceBuilder as UsDrivingLicenceBuilder;
 
@@ -31,7 +32,7 @@ class ChecksTest extends OnfidoTestCase
     public function testCreateCheck(): void
     {
         $this->assertSame($this->applicantId, $this->check->getApplicantId());
-        $this->assertSame(Check::STATUS_IN_PROGRESS, $this->check->getStatus());
+        $this->assertSame(CheckStatus::IN_PROGRESS, $this->check->getStatus());
         $this->assertSame(2, sizeOf($this->check->getReportIds()));
     }
 
@@ -41,11 +42,13 @@ class ChecksTest extends OnfidoTestCase
           'applicant_id' => $this->applicantId,
           'document_ids' => [$this->documentId],
           'report_names' => [ReportName::DOCUMENT],
-          'consider' => [ReportName::DOCUMENT]
+          'consider' => [ReportName::DOCUMENT],
+          'privacy_notices_read_consent_given' => true
         ]);
 
         $check = $this->createCheck($checkBuilder);
         $this->assertSame($this->applicantId, $check->getApplicantId());
+        $this->assertSame(true, $check->getPrivacyNoticesReadConsentGiven());
     }
 
     public function testCreateDrivingLicenceCheck(): void

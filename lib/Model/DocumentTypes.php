@@ -92,6 +92,16 @@ class DocumentTypes
 
     public const INTERNATIONAL_DRIVING_LICENCE = 'international_driving_licence';
 
+    public const HOME_OFFICE_LETTER = 'home_office_letter';
+
+    public const BIRTH_CERTIFICATE = 'birth_certificate';
+
+    public const VEHICLE_REGISTRATION_CERTIFICATE = 'vehicle_registration_certificate';
+
+    public const FORM_FOR_AFFIXING_THE_VISA = 'form_for_affixing_the_visa';
+
+    public const IDENTIFICATION_NUMBER_DOCUMENT = 'identification_number_document';
+
     public const UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -126,6 +136,11 @@ class DocumentTypes
             self::PROFESSIONAL_QUALIFICATION_CARD,
             self::CONSULAR_ID,
             self::INTERNATIONAL_DRIVING_LICENCE,
+            self::HOME_OFFICE_LETTER,
+            self::BIRTH_CERTIFICATE,
+            self::VEHICLE_REGISTRATION_CERTIFICATE,
+            self::FORM_FOR_AFFIXING_THE_VISA,
+            self::IDENTIFICATION_NUMBER_DOCUMENT,
             self::UNKNOWN_DEFAULT_OPEN_API
         ];
     }

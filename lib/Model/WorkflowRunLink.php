@@ -1,6 +1,6 @@
 <?php
 /**
- * ConsentItem
+ * WorkflowRunLink
  *
  * PHP version 7.4
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * ConsentItem Class Doc Comment
+ * WorkflowRunLink Class Doc Comment
  *
  * @category Class
- * @description The applicant&#39;s consents
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
+class WorkflowRunLink implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Consent_item';
+    protected static $openAPIModelName = 'workflow_run_link';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +57,11 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'granted' => 'bool'
+        'url' => 'string',
+        'completed_redirect_url' => 'string',
+        'expired_redirect_url' => 'string',
+        'expires_at' => '\DateTime',
+        'language' => 'string'
     ];
 
     /**
@@ -70,8 +72,11 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'granted' => null
+        'url' => null,
+        'completed_redirect_url' => null,
+        'expired_redirect_url' => null,
+        'expires_at' => 'date-time',
+        'language' => null
     ];
 
     /**
@@ -80,8 +85,11 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'granted' => false
+        'url' => false,
+        'completed_redirect_url' => true,
+        'expired_redirect_url' => true,
+        'expires_at' => true,
+        'language' => true
     ];
 
     /**
@@ -170,8 +178,11 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'granted' => 'granted'
+        'url' => 'url',
+        'completed_redirect_url' => 'completed_redirect_url',
+        'expired_redirect_url' => 'expired_redirect_url',
+        'expires_at' => 'expires_at',
+        'language' => 'language'
     ];
 
     /**
@@ -180,8 +191,11 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'granted' => 'setGranted'
+        'url' => 'setUrl',
+        'completed_redirect_url' => 'setCompletedRedirectUrl',
+        'expired_redirect_url' => 'setExpiredRedirectUrl',
+        'expires_at' => 'setExpiresAt',
+        'language' => 'setLanguage'
     ];
 
     /**
@@ -190,8 +204,11 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'granted' => 'getGranted'
+        'url' => 'getUrl',
+        'completed_redirect_url' => 'getCompletedRedirectUrl',
+        'expired_redirect_url' => 'getExpiredRedirectUrl',
+        'expires_at' => 'getExpiresAt',
+        'language' => 'getLanguage'
     ];
 
     /**
@@ -235,23 +252,31 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const NAME_PRIVACY_NOTICES_READ = 'privacy_notices_read';
-    public const NAME_SSN_VERIFICATION = 'ssn_verification';
-    public const NAME_PHONE_NUMBER_VERIFICATION = 'phone_number_verification';
-    public const NAME_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+    public const LANGUAGE_EN_US = 'en_US';
+    public const LANGUAGE_DE_DE = 'de_DE';
+    public const LANGUAGE_ES_ES = 'es_ES';
+    public const LANGUAGE_FR_FR = 'fr_FR';
+    public const LANGUAGE_IT_IT = 'it_IT';
+    public const LANGUAGE_PT_PT = 'pt_PT';
+    public const LANGUAGE_NL_NL = 'nl_NL';
+    public const LANGUAGE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getNameAllowableValues()
+    public function getLanguageAllowableValues()
     {
         return [
-            self::NAME_PRIVACY_NOTICES_READ,
-            self::NAME_SSN_VERIFICATION,
-            self::NAME_PHONE_NUMBER_VERIFICATION,
-            self::NAME_UNKNOWN_DEFAULT_OPEN_API,
+            self::LANGUAGE_EN_US,
+            self::LANGUAGE_DE_DE,
+            self::LANGUAGE_ES_ES,
+            self::LANGUAGE_FR_FR,
+            self::LANGUAGE_IT_IT,
+            self::LANGUAGE_PT_PT,
+            self::LANGUAGE_NL_NL,
+            self::LANGUAGE_UNKNOWN_DEFAULT_OPEN_API,
         ];
     }
 
@@ -270,8 +295,11 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('granted', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('completed_redirect_url', $data ?? [], null);
+        $this->setIfExists('expired_redirect_url', $data ?? [], null);
+        $this->setIfExists('expires_at', $data ?? [], null);
+        $this->setIfExists('language', $data ?? [], null);
     }
 
     /**
@@ -301,21 +329,15 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        $allowedValues = $this->getNameAllowableValues();
-        if (!is_null($this->container['name']) && !in_array($this->container['name'], $allowedValues, true)) {
+        $allowedValues = $this->getLanguageAllowableValues();
+        if (!is_null($this->container['language']) && !in_array($this->container['language'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'name', must be one of '%s'",
-                $this->container['name'],
+                "invalid value '%s' for 'language', must be one of '%s'",
+                $this->container['language'],
                 implode("', '", $allowedValues)
             );
         }
 
-        if ($this->container['granted'] === null) {
-            $invalidProperties[] = "'granted' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -332,65 +354,174 @@ class ConsentItem implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets name
+     * Gets url
      *
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getUrl()
     {
-        return $this->container['name'];
+        return $this->container['url'];
     }
 
     /**
-     * Sets name
+     * Sets url
      *
-     * @param string $name name
+     * @param string|null $url Link to access the Workflow Run without the need to integrate with Onfido's SDKs.
      *
      * @return self
      */
-    public function setName($name)
+    public function setUrl($url)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
         }
-        $allowedValues = $this->getNameAllowableValues();
-        if (!in_array($name, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'name', must be one of '%s'",
-                    $name,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['name'] = $name;
+        $this->container['url'] = $url;
 
         return $this;
     }
 
     /**
-     * Gets granted
+     * Gets completed_redirect_url
      *
-     * @return bool
+     * @return string|null
      */
-    public function getGranted()
+    public function getCompletedRedirectUrl()
     {
-        return $this->container['granted'];
+        return $this->container['completed_redirect_url'];
     }
 
     /**
-     * Sets granted
+     * Sets completed_redirect_url
      *
-     * @param bool $granted granted
+     * @param string|null $completed_redirect_url When the interactive section of the Workflow Run has completed successfully, the user will be redirected to this URL instead of seeing the default Onfido 'thank you' page.
      *
      * @return self
      */
-    public function setGranted($granted)
+    public function setCompletedRedirectUrl($completed_redirect_url)
     {
-        if (is_null($granted)) {
-            throw new \InvalidArgumentException('non-nullable granted cannot be null');
+        if (is_null($completed_redirect_url)) {
+            array_push($this->openAPINullablesSetToNull, 'completed_redirect_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('completed_redirect_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['granted'] = $granted;
+        $this->container['completed_redirect_url'] = $completed_redirect_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets expired_redirect_url
+     *
+     * @return string|null
+     */
+    public function getExpiredRedirectUrl()
+    {
+        return $this->container['expired_redirect_url'];
+    }
+
+    /**
+     * Sets expired_redirect_url
+     *
+     * @param string|null $expired_redirect_url When the link has expired, the user will be immediately redirected to this URL instead of seeing the default Onfido error message.
+     *
+     * @return self
+     */
+    public function setExpiredRedirectUrl($expired_redirect_url)
+    {
+        if (is_null($expired_redirect_url)) {
+            array_push($this->openAPINullablesSetToNull, 'expired_redirect_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expired_redirect_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['expired_redirect_url'] = $expired_redirect_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets expires_at
+     *
+     * @return \DateTime|null
+     */
+    public function getExpiresAt()
+    {
+        return $this->container['expires_at'];
+    }
+
+    /**
+     * Sets expires_at
+     *
+     * @param \DateTime|null $expires_at Date and time when the link will expire.
+     *
+     * @return self
+     */
+    public function setExpiresAt($expires_at)
+    {
+        if (is_null($expires_at)) {
+            array_push($this->openAPINullablesSetToNull, 'expires_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expires_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['expires_at'] = $expires_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets language
+     *
+     * @return string|null
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string|null $language The code for the language when the workflow run is acessed using the link.
+     *
+     * @return self
+     */
+    public function setLanguage($language)
+    {
+        if (is_null($language)) {
+            array_push($this->openAPINullablesSetToNull, 'language');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('language', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getLanguageAllowableValues();
+        if (!is_null($language) && !in_array($language, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'language', must be one of '%s'",
+                    $language,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['language'] = $language;
 
         return $this;
     }

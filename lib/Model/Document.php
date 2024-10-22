@@ -58,7 +58,7 @@ class Document implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'file_type' => 'string',
-        'type' => 'string',
+        'type' => '\Onfido\Model\DocumentTypes',
         'side' => 'string',
         'issuing_country' => '\Onfido\Model\CountryCodes',
         'applicant_id' => 'string',
@@ -458,7 +458,7 @@ class Document implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets type
      *
-     * @return string|null
+     * @return \Onfido\Model\DocumentTypes|null
      */
     public function getType()
     {
@@ -468,7 +468,7 @@ class Document implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets type
      *
-     * @param string|null $type The type of document
+     * @param \Onfido\Model\DocumentTypes|null $type The type of document
      *
      * @return self
      */
