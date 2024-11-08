@@ -5,6 +5,7 @@ namespace Onfido\Test\Resource;
 use Onfido\Test\OnfidoTestCase as OnfidoTestCase;
 use Onfido\Model\DocumentReport as DocumentReport;
 use Onfido\Model\FacialSimilarityPhotoReport as FacialSimilarityPhotoReport;
+use Onfido\Model\DocumentWithAddressInformationReport as DocumentWithAddressInformationReport;
 use Onfido\Model\ReportName as ReportName;
 use Onfido\Model\ReportStatus as ReportStatus;
 
@@ -74,6 +75,30 @@ class ReportSchemasTest extends OnfidoTestCase
                             ->getBreakdown()->getFaceMatch()->getResult(), "clear");
         $this->assertSame($facialSimilarityReport->getBreakdown()->getVisualAuthenticity()
                             ->getBreakdown()->getSpoofingDetection()->getProperties()->getScore(), 0.9512);
+    }
+
+    public function testSchemaOfDocumentWithAddressInformationReportIsValid(): void
+    {
+        $reportId = $this->createCheck(
+            null,
+            $this->applicantId,
+            $this->documentId,
+            [ReportName::DOCUMENT_WITH_ADDRESS_INFORMATION]
+        )->getReportIds()[0];
+
+        $report = $this->repeatRequestUntilStatusChanges(
+            $this->findReportFn,
+            [$reportId],
+            ReportStatus::COMPLETE
+        );
+
+        $this->assertInstanceOf(
+            DocumentWithAddressInformationReport::class,
+            $report
+        );
+
+        $this->assertSame($report->getName(), "document_with_address_information");
+        $this->assertSame($report->getProperties()->getBarcode()->getDocumentType(), "driving_licence");
     }
 }
 

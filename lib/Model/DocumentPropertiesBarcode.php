@@ -1,6 +1,6 @@
 <?php
 /**
- * DocumentPropertiesBarcodeInner
+ * DocumentPropertiesBarcode
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * DocumentPropertiesBarcodeInner Class Doc Comment
+ * DocumentPropertiesBarcode Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DocumentPropertiesBarcodeInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class DocumentPropertiesBarcode implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DocumentPropertiesBarcodeInner implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'document_properties_barcode_inner';
+    protected static $openAPIModelName = 'document_properties_barcode';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
