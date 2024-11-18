@@ -66,6 +66,10 @@ class FacialSimilarityMotionReport implements ModelInterface, ArrayAccess, \Json
         'check_id' => 'string',
         'documents' => '\Onfido\Model\ReportDocument[]',
         'name' => '\Onfido\Model\ReportName',
+        'live_photos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
+        'live_videos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
+        'motion_captures' => '\Onfido\Model\FacialSimilarityReportMedia[]',
+        'id_photos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
         'breakdown' => '\Onfido\Model\FacialSimilarityMotionBreakdown',
         'properties' => '\Onfido\Model\FacialSimilarityMotionProperties'
     ];
@@ -87,6 +91,10 @@ class FacialSimilarityMotionReport implements ModelInterface, ArrayAccess, \Json
         'check_id' => 'uuid',
         'documents' => null,
         'name' => null,
+        'live_photos' => null,
+        'live_videos' => null,
+        'motion_captures' => null,
+        'id_photos' => null,
         'breakdown' => null,
         'properties' => null
     ];
@@ -106,6 +114,10 @@ class FacialSimilarityMotionReport implements ModelInterface, ArrayAccess, \Json
         'check_id' => false,
         'documents' => false,
         'name' => false,
+        'live_photos' => false,
+        'live_videos' => false,
+        'motion_captures' => false,
+        'id_photos' => false,
         'breakdown' => false,
         'properties' => false
     ];
@@ -205,6 +217,10 @@ class FacialSimilarityMotionReport implements ModelInterface, ArrayAccess, \Json
         'check_id' => 'check_id',
         'documents' => 'documents',
         'name' => 'name',
+        'live_photos' => 'live_photos',
+        'live_videos' => 'live_videos',
+        'motion_captures' => 'motion_captures',
+        'id_photos' => 'id_photos',
         'breakdown' => 'breakdown',
         'properties' => 'properties'
     ];
@@ -224,6 +240,10 @@ class FacialSimilarityMotionReport implements ModelInterface, ArrayAccess, \Json
         'check_id' => 'setCheckId',
         'documents' => 'setDocuments',
         'name' => 'setName',
+        'live_photos' => 'setLivePhotos',
+        'live_videos' => 'setLiveVideos',
+        'motion_captures' => 'setMotionCaptures',
+        'id_photos' => 'setIdPhotos',
         'breakdown' => 'setBreakdown',
         'properties' => 'setProperties'
     ];
@@ -243,6 +263,10 @@ class FacialSimilarityMotionReport implements ModelInterface, ArrayAccess, \Json
         'check_id' => 'getCheckId',
         'documents' => 'getDocuments',
         'name' => 'getName',
+        'live_photos' => 'getLivePhotos',
+        'live_videos' => 'getLiveVideos',
+        'motion_captures' => 'getMotionCaptures',
+        'id_photos' => 'getIdPhotos',
         'breakdown' => 'getBreakdown',
         'properties' => 'getProperties'
     ];
@@ -313,6 +337,10 @@ class FacialSimilarityMotionReport implements ModelInterface, ArrayAccess, \Json
         $this->setIfExists('check_id', $data ?? [], null);
         $this->setIfExists('documents', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('live_photos', $data ?? [], null);
+        $this->setIfExists('live_videos', $data ?? [], null);
+        $this->setIfExists('motion_captures', $data ?? [], null);
+        $this->setIfExists('id_photos', $data ?? [], null);
         $this->setIfExists('breakdown', $data ?? [], null);
         $this->setIfExists('properties', $data ?? [], null);
     }
@@ -604,6 +632,114 @@ class FacialSimilarityMotionReport implements ModelInterface, ArrayAccess, \Json
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets live_photos
+     *
+     * @return \Onfido\Model\FacialSimilarityReportMedia[]|null
+     */
+    public function getLivePhotos()
+    {
+        return $this->container['live_photos'];
+    }
+
+    /**
+     * Sets live_photos
+     *
+     * @param \Onfido\Model\FacialSimilarityReportMedia[]|null $live_photos Array of objects with live photo ids that were used in the Onfido engine.
+     *
+     * @return self
+     */
+    public function setLivePhotos($live_photos)
+    {
+        if (is_null($live_photos)) {
+            throw new \InvalidArgumentException('non-nullable live_photos cannot be null');
+        }
+        $this->container['live_photos'] = $live_photos;
+
+        return $this;
+    }
+
+    /**
+     * Gets live_videos
+     *
+     * @return \Onfido\Model\FacialSimilarityReportMedia[]|null
+     */
+    public function getLiveVideos()
+    {
+        return $this->container['live_videos'];
+    }
+
+    /**
+     * Sets live_videos
+     *
+     * @param \Onfido\Model\FacialSimilarityReportMedia[]|null $live_videos Array of objects with live video ids that were used in the Onfido engine.
+     *
+     * @return self
+     */
+    public function setLiveVideos($live_videos)
+    {
+        if (is_null($live_videos)) {
+            throw new \InvalidArgumentException('non-nullable live_videos cannot be null');
+        }
+        $this->container['live_videos'] = $live_videos;
+
+        return $this;
+    }
+
+    /**
+     * Gets motion_captures
+     *
+     * @return \Onfido\Model\FacialSimilarityReportMedia[]|null
+     */
+    public function getMotionCaptures()
+    {
+        return $this->container['motion_captures'];
+    }
+
+    /**
+     * Sets motion_captures
+     *
+     * @param \Onfido\Model\FacialSimilarityReportMedia[]|null $motion_captures Array of objects with motion capture ids that were used in the Onfido engine.
+     *
+     * @return self
+     */
+    public function setMotionCaptures($motion_captures)
+    {
+        if (is_null($motion_captures)) {
+            throw new \InvalidArgumentException('non-nullable motion_captures cannot be null');
+        }
+        $this->container['motion_captures'] = $motion_captures;
+
+        return $this;
+    }
+
+    /**
+     * Gets id_photos
+     *
+     * @return \Onfido\Model\FacialSimilarityReportMedia[]|null
+     */
+    public function getIdPhotos()
+    {
+        return $this->container['id_photos'];
+    }
+
+    /**
+     * Sets id_photos
+     *
+     * @param \Onfido\Model\FacialSimilarityReportMedia[]|null $id_photos Array of objects with id photo ids that were used in the Onfido engine.
+     *
+     * @return self
+     */
+    public function setIdPhotos($id_photos)
+    {
+        if (is_null($id_photos)) {
+            throw new \InvalidArgumentException('non-nullable id_photos cannot be null');
+        }
+        $this->container['id_photos'] = $id_photos;
 
         return $this;
     }
