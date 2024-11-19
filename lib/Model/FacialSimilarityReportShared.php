@@ -1,6 +1,6 @@
 <?php
 /**
- * FacialSimilarityPhotoReport
+ * FacialSimilarityReportShared
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * FacialSimilarityPhotoReport Class Doc Comment
+ * FacialSimilarityReportShared Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonSerializable
+class FacialSimilarityReportShared implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'facial_similarity_photo_report';
+    protected static $openAPIModelName = 'facial_similarity_report_shared';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,21 +57,10 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'created_at' => '\DateTime',
-        'href' => 'string',
-        'status' => '\Onfido\Model\ReportStatus',
-        'result' => '\Onfido\Model\ReportResult',
-        'sub_result' => '\Onfido\Model\ReportSubResult',
-        'check_id' => 'string',
-        'documents' => '\Onfido\Model\ReportDocument[]',
-        'name' => '\Onfido\Model\ReportName',
         'live_photos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
         'live_videos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
         'motion_captures' => '\Onfido\Model\FacialSimilarityReportMedia[]',
-        'id_photos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
-        'breakdown' => '\Onfido\Model\FacialSimilarityPhotoBreakdown',
-        'properties' => '\Onfido\Model\FacialSimilarityPhotoProperties'
+        'id_photos' => '\Onfido\Model\FacialSimilarityReportMedia[]'
     ];
 
     /**
@@ -82,21 +71,10 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'created_at' => 'date-time',
-        'href' => null,
-        'status' => null,
-        'result' => null,
-        'sub_result' => null,
-        'check_id' => 'uuid',
-        'documents' => null,
-        'name' => null,
         'live_photos' => null,
         'live_videos' => null,
         'motion_captures' => null,
-        'id_photos' => null,
-        'breakdown' => null,
-        'properties' => null
+        'id_photos' => null
     ];
 
     /**
@@ -105,21 +83,10 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'created_at' => false,
-        'href' => false,
-        'status' => false,
-        'result' => false,
-        'sub_result' => false,
-        'check_id' => false,
-        'documents' => false,
-        'name' => false,
         'live_photos' => false,
         'live_videos' => false,
         'motion_captures' => false,
-        'id_photos' => false,
-        'breakdown' => false,
-        'properties' => false
+        'id_photos' => false
     ];
 
     /**
@@ -208,21 +175,10 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'created_at' => 'created_at',
-        'href' => 'href',
-        'status' => 'status',
-        'result' => 'result',
-        'sub_result' => 'sub_result',
-        'check_id' => 'check_id',
-        'documents' => 'documents',
-        'name' => 'name',
         'live_photos' => 'live_photos',
         'live_videos' => 'live_videos',
         'motion_captures' => 'motion_captures',
-        'id_photos' => 'id_photos',
-        'breakdown' => 'breakdown',
-        'properties' => 'properties'
+        'id_photos' => 'id_photos'
     ];
 
     /**
@@ -231,21 +187,10 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'created_at' => 'setCreatedAt',
-        'href' => 'setHref',
-        'status' => 'setStatus',
-        'result' => 'setResult',
-        'sub_result' => 'setSubResult',
-        'check_id' => 'setCheckId',
-        'documents' => 'setDocuments',
-        'name' => 'setName',
         'live_photos' => 'setLivePhotos',
         'live_videos' => 'setLiveVideos',
         'motion_captures' => 'setMotionCaptures',
-        'id_photos' => 'setIdPhotos',
-        'breakdown' => 'setBreakdown',
-        'properties' => 'setProperties'
+        'id_photos' => 'setIdPhotos'
     ];
 
     /**
@@ -254,21 +199,10 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'created_at' => 'getCreatedAt',
-        'href' => 'getHref',
-        'status' => 'getStatus',
-        'result' => 'getResult',
-        'sub_result' => 'getSubResult',
-        'check_id' => 'getCheckId',
-        'documents' => 'getDocuments',
-        'name' => 'getName',
         'live_photos' => 'getLivePhotos',
         'live_videos' => 'getLiveVideos',
         'motion_captures' => 'getMotionCaptures',
-        'id_photos' => 'getIdPhotos',
-        'breakdown' => 'getBreakdown',
-        'properties' => 'getProperties'
+        'id_photos' => 'getIdPhotos'
     ];
 
     /**
@@ -328,21 +262,10 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('href', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('result', $data ?? [], null);
-        $this->setIfExists('sub_result', $data ?? [], null);
-        $this->setIfExists('check_id', $data ?? [], null);
-        $this->setIfExists('documents', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('live_photos', $data ?? [], null);
         $this->setIfExists('live_videos', $data ?? [], null);
         $this->setIfExists('motion_captures', $data ?? [], null);
         $this->setIfExists('id_photos', $data ?? [], null);
-        $this->setIfExists('breakdown', $data ?? [], null);
-        $this->setIfExists('properties', $data ?? [], null);
     }
 
     /**
@@ -372,12 +295,6 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -392,249 +309,6 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string $id The unique identifier for the report. Read-only.
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at The date and time at which the report was first initiated. Read-only.
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets href
-     *
-     * @return string|null
-     */
-    public function getHref()
-    {
-        return $this->container['href'];
-    }
-
-    /**
-     * Sets href
-     *
-     * @param string|null $href The API endpoint to retrieve the report. Read-only.
-     *
-     * @return self
-     */
-    public function setHref($href)
-    {
-        if (is_null($href)) {
-            throw new \InvalidArgumentException('non-nullable href cannot be null');
-        }
-        $this->container['href'] = $href;
-
-        return $this;
-    }
-
-    /**
-     * Gets status
-     *
-     * @return \Onfido\Model\ReportStatus|null
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param \Onfido\Model\ReportStatus|null $status status
-     *
-     * @return self
-     */
-    public function setStatus($status)
-    {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets result
-     *
-     * @return \Onfido\Model\ReportResult|null
-     */
-    public function getResult()
-    {
-        return $this->container['result'];
-    }
-
-    /**
-     * Sets result
-     *
-     * @param \Onfido\Model\ReportResult|null $result result
-     *
-     * @return self
-     */
-    public function setResult($result)
-    {
-        if (is_null($result)) {
-            throw new \InvalidArgumentException('non-nullable result cannot be null');
-        }
-        $this->container['result'] = $result;
-
-        return $this;
-    }
-
-    /**
-     * Gets sub_result
-     *
-     * @return \Onfido\Model\ReportSubResult|null
-     */
-    public function getSubResult()
-    {
-        return $this->container['sub_result'];
-    }
-
-    /**
-     * Sets sub_result
-     *
-     * @param \Onfido\Model\ReportSubResult|null $sub_result sub_result
-     *
-     * @return self
-     */
-    public function setSubResult($sub_result)
-    {
-        if (is_null($sub_result)) {
-            throw new \InvalidArgumentException('non-nullable sub_result cannot be null');
-        }
-        $this->container['sub_result'] = $sub_result;
-
-        return $this;
-    }
-
-    /**
-     * Gets check_id
-     *
-     * @return string|null
-     */
-    public function getCheckId()
-    {
-        return $this->container['check_id'];
-    }
-
-    /**
-     * Sets check_id
-     *
-     * @param string|null $check_id The ID of the check to which the report belongs. Read-only.
-     *
-     * @return self
-     */
-    public function setCheckId($check_id)
-    {
-        if (is_null($check_id)) {
-            throw new \InvalidArgumentException('non-nullable check_id cannot be null');
-        }
-        $this->container['check_id'] = $check_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets documents
-     *
-     * @return \Onfido\Model\ReportDocument[]|null
-     */
-    public function getDocuments()
-    {
-        return $this->container['documents'];
-    }
-
-    /**
-     * Sets documents
-     *
-     * @param \Onfido\Model\ReportDocument[]|null $documents Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]
-     *
-     * @return self
-     */
-    public function setDocuments($documents)
-    {
-        if (is_null($documents)) {
-            throw new \InvalidArgumentException('non-nullable documents cannot be null');
-        }
-        $this->container['documents'] = $documents;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return \Onfido\Model\ReportName
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param \Onfido\Model\ReportName $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
 
     /**
      * Gets live_photos
@@ -740,60 +414,6 @@ class FacialSimilarityPhotoReport implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable id_photos cannot be null');
         }
         $this->container['id_photos'] = $id_photos;
-
-        return $this;
-    }
-
-    /**
-     * Gets breakdown
-     *
-     * @return \Onfido\Model\FacialSimilarityPhotoBreakdown|null
-     */
-    public function getBreakdown()
-    {
-        return $this->container['breakdown'];
-    }
-
-    /**
-     * Sets breakdown
-     *
-     * @param \Onfido\Model\FacialSimilarityPhotoBreakdown|null $breakdown breakdown
-     *
-     * @return self
-     */
-    public function setBreakdown($breakdown)
-    {
-        if (is_null($breakdown)) {
-            throw new \InvalidArgumentException('non-nullable breakdown cannot be null');
-        }
-        $this->container['breakdown'] = $breakdown;
-
-        return $this;
-    }
-
-    /**
-     * Gets properties
-     *
-     * @return \Onfido\Model\FacialSimilarityPhotoProperties|null
-     */
-    public function getProperties()
-    {
-        return $this->container['properties'];
-    }
-
-    /**
-     * Sets properties
-     *
-     * @param \Onfido\Model\FacialSimilarityPhotoProperties|null $properties properties
-     *
-     * @return self
-     */
-    public function setProperties($properties)
-    {
-        if (is_null($properties)) {
-            throw new \InvalidArgumentException('non-nullable properties cannot be null');
-        }
-        $this->container['properties'] = $properties;
 
         return $this;
     }

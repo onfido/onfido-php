@@ -102,6 +102,98 @@ class DocumentTypes
 
     public const IDENTIFICATION_NUMBER_DOCUMENT = 'identification_number_document';
 
+    public const ADOPTION_CERTIFICATE = 'adoption_certificate';
+
+    public const BANK_BUILDING_SOCIETY_STATEMENT = 'bank_building_society_statement';
+
+    public const BANK_STATEMENT = 'bank_statement';
+
+    public const BENEFIT_LETTERS = 'benefit_letters';
+
+    public const CBT = 'cbt';
+
+    public const CERTIFICATE_OF_SPONSORSHIP = 'certificate_of_sponsorship';
+
+    public const CHARACTER_REFERENCE = 'character_reference';
+
+    public const CIVIL_PARTNERSHIP_CERTIFICATE = 'civil_partnership_certificate';
+
+    public const COUNCIL_TAX = 'council_tax';
+
+    public const CREDIT_CARD_STATEMENT = 'credit_card_statement';
+
+    public const DEED_POLL = 'deed_poll';
+
+    public const DIVORCE_ABSOLUTE_DECREE = 'divorce_absolute_decree';
+
+    public const EDUCATIONAL_STATEMENT = 'educational_statement';
+
+    public const ELECTRICITY_BILL = 'electricity_bill';
+
+    public const GAS_BILL = 'gas_bill';
+
+    public const GOVERNMENT_LETTER = 'government_letter';
+
+    public const INTERNET_BILL = 'internet_bill';
+
+    public const MARRIAGE_CERTIFICATE = 'marriage_certificate';
+
+    public const MOTORCYCLE_INSURANCE = 'motorcycle_insurance';
+
+    public const NATIONAL_INSURANCE_CARD = 'national_insurance_card';
+
+    public const NATURALISATION_CERTIFICATE = 'naturalisation_certificate';
+
+    public const NON_UK_DRIVING_LICENCE = 'non_uk_driving_licence';
+
+    public const P45_P60 = 'p45_p60';
+
+    public const PAYSLIP = 'payslip';
+
+    public const PHONE_BILL = 'phone_bill';
+
+    public const PROFESSIONAL_IDENTIFICATION_CARD = 'professional_identification_card';
+
+    public const RIGHT_TO_WORK_SHARE_CODE_RESULT = 'right_to_work_share_code_result';
+
+    public const STATEMENT_FACT = 'statement_fact';
+
+    public const T4_STUDENT_UNIVERSITY_TERM_DATES_EVIDENCE = 't4_student_university_term_dates_evidence';
+
+    public const UK_BIOMETRIC_RESIDENCE_PERMIT = 'uk_biometric_residence_permit';
+
+    public const UK_DRIVING_LICENCE = 'uk_driving_licence';
+
+    public const UNKNOWN = 'unknown';
+
+    public const UTILITY_BILL = 'utility_bill';
+
+    public const UTILITY_BILL_ELECTRIC = 'utility_bill_electric';
+
+    public const UTILITY_BILL_GAS = 'utility_bill_gas';
+
+    public const UTILITY_BILL_OTHER = 'utility_bill_other';
+
+    public const WATER_BILL = 'water_bill';
+
+    public const ADDRESS_CERTIFICATE = 'address_certificate';
+
+    public const GENERAL_LETTER = 'general_letter';
+
+    public const INSURANCE_STATEMENT = 'insurance_statement';
+
+    public const PENSION_PROPERTY_STATEMENT_LETTER = 'pension_property_statement_letter';
+
+    public const MORTGAGE_STATEMENT = 'mortgage_statement';
+
+    public const MOBILE_PHONE_BILL = 'mobile_phone_bill';
+
+    public const IDENTITY_DOCUMENT_WITH_ADDRESS = 'identity_document_with_address';
+
+    public const EXCHANGE_HOUSE_STATEMENT = 'exchange_house_statement';
+
+    public const ACCOMMODATION_TENANCY_CERTIFICATE = 'accommodation_tenancy_certificate';
+
     public const UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -141,6 +233,52 @@ class DocumentTypes
             self::VEHICLE_REGISTRATION_CERTIFICATE,
             self::FORM_FOR_AFFIXING_THE_VISA,
             self::IDENTIFICATION_NUMBER_DOCUMENT,
+            self::ADOPTION_CERTIFICATE,
+            self::BANK_BUILDING_SOCIETY_STATEMENT,
+            self::BANK_STATEMENT,
+            self::BENEFIT_LETTERS,
+            self::CBT,
+            self::CERTIFICATE_OF_SPONSORSHIP,
+            self::CHARACTER_REFERENCE,
+            self::CIVIL_PARTNERSHIP_CERTIFICATE,
+            self::COUNCIL_TAX,
+            self::CREDIT_CARD_STATEMENT,
+            self::DEED_POLL,
+            self::DIVORCE_ABSOLUTE_DECREE,
+            self::EDUCATIONAL_STATEMENT,
+            self::ELECTRICITY_BILL,
+            self::GAS_BILL,
+            self::GOVERNMENT_LETTER,
+            self::INTERNET_BILL,
+            self::MARRIAGE_CERTIFICATE,
+            self::MOTORCYCLE_INSURANCE,
+            self::NATIONAL_INSURANCE_CARD,
+            self::NATURALISATION_CERTIFICATE,
+            self::NON_UK_DRIVING_LICENCE,
+            self::P45_P60,
+            self::PAYSLIP,
+            self::PHONE_BILL,
+            self::PROFESSIONAL_IDENTIFICATION_CARD,
+            self::RIGHT_TO_WORK_SHARE_CODE_RESULT,
+            self::STATEMENT_FACT,
+            self::T4_STUDENT_UNIVERSITY_TERM_DATES_EVIDENCE,
+            self::UK_BIOMETRIC_RESIDENCE_PERMIT,
+            self::UK_DRIVING_LICENCE,
+            self::UNKNOWN,
+            self::UTILITY_BILL,
+            self::UTILITY_BILL_ELECTRIC,
+            self::UTILITY_BILL_GAS,
+            self::UTILITY_BILL_OTHER,
+            self::WATER_BILL,
+            self::ADDRESS_CERTIFICATE,
+            self::GENERAL_LETTER,
+            self::INSURANCE_STATEMENT,
+            self::PENSION_PROPERTY_STATEMENT_LETTER,
+            self::MORTGAGE_STATEMENT,
+            self::MOBILE_PHONE_BILL,
+            self::IDENTITY_DOCUMENT_WITH_ADDRESS,
+            self::EXCHANGE_HOUSE_STATEMENT,
+            self::ACCOMMODATION_TENANCY_CERTIFICATE,
             self::UNKNOWN_DEFAULT_OPEN_API
         ];
     }
