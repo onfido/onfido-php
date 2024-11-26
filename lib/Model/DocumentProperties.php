@@ -97,7 +97,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'real_id_compliance' => 'bool',
         'security_tier' => 'string',
         'address_lines' => '\Onfido\Model\DocumentPropertiesAddressLines',
-        'barcode' => '\Onfido\Model\DocumentPropertiesBarcode',
+        'barcode' => '\Onfido\Model\DocumentPropertiesBarcodeInner[]',
         'nfc' => '\Onfido\Model\DocumentPropertiesNfc',
         'driving_licence_information' => '\Onfido\Model\DocumentPropertiesDrivingLicenceInformation',
         'document_classification' => '\Onfido\Model\DocumentPropertiesDocumentClassification',
@@ -1806,7 +1806,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets barcode
      *
-     * @return \Onfido\Model\DocumentPropertiesBarcode|null
+     * @return \Onfido\Model\DocumentPropertiesBarcodeInner[]|null
      */
     public function getBarcode()
     {
@@ -1816,7 +1816,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets barcode
      *
-     * @param \Onfido\Model\DocumentPropertiesBarcode|null $barcode barcode
+     * @param \Onfido\Model\DocumentPropertiesBarcodeInner[]|null $barcode barcode
      *
      * @return self
      */
