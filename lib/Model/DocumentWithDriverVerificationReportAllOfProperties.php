@@ -97,7 +97,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'real_id_compliance' => 'bool',
         'security_tier' => 'string',
         'address_lines' => '\Onfido\Model\DocumentPropertiesAddressLines',
-        'barcode' => '\Onfido\Model\DocumentPropertiesBarcode',
+        'barcode' => '\Onfido\Model\DocumentPropertiesBarcodeInner[]',
         'nfc' => '\Onfido\Model\DocumentPropertiesNfc',
         'driving_licence_information' => '\Onfido\Model\DocumentPropertiesDrivingLicenceInformation',
         'document_classification' => '\Onfido\Model\DocumentPropertiesDocumentClassification',
@@ -1848,7 +1848,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
     /**
      * Gets barcode
      *
-     * @return \Onfido\Model\DocumentPropertiesBarcode|null
+     * @return \Onfido\Model\DocumentPropertiesBarcodeInner[]|null
      */
     public function getBarcode()
     {
@@ -1858,7 +1858,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
     /**
      * Sets barcode
      *
-     * @param \Onfido\Model\DocumentPropertiesBarcode|null $barcode barcode
+     * @param \Onfido\Model\DocumentPropertiesBarcodeInner[]|null $barcode barcode
      *
      * @return self
      */

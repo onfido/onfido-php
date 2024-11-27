@@ -98,7 +98,7 @@ class ReportSchemasTest extends OnfidoTestCase
         );
 
         $this->assertSame($report->getName(), "document_with_address_information");
-        $this->assertSame($report->getProperties()->getBarcode()->getDocumentType(), "driving_licence");
+        $this->assertSame($report->getProperties()->getBarcode()[0]->getDocumentType(), "driving_licence");
     }
 }
 
