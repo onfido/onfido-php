@@ -76,6 +76,8 @@ class WebhookEventType
 
     public const WORKFLOW_SIGNED_EVIDENCE_FILE_CREATED = 'workflow_signed_evidence_file.created';
 
+    public const WORKFLOW_RUN_EVIDENCE_FOLDER_CREATED = 'workflow_run_evidence_folder.created';
+
     public const UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -102,6 +104,7 @@ class WebhookEventType
             self::REPORT_COMPLETED,
             self::WORKFLOW_TIMELINE_FILE_CREATED,
             self::WORKFLOW_SIGNED_EVIDENCE_FILE_CREATED,
+            self::WORKFLOW_RUN_EVIDENCE_FOLDER_CREATED,
             self::UNKNOWN_DEFAULT_OPEN_API
         ];
     }
