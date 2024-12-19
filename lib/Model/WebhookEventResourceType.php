@@ -54,6 +54,10 @@ class WebhookEventResourceType
 
     public const WATCHLIST_MONITOR = 'watchlist_monitor';
 
+    public const WORKFLOW_TIMELINE_FILE = 'workflow_timeline_file';
+
+    public const WORKFLOW_RUN_EVIDENCE_FOLDER = 'workflow_run_evidence_folder';
+
     public const UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -69,6 +73,8 @@ class WebhookEventResourceType
             self::WORKFLOW_RUN,
             self::WORKFLOW_TASK,
             self::WATCHLIST_MONITOR,
+            self::WORKFLOW_TIMELINE_FILE,
+            self::WORKFLOW_RUN_EVIDENCE_FOLDER,
             self::UNKNOWN_DEFAULT_OPEN_API
         ];
     }
