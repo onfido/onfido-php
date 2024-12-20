@@ -714,7 +714,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets output
      *
-     * @param object|null $output Output object with the fields produced by the Task execution.
+     * @param object|null $output Value field (it can be an Object, List, etc.) with the fields produced by the Task execution.
      *
      * @return self
      */
