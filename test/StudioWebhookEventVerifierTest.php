@@ -54,4 +54,26 @@ class StudioWebhookEventVerifierTest extends TestCase
         $this->expectException(Onfido\OnfidoInvalidSignatureError::class);
         $event = self::$webhookEventVerifier->readPayload(self::$rawEvent, $signature);
     }
+
+    public function testWebhookVerificationWithObjectInOuput(): void
+    {
+        $signature = "e3e5565647f5ccf07b2fd8ac22eab94a0a0619413d981fb768295c820523f7d7";
+
+        $rawEventFromFile = file_get_contents('test/media/studio_webhook_event_with_object_in_output.json');
+        $event = self::$webhookEventVerifier->readPayload($rawEventFromFile, $signature);
+
+        $this->assertNotNull($event->getPayload()->getResource()->getOutput()['properties']);
+    }
+
+
+    public function testWebhookVerificationWithListInOuput(): void
+    {
+        $signature = "f3a5170acfcecf8c1bf6d9cb9995c0d9dec941af83056a721530f8de7af2c293";
+
+        $rawEventFromFile = file_get_contents('test/media/studio_webhook_event_with_list_in_output.json');
+        $event = self::$webhookEventVerifier->readPayload($rawEventFromFile, $signature);
+
+        $this->assertNotNull($event->getPayload()->getResource()->getOutput()[0]);
+    }
+
 }
