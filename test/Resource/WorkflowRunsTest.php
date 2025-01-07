@@ -110,6 +110,24 @@ class WorkflowRunsTest extends OnfidoTestCase
 
         $this->assertGreaterThan(0, $file->getSize());
     }
+
+    public function testDownloadEvidenceFolder(): void
+    {
+        $workflowId = '221f9d24-cf72-4762-ac4a-01bf3ccc09dd';
+        $workflowRunId = $this->createWorkflowRun(null, $this->applicantId, $workflowId)->getId();
+        $findWorkflowRunFn = function($workflowRunId) {
+          return self::$onfido->findWorkflowRun($workflowRunId);
+        };
+        $this->repeatRequestUntilStatusChanges(
+          $findWorkflowRunFn,
+          [$workflowRunId],
+          WorkflowRunStatus::APPROVED
+        )->getOutput();
+
+        $file = self::$onfido->downloadEvidenceFolder($workflowRunId);
+
+        $this->assertGreaterThan(0, $file->getSize());
+    }
 }
 
 ?>
