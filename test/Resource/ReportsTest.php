@@ -48,12 +48,21 @@ class ReportsTest extends OnfidoTestCase
 
     public function testFindReport(): void
     {
+        $findReportFn = function($reportId) {
+            return self::$onfido->findReport($reportId);
+        };
+
+        $getDocumentReport = $this->repeatRequestUntilStatusChanges(
+            $findReportFn,
+            [$this->documentReportId],
+            ReportStatus::COMPLETE
+        );
         $getDocumentReport = self::$onfido->findReport($this->documentReportId);
         $getIdentityReport = self::$onfido->findReport($this->identityReportId);
 
         $this->assertSame($this->documentReportId, $getDocumentReport->getId());
         $this->assertSame(ReportName::DOCUMENT, $getDocumentReport->getName());
-        $this->assertSame(ReportStatus::AWAITING_DATA, $getDocumentReport->getStatus());
+        $this->assertSame(ReportStatus::COMPLETE, $getDocumentReport->getStatus());
 
         $this->assertSame($this->identityReportId, $getIdentityReport->getId());
         $this->assertSame(ReportName::IDENTITY_ENHANCED, $getIdentityReport->getName());
