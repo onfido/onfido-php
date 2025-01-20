@@ -176,7 +176,7 @@ abstract class OnfidoTestCase extends TestCase
         callable $function,
         array $params,
         string $status,
-        $maxRetries = 10,
+        $maxRetries = 15,
         $sleepTime = 1
     )
     {
@@ -199,7 +199,7 @@ abstract class OnfidoTestCase extends TestCase
     protected function repeatRequestUntilTaskOutputChanges(
         callable $function,
         array $params,
-        $maxRetries = 10,
+        $maxRetries = 15,
         $sleepTime = 1
     )
     {
@@ -222,7 +222,7 @@ abstract class OnfidoTestCase extends TestCase
     protected function repeatRequestUntilHttpCodeChanges(
         callable $function,
         array $params,
-        $maxRetries = 10,
+        $maxRetries = 15,
         $sleepTime = 1
     )
     {
