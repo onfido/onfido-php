@@ -124,7 +124,14 @@ class WorkflowRunsTest extends OnfidoTestCase
           WorkflowRunStatus::APPROVED
         )->getOutput();
 
-        $file = self::$onfido->downloadEvidenceFolder($workflowRunId);
+        $getEvidenceFolderFn = function($workflowRunId) {
+          return self::$onfido->downloadEvidenceFolder($workflowRunId);
+        };
+
+        $file = $this->repeatRequestUntilHttpCodeChanges(
+          $getEvidenceFolderFn,
+          [$workflowRunId]
+        );
 
         $this->assertGreaterThan(0, $file->getSize());
     }
