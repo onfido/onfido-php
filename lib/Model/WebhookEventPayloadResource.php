@@ -72,7 +72,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'output' => 'object',
         'reasons' => 'string[]',
         'link' => '\Onfido\Model\WorkflowRunLink',
-        'error' => '\Onfido\Model\WorkflowRunError'
+        'error' => '\Onfido\Model\WorkflowRunError',
+        'customer_user_id' => 'string'
     ];
 
     /**
@@ -97,7 +98,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'output' => null,
         'reasons' => null,
         'link' => null,
-        'error' => null
+        'error' => null,
+        'customer_user_id' => null
     ];
 
     /**
@@ -120,7 +122,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'output' => true,
         'reasons' => false,
         'link' => false,
-        'error' => false
+        'error' => false,
+        'customer_user_id' => false
     ];
 
     /**
@@ -223,7 +226,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'output' => 'output',
         'reasons' => 'reasons',
         'link' => 'link',
-        'error' => 'error'
+        'error' => 'error',
+        'customer_user_id' => 'customer_user_id'
     ];
 
     /**
@@ -246,7 +250,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'output' => 'setOutput',
         'reasons' => 'setReasons',
         'link' => 'setLink',
-        'error' => 'setError'
+        'error' => 'setError',
+        'customer_user_id' => 'setCustomerUserId'
     ];
 
     /**
@@ -269,7 +274,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'output' => 'getOutput',
         'reasons' => 'getReasons',
         'link' => 'getLink',
-        'error' => 'getError'
+        'error' => 'getError',
+        'customer_user_id' => 'getCustomerUserId'
     ];
 
     /**
@@ -344,6 +350,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('reasons', $data ?? [], null);
         $this->setIfExists('link', $data ?? [], null);
         $this->setIfExists('error', $data ?? [], null);
+        $this->setIfExists('customer_user_id', $data ?? [], null);
     }
 
     /**
@@ -375,6 +382,10 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
 
         if (!is_null($this->container['task_def_id']) && !preg_match("/^[0-9a-z_-]+$/", $this->container['task_def_id'])) {
             $invalidProperties[] = "invalid value for 'task_def_id', must be conform to the pattern /^[0-9a-z_-]+$/.";
+        }
+
+        if (!is_null($this->container['customer_user_id']) && (mb_strlen($this->container['customer_user_id']) > 256)) {
+            $invalidProperties[] = "invalid value for 'customer_user_id', the character length must be smaller than or equal to 256.";
         }
 
         return $invalidProperties;
@@ -812,6 +823,37 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable error cannot be null');
         }
         $this->container['error'] = $error;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_user_id
+     *
+     * @return string|null
+     */
+    public function getCustomerUserId()
+    {
+        return $this->container['customer_user_id'];
+    }
+
+    /**
+     * Sets customer_user_id
+     *
+     * @param string|null $customer_user_id Customer-provided user identifier.
+     *
+     * @return self
+     */
+    public function setCustomerUserId($customer_user_id)
+    {
+        if (is_null($customer_user_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_user_id cannot be null');
+        }
+        if ((mb_strlen($customer_user_id) > 256)) {
+            throw new \InvalidArgumentException('invalid length for $customer_user_id when calling WebhookEventPayloadResource., must be smaller than or equal to 256.');
+        }
+
+        $this->container['customer_user_id'] = $customer_user_id;
 
         return $this;
     }
