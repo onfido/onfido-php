@@ -244,6 +244,7 @@ class IdNumber implements ModelInterface, ArrayAccess, \JsonSerializable
     public const TYPE_SOCIAL_INSURANCE = 'social_insurance';
     public const TYPE_TAX_ID = 'tax_id';
     public const TYPE_IDENTITY_CARD = 'identity_card';
+    public const TYPE_DRIVING_LICENSE = 'driving_license';
     public const TYPE_DRIVING_LICENCE = 'driving_licence';
     public const TYPE_SHARE_CODE = 'share_code';
     public const TYPE_VOTER_ID = 'voter_id';
@@ -263,6 +264,7 @@ class IdNumber implements ModelInterface, ArrayAccess, \JsonSerializable
             self::TYPE_SOCIAL_INSURANCE,
             self::TYPE_TAX_ID,
             self::TYPE_IDENTITY_CARD,
+            self::TYPE_DRIVING_LICENSE,
             self::TYPE_DRIVING_LICENCE,
             self::TYPE_SHARE_CODE,
             self::TYPE_VOTER_ID,
