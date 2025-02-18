@@ -109,12 +109,12 @@ abstract class OnfidoTestCase extends TestCase
         }
     }
 
-    protected function uploadDocument(string $applicantId): Onfido\Model\Document
+    protected function uploadDocument(string $applicantId, string $filePath = 'test/media/sample_driving_licence.png'): Onfido\Model\Document
     {
         return self::$onfido->uploadDocument(
             Onfido\Model\DocumentTypes::PASSPORT,
             $applicantId,
-            new \SplFileObject('test/media/sample_driving_licence.png')
+            new \SplFileObject($filePath)
         );
     }
 
