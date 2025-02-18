@@ -57,6 +57,7 @@ class FacialSimilarityReportShared implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
+        'documents' => '\Onfido\Model\ReportDocument[]',
         'live_photos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
         'live_videos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
         'motion_captures' => '\Onfido\Model\FacialSimilarityReportMedia[]',
@@ -71,6 +72,7 @@ class FacialSimilarityReportShared implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'documents' => null,
         'live_photos' => null,
         'live_videos' => null,
         'motion_captures' => null,
@@ -83,6 +85,7 @@ class FacialSimilarityReportShared implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'documents' => false,
         'live_photos' => false,
         'live_videos' => false,
         'motion_captures' => false,
@@ -175,6 +178,7 @@ class FacialSimilarityReportShared implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
+        'documents' => 'documents',
         'live_photos' => 'live_photos',
         'live_videos' => 'live_videos',
         'motion_captures' => 'motion_captures',
@@ -187,6 +191,7 @@ class FacialSimilarityReportShared implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
+        'documents' => 'setDocuments',
         'live_photos' => 'setLivePhotos',
         'live_videos' => 'setLiveVideos',
         'motion_captures' => 'setMotionCaptures',
@@ -199,6 +204,7 @@ class FacialSimilarityReportShared implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
+        'documents' => 'getDocuments',
         'live_photos' => 'getLivePhotos',
         'live_videos' => 'getLiveVideos',
         'motion_captures' => 'getMotionCaptures',
@@ -262,6 +268,7 @@ class FacialSimilarityReportShared implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('documents', $data ?? [], null);
         $this->setIfExists('live_photos', $data ?? [], null);
         $this->setIfExists('live_videos', $data ?? [], null);
         $this->setIfExists('motion_captures', $data ?? [], null);
@@ -309,6 +316,33 @@ class FacialSimilarityReportShared implements ModelInterface, ArrayAccess, \Json
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets documents
+     *
+     * @return \Onfido\Model\ReportDocument[]|null
+     */
+    public function getDocuments()
+    {
+        return $this->container['documents'];
+    }
+
+    /**
+     * Sets documents
+     *
+     * @param \Onfido\Model\ReportDocument[]|null $documents Array of objects with document ids that were used in the Onfido engine.
+     *
+     * @return self
+     */
+    public function setDocuments($documents)
+    {
+        if (is_null($documents)) {
+            throw new \InvalidArgumentException('non-nullable documents cannot be null');
+        }
+        $this->container['documents'] = $documents;
+
+        return $this;
+    }
 
     /**
      * Gets live_photos

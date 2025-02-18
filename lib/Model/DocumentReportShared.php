@@ -1,6 +1,6 @@
 <?php
 /**
- * DocumentWithAddressInformationReport
+ * DocumentReportShared
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * DocumentWithAddressInformationReport Class Doc Comment
+ * DocumentReportShared Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DocumentWithAddressInformationReport implements ModelInterface, ArrayAccess, \JsonSerializable
+class DocumentReportShared implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'document_with_address_information_report';
+    protected static $openAPIModelName = 'document_report_shared';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,17 +57,7 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'created_at' => '\DateTime',
-        'href' => 'string',
-        'status' => '\Onfido\Model\ReportStatus',
-        'result' => '\Onfido\Model\ReportResult',
-        'sub_result' => '\Onfido\Model\ReportSubResult',
-        'check_id' => 'string',
-        'name' => '\Onfido\Model\ReportName',
-        'documents' => '\Onfido\Model\ReportDocument[]',
-        'breakdown' => '\Onfido\Model\DocumentBreakdown',
-        'properties' => '\Onfido\Model\DocumentProperties'
+        'documents' => '\Onfido\Model\ReportDocument[]'
     ];
 
     /**
@@ -78,17 +68,7 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'created_at' => 'date-time',
-        'href' => null,
-        'status' => null,
-        'result' => null,
-        'sub_result' => null,
-        'check_id' => 'uuid',
-        'name' => null,
-        'documents' => null,
-        'breakdown' => null,
-        'properties' => null
+        'documents' => null
     ];
 
     /**
@@ -97,17 +77,7 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'created_at' => false,
-        'href' => false,
-        'status' => false,
-        'result' => false,
-        'sub_result' => false,
-        'check_id' => false,
-        'name' => false,
-        'documents' => false,
-        'breakdown' => false,
-        'properties' => false
+        'documents' => false
     ];
 
     /**
@@ -196,17 +166,7 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'created_at' => 'created_at',
-        'href' => 'href',
-        'status' => 'status',
-        'result' => 'result',
-        'sub_result' => 'sub_result',
-        'check_id' => 'check_id',
-        'name' => 'name',
-        'documents' => 'documents',
-        'breakdown' => 'breakdown',
-        'properties' => 'properties'
+        'documents' => 'documents'
     ];
 
     /**
@@ -215,17 +175,7 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'created_at' => 'setCreatedAt',
-        'href' => 'setHref',
-        'status' => 'setStatus',
-        'result' => 'setResult',
-        'sub_result' => 'setSubResult',
-        'check_id' => 'setCheckId',
-        'name' => 'setName',
-        'documents' => 'setDocuments',
-        'breakdown' => 'setBreakdown',
-        'properties' => 'setProperties'
+        'documents' => 'setDocuments'
     ];
 
     /**
@@ -234,17 +184,7 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'created_at' => 'getCreatedAt',
-        'href' => 'getHref',
-        'status' => 'getStatus',
-        'result' => 'getResult',
-        'sub_result' => 'getSubResult',
-        'check_id' => 'getCheckId',
-        'name' => 'getName',
-        'documents' => 'getDocuments',
-        'breakdown' => 'getBreakdown',
-        'properties' => 'getProperties'
+        'documents' => 'getDocuments'
     ];
 
     /**
@@ -304,17 +244,7 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('href', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('result', $data ?? [], null);
-        $this->setIfExists('sub_result', $data ?? [], null);
-        $this->setIfExists('check_id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('documents', $data ?? [], null);
-        $this->setIfExists('breakdown', $data ?? [], null);
-        $this->setIfExists('properties', $data ?? [], null);
     }
 
     /**
@@ -344,12 +274,6 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -364,222 +288,6 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string $id The unique identifier for the report. Read-only.
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime|null $created_at The date and time at which the report was first initiated. Read-only.
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets href
-     *
-     * @return string|null
-     */
-    public function getHref()
-    {
-        return $this->container['href'];
-    }
-
-    /**
-     * Sets href
-     *
-     * @param string|null $href The API endpoint to retrieve the report. Read-only.
-     *
-     * @return self
-     */
-    public function setHref($href)
-    {
-        if (is_null($href)) {
-            throw new \InvalidArgumentException('non-nullable href cannot be null');
-        }
-        $this->container['href'] = $href;
-
-        return $this;
-    }
-
-    /**
-     * Gets status
-     *
-     * @return \Onfido\Model\ReportStatus|null
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param \Onfido\Model\ReportStatus|null $status status
-     *
-     * @return self
-     */
-    public function setStatus($status)
-    {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets result
-     *
-     * @return \Onfido\Model\ReportResult|null
-     */
-    public function getResult()
-    {
-        return $this->container['result'];
-    }
-
-    /**
-     * Sets result
-     *
-     * @param \Onfido\Model\ReportResult|null $result result
-     *
-     * @return self
-     */
-    public function setResult($result)
-    {
-        if (is_null($result)) {
-            throw new \InvalidArgumentException('non-nullable result cannot be null');
-        }
-        $this->container['result'] = $result;
-
-        return $this;
-    }
-
-    /**
-     * Gets sub_result
-     *
-     * @return \Onfido\Model\ReportSubResult|null
-     */
-    public function getSubResult()
-    {
-        return $this->container['sub_result'];
-    }
-
-    /**
-     * Sets sub_result
-     *
-     * @param \Onfido\Model\ReportSubResult|null $sub_result sub_result
-     *
-     * @return self
-     */
-    public function setSubResult($sub_result)
-    {
-        if (is_null($sub_result)) {
-            throw new \InvalidArgumentException('non-nullable sub_result cannot be null');
-        }
-        $this->container['sub_result'] = $sub_result;
-
-        return $this;
-    }
-
-    /**
-     * Gets check_id
-     *
-     * @return string|null
-     */
-    public function getCheckId()
-    {
-        return $this->container['check_id'];
-    }
-
-    /**
-     * Sets check_id
-     *
-     * @param string|null $check_id The ID of the check to which the report belongs. Read-only.
-     *
-     * @return self
-     */
-    public function setCheckId($check_id)
-    {
-        if (is_null($check_id)) {
-            throw new \InvalidArgumentException('non-nullable check_id cannot be null');
-        }
-        $this->container['check_id'] = $check_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return \Onfido\Model\ReportName
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param \Onfido\Model\ReportName $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
 
     /**
      * Gets documents
@@ -604,60 +312,6 @@ class DocumentWithAddressInformationReport implements ModelInterface, ArrayAcces
             throw new \InvalidArgumentException('non-nullable documents cannot be null');
         }
         $this->container['documents'] = $documents;
-
-        return $this;
-    }
-
-    /**
-     * Gets breakdown
-     *
-     * @return \Onfido\Model\DocumentBreakdown|null
-     */
-    public function getBreakdown()
-    {
-        return $this->container['breakdown'];
-    }
-
-    /**
-     * Sets breakdown
-     *
-     * @param \Onfido\Model\DocumentBreakdown|null $breakdown breakdown
-     *
-     * @return self
-     */
-    public function setBreakdown($breakdown)
-    {
-        if (is_null($breakdown)) {
-            throw new \InvalidArgumentException('non-nullable breakdown cannot be null');
-        }
-        $this->container['breakdown'] = $breakdown;
-
-        return $this;
-    }
-
-    /**
-     * Gets properties
-     *
-     * @return \Onfido\Model\DocumentProperties|null
-     */
-    public function getProperties()
-    {
-        return $this->container['properties'];
-    }
-
-    /**
-     * Sets properties
-     *
-     * @param \Onfido\Model\DocumentProperties|null $properties properties
-     *
-     * @return self
-     */
-    public function setProperties($properties)
-    {
-        if (is_null($properties)) {
-            throw new \InvalidArgumentException('non-nullable properties cannot be null');
-        }
-        $this->container['properties'] = $properties;
 
         return $this;
     }

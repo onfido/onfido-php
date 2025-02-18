@@ -306,9 +306,6 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        if ($this->container['href'] === null) {
-            $invalidProperties[] = "'href' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -435,7 +432,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets href
      *
-     * @return string
+     * @return string|null
      */
     public function getHref()
     {
@@ -445,7 +442,7 @@ class WebhookEventPayloadObject implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets href
      *
-     * @param string $href The uri of the resource.
+     * @param string|null $href The uri of the resource.
      *
      * @return self
      */

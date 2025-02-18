@@ -64,7 +64,6 @@ class KnownFacesReport implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => '\Onfido\Model\ReportResult',
         'sub_result' => '\Onfido\Model\ReportSubResult',
         'check_id' => 'string',
-        'documents' => '\Onfido\Model\ReportDocument[]',
         'name' => '\Onfido\Model\ReportName',
         'breakdown' => '\Onfido\Model\KnownFacesBreakdown',
         'properties' => '\Onfido\Model\KnownFacesProperties'
@@ -85,7 +84,6 @@ class KnownFacesReport implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => null,
         'sub_result' => null,
         'check_id' => 'uuid',
-        'documents' => null,
         'name' => null,
         'breakdown' => null,
         'properties' => null
@@ -104,7 +102,6 @@ class KnownFacesReport implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => false,
         'sub_result' => false,
         'check_id' => false,
-        'documents' => false,
         'name' => false,
         'breakdown' => false,
         'properties' => false
@@ -203,7 +200,6 @@ class KnownFacesReport implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => 'result',
         'sub_result' => 'sub_result',
         'check_id' => 'check_id',
-        'documents' => 'documents',
         'name' => 'name',
         'breakdown' => 'breakdown',
         'properties' => 'properties'
@@ -222,7 +218,6 @@ class KnownFacesReport implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => 'setResult',
         'sub_result' => 'setSubResult',
         'check_id' => 'setCheckId',
-        'documents' => 'setDocuments',
         'name' => 'setName',
         'breakdown' => 'setBreakdown',
         'properties' => 'setProperties'
@@ -241,7 +236,6 @@ class KnownFacesReport implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => 'getResult',
         'sub_result' => 'getSubResult',
         'check_id' => 'getCheckId',
-        'documents' => 'getDocuments',
         'name' => 'getName',
         'breakdown' => 'getBreakdown',
         'properties' => 'getProperties'
@@ -311,7 +305,6 @@ class KnownFacesReport implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('result', $data ?? [], null);
         $this->setIfExists('sub_result', $data ?? [], null);
         $this->setIfExists('check_id', $data ?? [], null);
-        $this->setIfExists('documents', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('breakdown', $data ?? [], null);
         $this->setIfExists('properties', $data ?? [], null);
@@ -550,33 +543,6 @@ class KnownFacesReport implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable check_id cannot be null');
         }
         $this->container['check_id'] = $check_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets documents
-     *
-     * @return \Onfido\Model\ReportDocument[]|null
-     */
-    public function getDocuments()
-    {
-        return $this->container['documents'];
-    }
-
-    /**
-     * Sets documents
-     *
-     * @param \Onfido\Model\ReportDocument[]|null $documents Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]
-     *
-     * @return self
-     */
-    public function setDocuments($documents)
-    {
-        if (is_null($documents)) {
-            throw new \InvalidArgumentException('non-nullable documents cannot be null');
-        }
-        $this->container['documents'] = $documents;
 
         return $this;
     }
