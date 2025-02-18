@@ -57,7 +57,7 @@ class WatchlistAmlProperties implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'records' => 'string[]'
+        'records' => 'object[]'
     ];
 
     /**
@@ -292,7 +292,7 @@ class WatchlistAmlProperties implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets records
      *
-     * @return string[]|null
+     * @return object[]|null
      * @deprecated
      */
     public function getRecords()
@@ -303,7 +303,7 @@ class WatchlistAmlProperties implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets records
      *
-     * @param string[]|null $records Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.
+     * @param object[]|null $records Returns any matches including, but not limited to, name and date of birth of match, aliases and associates, and relevant events and sources.
      *
      * @return self
      * @deprecated

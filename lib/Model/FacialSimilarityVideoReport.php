@@ -64,8 +64,8 @@ class FacialSimilarityVideoReport implements ModelInterface, ArrayAccess, \JsonS
         'result' => '\Onfido\Model\ReportResult',
         'sub_result' => '\Onfido\Model\ReportSubResult',
         'check_id' => 'string',
-        'documents' => '\Onfido\Model\ReportDocument[]',
         'name' => '\Onfido\Model\ReportName',
+        'documents' => '\Onfido\Model\ReportDocument[]',
         'live_photos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
         'live_videos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
         'motion_captures' => '\Onfido\Model\FacialSimilarityReportMedia[]',
@@ -89,8 +89,8 @@ class FacialSimilarityVideoReport implements ModelInterface, ArrayAccess, \JsonS
         'result' => null,
         'sub_result' => null,
         'check_id' => 'uuid',
-        'documents' => null,
         'name' => null,
+        'documents' => null,
         'live_photos' => null,
         'live_videos' => null,
         'motion_captures' => null,
@@ -112,8 +112,8 @@ class FacialSimilarityVideoReport implements ModelInterface, ArrayAccess, \JsonS
         'result' => false,
         'sub_result' => false,
         'check_id' => false,
-        'documents' => false,
         'name' => false,
+        'documents' => false,
         'live_photos' => false,
         'live_videos' => false,
         'motion_captures' => false,
@@ -215,8 +215,8 @@ class FacialSimilarityVideoReport implements ModelInterface, ArrayAccess, \JsonS
         'result' => 'result',
         'sub_result' => 'sub_result',
         'check_id' => 'check_id',
-        'documents' => 'documents',
         'name' => 'name',
+        'documents' => 'documents',
         'live_photos' => 'live_photos',
         'live_videos' => 'live_videos',
         'motion_captures' => 'motion_captures',
@@ -238,8 +238,8 @@ class FacialSimilarityVideoReport implements ModelInterface, ArrayAccess, \JsonS
         'result' => 'setResult',
         'sub_result' => 'setSubResult',
         'check_id' => 'setCheckId',
-        'documents' => 'setDocuments',
         'name' => 'setName',
+        'documents' => 'setDocuments',
         'live_photos' => 'setLivePhotos',
         'live_videos' => 'setLiveVideos',
         'motion_captures' => 'setMotionCaptures',
@@ -261,8 +261,8 @@ class FacialSimilarityVideoReport implements ModelInterface, ArrayAccess, \JsonS
         'result' => 'getResult',
         'sub_result' => 'getSubResult',
         'check_id' => 'getCheckId',
-        'documents' => 'getDocuments',
         'name' => 'getName',
+        'documents' => 'getDocuments',
         'live_photos' => 'getLivePhotos',
         'live_videos' => 'getLiveVideos',
         'motion_captures' => 'getMotionCaptures',
@@ -335,8 +335,8 @@ class FacialSimilarityVideoReport implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('result', $data ?? [], null);
         $this->setIfExists('sub_result', $data ?? [], null);
         $this->setIfExists('check_id', $data ?? [], null);
-        $this->setIfExists('documents', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('documents', $data ?? [], null);
         $this->setIfExists('live_photos', $data ?? [], null);
         $this->setIfExists('live_videos', $data ?? [], null);
         $this->setIfExists('motion_captures', $data ?? [], null);
@@ -583,33 +583,6 @@ class FacialSimilarityVideoReport implements ModelInterface, ArrayAccess, \JsonS
     }
 
     /**
-     * Gets documents
-     *
-     * @return \Onfido\Model\ReportDocument[]|null
-     */
-    public function getDocuments()
-    {
-        return $this->container['documents'];
-    }
-
-    /**
-     * Sets documents
-     *
-     * @param \Onfido\Model\ReportDocument[]|null $documents Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]
-     *
-     * @return self
-     */
-    public function setDocuments($documents)
-    {
-        if (is_null($documents)) {
-            throw new \InvalidArgumentException('non-nullable documents cannot be null');
-        }
-        $this->container['documents'] = $documents;
-
-        return $this;
-    }
-
-    /**
      * Gets name
      *
      * @return \Onfido\Model\ReportName
@@ -632,6 +605,33 @@ class FacialSimilarityVideoReport implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets documents
+     *
+     * @return \Onfido\Model\ReportDocument[]|null
+     */
+    public function getDocuments()
+    {
+        return $this->container['documents'];
+    }
+
+    /**
+     * Sets documents
+     *
+     * @param \Onfido\Model\ReportDocument[]|null $documents Array of objects with document ids that were used in the Onfido engine.
+     *
+     * @return self
+     */
+    public function setDocuments($documents)
+    {
+        if (is_null($documents)) {
+            throw new \InvalidArgumentException('non-nullable documents cannot be null');
+        }
+        $this->container['documents'] = $documents;
 
         return $this;
     }

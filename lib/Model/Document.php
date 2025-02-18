@@ -288,30 +288,9 @@ class Document implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const FILE_TYPE_JPG = 'jpg';
-    public const FILE_TYPE_JPEG = 'jpeg';
-    public const FILE_TYPE_PNG = 'png';
-    public const FILE_TYPE_PDF = 'pdf';
-    public const FILE_TYPE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
     public const SIDE_FRONT = 'front';
     public const SIDE_BACK = 'back';
     public const SIDE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getFileTypeAllowableValues()
-    {
-        return [
-            self::FILE_TYPE_JPG,
-            self::FILE_TYPE_JPEG,
-            self::FILE_TYPE_PNG,
-            self::FILE_TYPE_PDF,
-            self::FILE_TYPE_UNKNOWN_DEFAULT_OPEN_API,
-        ];
-    }
 
     /**
      * Gets allowable values of the enum
@@ -382,15 +361,6 @@ class Document implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getFileTypeAllowableValues();
-        if (!is_null($this->container['file_type']) && !in_array($this->container['file_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'file_type', must be one of '%s'",
-                $this->container['file_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         $allowedValues = $this->getSideAllowableValues();
         if (!is_null($this->container['side']) && !in_array($this->container['side'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -439,16 +409,6 @@ class Document implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         if (is_null($file_type)) {
             throw new \InvalidArgumentException('non-nullable file_type cannot be null');
-        }
-        $allowedValues = $this->getFileTypeAllowableValues();
-        if (!in_array($file_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'file_type', must be one of '%s'",
-                    $file_type,
-                    implode("', '", $allowedValues)
-                )
-            );
         }
         $this->container['file_type'] = $file_type;
 

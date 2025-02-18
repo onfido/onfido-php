@@ -134,6 +134,9 @@ class DefaultApi
         'downloadMotionCaptureFrame' => [
             'application/json',
         ],
+        'downloadNfcFace' => [
+            'application/json',
+        ],
         'downloadQesDocument' => [
             'application/json',
         ],
@@ -7006,6 +7009,354 @@ class DefaultApi
             $resourcePath = str_replace(
                 '{' . 'motion_capture_id' . '}',
                 ObjectSerializer::toPathValue($motion_capture_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['*/*', 'application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation downloadNfcFace
+     *
+     * Download NFC face
+     *
+     * @param  string $document_id document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadNfcFace'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject|\Onfido\Model\Error
+     */
+    public function downloadNfcFace($document_id, string $contentType = self::contentTypes['downloadNfcFace'][0])
+    {
+        list($response) = $this->downloadNfcFaceWithHttpInfo($document_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation downloadNfcFaceWithHttpInfo
+     *
+     * Download NFC face
+     *
+     * @param  string $document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadNfcFace'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function downloadNfcFaceWithHttpInfo($document_id, string $contentType = self::contentTypes['downloadNfcFace'][0])
+    {
+        $request = $this->downloadNfcFaceRequest($document_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation downloadNfcFaceAsync
+     *
+     * Download NFC face
+     *
+     * @param  string $document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadNfcFace'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function downloadNfcFaceAsync($document_id, string $contentType = self::contentTypes['downloadNfcFace'][0])
+    {
+        return $this->downloadNfcFaceAsyncWithHttpInfo($document_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation downloadNfcFaceAsyncWithHttpInfo
+     *
+     * Download NFC face
+     *
+     * @param  string $document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadNfcFace'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function downloadNfcFaceAsyncWithHttpInfo($document_id, string $contentType = self::contentTypes['downloadNfcFace'][0])
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->downloadNfcFaceRequest($document_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'downloadNfcFace'
+     *
+     * @param  string $document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadNfcFace'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function downloadNfcFaceRequest($document_id, string $contentType = self::contentTypes['downloadNfcFace'][0])
+    {
+
+        // verify the required parameter 'document_id' is set
+        if ($document_id === null || (is_array($document_id) && count($document_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $document_id when calling downloadNfcFace'
+            );
+        }
+
+
+        $resourcePath = '/documents/{document_id}/nfc_face';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($document_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'document_id' . '}',
+                ObjectSerializer::toPathValue($document_id),
                 $resourcePath
             );
         }
@@ -18151,15 +18502,16 @@ class DefaultApi
      * @param  \DateTime $created_at_gt A ISO-8601 date to filter results with a created date greater than (after) the one provided. (optional)
      * @param  \DateTime $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
+     * @param  string $applicant_id the applicant&#39;s id. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Onfido\Model\WorkflowRun[]|\Onfido\Model\Error
      */
-    public function listWorkflowRuns($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRuns($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
-        list($response) = $this->listWorkflowRunsWithHttpInfo($page, $status, $created_at_gt, $created_at_lt, $sort, $contentType);
+        list($response) = $this->listWorkflowRunsWithHttpInfo($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $contentType);
         return $response;
     }
 
@@ -18173,15 +18525,16 @@ class DefaultApi
      * @param  \DateTime $created_at_gt A ISO-8601 date to filter results with a created date greater than (after) the one provided. (optional)
      * @param  \DateTime $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
+     * @param  string $applicant_id the applicant&#39;s id. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Onfido\Model\WorkflowRun[]|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listWorkflowRunsWithHttpInfo($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRunsWithHttpInfo($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
-        $request = $this->listWorkflowRunsRequest($page, $status, $created_at_gt, $created_at_lt, $sort, $contentType);
+        $request = $this->listWorkflowRunsRequest($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -18337,14 +18690,15 @@ class DefaultApi
      * @param  \DateTime $created_at_gt A ISO-8601 date to filter results with a created date greater than (after) the one provided. (optional)
      * @param  \DateTime $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
+     * @param  string $applicant_id the applicant&#39;s id. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listWorkflowRunsAsync($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRunsAsync($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
-        return $this->listWorkflowRunsAsyncWithHttpInfo($page, $status, $created_at_gt, $created_at_lt, $sort, $contentType)
+        return $this->listWorkflowRunsAsyncWithHttpInfo($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -18362,15 +18716,16 @@ class DefaultApi
      * @param  \DateTime $created_at_gt A ISO-8601 date to filter results with a created date greater than (after) the one provided. (optional)
      * @param  \DateTime $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
+     * @param  string $applicant_id the applicant&#39;s id. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listWorkflowRunsAsyncWithHttpInfo($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRunsAsyncWithHttpInfo($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
         $returnType = '\Onfido\Model\WorkflowRun[]';
-        $request = $this->listWorkflowRunsRequest($page, $status, $created_at_gt, $created_at_lt, $sort, $contentType);
+        $request = $this->listWorkflowRunsRequest($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -18416,13 +18771,15 @@ class DefaultApi
      * @param  \DateTime $created_at_gt A ISO-8601 date to filter results with a created date greater than (after) the one provided. (optional)
      * @param  \DateTime $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
+     * @param  string $applicant_id the applicant&#39;s id. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listWorkflowRunsRequest($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRunsRequest($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
+
 
 
 
@@ -18477,6 +18834,15 @@ class DefaultApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $sort,
             'sort', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $applicant_id,
+            'applicant_id', // param base name
             'string', // openApiType
             '', // style
             false, // explode

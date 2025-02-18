@@ -108,8 +108,8 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => '\Onfido\Model\ReportResult',
         'sub_result' => '\Onfido\Model\ReportSubResult',
         'check_id' => 'string',
-        'documents' => '\Onfido\Model\ReportDocument[]',
         'name' => '\Onfido\Model\ReportName',
+        'documents' => '\Onfido\Model\ReportDocument[]',
         'breakdown' => '\Onfido\Model\IndiaPanReportAllOfBreakdown',
         'properties' => '\Onfido\Model\IndiaPanReportAllOfProperties',
         'live_photos' => '\Onfido\Model\FacialSimilarityReportMedia[]',
@@ -133,8 +133,8 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => null,
         'sub_result' => null,
         'check_id' => 'uuid',
-        'documents' => null,
         'name' => null,
+        'documents' => null,
         'breakdown' => null,
         'properties' => null,
         'live_photos' => null,
@@ -156,8 +156,8 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => false,
         'sub_result' => false,
         'check_id' => false,
-        'documents' => false,
         'name' => false,
+        'documents' => false,
         'breakdown' => false,
         'properties' => false,
         'live_photos' => false,
@@ -259,8 +259,8 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => 'result',
         'sub_result' => 'sub_result',
         'check_id' => 'check_id',
-        'documents' => 'documents',
         'name' => 'name',
+        'documents' => 'documents',
         'breakdown' => 'breakdown',
         'properties' => 'properties',
         'live_photos' => 'live_photos',
@@ -282,8 +282,8 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => 'setResult',
         'sub_result' => 'setSubResult',
         'check_id' => 'setCheckId',
-        'documents' => 'setDocuments',
         'name' => 'setName',
+        'documents' => 'setDocuments',
         'breakdown' => 'setBreakdown',
         'properties' => 'setProperties',
         'live_photos' => 'setLivePhotos',
@@ -305,8 +305,8 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         'result' => 'getResult',
         'sub_result' => 'getSubResult',
         'check_id' => 'getCheckId',
-        'documents' => 'getDocuments',
         'name' => 'getName',
+        'documents' => 'getDocuments',
         'breakdown' => 'getBreakdown',
         'properties' => 'getProperties',
         'live_photos' => 'getLivePhotos',
@@ -379,8 +379,8 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('result', $data ?? [], null);
         $this->setIfExists('sub_result', $data ?? [], null);
         $this->setIfExists('check_id', $data ?? [], null);
-        $this->setIfExists('documents', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('documents', $data ?? [], null);
         $this->setIfExists('breakdown', $data ?? [], null);
         $this->setIfExists('properties', $data ?? [], null);
         $this->setIfExists('live_photos', $data ?? [], null);
@@ -630,33 +630,6 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets documents
-     *
-     * @return \Onfido\Model\ReportDocument[]|null
-     */
-    public function getDocuments()
-    {
-        return $this->container['documents'];
-    }
-
-    /**
-     * Sets documents
-     *
-     * @param \Onfido\Model\ReportDocument[]|null $documents Array of objects with document ids that were used in the Onfido engine. [ONLY POPULATED FOR DOCUMENT AND FACIAL SIMILARITY REPORTS]
-     *
-     * @return self
-     */
-    public function setDocuments($documents)
-    {
-        if (is_null($documents)) {
-            throw new \InvalidArgumentException('non-nullable documents cannot be null');
-        }
-        $this->container['documents'] = $documents;
-
-        return $this;
-    }
-
-    /**
      * Gets name
      *
      * @return \Onfido\Model\ReportName
@@ -679,6 +652,33 @@ class Report implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets documents
+     *
+     * @return \Onfido\Model\ReportDocument[]|null
+     */
+    public function getDocuments()
+    {
+        return $this->container['documents'];
+    }
+
+    /**
+     * Sets documents
+     *
+     * @param \Onfido\Model\ReportDocument[]|null $documents Array of objects with document ids that were used in the Onfido engine.
+     *
+     * @return self
+     */
+    public function setDocuments($documents)
+    {
+        if (is_null($documents)) {
+            throw new \InvalidArgumentException('non-nullable documents cannot be null');
+        }
+        $this->container['documents'] = $documents;
 
         return $this;
     }
