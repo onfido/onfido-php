@@ -53,5 +53,21 @@ class DocumentsTest extends OnfidoTestCase
         $this->expectException(Onfido\ApiException::class);
         self::$onfido->downloadDocument($inexistentDocumentId);
     }
+
+    public function testDownloadNfcFace(): void
+    {
+        $nfcFace = $this->uploadDocument($this->applicantId, 'test/media/nfc_data.json');
+        $file = self::$onfido->downloadDocument($nfcFace->getId());
+
+        $this->assertGreaterThan(0, $file->getSize());
+    }
+
+    public function testDownloadNfcFaceNotFound(): void
+    {
+        $inexistentDocumentId = '00000000-0000-0000-0000-000000000000';
+
+        $this->expectException(Onfido\ApiException::class);
+        self::$onfido->downloadNfcFace($inexistentDocumentId);
+    }
 }
 ?>
