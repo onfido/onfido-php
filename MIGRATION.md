@@ -17,11 +17,11 @@ ensuring a smooth transition between versions.
 
 - Webhooks
   - Drop `WORKFLOW_SIGNED_EVIDENCE_FILE_CREATED` enum value from `WebhookEventType`
-   enum
+    enum
   - Make `href` property in `WebhookEventPayloadObject` optional
 - Reports
   - Allow the deprecated `records` property in `WatchlistAml` and
-   `WatchlistStandard` reports to be any object, and not just a string
+    `WatchlistStandard` reports to be any object, and not just a string
   - Remove `documents` property (incl. `getDocuments()` accessors) from all
     reports except Document and Facial Similarity reports
 
