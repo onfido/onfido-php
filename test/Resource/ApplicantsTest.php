@@ -73,6 +73,37 @@ class ApplicantsTest extends OnfidoTestCase
         $this->assertSame('Doe', $updatedApplicant->getLastName());
     }
 
+    public function testFindApplicantConsents()
+    {
+        $expectedConsents = [
+            new Onfido\Model\ApplicantConsentBuilder([
+                'name' => Onfido\Model\ApplicantConsentName::PHONE_NUMBER_VERIFICATION,
+                'granted' => true
+            ]),
+            new Onfido\Model\ApplicantConsentBuilder([
+                'name' => Onfido\Model\ApplicantConsentName::PRIVACY_NOTICES_READ,
+                'granted' => true
+            ]),
+            new Onfido\Model\ApplicantConsentBuilder([
+                'name' => Onfido\Model\ApplicantConsentName::SSN_VERIFICATION,
+                'granted' => true
+            ])
+        ];
+
+        $updatedApplicantData = new Onfido\Model\ApplicantUpdater([
+            'consents' => $expectedConsents
+        ]);
+
+        self::$onfido->updateApplicant($this->applicantId, $updatedApplicantData);
+
+        $actualConsents = self::$onfido->findApplicantConsents($this->applicantId);
+
+        for ($i = 0; $i < count($expectedConsents); $i++) {
+            $this->assertEquals($expectedConsents[$i]->getName(), $actualConsents[$i]->getName());
+            $this->assertEquals($expectedConsents[$i]->getGranted(), $actualConsents[$i]->getGranted());
+        }
+    }
+
     public function testDeleteApplicant()
     {
         self::$onfido->deleteApplicant($this->applicantId);
