@@ -6,6 +6,8 @@ use Onfido\Test\OnfidoTestCase as OnfidoTestCase;
 use Onfido\Model\DocumentReport as DocumentReport;
 use Onfido\Model\FacialSimilarityPhotoReport as FacialSimilarityPhotoReport;
 use Onfido\Model\DocumentWithAddressInformationReport as DocumentWithAddressInformationReport;
+use Onfido\Model\DocumentWithDrivingLicenceInformationReport as DocumentWithDrivingLicenceInformationReport;
+use Onfido\Model\DeviceIntelligenceReport as DeviceIntelligenceReport;
 use Onfido\Model\ReportName as ReportName;
 use Onfido\Model\ReportStatus as ReportStatus;
 
@@ -99,6 +101,55 @@ class ReportSchemasTest extends OnfidoTestCase
 
         $this->assertSame($report->getName(), "document_with_address_information");
         $this->assertSame($report->getProperties()->getBarcode()[0]->getDocumentType(), "driving_licence");
+    }
+
+    public function testSchemaOfDocumentWithDrivingLicenceInformationReportIsValid(): void
+    {
+        $reportId = $this->createCheck(
+            null,
+            $this->applicantId,
+            $this->documentId,
+            [ReportName::DOCUMENT_WITH_DRIVING_LICENCE_INFORMATION]
+        )->getReportIds()[0];
+
+        $report = $this->repeatRequestUntilStatusChanges(
+            $this->findReportFn,
+            [$reportId],
+            ReportStatus::COMPLETE
+        );
+
+        $this->assertInstanceOf(
+            DocumentWithDrivingLicenceInformationReport::class,
+            $report
+        );
+
+        $this->assertSame($report->getName(), "document_with_driving_licence_information");
+        $this->assertNotNull($report->getProperties()->getDrivingLicenceInformation());
+    }
+
+    public function testSchemaOfDeviceIntelligenceReportIsValid(): void
+    {
+        $reportId = $this->createCheck(
+            null,
+            $this->applicantId,
+            $this->documentId,
+            [ReportName::DEVICE_INTELLIGENCE]
+        )->getReportIds()[0];
+
+        $report = $this->repeatRequestUntilStatusChanges(
+            $this->findReportFn,
+            [$reportId],
+            ReportStatus::COMPLETE
+        );
+
+        $this->assertInstanceOf(
+            DeviceIntelligenceReport::class,
+            $report
+        );
+
+        $this->assertSame($report->getName(), "device_intelligence");
+        $this->assertNotNull($report->getBreakdown());
+        $this->assertNotNull($report->getProperties());
     }
 }
 
