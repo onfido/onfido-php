@@ -60,7 +60,12 @@ class WebhookShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => 'bool',
         'events' => '\Onfido\Model\WebhookEventType[]',
         'environments' => 'string[]',
-        'payload_version' => 'int'
+        'payload_version' => 'int',
+        'oauth_enabled' => 'bool',
+        'oauth_server_url' => 'string',
+        'oauth_server_client_id' => 'string',
+        'oauth_server_client_secret' => 'string',
+        'oauth_server_scope' => 'string'
     ];
 
     /**
@@ -74,7 +79,12 @@ class WebhookShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => null,
         'events' => null,
         'environments' => null,
-        'payload_version' => null
+        'payload_version' => null,
+        'oauth_enabled' => null,
+        'oauth_server_url' => null,
+        'oauth_server_client_id' => null,
+        'oauth_server_client_secret' => null,
+        'oauth_server_scope' => null
     ];
 
     /**
@@ -86,7 +96,12 @@ class WebhookShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => false,
         'events' => false,
         'environments' => false,
-        'payload_version' => false
+        'payload_version' => false,
+        'oauth_enabled' => false,
+        'oauth_server_url' => false,
+        'oauth_server_client_id' => false,
+        'oauth_server_client_secret' => false,
+        'oauth_server_scope' => false
     ];
 
     /**
@@ -178,7 +193,12 @@ class WebhookShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => 'enabled',
         'events' => 'events',
         'environments' => 'environments',
-        'payload_version' => 'payload_version'
+        'payload_version' => 'payload_version',
+        'oauth_enabled' => 'oauth_enabled',
+        'oauth_server_url' => 'oauth_server_url',
+        'oauth_server_client_id' => 'oauth_server_client_id',
+        'oauth_server_client_secret' => 'oauth_server_client_secret',
+        'oauth_server_scope' => 'oauth_server_scope'
     ];
 
     /**
@@ -190,7 +210,12 @@ class WebhookShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => 'setEnabled',
         'events' => 'setEvents',
         'environments' => 'setEnvironments',
-        'payload_version' => 'setPayloadVersion'
+        'payload_version' => 'setPayloadVersion',
+        'oauth_enabled' => 'setOauthEnabled',
+        'oauth_server_url' => 'setOauthServerUrl',
+        'oauth_server_client_id' => 'setOauthServerClientId',
+        'oauth_server_client_secret' => 'setOauthServerClientSecret',
+        'oauth_server_scope' => 'setOauthServerScope'
     ];
 
     /**
@@ -202,7 +227,12 @@ class WebhookShared implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => 'getEnabled',
         'events' => 'getEvents',
         'environments' => 'getEnvironments',
-        'payload_version' => 'getPayloadVersion'
+        'payload_version' => 'getPayloadVersion',
+        'oauth_enabled' => 'getOauthEnabled',
+        'oauth_server_url' => 'getOauthServerUrl',
+        'oauth_server_client_id' => 'getOauthServerClientId',
+        'oauth_server_client_secret' => 'getOauthServerClientSecret',
+        'oauth_server_scope' => 'getOauthServerScope'
     ];
 
     /**
@@ -266,6 +296,11 @@ class WebhookShared implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('events', $data ?? [], null);
         $this->setIfExists('environments', $data ?? [], null);
         $this->setIfExists('payload_version', $data ?? [], null);
+        $this->setIfExists('oauth_enabled', $data ?? [], null);
+        $this->setIfExists('oauth_server_url', $data ?? [], null);
+        $this->setIfExists('oauth_server_client_id', $data ?? [], null);
+        $this->setIfExists('oauth_server_client_secret', $data ?? [], null);
+        $this->setIfExists('oauth_server_scope', $data ?? [], null);
     }
 
     /**
@@ -414,6 +449,141 @@ class WebhookShared implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable payload_version cannot be null');
         }
         $this->container['payload_version'] = $payload_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets oauth_enabled
+     *
+     * @return bool|null
+     */
+    public function getOauthEnabled()
+    {
+        return $this->container['oauth_enabled'];
+    }
+
+    /**
+     * Sets oauth_enabled
+     *
+     * @param bool|null $oauth_enabled Determines if the webhook will fetch OAuth access tokens to send in the Authorization header.
+     *
+     * @return self
+     */
+    public function setOauthEnabled($oauth_enabled)
+    {
+        if (is_null($oauth_enabled)) {
+            throw new \InvalidArgumentException('non-nullable oauth_enabled cannot be null');
+        }
+        $this->container['oauth_enabled'] = $oauth_enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets oauth_server_url
+     *
+     * @return string|null
+     */
+    public function getOauthServerUrl()
+    {
+        return $this->container['oauth_server_url'];
+    }
+
+    /**
+     * Sets oauth_server_url
+     *
+     * @param string|null $oauth_server_url The url to fetch the OAuth access token using client credentials grant.
+     *
+     * @return self
+     */
+    public function setOauthServerUrl($oauth_server_url)
+    {
+        if (is_null($oauth_server_url)) {
+            throw new \InvalidArgumentException('non-nullable oauth_server_url cannot be null');
+        }
+        $this->container['oauth_server_url'] = $oauth_server_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets oauth_server_client_id
+     *
+     * @return string|null
+     */
+    public function getOauthServerClientId()
+    {
+        return $this->container['oauth_server_client_id'];
+    }
+
+    /**
+     * Sets oauth_server_client_id
+     *
+     * @param string|null $oauth_server_client_id The client id to authenticate the client credentials grant.
+     *
+     * @return self
+     */
+    public function setOauthServerClientId($oauth_server_client_id)
+    {
+        if (is_null($oauth_server_client_id)) {
+            throw new \InvalidArgumentException('non-nullable oauth_server_client_id cannot be null');
+        }
+        $this->container['oauth_server_client_id'] = $oauth_server_client_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets oauth_server_client_secret
+     *
+     * @return string|null
+     */
+    public function getOauthServerClientSecret()
+    {
+        return $this->container['oauth_server_client_secret'];
+    }
+
+    /**
+     * Sets oauth_server_client_secret
+     *
+     * @param string|null $oauth_server_client_secret The client secret to authenticate the client credentials grant.
+     *
+     * @return self
+     */
+    public function setOauthServerClientSecret($oauth_server_client_secret)
+    {
+        if (is_null($oauth_server_client_secret)) {
+            throw new \InvalidArgumentException('non-nullable oauth_server_client_secret cannot be null');
+        }
+        $this->container['oauth_server_client_secret'] = $oauth_server_client_secret;
+
+        return $this;
+    }
+
+    /**
+     * Gets oauth_server_scope
+     *
+     * @return string|null
+     */
+    public function getOauthServerScope()
+    {
+        return $this->container['oauth_server_scope'];
+    }
+
+    /**
+     * Sets oauth_server_scope
+     *
+     * @param string|null $oauth_server_scope The scopes to be sent when requesting the access token.
+     *
+     * @return self
+     */
+    public function setOauthServerScope($oauth_server_scope)
+    {
+        if (is_null($oauth_server_scope)) {
+            throw new \InvalidArgumentException('non-nullable oauth_server_scope cannot be null');
+        }
+        $this->container['oauth_server_scope'] = $oauth_server_scope;
 
         return $this;
     }

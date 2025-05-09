@@ -67,7 +67,7 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
         'randomized_device' => 'bool',
         'fake_network_request' => 'bool',
         'ip_reputation' => 'string',
-        'device_fingerprint_reuse' => 'int',
+        'device_fingerprint_reuse' => 'float',
         'single_device_used' => 'bool',
         'document_capture' => 'string',
         'biometric_capture' => 'string'
@@ -819,7 +819,7 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
     /**
      * Gets device_fingerprint_reuse
      *
-     * @return int|null
+     * @return float|null
      */
     public function getDeviceFingerprintReuse()
     {
@@ -829,7 +829,7 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
     /**
      * Sets device_fingerprint_reuse
      *
-     * @param int|null $device_fingerprint_reuse The number of times the device was used to create a report for a new applicant. A value greater than 1 indicates potential device reuse.
+     * @param float|null $device_fingerprint_reuse The number of times the device was used to create a report for a new applicant. A value greater than 1 indicates potential device reuse.
      *
      * @return self
      */

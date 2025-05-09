@@ -1,6 +1,6 @@
 <?php
 /**
- * DeviceIntelligenceReport
+ * DocumentPropertiesDrivingLicenceInformationItem
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * DeviceIntelligenceReport Class Doc Comment
+ * DocumentPropertiesDrivingLicenceInformationItem Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSerializable
+class DocumentPropertiesDrivingLicenceInformationItem implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = 'device_intelligence_report';
+    protected static $openAPIModelName = 'Document_Properties_Driving_Licence_Information_Item';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +57,10 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'created_at' => '\DateTime',
-        'href' => 'string',
-        'status' => '\Onfido\Model\ReportStatus',
-        'result' => '\Onfido\Model\ReportResult',
-        'sub_result' => '\Onfido\Model\ReportSubResult',
-        'check_id' => 'string',
-        'name' => '\Onfido\Model\ReportName',
-        'breakdown' => '\Onfido\Model\DeviceIntelligenceBreakdown',
-        'properties' => '\Onfido\Model\DeviceIntelligenceProperties'
+        'category' => 'string',
+        'obtainment_date' => '\DateTime',
+        'expiry_date' => '\DateTime',
+        'codes' => 'string'
     ];
 
     /**
@@ -77,16 +71,10 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'created_at' => 'date-time',
-        'href' => null,
-        'status' => null,
-        'result' => null,
-        'sub_result' => null,
-        'check_id' => 'uuid',
-        'name' => null,
-        'breakdown' => null,
-        'properties' => null
+        'category' => null,
+        'obtainment_date' => 'date',
+        'expiry_date' => 'date',
+        'codes' => null
     ];
 
     /**
@@ -95,16 +83,10 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'created_at' => false,
-        'href' => false,
-        'status' => false,
-        'result' => false,
-        'sub_result' => false,
-        'check_id' => false,
-        'name' => false,
-        'breakdown' => false,
-        'properties' => false
+        'category' => false,
+        'obtainment_date' => false,
+        'expiry_date' => false,
+        'codes' => false
     ];
 
     /**
@@ -193,16 +175,10 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'created_at' => 'created_at',
-        'href' => 'href',
-        'status' => 'status',
-        'result' => 'result',
-        'sub_result' => 'sub_result',
-        'check_id' => 'check_id',
-        'name' => 'name',
-        'breakdown' => 'breakdown',
-        'properties' => 'properties'
+        'category' => 'category',
+        'obtainment_date' => 'obtainment_date',
+        'expiry_date' => 'expiry_date',
+        'codes' => 'codes'
     ];
 
     /**
@@ -211,16 +187,10 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'created_at' => 'setCreatedAt',
-        'href' => 'setHref',
-        'status' => 'setStatus',
-        'result' => 'setResult',
-        'sub_result' => 'setSubResult',
-        'check_id' => 'setCheckId',
-        'name' => 'setName',
-        'breakdown' => 'setBreakdown',
-        'properties' => 'setProperties'
+        'category' => 'setCategory',
+        'obtainment_date' => 'setObtainmentDate',
+        'expiry_date' => 'setExpiryDate',
+        'codes' => 'setCodes'
     ];
 
     /**
@@ -229,16 +199,10 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'created_at' => 'getCreatedAt',
-        'href' => 'getHref',
-        'status' => 'getStatus',
-        'result' => 'getResult',
-        'sub_result' => 'getSubResult',
-        'check_id' => 'getCheckId',
-        'name' => 'getName',
-        'breakdown' => 'getBreakdown',
-        'properties' => 'getProperties'
+        'category' => 'getCategory',
+        'obtainment_date' => 'getObtainmentDate',
+        'expiry_date' => 'getExpiryDate',
+        'codes' => 'getCodes'
     ];
 
     /**
@@ -298,16 +262,10 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('href', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('result', $data ?? [], null);
-        $this->setIfExists('sub_result', $data ?? [], null);
-        $this->setIfExists('check_id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('breakdown', $data ?? [], null);
-        $this->setIfExists('properties', $data ?? [], null);
+        $this->setIfExists('category', $data ?? [], null);
+        $this->setIfExists('obtainment_date', $data ?? [], null);
+        $this->setIfExists('expiry_date', $data ?? [], null);
+        $this->setIfExists('codes', $data ?? [], null);
     }
 
     /**
@@ -337,12 +295,6 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -359,271 +311,109 @@ class DeviceIntelligenceReport implements ModelInterface, ArrayAccess, \JsonSeri
 
 
     /**
-     * Gets id
+     * Gets category
      *
-     * @return string
+     * @return string|null
      */
-    public function getId()
+    public function getCategory()
     {
-        return $this->container['id'];
+        return $this->container['category'];
     }
 
     /**
-     * Sets id
+     * Sets category
      *
-     * @param string $id The unique identifier for the report. Read-only.
+     * @param string|null $category category
      *
      * @return self
      */
-    public function setId($id)
+    public function setCategory($category)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($category)) {
+            throw new \InvalidArgumentException('non-nullable category cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['category'] = $category;
 
         return $this;
     }
 
     /**
-     * Gets created_at
+     * Gets obtainment_date
      *
      * @return \DateTime|null
      */
-    public function getCreatedAt()
+    public function getObtainmentDate()
     {
-        return $this->container['created_at'];
+        return $this->container['obtainment_date'];
     }
 
     /**
-     * Sets created_at
+     * Sets obtainment_date
      *
-     * @param \DateTime|null $created_at The date and time at which the report was first initiated. Read-only.
+     * @param \DateTime|null $obtainment_date obtainment_date
      *
      * @return self
      */
-    public function setCreatedAt($created_at)
+    public function setObtainmentDate($obtainment_date)
     {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        if (is_null($obtainment_date)) {
+            throw new \InvalidArgumentException('non-nullable obtainment_date cannot be null');
         }
-        $this->container['created_at'] = $created_at;
+        $this->container['obtainment_date'] = $obtainment_date;
 
         return $this;
     }
 
     /**
-     * Gets href
+     * Gets expiry_date
+     *
+     * @return \DateTime|null
+     */
+    public function getExpiryDate()
+    {
+        return $this->container['expiry_date'];
+    }
+
+    /**
+     * Sets expiry_date
+     *
+     * @param \DateTime|null $expiry_date expiry_date
+     *
+     * @return self
+     */
+    public function setExpiryDate($expiry_date)
+    {
+        if (is_null($expiry_date)) {
+            throw new \InvalidArgumentException('non-nullable expiry_date cannot be null');
+        }
+        $this->container['expiry_date'] = $expiry_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets codes
      *
      * @return string|null
      */
-    public function getHref()
+    public function getCodes()
     {
-        return $this->container['href'];
+        return $this->container['codes'];
     }
 
     /**
-     * Sets href
+     * Sets codes
      *
-     * @param string|null $href The API endpoint to retrieve the report. Read-only.
+     * @param string|null $codes codes
      *
      * @return self
      */
-    public function setHref($href)
+    public function setCodes($codes)
     {
-        if (is_null($href)) {
-            throw new \InvalidArgumentException('non-nullable href cannot be null');
+        if (is_null($codes)) {
+            throw new \InvalidArgumentException('non-nullable codes cannot be null');
         }
-        $this->container['href'] = $href;
-
-        return $this;
-    }
-
-    /**
-     * Gets status
-     *
-     * @return \Onfido\Model\ReportStatus|null
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param \Onfido\Model\ReportStatus|null $status status
-     *
-     * @return self
-     */
-    public function setStatus($status)
-    {
-        if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
-        }
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets result
-     *
-     * @return \Onfido\Model\ReportResult|null
-     */
-    public function getResult()
-    {
-        return $this->container['result'];
-    }
-
-    /**
-     * Sets result
-     *
-     * @param \Onfido\Model\ReportResult|null $result result
-     *
-     * @return self
-     */
-    public function setResult($result)
-    {
-        if (is_null($result)) {
-            throw new \InvalidArgumentException('non-nullable result cannot be null');
-        }
-        $this->container['result'] = $result;
-
-        return $this;
-    }
-
-    /**
-     * Gets sub_result
-     *
-     * @return \Onfido\Model\ReportSubResult|null
-     */
-    public function getSubResult()
-    {
-        return $this->container['sub_result'];
-    }
-
-    /**
-     * Sets sub_result
-     *
-     * @param \Onfido\Model\ReportSubResult|null $sub_result sub_result
-     *
-     * @return self
-     */
-    public function setSubResult($sub_result)
-    {
-        if (is_null($sub_result)) {
-            throw new \InvalidArgumentException('non-nullable sub_result cannot be null');
-        }
-        $this->container['sub_result'] = $sub_result;
-
-        return $this;
-    }
-
-    /**
-     * Gets check_id
-     *
-     * @return string|null
-     */
-    public function getCheckId()
-    {
-        return $this->container['check_id'];
-    }
-
-    /**
-     * Sets check_id
-     *
-     * @param string|null $check_id The ID of the check to which the report belongs. Read-only.
-     *
-     * @return self
-     */
-    public function setCheckId($check_id)
-    {
-        if (is_null($check_id)) {
-            throw new \InvalidArgumentException('non-nullable check_id cannot be null');
-        }
-        $this->container['check_id'] = $check_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return \Onfido\Model\ReportName
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param \Onfido\Model\ReportName $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets breakdown
-     *
-     * @return \Onfido\Model\DeviceIntelligenceBreakdown|null
-     */
-    public function getBreakdown()
-    {
-        return $this->container['breakdown'];
-    }
-
-    /**
-     * Sets breakdown
-     *
-     * @param \Onfido\Model\DeviceIntelligenceBreakdown|null $breakdown breakdown
-     *
-     * @return self
-     */
-    public function setBreakdown($breakdown)
-    {
-        if (is_null($breakdown)) {
-            throw new \InvalidArgumentException('non-nullable breakdown cannot be null');
-        }
-        $this->container['breakdown'] = $breakdown;
-
-        return $this;
-    }
-
-    /**
-     * Gets properties
-     *
-     * @return \Onfido\Model\DeviceIntelligenceProperties|null
-     */
-    public function getProperties()
-    {
-        return $this->container['properties'];
-    }
-
-    /**
-     * Sets properties
-     *
-     * @param \Onfido\Model\DeviceIntelligenceProperties|null $properties properties
-     *
-     * @return self
-     */
-    public function setProperties($properties)
-    {
-        if (is_null($properties)) {
-            throw new \InvalidArgumentException('non-nullable properties cannot be null');
-        }
-        $this->container['properties'] = $properties;
+        $this->container['codes'] = $codes;
 
         return $this;
     }

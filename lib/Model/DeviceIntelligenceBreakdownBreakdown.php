@@ -57,7 +57,7 @@ class DeviceIntelligenceBreakdownBreakdown implements ModelInterface, ArrayAcces
       * @var string[]
       */
     protected static $openAPITypes = [
-        'device' => '\Onfido\Model\DeviceIntelligenceBreakdownBreakdownDevice'
+        'device' => '\Onfido\Model\DeviceIntelligenceBreakdownDevice'
     ];
 
     /**
@@ -292,7 +292,7 @@ class DeviceIntelligenceBreakdownBreakdown implements ModelInterface, ArrayAcces
     /**
      * Gets device
      *
-     * @return \Onfido\Model\DeviceIntelligenceBreakdownBreakdownDevice|null
+     * @return \Onfido\Model\DeviceIntelligenceBreakdownDevice|null
      */
     public function getDevice()
     {
@@ -302,7 +302,7 @@ class DeviceIntelligenceBreakdownBreakdown implements ModelInterface, ArrayAcces
     /**
      * Sets device
      *
-     * @param \Onfido\Model\DeviceIntelligenceBreakdownBreakdownDevice|null $device device
+     * @param \Onfido\Model\DeviceIntelligenceBreakdownDevice|null $device device
      *
      * @return self
      */

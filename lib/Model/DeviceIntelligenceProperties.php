@@ -1,6 +1,6 @@
 <?php
 /**
- * DeviceIntelligenceBreakdownBreakdownDevice
+ * DeviceIntelligenceProperties
  *
  * PHP version 7.4
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * DeviceIntelligenceBreakdownBreakdownDevice Class Doc Comment
+ * DeviceIntelligenceProperties Class Doc Comment
  *
  * @category Class
- * @description Asserts whether the device used to upload the media is trustworthy, i.e. it is a real, physical device.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeviceIntelligenceProperties implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, Arra
       *
       * @var string
       */
-    protected static $openAPIModelName = 'device_intelligence_breakdown_breakdown_device';
+    protected static $openAPIModelName = 'device_intelligence_properties';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +57,9 @@ class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, Arra
       * @var string[]
       */
     protected static $openAPITypes = [
-        'breakdown' => '\Onfido\Model\DeviceIntelligenceBreakdownBreakdownDeviceBreakdown'
+        'device' => '\Onfido\Model\DeviceIntelligenceBreakdownPropertiesDevice',
+        'ip' => '\Onfido\Model\DeviceIntelligenceBreakdownPropertiesIp',
+        'geolocation' => '\Onfido\Model\DeviceIntelligenceBreakdownPropertiesGeolocation'
     ];
 
     /**
@@ -69,7 +70,9 @@ class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, Arra
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'breakdown' => null
+        'device' => null,
+        'ip' => null,
+        'geolocation' => null
     ];
 
     /**
@@ -78,7 +81,9 @@ class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, Arra
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'breakdown' => false
+        'device' => false,
+        'ip' => false,
+        'geolocation' => false
     ];
 
     /**
@@ -167,7 +172,9 @@ class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, Arra
      * @var string[]
      */
     protected static $attributeMap = [
-        'breakdown' => 'breakdown'
+        'device' => 'device',
+        'ip' => 'ip',
+        'geolocation' => 'geolocation'
     ];
 
     /**
@@ -176,7 +183,9 @@ class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, Arra
      * @var string[]
      */
     protected static $setters = [
-        'breakdown' => 'setBreakdown'
+        'device' => 'setDevice',
+        'ip' => 'setIp',
+        'geolocation' => 'setGeolocation'
     ];
 
     /**
@@ -185,7 +194,9 @@ class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, Arra
      * @var string[]
      */
     protected static $getters = [
-        'breakdown' => 'getBreakdown'
+        'device' => 'getDevice',
+        'ip' => 'getIp',
+        'geolocation' => 'getGeolocation'
     ];
 
     /**
@@ -245,7 +256,9 @@ class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, Arra
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('breakdown', $data ?? [], null);
+        $this->setIfExists('device', $data ?? [], null);
+        $this->setIfExists('ip', $data ?? [], null);
+        $this->setIfExists('geolocation', $data ?? [], null);
     }
 
     /**
@@ -291,28 +304,82 @@ class DeviceIntelligenceBreakdownBreakdownDevice implements ModelInterface, Arra
 
 
     /**
-     * Gets breakdown
+     * Gets device
      *
-     * @return \Onfido\Model\DeviceIntelligenceBreakdownBreakdownDeviceBreakdown|null
+     * @return \Onfido\Model\DeviceIntelligenceBreakdownPropertiesDevice|null
      */
-    public function getBreakdown()
+    public function getDevice()
     {
-        return $this->container['breakdown'];
+        return $this->container['device'];
     }
 
     /**
-     * Sets breakdown
+     * Sets device
      *
-     * @param \Onfido\Model\DeviceIntelligenceBreakdownBreakdownDeviceBreakdown|null $breakdown breakdown
+     * @param \Onfido\Model\DeviceIntelligenceBreakdownPropertiesDevice|null $device device
      *
      * @return self
      */
-    public function setBreakdown($breakdown)
+    public function setDevice($device)
     {
-        if (is_null($breakdown)) {
-            throw new \InvalidArgumentException('non-nullable breakdown cannot be null');
+        if (is_null($device)) {
+            throw new \InvalidArgumentException('non-nullable device cannot be null');
         }
-        $this->container['breakdown'] = $breakdown;
+        $this->container['device'] = $device;
+
+        return $this;
+    }
+
+    /**
+     * Gets ip
+     *
+     * @return \Onfido\Model\DeviceIntelligenceBreakdownPropertiesIp|null
+     */
+    public function getIp()
+    {
+        return $this->container['ip'];
+    }
+
+    /**
+     * Sets ip
+     *
+     * @param \Onfido\Model\DeviceIntelligenceBreakdownPropertiesIp|null $ip ip
+     *
+     * @return self
+     */
+    public function setIp($ip)
+    {
+        if (is_null($ip)) {
+            throw new \InvalidArgumentException('non-nullable ip cannot be null');
+        }
+        $this->container['ip'] = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Gets geolocation
+     *
+     * @return \Onfido\Model\DeviceIntelligenceBreakdownPropertiesGeolocation|null
+     */
+    public function getGeolocation()
+    {
+        return $this->container['geolocation'];
+    }
+
+    /**
+     * Sets geolocation
+     *
+     * @param \Onfido\Model\DeviceIntelligenceBreakdownPropertiesGeolocation|null $geolocation geolocation
+     *
+     * @return self
+     */
+    public function setGeolocation($geolocation)
+    {
+        if (is_null($geolocation)) {
+            throw new \InvalidArgumentException('non-nullable geolocation cannot be null');
+        }
+        $this->container['geolocation'] = $geolocation;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * DeviceIntelligenceBreakdownBreakdownDeviceBreakdown
+ * DeviceIntelligenceBreakdownDevice
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * DeviceIntelligenceBreakdownBreakdownDeviceBreakdown Class Doc Comment
+ * DeviceIntelligenceBreakdownDevice Class Doc Comment
  *
  * @category Class
+ * @description Asserts whether the device used to upload the media is trustworthy, i.e. it is a real, physical device.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeviceIntelligenceBreakdownDevice implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterf
       *
       * @var string
       */
-    protected static $openAPIModelName = 'device_intelligence_breakdown_breakdown_device_breakdown';
+    protected static $openAPIModelName = 'device_intelligence_breakdown_device';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +58,7 @@ class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterf
       * @var string[]
       */
     protected static $openAPITypes = [
-        'application_authenticity' => '\Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry',
-        'device_integrity' => '\Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry',
-        'device_reputation' => '\Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry'
+        'breakdown' => '\Onfido\Model\DeviceIntelligenceBreakdownDeviceBreakdown'
     ];
 
     /**
@@ -70,9 +69,7 @@ class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterf
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'application_authenticity' => null,
-        'device_integrity' => null,
-        'device_reputation' => null
+        'breakdown' => null
     ];
 
     /**
@@ -81,9 +78,7 @@ class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterf
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'application_authenticity' => false,
-        'device_integrity' => false,
-        'device_reputation' => false
+        'breakdown' => false
     ];
 
     /**
@@ -172,9 +167,7 @@ class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterf
      * @var string[]
      */
     protected static $attributeMap = [
-        'application_authenticity' => 'application_authenticity',
-        'device_integrity' => 'device_integrity',
-        'device_reputation' => 'device_reputation'
+        'breakdown' => 'breakdown'
     ];
 
     /**
@@ -183,9 +176,7 @@ class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterf
      * @var string[]
      */
     protected static $setters = [
-        'application_authenticity' => 'setApplicationAuthenticity',
-        'device_integrity' => 'setDeviceIntegrity',
-        'device_reputation' => 'setDeviceReputation'
+        'breakdown' => 'setBreakdown'
     ];
 
     /**
@@ -194,9 +185,7 @@ class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterf
      * @var string[]
      */
     protected static $getters = [
-        'application_authenticity' => 'getApplicationAuthenticity',
-        'device_integrity' => 'getDeviceIntegrity',
-        'device_reputation' => 'getDeviceReputation'
+        'breakdown' => 'getBreakdown'
     ];
 
     /**
@@ -256,9 +245,7 @@ class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterf
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('application_authenticity', $data ?? [], null);
-        $this->setIfExists('device_integrity', $data ?? [], null);
-        $this->setIfExists('device_reputation', $data ?? [], null);
+        $this->setIfExists('breakdown', $data ?? [], null);
     }
 
     /**
@@ -304,82 +291,28 @@ class DeviceIntelligenceBreakdownBreakdownDeviceBreakdown implements ModelInterf
 
 
     /**
-     * Gets application_authenticity
+     * Gets breakdown
      *
-     * @return \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null
+     * @return \Onfido\Model\DeviceIntelligenceBreakdownDeviceBreakdown|null
      */
-    public function getApplicationAuthenticity()
+    public function getBreakdown()
     {
-        return $this->container['application_authenticity'];
+        return $this->container['breakdown'];
     }
 
     /**
-     * Sets application_authenticity
+     * Sets breakdown
      *
-     * @param \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null $application_authenticity application_authenticity
+     * @param \Onfido\Model\DeviceIntelligenceBreakdownDeviceBreakdown|null $breakdown breakdown
      *
      * @return self
      */
-    public function setApplicationAuthenticity($application_authenticity)
+    public function setBreakdown($breakdown)
     {
-        if (is_null($application_authenticity)) {
-            throw new \InvalidArgumentException('non-nullable application_authenticity cannot be null');
+        if (is_null($breakdown)) {
+            throw new \InvalidArgumentException('non-nullable breakdown cannot be null');
         }
-        $this->container['application_authenticity'] = $application_authenticity;
-
-        return $this;
-    }
-
-    /**
-     * Gets device_integrity
-     *
-     * @return \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null
-     */
-    public function getDeviceIntegrity()
-    {
-        return $this->container['device_integrity'];
-    }
-
-    /**
-     * Sets device_integrity
-     *
-     * @param \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null $device_integrity device_integrity
-     *
-     * @return self
-     */
-    public function setDeviceIntegrity($device_integrity)
-    {
-        if (is_null($device_integrity)) {
-            throw new \InvalidArgumentException('non-nullable device_integrity cannot be null');
-        }
-        $this->container['device_integrity'] = $device_integrity;
-
-        return $this;
-    }
-
-    /**
-     * Gets device_reputation
-     *
-     * @return \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null
-     */
-    public function getDeviceReputation()
-    {
-        return $this->container['device_reputation'];
-    }
-
-    /**
-     * Sets device_reputation
-     *
-     * @param \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null $device_reputation device_reputation
-     *
-     * @return self
-     */
-    public function setDeviceReputation($device_reputation)
-    {
-        if (is_null($device_reputation)) {
-            throw new \InvalidArgumentException('non-nullable device_reputation cannot be null');
-        }
-        $this->container['device_reputation'] = $device_reputation;
+        $this->container['breakdown'] = $breakdown;
 
         return $this;
     }
