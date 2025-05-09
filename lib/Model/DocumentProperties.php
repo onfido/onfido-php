@@ -99,7 +99,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'address_lines' => '\Onfido\Model\DocumentPropertiesAddressLines',
         'barcode' => '\Onfido\Model\DocumentPropertiesBarcodeInner[]',
         'nfc' => '\Onfido\Model\DocumentPropertiesNfc',
-        'driving_licence_information' => '\Onfido\Model\DocumentPropertiesDrivingLicenceInformation',
+        'driving_licence_information' => '\Onfido\Model\DocumentPropertiesDrivingLicenceInformationItem[]',
         'document_classification' => '\Onfido\Model\DocumentPropertiesDocumentClassification',
         'extracted_data' => '\Onfido\Model\DocumentPropertiesExtractedData'
     ];
@@ -1860,7 +1860,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets driving_licence_information
      *
-     * @return \Onfido\Model\DocumentPropertiesDrivingLicenceInformation|null
+     * @return \Onfido\Model\DocumentPropertiesDrivingLicenceInformationItem[]|null
      */
     public function getDrivingLicenceInformation()
     {
@@ -1870,7 +1870,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets driving_licence_information
      *
-     * @param \Onfido\Model\DocumentPropertiesDrivingLicenceInformation|null $driving_licence_information driving_licence_information
+     * @param \Onfido\Model\DocumentPropertiesDrivingLicenceInformationItem[]|null $driving_licence_information driving_licence_information
      *
      * @return self
      */

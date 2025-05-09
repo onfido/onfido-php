@@ -1,6 +1,6 @@
 <?php
 /**
- * DocumentPropertiesDrivingLicenceInformation
+ * DeviceIntelligenceBreakdownDeviceBreakdown
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * DocumentPropertiesDrivingLicenceInformation Class Doc Comment
+ * DeviceIntelligenceBreakdownDeviceBreakdown Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeviceIntelligenceBreakdownDeviceBreakdown implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, Arr
       *
       * @var string
       */
-    protected static $openAPIModelName = 'document_properties_driving_licence_information';
+    protected static $openAPIModelName = 'device_intelligence_breakdown_device_breakdown';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, Arr
       * @var string[]
       */
     protected static $openAPITypes = [
-        'category' => 'string',
-        'obtainment_date' => '\DateTime',
-        'expiry_date' => '\DateTime',
-        'codes' => 'string'
+        'application_authenticity' => '\Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry',
+        'device_integrity' => '\Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry',
+        'device_reputation' => '\Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry'
     ];
 
     /**
@@ -71,10 +70,9 @@ class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, Arr
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'category' => null,
-        'obtainment_date' => 'date',
-        'expiry_date' => 'date',
-        'codes' => null
+        'application_authenticity' => null,
+        'device_integrity' => null,
+        'device_reputation' => null
     ];
 
     /**
@@ -83,10 +81,9 @@ class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, Arr
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'category' => false,
-        'obtainment_date' => false,
-        'expiry_date' => false,
-        'codes' => false
+        'application_authenticity' => false,
+        'device_integrity' => false,
+        'device_reputation' => false
     ];
 
     /**
@@ -175,10 +172,9 @@ class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, Arr
      * @var string[]
      */
     protected static $attributeMap = [
-        'category' => 'category',
-        'obtainment_date' => 'obtainment_date',
-        'expiry_date' => 'expiry_date',
-        'codes' => 'codes'
+        'application_authenticity' => 'application_authenticity',
+        'device_integrity' => 'device_integrity',
+        'device_reputation' => 'device_reputation'
     ];
 
     /**
@@ -187,10 +183,9 @@ class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, Arr
      * @var string[]
      */
     protected static $setters = [
-        'category' => 'setCategory',
-        'obtainment_date' => 'setObtainmentDate',
-        'expiry_date' => 'setExpiryDate',
-        'codes' => 'setCodes'
+        'application_authenticity' => 'setApplicationAuthenticity',
+        'device_integrity' => 'setDeviceIntegrity',
+        'device_reputation' => 'setDeviceReputation'
     ];
 
     /**
@@ -199,10 +194,9 @@ class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, Arr
      * @var string[]
      */
     protected static $getters = [
-        'category' => 'getCategory',
-        'obtainment_date' => 'getObtainmentDate',
-        'expiry_date' => 'getExpiryDate',
-        'codes' => 'getCodes'
+        'application_authenticity' => 'getApplicationAuthenticity',
+        'device_integrity' => 'getDeviceIntegrity',
+        'device_reputation' => 'getDeviceReputation'
     ];
 
     /**
@@ -262,10 +256,9 @@ class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, Arr
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('category', $data ?? [], null);
-        $this->setIfExists('obtainment_date', $data ?? [], null);
-        $this->setIfExists('expiry_date', $data ?? [], null);
-        $this->setIfExists('codes', $data ?? [], null);
+        $this->setIfExists('application_authenticity', $data ?? [], null);
+        $this->setIfExists('device_integrity', $data ?? [], null);
+        $this->setIfExists('device_reputation', $data ?? [], null);
     }
 
     /**
@@ -311,109 +304,82 @@ class DocumentPropertiesDrivingLicenceInformation implements ModelInterface, Arr
 
 
     /**
-     * Gets category
+     * Gets application_authenticity
      *
-     * @return string|null
+     * @return \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null
      */
-    public function getCategory()
+    public function getApplicationAuthenticity()
     {
-        return $this->container['category'];
+        return $this->container['application_authenticity'];
     }
 
     /**
-     * Sets category
+     * Sets application_authenticity
      *
-     * @param string|null $category category
+     * @param \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null $application_authenticity application_authenticity
      *
      * @return self
      */
-    public function setCategory($category)
+    public function setApplicationAuthenticity($application_authenticity)
     {
-        if (is_null($category)) {
-            throw new \InvalidArgumentException('non-nullable category cannot be null');
+        if (is_null($application_authenticity)) {
+            throw new \InvalidArgumentException('non-nullable application_authenticity cannot be null');
         }
-        $this->container['category'] = $category;
+        $this->container['application_authenticity'] = $application_authenticity;
 
         return $this;
     }
 
     /**
-     * Gets obtainment_date
+     * Gets device_integrity
      *
-     * @return \DateTime|null
+     * @return \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null
      */
-    public function getObtainmentDate()
+    public function getDeviceIntegrity()
     {
-        return $this->container['obtainment_date'];
+        return $this->container['device_integrity'];
     }
 
     /**
-     * Sets obtainment_date
+     * Sets device_integrity
      *
-     * @param \DateTime|null $obtainment_date obtainment_date
+     * @param \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null $device_integrity device_integrity
      *
      * @return self
      */
-    public function setObtainmentDate($obtainment_date)
+    public function setDeviceIntegrity($device_integrity)
     {
-        if (is_null($obtainment_date)) {
-            throw new \InvalidArgumentException('non-nullable obtainment_date cannot be null');
+        if (is_null($device_integrity)) {
+            throw new \InvalidArgumentException('non-nullable device_integrity cannot be null');
         }
-        $this->container['obtainment_date'] = $obtainment_date;
+        $this->container['device_integrity'] = $device_integrity;
 
         return $this;
     }
 
     /**
-     * Gets expiry_date
+     * Gets device_reputation
      *
-     * @return \DateTime|null
+     * @return \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null
      */
-    public function getExpiryDate()
+    public function getDeviceReputation()
     {
-        return $this->container['expiry_date'];
+        return $this->container['device_reputation'];
     }
 
     /**
-     * Sets expiry_date
+     * Sets device_reputation
      *
-     * @param \DateTime|null $expiry_date expiry_date
+     * @param \Onfido\Model\DocumentBreakdownDataComparisonBreakdownIssuingCountry|null $device_reputation device_reputation
      *
      * @return self
      */
-    public function setExpiryDate($expiry_date)
+    public function setDeviceReputation($device_reputation)
     {
-        if (is_null($expiry_date)) {
-            throw new \InvalidArgumentException('non-nullable expiry_date cannot be null');
+        if (is_null($device_reputation)) {
+            throw new \InvalidArgumentException('non-nullable device_reputation cannot be null');
         }
-        $this->container['expiry_date'] = $expiry_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets codes
-     *
-     * @return string|null
-     */
-    public function getCodes()
-    {
-        return $this->container['codes'];
-    }
-
-    /**
-     * Sets codes
-     *
-     * @param string|null $codes codes
-     *
-     * @return self
-     */
-    public function setCodes($codes)
-    {
-        if (is_null($codes)) {
-            throw new \InvalidArgumentException('non-nullable codes cannot be null');
-        }
-        $this->container['codes'] = $codes;
+        $this->container['device_reputation'] = $device_reputation;
 
         return $this;
     }
