@@ -507,8 +507,8 @@ class ObjectSerializer
 
         if (method_exists($class, 'getAllowableEnumValues')) {
             if (!in_array($data, $class::getAllowableEnumValues(), true)) {
-                $imploded = implode("', '", $class::getAllowableEnumValues());
-                throw new \InvalidArgumentException("Invalid value for enum '$class', must be one of: '$imploded'");
+                                $data = 'unknown_default_open_api';
+                
             }
             return $data;
         } else {
