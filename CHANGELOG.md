@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.1.1 27th May 2025
+
+- Release based on Onfido OpenAPI spec version [v5.1.2](https://github.com/onfido/onfido-openapi-spec/releases/tag/v5.1.2):
+  - [CAT-1989] Allow decoding an unknown enum value from API response
+
 ## v9.1.0 14th May 2025
 
 - Release based on Onfido OpenAPI spec version [v5.1.0](https://github.com/onfido/onfido-openapi-spec/releases/tag/v5.1.0):
