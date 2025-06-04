@@ -64,7 +64,8 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'suppress_form_emails' => 'bool',
         'sub_result' => 'string',
         'consider' => '\Onfido\Model\ReportName[]',
-        'us_driving_licence' => '\Onfido\Model\UsDrivingLicenceBuilder'
+        'us_driving_licence' => '\Onfido\Model\UsDrivingLicenceBuilder',
+        'report_configuration' => '\Onfido\Model\ReportConfiguration'
     ];
 
     /**
@@ -82,7 +83,8 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'suppress_form_emails' => null,
         'sub_result' => null,
         'consider' => null,
-        'us_driving_licence' => null
+        'us_driving_licence' => null,
+        'report_configuration' => null
     ];
 
     /**
@@ -98,7 +100,8 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'suppress_form_emails' => false,
         'sub_result' => false,
         'consider' => false,
-        'us_driving_licence' => false
+        'us_driving_licence' => false,
+        'report_configuration' => false
     ];
 
     /**
@@ -194,7 +197,8 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'suppress_form_emails' => 'suppress_form_emails',
         'sub_result' => 'sub_result',
         'consider' => 'consider',
-        'us_driving_licence' => 'us_driving_licence'
+        'us_driving_licence' => 'us_driving_licence',
+        'report_configuration' => 'report_configuration'
     ];
 
     /**
@@ -210,7 +214,8 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'suppress_form_emails' => 'setSuppressFormEmails',
         'sub_result' => 'setSubResult',
         'consider' => 'setConsider',
-        'us_driving_licence' => 'setUsDrivingLicence'
+        'us_driving_licence' => 'setUsDrivingLicence',
+        'report_configuration' => 'setReportConfiguration'
     ];
 
     /**
@@ -226,7 +231,8 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'suppress_form_emails' => 'getSuppressFormEmails',
         'sub_result' => 'getSubResult',
         'consider' => 'getConsider',
-        'us_driving_licence' => 'getUsDrivingLicence'
+        'us_driving_licence' => 'getUsDrivingLicence',
+        'report_configuration' => 'getReportConfiguration'
     ];
 
     /**
@@ -294,6 +300,7 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('sub_result', $data ?? [], null);
         $this->setIfExists('consider', $data ?? [], null);
         $this->setIfExists('us_driving_licence', $data ?? [], null);
+        $this->setIfExists('report_configuration', $data ?? [], null);
     }
 
     /**
@@ -553,6 +560,35 @@ class CheckRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable us_driving_licence cannot be null');
         }
         $this->container['us_driving_licence'] = $us_driving_licence;
+
+        return $this;
+    }
+
+    /**
+     * Gets report_configuration
+     *
+     * @return \Onfido\Model\ReportConfiguration|null
+     * @deprecated
+     */
+    public function getReportConfiguration()
+    {
+        return $this->container['report_configuration'];
+    }
+
+    /**
+     * Sets report_configuration
+     *
+     * @param \Onfido\Model\ReportConfiguration|null $report_configuration report_configuration
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setReportConfiguration($report_configuration)
+    {
+        if (is_null($report_configuration)) {
+            throw new \InvalidArgumentException('non-nullable report_configuration cannot be null');
+        }
+        $this->container['report_configuration'] = $report_configuration;
 
         return $this;
     }
