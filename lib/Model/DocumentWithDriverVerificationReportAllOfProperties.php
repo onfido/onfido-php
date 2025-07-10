@@ -106,6 +106,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'restricted_licence' => 'bool',
         'raw_licence_category' => 'string',
         'raw_vehicle_classes' => 'string',
+        'manual_transmission_restriction' => 'bool',
         'vehicle_class_details' => '\Onfido\Model\DocumentWithDriverVerificationReportAllOfPropertiesAllOfVehicleClassDetailsInner[]',
         'passenger_vehicle' => '\Onfido\Model\DocumentWithDriverVerificationReportAllOfPropertiesAllOfPassengerVehicle'
     ];
@@ -167,6 +168,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'restricted_licence' => null,
         'raw_licence_category' => null,
         'raw_vehicle_classes' => null,
+        'manual_transmission_restriction' => null,
         'vehicle_class_details' => null,
         'passenger_vehicle' => null
     ];
@@ -226,6 +228,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'restricted_licence' => false,
         'raw_licence_category' => false,
         'raw_vehicle_classes' => false,
+        'manual_transmission_restriction' => false,
         'vehicle_class_details' => false,
         'passenger_vehicle' => false
     ];
@@ -365,6 +368,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'restricted_licence' => 'restricted_licence',
         'raw_licence_category' => 'raw_licence_category',
         'raw_vehicle_classes' => 'raw_vehicle_classes',
+        'manual_transmission_restriction' => 'manual_transmission_restriction',
         'vehicle_class_details' => 'vehicle_class_details',
         'passenger_vehicle' => 'passenger_vehicle'
     ];
@@ -424,6 +428,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'restricted_licence' => 'setRestrictedLicence',
         'raw_licence_category' => 'setRawLicenceCategory',
         'raw_vehicle_classes' => 'setRawVehicleClasses',
+        'manual_transmission_restriction' => 'setManualTransmissionRestriction',
         'vehicle_class_details' => 'setVehicleClassDetails',
         'passenger_vehicle' => 'setPassengerVehicle'
     ];
@@ -483,6 +488,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'restricted_licence' => 'getRestrictedLicence',
         'raw_licence_category' => 'getRawLicenceCategory',
         'raw_vehicle_classes' => 'getRawVehicleClasses',
+        'manual_transmission_restriction' => 'getManualTransmissionRestriction',
         'vehicle_class_details' => 'getVehicleClassDetails',
         'passenger_vehicle' => 'getPassengerVehicle'
     ];
@@ -662,6 +668,7 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         $this->setIfExists('restricted_licence', $data ?? [], null);
         $this->setIfExists('raw_licence_category', $data ?? [], null);
         $this->setIfExists('raw_vehicle_classes', $data ?? [], null);
+        $this->setIfExists('manual_transmission_restriction', $data ?? [], null);
         $this->setIfExists('vehicle_class_details', $data ?? [], null);
         $this->setIfExists('passenger_vehicle', $data ?? [], null);
     }
@@ -2084,6 +2091,33 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
             throw new \InvalidArgumentException('non-nullable raw_vehicle_classes cannot be null');
         }
         $this->container['raw_vehicle_classes'] = $raw_vehicle_classes;
+
+        return $this;
+    }
+
+    /**
+     * Gets manual_transmission_restriction
+     *
+     * @return bool|null
+     */
+    public function getManualTransmissionRestriction()
+    {
+        return $this->container['manual_transmission_restriction'];
+    }
+
+    /**
+     * Sets manual_transmission_restriction
+     *
+     * @param bool|null $manual_transmission_restriction True if the user is not qualified to drive a manual transmission
+     *
+     * @return self
+     */
+    public function setManualTransmissionRestriction($manual_transmission_restriction)
+    {
+        if (is_null($manual_transmission_restriction)) {
+            throw new \InvalidArgumentException('non-nullable manual_transmission_restriction cannot be null');
+        }
+        $this->container['manual_transmission_restriction'] = $manual_transmission_restriction;
 
         return $this;
     }
