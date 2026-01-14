@@ -73,7 +73,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'reasons' => 'string[]',
         'link' => '\Onfido\Model\WorkflowRunLink',
         'error' => '\Onfido\Model\WorkflowRunError',
-        'customer_user_id' => 'string'
+        'customer_user_id' => 'string',
+        'timeline_file_download_url' => 'string'
     ];
 
     /**
@@ -99,7 +100,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'reasons' => null,
         'link' => null,
         'error' => null,
-        'customer_user_id' => null
+        'customer_user_id' => null,
+        'timeline_file_download_url' => null
     ];
 
     /**
@@ -123,7 +125,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'reasons' => false,
         'link' => false,
         'error' => false,
-        'customer_user_id' => false
+        'customer_user_id' => false,
+        'timeline_file_download_url' => false
     ];
 
     /**
@@ -227,7 +230,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'reasons' => 'reasons',
         'link' => 'link',
         'error' => 'error',
-        'customer_user_id' => 'customer_user_id'
+        'customer_user_id' => 'customer_user_id',
+        'timeline_file_download_url' => 'timeline_file_download_url'
     ];
 
     /**
@@ -251,7 +255,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'reasons' => 'setReasons',
         'link' => 'setLink',
         'error' => 'setError',
-        'customer_user_id' => 'setCustomerUserId'
+        'customer_user_id' => 'setCustomerUserId',
+        'timeline_file_download_url' => 'setTimelineFileDownloadUrl'
     ];
 
     /**
@@ -275,7 +280,8 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'reasons' => 'getReasons',
         'link' => 'getLink',
         'error' => 'getError',
-        'customer_user_id' => 'getCustomerUserId'
+        'customer_user_id' => 'getCustomerUserId',
+        'timeline_file_download_url' => 'getTimelineFileDownloadUrl'
     ];
 
     /**
@@ -351,6 +357,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('link', $data ?? [], null);
         $this->setIfExists('error', $data ?? [], null);
         $this->setIfExists('customer_user_id', $data ?? [], null);
+        $this->setIfExists('timeline_file_download_url', $data ?? [], null);
     }
 
     /**
@@ -854,6 +861,33 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         }
 
         $this->container['customer_user_id'] = $customer_user_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets timeline_file_download_url
+     *
+     * @return string|null
+     */
+    public function getTimelineFileDownloadUrl()
+    {
+        return $this->container['timeline_file_download_url'];
+    }
+
+    /**
+     * Sets timeline_file_download_url
+     *
+     * @param string|null $timeline_file_download_url Pre-signed URL to download the timeline file for the Workflow Run.
+     *
+     * @return self
+     */
+    public function setTimelineFileDownloadUrl($timeline_file_download_url)
+    {
+        if (is_null($timeline_file_download_url)) {
+            throw new \InvalidArgumentException('non-nullable timeline_file_download_url cannot be null');
+        }
+        $this->container['timeline_file_download_url'] = $timeline_file_download_url;
 
         return $this;
     }

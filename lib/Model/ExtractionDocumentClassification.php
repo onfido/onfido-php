@@ -252,9 +252,29 @@ class ExtractionDocumentClassification implements ModelInterface, ArrayAccess, \
         return self::$openAPIModelName;
     }
 
+    public const SUBTYPE_SPE = 'SPE';
+    public const SUBTYPE_ALI = 'ali';
+    public const SUBTYPE_ALIEN = 'alien';
+    public const SUBTYPE_COM = 'com';
+    public const SUBTYPE_COMMERCIAL = 'commercial';
+    public const SUBTYPE_DOM = 'dom';
+    public const SUBTYPE_DOMESTIC = 'domestic';
     public const SUBTYPE_FULL = 'full';
     public const SUBTYPE_NOT_FULL = 'not_full';
+    public const SUBTYPE_FULL_DRIVING_LICENCE = 'full driving licence';
+    public const SUBTYPE_HEAVY_VEHICLE = 'heavy_vehicle';
+    public const SUBTYPE_LEARNER = 'learner';
+    public const SUBTYPE_MINOR__U21_OR_U18 = 'minor (u21 or u18)';
+    public const SUBTYPE_MOT = 'mot';
+    public const SUBTYPE_MUL = 'mul';
     public const SUBTYPE_PROVISIONAL = 'provisional';
+    public const SUBTYPE_PROVISIONAL_DRIVING_LICENCE = 'provisional driving licence';
+    public const SUBTYPE_SER = 'ser';
+    public const SUBTYPE_SPE2 = 'spe';
+    public const SUBTYPE_SPECIAL = 'special';
+    public const SUBTYPE_STANDARD = 'standard';
+    public const SUBTYPE_TEM = 'tem';
+    public const SUBTYPE_U21 = 'u21';
     public const SUBTYPE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -265,9 +285,29 @@ class ExtractionDocumentClassification implements ModelInterface, ArrayAccess, \
     public function getSubtypeAllowableValues()
     {
         return [
+            self::SUBTYPE_SPE,
+            self::SUBTYPE_ALI,
+            self::SUBTYPE_ALIEN,
+            self::SUBTYPE_COM,
+            self::SUBTYPE_COMMERCIAL,
+            self::SUBTYPE_DOM,
+            self::SUBTYPE_DOMESTIC,
             self::SUBTYPE_FULL,
             self::SUBTYPE_NOT_FULL,
+            self::SUBTYPE_FULL_DRIVING_LICENCE,
+            self::SUBTYPE_HEAVY_VEHICLE,
+            self::SUBTYPE_LEARNER,
+            self::SUBTYPE_MINOR__U21_OR_U18,
+            self::SUBTYPE_MOT,
+            self::SUBTYPE_MUL,
             self::SUBTYPE_PROVISIONAL,
+            self::SUBTYPE_PROVISIONAL_DRIVING_LICENCE,
+            self::SUBTYPE_SER,
+            self::SUBTYPE_SPE2,
+            self::SUBTYPE_SPECIAL,
+            self::SUBTYPE_STANDARD,
+            self::SUBTYPE_TEM,
+            self::SUBTYPE_U21,
             self::SUBTYPE_UNKNOWN_DEFAULT_OPEN_API,
         ];
     }

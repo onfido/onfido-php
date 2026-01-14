@@ -281,6 +281,13 @@ class ProofOfAddressProperties implements ModelInterface, ArrayAccess, \JsonSeri
     public const DOCUMENT_TYPE_PENSION_PROPERTY_STATEMENT_LETTER = 'pension_property_statement_letter';
     public const DOCUMENT_TYPE_IDENTITY_DOCUMENT_WITH_ADDRESS = 'identity_document_with_address';
     public const DOCUMENT_TYPE_EXCHANGE_HOUSE_STATEMENT = 'exchange_house_statement';
+    public const DOCUMENT_TYPE_ACCOMMODATION_TENANCY_CERTIFICATE = 'accommodation_tenancy_certificate';
+    public const DOCUMENT_TYPE_ADDRESS_CERTIFICATE = 'address_certificate';
+    public const DOCUMENT_TYPE_ELECTRICITY_BILL = 'electricity_bill';
+    public const DOCUMENT_TYPE_GAS_BILL = 'gas_bill';
+    public const DOCUMENT_TYPE_INTERNET_BILL = 'internet_bill';
+    public const DOCUMENT_TYPE_PHONE_BILL = 'phone_bill';
+    public const DOCUMENT_TYPE_WATER_BILL = 'water_bill';
     public const DOCUMENT_TYPE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -302,6 +309,13 @@ class ProofOfAddressProperties implements ModelInterface, ArrayAccess, \JsonSeri
             self::DOCUMENT_TYPE_PENSION_PROPERTY_STATEMENT_LETTER,
             self::DOCUMENT_TYPE_IDENTITY_DOCUMENT_WITH_ADDRESS,
             self::DOCUMENT_TYPE_EXCHANGE_HOUSE_STATEMENT,
+            self::DOCUMENT_TYPE_ACCOMMODATION_TENANCY_CERTIFICATE,
+            self::DOCUMENT_TYPE_ADDRESS_CERTIFICATE,
+            self::DOCUMENT_TYPE_ELECTRICITY_BILL,
+            self::DOCUMENT_TYPE_GAS_BILL,
+            self::DOCUMENT_TYPE_INTERNET_BILL,
+            self::DOCUMENT_TYPE_PHONE_BILL,
+            self::DOCUMENT_TYPE_WATER_BILL,
             self::DOCUMENT_TYPE_UNKNOWN_DEFAULT_OPEN_API,
         ];
     }
