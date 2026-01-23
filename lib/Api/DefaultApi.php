@@ -98,6 +98,12 @@ class DefaultApi
         'deleteApplicant' => [
             'application/json',
         ],
+        'deletePasskey' => [
+            'application/json',
+        ],
+        'deletePasskeys' => [
+            'application/json',
+        ],
         'deleteWatchlistMonitor' => [
             'application/json',
         ],
@@ -143,7 +149,13 @@ class DefaultApi
         'downloadQesDocument' => [
             'application/json',
         ],
+        'downloadSesDocument' => [
+            'application/json',
+        ],
         'downloadSignedEvidenceFile' => [
+            'application/json',
+        ],
+        'downloadSigningDocument' => [
             'application/json',
         ],
         'extract' => [
@@ -176,7 +188,13 @@ class DefaultApi
         'findMotionCapture' => [
             'application/json',
         ],
+        'findPasskey' => [
+            'application/json',
+        ],
         'findReport' => [
+            'application/json',
+        ],
+        'findSigningDocument' => [
             'application/json',
         ],
         'findTask' => [
@@ -221,10 +239,16 @@ class DefaultApi
         'listMotionCaptures' => [
             'application/json',
         ],
+        'listPasskeys' => [
+            'application/json',
+        ],
         'listRepeatAttempts' => [
             'application/json',
         ],
         'listReports' => [
+            'application/json',
+        ],
+        'listSigningDocuments' => [
             'application/json',
         ],
         'listTasks' => [
@@ -263,6 +287,9 @@ class DefaultApi
         'updateApplicant' => [
             'application/json',
         ],
+        'updatePasskey' => [
+            'application/json',
+        ],
         'updateWatchlistMonitorMatch' => [
             'application/json',
         ],
@@ -276,6 +303,9 @@ class DefaultApi
             'multipart/form-data',
         ],
         'uploadLivePhoto' => [
+            'multipart/form-data',
+        ],
+        'uploadSigningDocument' => [
             'multipart/form-data',
         ],
     ];
@@ -3075,6 +3105,486 @@ class DefaultApi
             $resourcePath = str_replace(
                 '{' . 'applicant_id' . '}',
                 ObjectSerializer::toPathValue($applicant_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deletePasskey
+     *
+     * Delete passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskey'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function deletePasskey($username, $passkey_id, string $contentType = self::contentTypes['deletePasskey'][0])
+    {
+        $this->deletePasskeyWithHttpInfo($username, $passkey_id, $contentType);
+    }
+
+    /**
+     * Operation deletePasskeyWithHttpInfo
+     *
+     * Delete passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskey'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deletePasskeyWithHttpInfo($username, $passkey_id, string $contentType = self::contentTypes['deletePasskey'][0])
+    {
+        $request = $this->deletePasskeyRequest($username, $passkey_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deletePasskeyAsync
+     *
+     * Delete passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deletePasskeyAsync($username, $passkey_id, string $contentType = self::contentTypes['deletePasskey'][0])
+    {
+        return $this->deletePasskeyAsyncWithHttpInfo($username, $passkey_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deletePasskeyAsyncWithHttpInfo
+     *
+     * Delete passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deletePasskeyAsyncWithHttpInfo($username, $passkey_id, string $contentType = self::contentTypes['deletePasskey'][0])
+    {
+        $returnType = '';
+        $request = $this->deletePasskeyRequest($username, $passkey_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deletePasskey'
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deletePasskeyRequest($username, $passkey_id, string $contentType = self::contentTypes['deletePasskey'][0])
+    {
+
+        // verify the required parameter 'username' is set
+        if ($username === null || (is_array($username) && count($username) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $username when calling deletePasskey'
+            );
+        }
+
+        // verify the required parameter 'passkey_id' is set
+        if ($passkey_id === null || (is_array($passkey_id) && count($passkey_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $passkey_id when calling deletePasskey'
+            );
+        }
+
+
+        $resourcePath = '/passkeys/{username}/{passkey_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($username !== null) {
+            $resourcePath = str_replace(
+                '{' . 'username' . '}',
+                ObjectSerializer::toPathValue($username),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($passkey_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'passkey_id' . '}',
+                ObjectSerializer::toPathValue($passkey_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deletePasskeys
+     *
+     * Delete passkeys
+     *
+     * @param  string $username Username whose passkeys will be deleted. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskeys'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function deletePasskeys($username, string $contentType = self::contentTypes['deletePasskeys'][0])
+    {
+        $this->deletePasskeysWithHttpInfo($username, $contentType);
+    }
+
+    /**
+     * Operation deletePasskeysWithHttpInfo
+     *
+     * Delete passkeys
+     *
+     * @param  string $username Username whose passkeys will be deleted. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskeys'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deletePasskeysWithHttpInfo($username, string $contentType = self::contentTypes['deletePasskeys'][0])
+    {
+        $request = $this->deletePasskeysRequest($username, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deletePasskeysAsync
+     *
+     * Delete passkeys
+     *
+     * @param  string $username Username whose passkeys will be deleted. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deletePasskeysAsync($username, string $contentType = self::contentTypes['deletePasskeys'][0])
+    {
+        return $this->deletePasskeysAsyncWithHttpInfo($username, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deletePasskeysAsyncWithHttpInfo
+     *
+     * Delete passkeys
+     *
+     * @param  string $username Username whose passkeys will be deleted. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deletePasskeysAsyncWithHttpInfo($username, string $contentType = self::contentTypes['deletePasskeys'][0])
+    {
+        $returnType = '';
+        $request = $this->deletePasskeysRequest($username, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deletePasskeys'
+     *
+     * @param  string $username Username whose passkeys will be deleted. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deletePasskeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deletePasskeysRequest($username, string $contentType = self::contentTypes['deletePasskeys'][0])
+    {
+
+        // verify the required parameter 'username' is set
+        if ($username === null || (is_array($username) && count($username) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $username when calling deletePasskeys'
+            );
+        }
+
+
+        $resourcePath = '/passkeys/{username}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($username !== null) {
+            $resourcePath = str_replace(
+                '{' . 'username' . '}',
+                ObjectSerializer::toPathValue($username),
                 $resourcePath
             );
         }
@@ -8167,6 +8677,376 @@ class DefaultApi
     }
 
     /**
+     * Operation downloadSesDocument
+     *
+     * Retrieves the signed document or signing transaction receipt
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run for which you want to retrieve the signed document. (required)
+     * @param  string $id The unique identifier of the file which you want to retrieve. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSesDocument'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return |\SplFileObject|\Onfido\Model\Error
+     */
+    public function downloadSesDocument($workflow_run_id, $id, string $contentType = self::contentTypes['downloadSesDocument'][0])
+    {
+        list($response) = $this->downloadSesDocumentWithHttpInfo($workflow_run_id, $id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation downloadSesDocumentWithHttpInfo
+     *
+     * Retrieves the signed document or signing transaction receipt
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run for which you want to retrieve the signed document. (required)
+     * @param  string $id The unique identifier of the file which you want to retrieve. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSesDocument'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of |\SplFileObject|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function downloadSesDocumentWithHttpInfo($workflow_run_id, $id, string $contentType = self::contentTypes['downloadSesDocument'][0])
+    {
+        $request = $this->downloadSesDocumentRequest($workflow_run_id, $id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation downloadSesDocumentAsync
+     *
+     * Retrieves the signed document or signing transaction receipt
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run for which you want to retrieve the signed document. (required)
+     * @param  string $id The unique identifier of the file which you want to retrieve. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSesDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function downloadSesDocumentAsync($workflow_run_id, $id, string $contentType = self::contentTypes['downloadSesDocument'][0])
+    {
+        return $this->downloadSesDocumentAsyncWithHttpInfo($workflow_run_id, $id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation downloadSesDocumentAsyncWithHttpInfo
+     *
+     * Retrieves the signed document or signing transaction receipt
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run for which you want to retrieve the signed document. (required)
+     * @param  string $id The unique identifier of the file which you want to retrieve. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSesDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function downloadSesDocumentAsyncWithHttpInfo($workflow_run_id, $id, string $contentType = self::contentTypes['downloadSesDocument'][0])
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->downloadSesDocumentRequest($workflow_run_id, $id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'downloadSesDocument'
+     *
+     * @param  string $workflow_run_id The unique identifier of the Workflow Run for which you want to retrieve the signed document. (required)
+     * @param  string $id The unique identifier of the file which you want to retrieve. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSesDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function downloadSesDocumentRequest($workflow_run_id, $id, string $contentType = self::contentTypes['downloadSesDocument'][0])
+    {
+
+        // verify the required parameter 'workflow_run_id' is set
+        if ($workflow_run_id === null || (is_array($workflow_run_id) && count($workflow_run_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $workflow_run_id when calling downloadSesDocument'
+            );
+        }
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling downloadSesDocument'
+            );
+        }
+
+
+        $resourcePath = '/simple_electronic_signature/documents';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $workflow_run_id,
+            'workflow_run_id', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $id,
+            'id', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            true // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/pdf', 'application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation downloadSignedEvidenceFile
      *
      * Retrieve Workflow Run Evidence Summary File
@@ -8458,6 +9338,354 @@ class DefaultApi
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/pdf', 'application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation downloadSigningDocument
+     *
+     * Download signing document
+     *
+     * @param  string $signing_document_id signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject|\Onfido\Model\Error
+     */
+    public function downloadSigningDocument($signing_document_id, string $contentType = self::contentTypes['downloadSigningDocument'][0])
+    {
+        list($response) = $this->downloadSigningDocumentWithHttpInfo($signing_document_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation downloadSigningDocumentWithHttpInfo
+     *
+     * Download signing document
+     *
+     * @param  string $signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function downloadSigningDocumentWithHttpInfo($signing_document_id, string $contentType = self::contentTypes['downloadSigningDocument'][0])
+    {
+        $request = $this->downloadSigningDocumentRequest($signing_document_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation downloadSigningDocumentAsync
+     *
+     * Download signing document
+     *
+     * @param  string $signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function downloadSigningDocumentAsync($signing_document_id, string $contentType = self::contentTypes['downloadSigningDocument'][0])
+    {
+        return $this->downloadSigningDocumentAsyncWithHttpInfo($signing_document_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation downloadSigningDocumentAsyncWithHttpInfo
+     *
+     * Download signing document
+     *
+     * @param  string $signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function downloadSigningDocumentAsyncWithHttpInfo($signing_document_id, string $contentType = self::contentTypes['downloadSigningDocument'][0])
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->downloadSigningDocumentRequest($signing_document_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'downloadSigningDocument'
+     *
+     * @param  string $signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function downloadSigningDocumentRequest($signing_document_id, string $contentType = self::contentTypes['downloadSigningDocument'][0])
+    {
+
+        // verify the required parameter 'signing_document_id' is set
+        if ($signing_document_id === null || (is_array($signing_document_id) && count($signing_document_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $signing_document_id when calling downloadSigningDocument'
+            );
+        }
+
+
+        $resourcePath = '/signing_documents/{signing_document_id}/download';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($signing_document_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'signing_document_id' . '}',
+                ObjectSerializer::toPathValue($signing_document_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['*/*', 'application/json', ],
             $contentType,
             $multipart
         );
@@ -11995,6 +13223,374 @@ class DefaultApi
     }
 
     /**
+     * Operation findPasskey
+     *
+     * Retrieve passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findPasskey'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\Passkey|\Onfido\Model\Error
+     */
+    public function findPasskey($username, $passkey_id, string $contentType = self::contentTypes['findPasskey'][0])
+    {
+        list($response) = $this->findPasskeyWithHttpInfo($username, $passkey_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation findPasskeyWithHttpInfo
+     *
+     * Retrieve passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findPasskey'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\Passkey|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function findPasskeyWithHttpInfo($username, $passkey_id, string $contentType = self::contentTypes['findPasskey'][0])
+    {
+        $request = $this->findPasskeyRequest($username, $passkey_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Onfido\Model\Passkey' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Passkey' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Passkey', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Onfido\Model\Passkey';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Passkey',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation findPasskeyAsync
+     *
+     * Retrieve passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findPasskey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findPasskeyAsync($username, $passkey_id, string $contentType = self::contentTypes['findPasskey'][0])
+    {
+        return $this->findPasskeyAsyncWithHttpInfo($username, $passkey_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation findPasskeyAsyncWithHttpInfo
+     *
+     * Retrieve passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findPasskey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findPasskeyAsyncWithHttpInfo($username, $passkey_id, string $contentType = self::contentTypes['findPasskey'][0])
+    {
+        $returnType = '\Onfido\Model\Passkey';
+        $request = $this->findPasskeyRequest($username, $passkey_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'findPasskey'
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findPasskey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function findPasskeyRequest($username, $passkey_id, string $contentType = self::contentTypes['findPasskey'][0])
+    {
+
+        // verify the required parameter 'username' is set
+        if ($username === null || (is_array($username) && count($username) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $username when calling findPasskey'
+            );
+        }
+
+        // verify the required parameter 'passkey_id' is set
+        if ($passkey_id === null || (is_array($passkey_id) && count($passkey_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $passkey_id when calling findPasskey'
+            );
+        }
+
+
+        $resourcePath = '/passkeys/{username}/{passkey_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($username !== null) {
+            $resourcePath = str_replace(
+                '{' . 'username' . '}',
+                ObjectSerializer::toPathValue($username),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($passkey_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'passkey_id' . '}',
+                ObjectSerializer::toPathValue($passkey_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation findReport
      *
      * Retrieve report
@@ -12279,6 +13875,354 @@ class DefaultApi
             $resourcePath = str_replace(
                 '{' . 'report_id' . '}',
                 ObjectSerializer::toPathValue($report_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation findSigningDocument
+     *
+     * Retrieve signing document
+     *
+     * @param  string $signing_document_id signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\SigningDocument|\Onfido\Model\Error
+     */
+    public function findSigningDocument($signing_document_id, string $contentType = self::contentTypes['findSigningDocument'][0])
+    {
+        list($response) = $this->findSigningDocumentWithHttpInfo($signing_document_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation findSigningDocumentWithHttpInfo
+     *
+     * Retrieve signing document
+     *
+     * @param  string $signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\SigningDocument|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function findSigningDocumentWithHttpInfo($signing_document_id, string $contentType = self::contentTypes['findSigningDocument'][0])
+    {
+        $request = $this->findSigningDocumentRequest($signing_document_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Onfido\Model\SigningDocument' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\SigningDocument' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\SigningDocument', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Onfido\Model\SigningDocument';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\SigningDocument',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation findSigningDocumentAsync
+     *
+     * Retrieve signing document
+     *
+     * @param  string $signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findSigningDocumentAsync($signing_document_id, string $contentType = self::contentTypes['findSigningDocument'][0])
+    {
+        return $this->findSigningDocumentAsyncWithHttpInfo($signing_document_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation findSigningDocumentAsyncWithHttpInfo
+     *
+     * Retrieve signing document
+     *
+     * @param  string $signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findSigningDocumentAsyncWithHttpInfo($signing_document_id, string $contentType = self::contentTypes['findSigningDocument'][0])
+    {
+        $returnType = '\Onfido\Model\SigningDocument';
+        $request = $this->findSigningDocumentRequest($signing_document_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'findSigningDocument'
+     *
+     * @param  string $signing_document_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function findSigningDocumentRequest($signing_document_id, string $contentType = self::contentTypes['findSigningDocument'][0])
+    {
+
+        // verify the required parameter 'signing_document_id' is set
+        if ($signing_document_id === null || (is_array($signing_document_id) && count($signing_document_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $signing_document_id when calling findSigningDocument'
+            );
+        }
+
+
+        $resourcePath = '/signing_documents/{signing_document_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($signing_document_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'signing_document_id' . '}',
+                ObjectSerializer::toPathValue($signing_document_id),
                 $resourcePath
             );
         }
@@ -17167,6 +19111,354 @@ class DefaultApi
     }
 
     /**
+     * Operation listPasskeys
+     *
+     * List passkeys
+     *
+     * @param  string $username Username that owns the passkeys. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPasskeys'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\PasskeysList|\Onfido\Model\Error
+     */
+    public function listPasskeys($username, string $contentType = self::contentTypes['listPasskeys'][0])
+    {
+        list($response) = $this->listPasskeysWithHttpInfo($username, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listPasskeysWithHttpInfo
+     *
+     * List passkeys
+     *
+     * @param  string $username Username that owns the passkeys. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPasskeys'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\PasskeysList|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listPasskeysWithHttpInfo($username, string $contentType = self::contentTypes['listPasskeys'][0])
+    {
+        $request = $this->listPasskeysRequest($username, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Onfido\Model\PasskeysList' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\PasskeysList' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\PasskeysList', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Onfido\Model\PasskeysList';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\PasskeysList',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listPasskeysAsync
+     *
+     * List passkeys
+     *
+     * @param  string $username Username that owns the passkeys. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPasskeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listPasskeysAsync($username, string $contentType = self::contentTypes['listPasskeys'][0])
+    {
+        return $this->listPasskeysAsyncWithHttpInfo($username, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listPasskeysAsyncWithHttpInfo
+     *
+     * List passkeys
+     *
+     * @param  string $username Username that owns the passkeys. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPasskeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listPasskeysAsyncWithHttpInfo($username, string $contentType = self::contentTypes['listPasskeys'][0])
+    {
+        $returnType = '\Onfido\Model\PasskeysList';
+        $request = $this->listPasskeysRequest($username, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listPasskeys'
+     *
+     * @param  string $username Username that owns the passkeys. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPasskeys'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listPasskeysRequest($username, string $contentType = self::contentTypes['listPasskeys'][0])
+    {
+
+        // verify the required parameter 'username' is set
+        if ($username === null || (is_array($username) && count($username) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $username when calling listPasskeys'
+            );
+        }
+
+
+        $resourcePath = '/passkeys/{username}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($username !== null) {
+            $resourcePath = str_replace(
+                '{' . 'username' . '}',
+                ObjectSerializer::toPathValue($username),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation listRepeatAttempts
      *
      * Retrieve repeat attempts
@@ -17796,6 +20088,355 @@ class DefaultApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $check_id,
             'check_id', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            true // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listSigningDocuments
+     *
+     * List signing documents
+     *
+     * @param  string $applicant_id applicant_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSigningDocuments'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\SigningDocumentsList|\Onfido\Model\Error
+     */
+    public function listSigningDocuments($applicant_id, string $contentType = self::contentTypes['listSigningDocuments'][0])
+    {
+        list($response) = $this->listSigningDocumentsWithHttpInfo($applicant_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listSigningDocumentsWithHttpInfo
+     *
+     * List signing documents
+     *
+     * @param  string $applicant_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSigningDocuments'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\SigningDocumentsList|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listSigningDocumentsWithHttpInfo($applicant_id, string $contentType = self::contentTypes['listSigningDocuments'][0])
+    {
+        $request = $this->listSigningDocumentsRequest($applicant_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Onfido\Model\SigningDocumentsList' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\SigningDocumentsList' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\SigningDocumentsList', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Onfido\Model\SigningDocumentsList';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\SigningDocumentsList',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listSigningDocumentsAsync
+     *
+     * List signing documents
+     *
+     * @param  string $applicant_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSigningDocuments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listSigningDocumentsAsync($applicant_id, string $contentType = self::contentTypes['listSigningDocuments'][0])
+    {
+        return $this->listSigningDocumentsAsyncWithHttpInfo($applicant_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listSigningDocumentsAsyncWithHttpInfo
+     *
+     * List signing documents
+     *
+     * @param  string $applicant_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSigningDocuments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listSigningDocumentsAsyncWithHttpInfo($applicant_id, string $contentType = self::contentTypes['listSigningDocuments'][0])
+    {
+        $returnType = '\Onfido\Model\SigningDocumentsList';
+        $request = $this->listSigningDocumentsRequest($applicant_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listSigningDocuments'
+     *
+     * @param  string $applicant_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSigningDocuments'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listSigningDocumentsRequest($applicant_id, string $contentType = self::contentTypes['listSigningDocuments'][0])
+    {
+
+        // verify the required parameter 'applicant_id' is set
+        if ($applicant_id === null || (is_array($applicant_id) && count($applicant_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $applicant_id when calling listSigningDocuments'
+            );
+        }
+
+
+        $resourcePath = '/signing_documents';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $applicant_id,
+            'applicant_id', // param base name
             'string', // openApiType
             '', // style
             false, // explode
@@ -21596,6 +24237,393 @@ class DefaultApi
     }
 
     /**
+     * Operation updatePasskey
+     *
+     * Update passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  \Onfido\Model\PasskeyUpdater $passkey_updater Passkey update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePasskey'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\Passkey|\Onfido\Model\Error
+     */
+    public function updatePasskey($username, $passkey_id, $passkey_updater, string $contentType = self::contentTypes['updatePasskey'][0])
+    {
+        list($response) = $this->updatePasskeyWithHttpInfo($username, $passkey_id, $passkey_updater, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updatePasskeyWithHttpInfo
+     *
+     * Update passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  \Onfido\Model\PasskeyUpdater $passkey_updater Passkey update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePasskey'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\Passkey|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updatePasskeyWithHttpInfo($username, $passkey_id, $passkey_updater, string $contentType = self::contentTypes['updatePasskey'][0])
+    {
+        $request = $this->updatePasskeyRequest($username, $passkey_id, $passkey_updater, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Onfido\Model\Passkey' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Passkey' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Passkey', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Onfido\Model\Passkey';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Passkey',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updatePasskeyAsync
+     *
+     * Update passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  \Onfido\Model\PasskeyUpdater $passkey_updater Passkey update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePasskey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updatePasskeyAsync($username, $passkey_id, $passkey_updater, string $contentType = self::contentTypes['updatePasskey'][0])
+    {
+        return $this->updatePasskeyAsyncWithHttpInfo($username, $passkey_id, $passkey_updater, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updatePasskeyAsyncWithHttpInfo
+     *
+     * Update passkey
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  \Onfido\Model\PasskeyUpdater $passkey_updater Passkey update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePasskey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updatePasskeyAsyncWithHttpInfo($username, $passkey_id, $passkey_updater, string $contentType = self::contentTypes['updatePasskey'][0])
+    {
+        $returnType = '\Onfido\Model\Passkey';
+        $request = $this->updatePasskeyRequest($username, $passkey_id, $passkey_updater, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updatePasskey'
+     *
+     * @param  string $username Username that owns the passkey. (required)
+     * @param  string $passkey_id Passkey ID. (required)
+     * @param  \Onfido\Model\PasskeyUpdater $passkey_updater Passkey update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePasskey'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updatePasskeyRequest($username, $passkey_id, $passkey_updater, string $contentType = self::contentTypes['updatePasskey'][0])
+    {
+
+        // verify the required parameter 'username' is set
+        if ($username === null || (is_array($username) && count($username) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $username when calling updatePasskey'
+            );
+        }
+
+        // verify the required parameter 'passkey_id' is set
+        if ($passkey_id === null || (is_array($passkey_id) && count($passkey_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $passkey_id when calling updatePasskey'
+            );
+        }
+
+        // verify the required parameter 'passkey_updater' is set
+        if ($passkey_updater === null || (is_array($passkey_updater) && count($passkey_updater) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $passkey_updater when calling updatePasskey'
+            );
+        }
+
+
+        $resourcePath = '/passkeys/{username}/{passkey_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($username !== null) {
+            $resourcePath = str_replace(
+                '{' . 'username' . '}',
+                ObjectSerializer::toPathValue($username),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($passkey_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'passkey_id' . '}',
+                ObjectSerializer::toPathValue($passkey_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($passkey_updater)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($passkey_updater));
+            } else {
+                $httpBody = $passkey_updater;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation updateWatchlistMonitorMatch
      *
      * Set match status (BETA)
@@ -23427,6 +26455,375 @@ class DefaultApi
         // form params
         if ($advanced_validation !== null) {
             $formParams['advanced_validation'] = ObjectSerializer::toFormValue($advanced_validation);
+        }
+
+        $multipart = true;
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation uploadSigningDocument
+     *
+     * Upload a signing document
+     *
+     * @param  string $applicant_id The ID of the applicant whose signing document is being uploaded. (required)
+     * @param  \SplFileObject $file The file to be uploaded. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\SigningDocument|\Onfido\Model\Error
+     */
+    public function uploadSigningDocument($applicant_id, $file, string $contentType = self::contentTypes['uploadSigningDocument'][0])
+    {
+        list($response) = $this->uploadSigningDocumentWithHttpInfo($applicant_id, $file, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation uploadSigningDocumentWithHttpInfo
+     *
+     * Upload a signing document
+     *
+     * @param  string $applicant_id The ID of the applicant whose signing document is being uploaded. (required)
+     * @param  \SplFileObject $file The file to be uploaded. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\SigningDocument|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function uploadSigningDocumentWithHttpInfo($applicant_id, $file, string $contentType = self::contentTypes['uploadSigningDocument'][0])
+    {
+        $request = $this->uploadSigningDocumentRequest($applicant_id, $file, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\Onfido\Model\SigningDocument' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\SigningDocument' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\SigningDocument', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                default:
+                    if ('\Onfido\Model\Error' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Onfido\Model\Error' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Onfido\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Onfido\Model\SigningDocument';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\SigningDocument',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation uploadSigningDocumentAsync
+     *
+     * Upload a signing document
+     *
+     * @param  string $applicant_id The ID of the applicant whose signing document is being uploaded. (required)
+     * @param  \SplFileObject $file The file to be uploaded. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function uploadSigningDocumentAsync($applicant_id, $file, string $contentType = self::contentTypes['uploadSigningDocument'][0])
+    {
+        return $this->uploadSigningDocumentAsyncWithHttpInfo($applicant_id, $file, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation uploadSigningDocumentAsyncWithHttpInfo
+     *
+     * Upload a signing document
+     *
+     * @param  string $applicant_id The ID of the applicant whose signing document is being uploaded. (required)
+     * @param  \SplFileObject $file The file to be uploaded. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function uploadSigningDocumentAsyncWithHttpInfo($applicant_id, $file, string $contentType = self::contentTypes['uploadSigningDocument'][0])
+    {
+        $returnType = '\Onfido\Model\SigningDocument';
+        $request = $this->uploadSigningDocumentRequest($applicant_id, $file, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'uploadSigningDocument'
+     *
+     * @param  string $applicant_id The ID of the applicant whose signing document is being uploaded. (required)
+     * @param  \SplFileObject $file The file to be uploaded. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSigningDocument'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function uploadSigningDocumentRequest($applicant_id, $file, string $contentType = self::contentTypes['uploadSigningDocument'][0])
+    {
+
+        // verify the required parameter 'applicant_id' is set
+        if ($applicant_id === null || (is_array($applicant_id) && count($applicant_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $applicant_id when calling uploadSigningDocument'
+            );
+        }
+
+        // verify the required parameter 'file' is set
+        if ($file === null || (is_array($file) && count($file) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $file when calling uploadSigningDocument'
+            );
+        }
+
+
+        $resourcePath = '/signing_documents';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+        // form params
+        if ($applicant_id !== null) {
+            $formParams['applicant_id'] = ObjectSerializer::toFormValue($applicant_id);
+        }
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $formParams['file'] = [];
+            $paramFiles = is_array($file) ? $file : [$file];
+            foreach ($paramFiles as $paramFile) {
+                $formParams['file'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
+                    ObjectSerializer::toFormValue($paramFile),
+                    'rb'
+                );
+            }
         }
 
         $multipart = true;
