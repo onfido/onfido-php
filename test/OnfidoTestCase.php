@@ -118,6 +118,14 @@ abstract class OnfidoTestCase extends TestCase
         );
     }
 
+    protected function uploadSigningDocument(string $applicantId, string $filePath = 'test/media/sample_signing_document.pdf'): Onfido\Model\SigningDocument
+    {
+        return self::$onfido->uploadSigningDocument(
+            $applicantId,
+            new \SplFileObject($filePath)
+        );
+    }
+
     protected function uploadLivePhoto(string $applicantId): Onfido\Model\LivePhoto
     {
         return self::$onfido->uploadLivePhoto(
