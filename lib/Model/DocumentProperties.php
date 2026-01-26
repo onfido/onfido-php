@@ -70,6 +70,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'nationality' => 'string',
         'issuing_state' => 'string',
         'issuing_date' => '\DateTime',
+        'valid_from' => '\DateTime',
         'categorisation' => 'string',
         'mrz_line1' => 'string',
         'mrz_line2' => 'string',
@@ -125,6 +126,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'nationality' => null,
         'issuing_state' => null,
         'issuing_date' => 'date',
+        'valid_from' => 'date',
         'categorisation' => null,
         'mrz_line1' => null,
         'mrz_line2' => null,
@@ -178,6 +180,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'nationality' => false,
         'issuing_state' => false,
         'issuing_date' => false,
+        'valid_from' => false,
         'categorisation' => false,
         'mrz_line1' => false,
         'mrz_line2' => false,
@@ -311,6 +314,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'nationality' => 'nationality',
         'issuing_state' => 'issuing_state',
         'issuing_date' => 'issuing_date',
+        'valid_from' => 'valid_from',
         'categorisation' => 'categorisation',
         'mrz_line1' => 'mrz_line1',
         'mrz_line2' => 'mrz_line2',
@@ -364,6 +368,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'nationality' => 'setNationality',
         'issuing_state' => 'setIssuingState',
         'issuing_date' => 'setIssuingDate',
+        'valid_from' => 'setValidFrom',
         'categorisation' => 'setCategorisation',
         'mrz_line1' => 'setMrzLine1',
         'mrz_line2' => 'setMrzLine2',
@@ -417,6 +422,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'nationality' => 'getNationality',
         'issuing_state' => 'getIssuingState',
         'issuing_date' => 'getIssuingDate',
+        'valid_from' => 'getValidFrom',
         'categorisation' => 'getCategorisation',
         'mrz_line1' => 'getMrzLine1',
         'mrz_line2' => 'getMrzLine2',
@@ -590,6 +596,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('nationality', $data ?? [], null);
         $this->setIfExists('issuing_state', $data ?? [], null);
         $this->setIfExists('issuing_date', $data ?? [], null);
+        $this->setIfExists('valid_from', $data ?? [], null);
         $this->setIfExists('categorisation', $data ?? [], null);
         $this->setIfExists('mrz_line1', $data ?? [], null);
         $this->setIfExists('mrz_line2', $data ?? [], null);
@@ -1040,6 +1047,33 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable issuing_date cannot be null');
         }
         $this->container['issuing_date'] = $issuing_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets valid_from
+     *
+     * @return \DateTime|null
+     */
+    public function getValidFrom()
+    {
+        return $this->container['valid_from'];
+    }
+
+    /**
+     * Sets valid_from
+     *
+     * @param \DateTime|null $valid_from valid_from
+     *
+     * @return self
+     */
+    public function setValidFrom($valid_from)
+    {
+        if (is_null($valid_from)) {
+            throw new \InvalidArgumentException('non-nullable valid_from cannot be null');
+        }
+        $this->container['valid_from'] = $valid_from;
 
         return $this;
     }
