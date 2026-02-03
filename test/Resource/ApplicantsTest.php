@@ -98,6 +98,15 @@ class ApplicantsTest extends OnfidoTestCase
 
         $actualConsents = self::$onfido->findApplicantConsents($this->applicantId);
 
+        $byName = static function ($a, $b): int {
+            return strcmp($a->getName(), $b->getName());
+        };
+
+        usort($expectedConsents, $byName);
+        usort($actualConsents, $byName);
+
+        $this->assertCount(count($expectedConsents), $actualConsents, 'Consents count mismatch');
+
         for ($i = 0; $i < count($expectedConsents); $i++) {
             $this->assertEquals($expectedConsents[$i]->getName(), $actualConsents[$i]->getName());
             $this->assertEquals($expectedConsents[$i]->getGranted(), $actualConsents[$i]->getGranted());
