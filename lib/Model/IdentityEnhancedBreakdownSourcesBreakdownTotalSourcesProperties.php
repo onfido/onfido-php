@@ -57,7 +57,7 @@ class IdentityEnhancedBreakdownSourcesBreakdownTotalSourcesProperties implements
       * @var string[]
       */
     protected static $openAPITypes = [
-        'total_number_of_sources' => 'int'
+        'total_number_of_sources' => 'string'
     ];
 
     /**
@@ -292,7 +292,7 @@ class IdentityEnhancedBreakdownSourcesBreakdownTotalSourcesProperties implements
     /**
      * Gets total_number_of_sources
      *
-     * @return int|null
+     * @return string|null
      */
     public function getTotalNumberOfSources()
     {
@@ -302,7 +302,7 @@ class IdentityEnhancedBreakdownSourcesBreakdownTotalSourcesProperties implements
     /**
      * Sets total_number_of_sources
      *
-     * @param int|null $total_number_of_sources total_number_of_sources
+     * @param string|null $total_number_of_sources total_number_of_sources
      *
      * @return self
      */

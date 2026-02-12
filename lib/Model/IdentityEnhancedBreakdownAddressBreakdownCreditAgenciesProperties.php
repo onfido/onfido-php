@@ -57,7 +57,7 @@ class IdentityEnhancedBreakdownAddressBreakdownCreditAgenciesProperties implemen
       * @var string[]
       */
     protected static $openAPITypes = [
-        'number_of_matches' => 'int'
+        'number_of_matches' => 'string'
     ];
 
     /**
@@ -292,7 +292,7 @@ class IdentityEnhancedBreakdownAddressBreakdownCreditAgenciesProperties implemen
     /**
      * Gets number_of_matches
      *
-     * @return int|null
+     * @return string|null
      */
     public function getNumberOfMatches()
     {
@@ -302,7 +302,7 @@ class IdentityEnhancedBreakdownAddressBreakdownCreditAgenciesProperties implemen
     /**
      * Sets number_of_matches
      *
-     * @param int|null $number_of_matches number_of_matches
+     * @param string|null $number_of_matches number_of_matches
      *
      * @return self
      */
