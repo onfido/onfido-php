@@ -58,7 +58,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPITypes = [
         'device' => '\Onfido\Model\DeviceIntelligenceBreakdownDevice',
-        'breakdown' => '\Onfido\Model\DeviceIntelligenceBreakdownBreakdown',
         'properties' => '\Onfido\Model\DeviceIntelligenceBreakdownProperties'
     ];
 
@@ -71,7 +70,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPIFormats = [
         'device' => null,
-        'breakdown' => null,
         'properties' => null
     ];
 
@@ -82,7 +80,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static array $openAPINullables = [
         'device' => false,
-        'breakdown' => false,
         'properties' => false
     ];
 
@@ -173,7 +170,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $attributeMap = [
         'device' => 'device',
-        'breakdown' => 'breakdown',
         'properties' => 'properties'
     ];
 
@@ -184,7 +180,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $setters = [
         'device' => 'setDevice',
-        'breakdown' => 'setBreakdown',
         'properties' => 'setProperties'
     ];
 
@@ -195,7 +190,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $getters = [
         'device' => 'getDevice',
-        'breakdown' => 'getBreakdown',
         'properties' => 'getProperties'
     ];
 
@@ -257,7 +251,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
     public function __construct(?array $data = null)
     {
         $this->setIfExists('device', $data ?? [], null);
-        $this->setIfExists('breakdown', $data ?? [], null);
         $this->setIfExists('properties', $data ?? [], null);
     }
 
@@ -326,35 +319,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable device cannot be null');
         }
         $this->container['device'] = $device;
-
-        return $this;
-    }
-
-    /**
-     * Gets breakdown
-     *
-     * @return \Onfido\Model\DeviceIntelligenceBreakdownBreakdown|null
-     * @deprecated
-     */
-    public function getBreakdown()
-    {
-        return $this->container['breakdown'];
-    }
-
-    /**
-     * Sets breakdown
-     *
-     * @param \Onfido\Model\DeviceIntelligenceBreakdownBreakdown|null $breakdown breakdown
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setBreakdown($breakdown)
-    {
-        if (is_null($breakdown)) {
-            throw new \InvalidArgumentException('non-nullable breakdown cannot be null');
-        }
-        $this->container['breakdown'] = $breakdown;
 
         return $this;
     }

@@ -71,6 +71,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'input' => 'object',
         'output' => 'object',
         'reasons' => 'string[]',
+        'tags' => 'string[]',
         'link' => '\Onfido\Model\WorkflowRunLink',
         'error' => '\Onfido\Model\WorkflowRunError',
         'customer_user_id' => 'string',
@@ -98,6 +99,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'input' => null,
         'output' => null,
         'reasons' => null,
+        'tags' => null,
         'link' => null,
         'error' => null,
         'customer_user_id' => null,
@@ -123,6 +125,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'input' => false,
         'output' => true,
         'reasons' => false,
+        'tags' => false,
         'link' => false,
         'error' => false,
         'customer_user_id' => false,
@@ -228,6 +231,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'input' => 'input',
         'output' => 'output',
         'reasons' => 'reasons',
+        'tags' => 'tags',
         'link' => 'link',
         'error' => 'error',
         'customer_user_id' => 'customer_user_id',
@@ -253,6 +257,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'input' => 'setInput',
         'output' => 'setOutput',
         'reasons' => 'setReasons',
+        'tags' => 'setTags',
         'link' => 'setLink',
         'error' => 'setError',
         'customer_user_id' => 'setCustomerUserId',
@@ -278,6 +283,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         'input' => 'getInput',
         'output' => 'getOutput',
         'reasons' => 'getReasons',
+        'tags' => 'getTags',
         'link' => 'getLink',
         'error' => 'getError',
         'customer_user_id' => 'getCustomerUserId',
@@ -354,6 +360,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('input', $data ?? [], null);
         $this->setIfExists('output', $data ?? [], null);
         $this->setIfExists('reasons', $data ?? [], null);
+        $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('link', $data ?? [], null);
         $this->setIfExists('error', $data ?? [], null);
         $this->setIfExists('customer_user_id', $data ?? [], null);
@@ -776,6 +783,33 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable reasons cannot be null');
         }
         $this->container['reasons'] = $reasons;
+
+        return $this;
+    }
+
+    /**
+     * Gets tags
+     *
+     * @return string[]|null
+     */
+    public function getTags()
+    {
+        return $this->container['tags'];
+    }
+
+    /**
+     * Sets tags
+     *
+     * @param string[]|null $tags A list of tags associated with the Workflow Run.
+     *
+     * @return self
+     */
+    public function setTags($tags)
+    {
+        if (is_null($tags)) {
+            throw new \InvalidArgumentException('non-nullable tags cannot be null');
+        }
+        $this->container['tags'] = $tags;
 
         return $this;
     }

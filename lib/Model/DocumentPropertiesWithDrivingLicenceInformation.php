@@ -1,6 +1,6 @@
 <?php
 /**
- * DocumentProperties
+ * DocumentPropertiesWithDrivingLicenceInformation
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * DocumentProperties Class Doc Comment
+ * DocumentPropertiesWithDrivingLicenceInformation Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializable
+class DocumentPropertiesWithDrivingLicenceInformation implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'document_properties';
+    protected static $openAPIModelName = 'Document_Properties_with_Driving_Licence_Information';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -101,7 +101,8 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'barcode' => '\Onfido\Model\DocumentPropertiesBarcodeInner[]',
         'nfc' => '\Onfido\Model\DocumentPropertiesNfc',
         'document_classification' => '\Onfido\Model\DocumentPropertiesDocumentClassification',
-        'extracted_data' => '\Onfido\Model\DocumentPropertiesExtractedData'
+        'extracted_data' => '\Onfido\Model\DocumentPropertiesExtractedData',
+        'driving_licence_information' => '\Onfido\Model\DocumentPropertiesDrivingLicenceInformationItem[]'
     ];
 
     /**
@@ -156,7 +157,8 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'barcode' => null,
         'nfc' => null,
         'document_classification' => null,
-        'extracted_data' => null
+        'extracted_data' => null,
+        'driving_licence_information' => null
     ];
 
     /**
@@ -209,7 +211,8 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'barcode' => false,
         'nfc' => false,
         'document_classification' => false,
-        'extracted_data' => false
+        'extracted_data' => false,
+        'driving_licence_information' => false
     ];
 
     /**
@@ -342,7 +345,8 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'barcode' => 'barcode',
         'nfc' => 'nfc',
         'document_classification' => 'document_classification',
-        'extracted_data' => 'extracted_data'
+        'extracted_data' => 'extracted_data',
+        'driving_licence_information' => 'driving_licence_information'
     ];
 
     /**
@@ -395,7 +399,8 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'barcode' => 'setBarcode',
         'nfc' => 'setNfc',
         'document_classification' => 'setDocumentClassification',
-        'extracted_data' => 'setExtractedData'
+        'extracted_data' => 'setExtractedData',
+        'driving_licence_information' => 'setDrivingLicenceInformation'
     ];
 
     /**
@@ -448,7 +453,8 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         'barcode' => 'getBarcode',
         'nfc' => 'getNfc',
         'document_classification' => 'getDocumentClassification',
-        'extracted_data' => 'getExtractedData'
+        'extracted_data' => 'getExtractedData',
+        'driving_licence_information' => 'getDrivingLicenceInformation'
     ];
 
     /**
@@ -622,6 +628,7 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('nfc', $data ?? [], null);
         $this->setIfExists('document_classification', $data ?? [], null);
         $this->setIfExists('extracted_data', $data ?? [], null);
+        $this->setIfExists('driving_licence_information', $data ?? [], null);
     }
 
     /**
@@ -1934,6 +1941,33 @@ class DocumentProperties implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable extracted_data cannot be null');
         }
         $this->container['extracted_data'] = $extracted_data;
+
+        return $this;
+    }
+
+    /**
+     * Gets driving_licence_information
+     *
+     * @return \Onfido\Model\DocumentPropertiesDrivingLicenceInformationItem[]|null
+     */
+    public function getDrivingLicenceInformation()
+    {
+        return $this->container['driving_licence_information'];
+    }
+
+    /**
+     * Sets driving_licence_information
+     *
+     * @param \Onfido\Model\DocumentPropertiesDrivingLicenceInformationItem[]|null $driving_licence_information driving_licence_information
+     *
+     * @return self
+     */
+    public function setDrivingLicenceInformation($driving_licence_information)
+    {
+        if (is_null($driving_licence_information)) {
+            throw new \InvalidArgumentException('non-nullable driving_licence_information cannot be null');
+        }
+        $this->container['driving_licence_information'] = $driving_licence_information;
 
         return $this;
     }

@@ -67,7 +67,7 @@ class DocumentWithDrivingLicenceInformationReport implements ModelInterface, Arr
         'name' => '\Onfido\Model\ReportName',
         'documents' => '\Onfido\Model\ReportDocument[]',
         'breakdown' => '\Onfido\Model\DocumentBreakdown',
-        'properties' => '\Onfido\Model\DocumentProperties'
+        'properties' => '\Onfido\Model\DocumentPropertiesWithDrivingLicenceInformation'
     ];
 
     /**
@@ -638,7 +638,7 @@ class DocumentWithDrivingLicenceInformationReport implements ModelInterface, Arr
     /**
      * Gets properties
      *
-     * @return \Onfido\Model\DocumentProperties|null
+     * @return \Onfido\Model\DocumentPropertiesWithDrivingLicenceInformation|null
      */
     public function getProperties()
     {
@@ -648,7 +648,7 @@ class DocumentWithDrivingLicenceInformationReport implements ModelInterface, Arr
     /**
      * Sets properties
      *
-     * @param \Onfido\Model\DocumentProperties|null $properties properties
+     * @param \Onfido\Model\DocumentPropertiesWithDrivingLicenceInformation|null $properties properties
      *
      * @return self
      */

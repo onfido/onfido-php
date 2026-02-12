@@ -100,7 +100,6 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'address_lines' => '\Onfido\Model\DocumentPropertiesAddressLines',
         'barcode' => '\Onfido\Model\DocumentPropertiesBarcodeInner[]',
         'nfc' => '\Onfido\Model\DocumentPropertiesNfc',
-        'driving_licence_information' => '\Onfido\Model\DocumentPropertiesDrivingLicenceInformationItem[]',
         'document_classification' => '\Onfido\Model\DocumentPropertiesDocumentClassification',
         'extracted_data' => '\Onfido\Model\DocumentPropertiesExtractedData',
         'drivers_licence' => 'bool',
@@ -163,7 +162,6 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'address_lines' => null,
         'barcode' => null,
         'nfc' => null,
-        'driving_licence_information' => null,
         'document_classification' => null,
         'extracted_data' => null,
         'drivers_licence' => null,
@@ -224,7 +222,6 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'address_lines' => false,
         'barcode' => false,
         'nfc' => false,
-        'driving_licence_information' => false,
         'document_classification' => false,
         'extracted_data' => false,
         'drivers_licence' => false,
@@ -365,7 +362,6 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'address_lines' => 'address_lines',
         'barcode' => 'barcode',
         'nfc' => 'nfc',
-        'driving_licence_information' => 'driving_licence_information',
         'document_classification' => 'document_classification',
         'extracted_data' => 'extracted_data',
         'drivers_licence' => 'drivers_licence',
@@ -426,7 +422,6 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'address_lines' => 'setAddressLines',
         'barcode' => 'setBarcode',
         'nfc' => 'setNfc',
-        'driving_licence_information' => 'setDrivingLicenceInformation',
         'document_classification' => 'setDocumentClassification',
         'extracted_data' => 'setExtractedData',
         'drivers_licence' => 'setDriversLicence',
@@ -487,7 +482,6 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         'address_lines' => 'getAddressLines',
         'barcode' => 'getBarcode',
         'nfc' => 'getNfc',
-        'driving_licence_information' => 'getDrivingLicenceInformation',
         'document_classification' => 'getDocumentClassification',
         'extracted_data' => 'getExtractedData',
         'drivers_licence' => 'getDriversLicence',
@@ -668,7 +662,6 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
         $this->setIfExists('address_lines', $data ?? [], null);
         $this->setIfExists('barcode', $data ?? [], null);
         $this->setIfExists('nfc', $data ?? [], null);
-        $this->setIfExists('driving_licence_information', $data ?? [], null);
         $this->setIfExists('document_classification', $data ?? [], null);
         $this->setIfExists('extracted_data', $data ?? [], null);
         $this->setIfExists('drivers_licence', $data ?? [], null);
@@ -1936,33 +1929,6 @@ class DocumentWithDriverVerificationReportAllOfProperties implements ModelInterf
             throw new \InvalidArgumentException('non-nullable nfc cannot be null');
         }
         $this->container['nfc'] = $nfc;
-
-        return $this;
-    }
-
-    /**
-     * Gets driving_licence_information
-     *
-     * @return \Onfido\Model\DocumentPropertiesDrivingLicenceInformationItem[]|null
-     */
-    public function getDrivingLicenceInformation()
-    {
-        return $this->container['driving_licence_information'];
-    }
-
-    /**
-     * Sets driving_licence_information
-     *
-     * @param \Onfido\Model\DocumentPropertiesDrivingLicenceInformationItem[]|null $driving_licence_information driving_licence_information
-     *
-     * @return self
-     */
-    public function setDrivingLicenceInformation($driving_licence_information)
-    {
-        if (is_null($driving_licence_information)) {
-            throw new \InvalidArgumentException('non-nullable driving_licence_information cannot be null');
-        }
-        $this->container['driving_licence_information'] = $driving_licence_information;
 
         return $this;
     }

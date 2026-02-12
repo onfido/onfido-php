@@ -21868,15 +21868,16 @@ class DefaultApi
      * @param  \DateTime|null $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string|null $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
      * @param  string|null $applicant_id the applicant&#39;s id. (optional)
+     * @param  string[]|null $tags A list of tags to filter the results. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Onfido\Model\WorkflowRun[]|\Onfido\Model\Error
      */
-    public function listWorkflowRuns($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRuns($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, $tags = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
-        list($response) = $this->listWorkflowRunsWithHttpInfo($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $contentType);
+        list($response) = $this->listWorkflowRunsWithHttpInfo($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $tags, $contentType);
         return $response;
     }
 
@@ -21891,15 +21892,16 @@ class DefaultApi
      * @param  \DateTime|null $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string|null $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
      * @param  string|null $applicant_id the applicant&#39;s id. (optional)
+     * @param  string[]|null $tags A list of tags to filter the results. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Onfido\Model\WorkflowRun[]|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listWorkflowRunsWithHttpInfo($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRunsWithHttpInfo($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, $tags = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
-        $request = $this->listWorkflowRunsRequest($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $contentType);
+        $request = $this->listWorkflowRunsRequest($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $tags, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -22056,14 +22058,15 @@ class DefaultApi
      * @param  \DateTime|null $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string|null $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
      * @param  string|null $applicant_id the applicant&#39;s id. (optional)
+     * @param  string[]|null $tags A list of tags to filter the results. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listWorkflowRunsAsync($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRunsAsync($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, $tags = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
-        return $this->listWorkflowRunsAsyncWithHttpInfo($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $contentType)
+        return $this->listWorkflowRunsAsyncWithHttpInfo($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $tags, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -22082,15 +22085,16 @@ class DefaultApi
      * @param  \DateTime|null $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string|null $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
      * @param  string|null $applicant_id the applicant&#39;s id. (optional)
+     * @param  string[]|null $tags A list of tags to filter the results. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listWorkflowRunsAsyncWithHttpInfo($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRunsAsyncWithHttpInfo($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, $tags = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
         $returnType = '\Onfido\Model\WorkflowRun[]';
-        $request = $this->listWorkflowRunsRequest($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $contentType);
+        $request = $this->listWorkflowRunsRequest($page, $status, $created_at_gt, $created_at_lt, $sort, $applicant_id, $tags, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -22137,13 +22141,15 @@ class DefaultApi
      * @param  \DateTime|null $created_at_lt A ISO-8601 date to filter results with a created date less than (before) the one provided. (optional)
      * @param  string|null $sort A string with the value &#39;desc&#39; or &#39;asc&#39; that allows to sort the returned list by the completed datetime either descending or ascending, respectively. If not specified, defaults to &#39;desc&#39;. (optional, default to 'desc')
      * @param  string|null $applicant_id the applicant&#39;s id. (optional)
+     * @param  string[]|null $tags A list of tags to filter the results. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkflowRuns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listWorkflowRunsRequest($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
+    public function listWorkflowRunsRequest($page = 1, $status = null, $created_at_gt = null, $created_at_lt = null, $sort = 'desc', $applicant_id = null, $tags = null, string $contentType = self::contentTypes['listWorkflowRuns'][0])
     {
+
 
 
 
@@ -22209,6 +22215,15 @@ class DefaultApi
             $applicant_id,
             'applicant_id', // param base name
             'string', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $tags,
+            'tags', // param base name
+            'array', // openApiType
             '', // style
             false, // explode
             false // required
