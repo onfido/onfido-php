@@ -10,7 +10,7 @@ This version uses Onfido API v3.6. Refer to our [API versioning guide](https://d
 
 ### Requirements
 
-PHP 7.4 and later. Should also work with PHP 8.0.
+PHP 8.1 and later.
 
 [![Latest release](https://badge.fury.io/ph/onfido%2Fonfido-php.svg)](https://badge.fury.io/ph/onfido%2Fonfido-php)
 ![Build Status](https://github.com/onfido/onfido-php/actions/workflows/php.yml/badge.svg)
@@ -114,7 +114,7 @@ Except for accessing Task object's outputs, avoid using the square bracket synta
 
 ## Contributing
 
-This library is automatically generated using [OpenAPI Generator](https://openapi-generator.tech) (version: 7.11.0); therefore, all contributions (except test files) should target the [Onfido OpenAPI specification repository](https://github.com/onfido/onfido-openapi-spec/tree/master) instead of this repository. Please follow the contribution guidelines provided in the OpenAPI specification repository.
+This library is automatically generated using [OpenAPI Generator](https://openapi-generator.tech) (version: 7.16.0); therefore, all contributions (except test files) should target the [Onfido OpenAPI specification repository](https://github.com/onfido/onfido-openapi-spec/tree/master) instead of this repository. Please follow the contribution guidelines provided in the OpenAPI specification repository.
 
 For contributions to the tests instead, please follow the steps below:
 
