@@ -1,6 +1,6 @@
 <?php
 /**
- * DeviceIntelligenceBreakdownPropertiesGeolocation
+ * DeviceIntelligencePropertiesGeolocation
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * DeviceIntelligenceBreakdownPropertiesGeolocation Class Doc Comment
+ * DeviceIntelligencePropertiesGeolocation Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DeviceIntelligenceBreakdownPropertiesGeolocation implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeviceIntelligencePropertiesGeolocation implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DeviceIntelligenceBreakdownPropertiesGeolocation implements ModelInterface
       *
       * @var string
       */
-    protected static $openAPIModelName = 'device_intelligence_breakdown_properties_geolocation';
+    protected static $openAPIModelName = 'device_intelligence_properties_geolocation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

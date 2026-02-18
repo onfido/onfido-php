@@ -57,9 +57,9 @@ class DeviceIntelligenceProperties implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'device' => '\Onfido\Model\DeviceIntelligenceBreakdownPropertiesDevice',
-        'ip' => '\Onfido\Model\DeviceIntelligenceBreakdownPropertiesIp',
-        'geolocation' => '\Onfido\Model\DeviceIntelligenceBreakdownPropertiesGeolocation'
+        'device' => '\Onfido\Model\DeviceIntelligencePropertiesDevice',
+        'ip' => '\Onfido\Model\DeviceIntelligencePropertiesIp',
+        'geolocation' => '\Onfido\Model\DeviceIntelligencePropertiesGeolocation'
     ];
 
     /**
@@ -306,7 +306,7 @@ class DeviceIntelligenceProperties implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets device
      *
-     * @return \Onfido\Model\DeviceIntelligenceBreakdownPropertiesDevice|null
+     * @return \Onfido\Model\DeviceIntelligencePropertiesDevice|null
      */
     public function getDevice()
     {
@@ -316,7 +316,7 @@ class DeviceIntelligenceProperties implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets device
      *
-     * @param \Onfido\Model\DeviceIntelligenceBreakdownPropertiesDevice|null $device device
+     * @param \Onfido\Model\DeviceIntelligencePropertiesDevice|null $device device
      *
      * @return self
      */
@@ -333,7 +333,7 @@ class DeviceIntelligenceProperties implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets ip
      *
-     * @return \Onfido\Model\DeviceIntelligenceBreakdownPropertiesIp|null
+     * @return \Onfido\Model\DeviceIntelligencePropertiesIp|null
      */
     public function getIp()
     {
@@ -343,7 +343,7 @@ class DeviceIntelligenceProperties implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets ip
      *
-     * @param \Onfido\Model\DeviceIntelligenceBreakdownPropertiesIp|null $ip ip
+     * @param \Onfido\Model\DeviceIntelligencePropertiesIp|null $ip ip
      *
      * @return self
      */
@@ -360,7 +360,7 @@ class DeviceIntelligenceProperties implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets geolocation
      *
-     * @return \Onfido\Model\DeviceIntelligenceBreakdownPropertiesGeolocation|null
+     * @return \Onfido\Model\DeviceIntelligencePropertiesGeolocation|null
      */
     public function getGeolocation()
     {
@@ -370,7 +370,7 @@ class DeviceIntelligenceProperties implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets geolocation
      *
-     * @param \Onfido\Model\DeviceIntelligenceBreakdownPropertiesGeolocation|null $geolocation geolocation
+     * @param \Onfido\Model\DeviceIntelligencePropertiesGeolocation|null $geolocation geolocation
      *
      * @return self
      */

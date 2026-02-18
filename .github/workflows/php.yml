@@ -40,7 +40,9 @@ jobs:
       - name: Test with phpunit
         if: ${{ matrix.php-version == '8.3' &&
           github.repository_owner == 'onfido' &&
-          (github.event_name == 'pull_request' || github.event_name == 'release') }}
+          (github.event_name == 'pull_request' ||
+           github.event_name == 'release' ||
+           github.event_name == 'workflow_dispatch') }}
         run: |
           vendor/bin/phpunit
         env:
