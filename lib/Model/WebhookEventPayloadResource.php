@@ -60,6 +60,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
     protected static $openAPITypes = [
         'id' => 'string',
         'applicant_id' => 'string',
+        'status' => '\Onfido\Model\WebhookEventResourceStatus',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'dashboard_url' => 'string',
@@ -88,6 +89,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
     protected static $openAPIFormats = [
         'id' => null,
         'applicant_id' => 'uuid',
+        'status' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'dashboard_url' => null,
@@ -114,6 +116,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
     protected static array $openAPINullables = [
         'id' => false,
         'applicant_id' => false,
+        'status' => false,
         'created_at' => false,
         'updated_at' => false,
         'dashboard_url' => false,
@@ -220,6 +223,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
     protected static $attributeMap = [
         'id' => 'id',
         'applicant_id' => 'applicant_id',
+        'status' => 'status',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at',
         'dashboard_url' => 'dashboard_url',
@@ -246,6 +250,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
     protected static $setters = [
         'id' => 'setId',
         'applicant_id' => 'setApplicantId',
+        'status' => 'setStatus',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'dashboard_url' => 'setDashboardUrl',
@@ -272,6 +277,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
     protected static $getters = [
         'id' => 'getId',
         'applicant_id' => 'getApplicantId',
+        'status' => 'getStatus',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'dashboard_url' => 'getDashboardUrl',
@@ -349,6 +355,7 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('applicant_id', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('dashboard_url', $data ?? [], null);
@@ -467,6 +474,33 @@ class WebhookEventPayloadResource implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable applicant_id cannot be null');
         }
         $this->container['applicant_id'] = $applicant_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return \Onfido\Model\WebhookEventResourceStatus|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param \Onfido\Model\WebhookEventResourceStatus|null $status status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $this->container['status'] = $status;
 
         return $this;
     }

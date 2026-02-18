@@ -1,6 +1,6 @@
 <?php
 /**
- * DeviceIntelligenceBreakdownPropertiesDevice
+ * DeviceIntelligencePropertiesDevice
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * DeviceIntelligenceBreakdownPropertiesDevice Class Doc Comment
+ * DeviceIntelligencePropertiesDevice Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeviceIntelligencePropertiesDevice implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DeviceIntelligenceBreakdownPropertiesDevice implements ModelInterface, Arr
       *
       * @var string
       */
-    protected static $openAPIModelName = 'device_intelligence_breakdown_properties_device';
+    protected static $openAPIModelName = 'device_intelligence_properties_device';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

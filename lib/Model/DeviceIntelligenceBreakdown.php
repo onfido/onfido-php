@@ -57,8 +57,7 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'device' => '\Onfido\Model\DeviceIntelligenceBreakdownDevice',
-        'properties' => '\Onfido\Model\DeviceIntelligenceBreakdownProperties'
+        'device' => '\Onfido\Model\DeviceIntelligenceBreakdownDevice'
     ];
 
     /**
@@ -69,8 +68,7 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'device' => null,
-        'properties' => null
+        'device' => null
     ];
 
     /**
@@ -79,8 +77,7 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'device' => false,
-        'properties' => false
+        'device' => false
     ];
 
     /**
@@ -169,8 +166,7 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'device' => 'device',
-        'properties' => 'properties'
+        'device' => 'device'
     ];
 
     /**
@@ -179,8 +175,7 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'device' => 'setDevice',
-        'properties' => 'setProperties'
+        'device' => 'setDevice'
     ];
 
     /**
@@ -189,8 +184,7 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'device' => 'getDevice',
-        'properties' => 'getProperties'
+        'device' => 'getDevice'
     ];
 
     /**
@@ -251,7 +245,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
     public function __construct(?array $data = null)
     {
         $this->setIfExists('device', $data ?? [], null);
-        $this->setIfExists('properties', $data ?? [], null);
     }
 
     /**
@@ -319,35 +312,6 @@ class DeviceIntelligenceBreakdown implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable device cannot be null');
         }
         $this->container['device'] = $device;
-
-        return $this;
-    }
-
-    /**
-     * Gets properties
-     *
-     * @return \Onfido\Model\DeviceIntelligenceBreakdownProperties|null
-     * @deprecated
-     */
-    public function getProperties()
-    {
-        return $this->container['properties'];
-    }
-
-    /**
-     * Sets properties
-     *
-     * @param \Onfido\Model\DeviceIntelligenceBreakdownProperties|null $properties properties
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setProperties($properties)
-    {
-        if (is_null($properties)) {
-            throw new \InvalidArgumentException('non-nullable properties cannot be null');
-        }
-        $this->container['properties'] = $properties;
 
         return $this;
     }
