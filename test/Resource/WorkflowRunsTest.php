@@ -58,7 +58,17 @@ class WorkflowRunsTest extends OnfidoTestCase
 
     public function testDownloadEvidenceFile(): void
     {
-        $file = self::$onfido->downloadSignedEvidenceFile($this->workflowRun->getId());
+        $getEvidenceFileFn = function($workflowRunId) {
+          return self::$onfido->downloadSignedEvidenceFile($workflowRunId);
+        };
+
+        $file = $this->repeatRequestUntilHttpCodeChanges(
+          $getEvidenceFileFn,
+          [$this->workflowRun->getId()],
+          15,
+          2
+        );
+
         $this->assertGreaterThan(0, $file->getSize());
     }
 
@@ -130,7 +140,9 @@ class WorkflowRunsTest extends OnfidoTestCase
 
         $file = $this->repeatRequestUntilHttpCodeChanges(
           $getEvidenceFolderFn,
-          [$workflowRunId]
+          [$workflowRunId],
+          15,
+          2
         );
 
         $this->assertGreaterThan(0, $file->getSize());
