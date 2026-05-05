@@ -65,6 +65,8 @@ class DeviceIntelligencePropertiesDevice implements ModelInterface, ArrayAccess,
         'browser' => 'string',
         'emulator' => 'bool',
         'randomized_device' => 'bool',
+        'number_of_ip_reuse_reports' => 'float',
+        'number_of_suspected_ip_reuse_reports' => 'float',
         'fake_network_request' => 'bool',
         'ip_reputation' => 'string',
         'device_fingerprint_reuse' => 'float',
@@ -89,6 +91,8 @@ class DeviceIntelligencePropertiesDevice implements ModelInterface, ArrayAccess,
         'browser' => null,
         'emulator' => null,
         'randomized_device' => null,
+        'number_of_ip_reuse_reports' => null,
+        'number_of_suspected_ip_reuse_reports' => null,
         'fake_network_request' => null,
         'ip_reputation' => null,
         'device_fingerprint_reuse' => null,
@@ -111,6 +115,8 @@ class DeviceIntelligencePropertiesDevice implements ModelInterface, ArrayAccess,
         'browser' => false,
         'emulator' => false,
         'randomized_device' => false,
+        'number_of_ip_reuse_reports' => false,
+        'number_of_suspected_ip_reuse_reports' => false,
         'fake_network_request' => false,
         'ip_reputation' => false,
         'device_fingerprint_reuse' => false,
@@ -213,6 +219,8 @@ class DeviceIntelligencePropertiesDevice implements ModelInterface, ArrayAccess,
         'browser' => 'browser',
         'emulator' => 'emulator',
         'randomized_device' => 'randomized_device',
+        'number_of_ip_reuse_reports' => 'number_of_ip_reuse_reports',
+        'number_of_suspected_ip_reuse_reports' => 'number_of_suspected_ip_reuse_reports',
         'fake_network_request' => 'fake_network_request',
         'ip_reputation' => 'ip_reputation',
         'device_fingerprint_reuse' => 'device_fingerprint_reuse',
@@ -235,6 +243,8 @@ class DeviceIntelligencePropertiesDevice implements ModelInterface, ArrayAccess,
         'browser' => 'setBrowser',
         'emulator' => 'setEmulator',
         'randomized_device' => 'setRandomizedDevice',
+        'number_of_ip_reuse_reports' => 'setNumberOfIpReuseReports',
+        'number_of_suspected_ip_reuse_reports' => 'setNumberOfSuspectedIpReuseReports',
         'fake_network_request' => 'setFakeNetworkRequest',
         'ip_reputation' => 'setIpReputation',
         'device_fingerprint_reuse' => 'setDeviceFingerprintReuse',
@@ -257,6 +267,8 @@ class DeviceIntelligencePropertiesDevice implements ModelInterface, ArrayAccess,
         'browser' => 'getBrowser',
         'emulator' => 'getEmulator',
         'randomized_device' => 'getRandomizedDevice',
+        'number_of_ip_reuse_reports' => 'getNumberOfIpReuseReports',
+        'number_of_suspected_ip_reuse_reports' => 'getNumberOfSuspectedIpReuseReports',
         'fake_network_request' => 'getFakeNetworkRequest',
         'ip_reputation' => 'getIpReputation',
         'device_fingerprint_reuse' => 'getDeviceFingerprintReuse',
@@ -421,6 +433,8 @@ class DeviceIntelligencePropertiesDevice implements ModelInterface, ArrayAccess,
         $this->setIfExists('browser', $data ?? [], null);
         $this->setIfExists('emulator', $data ?? [], null);
         $this->setIfExists('randomized_device', $data ?? [], null);
+        $this->setIfExists('number_of_ip_reuse_reports', $data ?? [], null);
+        $this->setIfExists('number_of_suspected_ip_reuse_reports', $data ?? [], null);
         $this->setIfExists('fake_network_request', $data ?? [], null);
         $this->setIfExists('ip_reputation', $data ?? [], null);
         $this->setIfExists('device_fingerprint_reuse', $data ?? [], null);
@@ -736,6 +750,60 @@ class DeviceIntelligencePropertiesDevice implements ModelInterface, ArrayAccess,
             throw new \InvalidArgumentException('non-nullable randomized_device cannot be null');
         }
         $this->container['randomized_device'] = $randomized_device;
+
+        return $this;
+    }
+
+    /**
+     * Gets number_of_ip_reuse_reports
+     *
+     * @return float|null
+     */
+    public function getNumberOfIpReuseReports()
+    {
+        return $this->container['number_of_ip_reuse_reports'];
+    }
+
+    /**
+     * Sets number_of_ip_reuse_reports
+     *
+     * @param float|null $number_of_ip_reuse_reports Counts the number of distinct document reports submitted in the last 24 hours that are associated with the applicant’s IP address.
+     *
+     * @return self
+     */
+    public function setNumberOfIpReuseReports($number_of_ip_reuse_reports)
+    {
+        if (is_null($number_of_ip_reuse_reports)) {
+            throw new \InvalidArgumentException('non-nullable number_of_ip_reuse_reports cannot be null');
+        }
+        $this->container['number_of_ip_reuse_reports'] = $number_of_ip_reuse_reports;
+
+        return $this;
+    }
+
+    /**
+     * Gets number_of_suspected_ip_reuse_reports
+     *
+     * @return float|null
+     */
+    public function getNumberOfSuspectedIpReuseReports()
+    {
+        return $this->container['number_of_suspected_ip_reuse_reports'];
+    }
+
+    /**
+     * Sets number_of_suspected_ip_reuse_reports
+     *
+     * @param float|null $number_of_suspected_ip_reuse_reports Counts the number of distinct document reports from the last 24 hours associated with the applicant’s IP address that have a result of suspected and other document integrity or authenticity signals have been flagged.
+     *
+     * @return self
+     */
+    public function setNumberOfSuspectedIpReuseReports($number_of_suspected_ip_reuse_reports)
+    {
+        if (is_null($number_of_suspected_ip_reuse_reports)) {
+            throw new \InvalidArgumentException('non-nullable number_of_suspected_ip_reuse_reports cannot be null');
+        }
+        $this->container['number_of_suspected_ip_reuse_reports'] = $number_of_suspected_ip_reuse_reports;
 
         return $this;
     }
