@@ -67,6 +67,27 @@ $onfidoApi = new Onfido\Api\DefaultApi(
 
 ```
 
+You can also authenticate using OAuth2 client credentials instead of an API token:
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$configuration = Onfido\Configuration::getDefaultConfiguration();
+$configuration->setOAuthCredentials($_ENV['ONFIDO_OAUTH_CLIENT_ID'], $_ENV['ONFIDO_OAUTH_CLIENT_SECRET']);
+$configuration->setRegion(Onfido\Region::EU);   // Supports `Region::EU`, `Region::US`, and `Region::CA`
+
+$onfidoApi = new Onfido\Api\DefaultApi(
+              new \GuzzleHttp\Client([
+                  'timeout'  => 30,
+                  'connect_timeout' => 30,
+                  'read_timeout' => 30
+              ]), $configuration);
+
+```
+
+The client will automatically exchange credentials for an access token and refresh it when it expires.
+
 ### Making a call to the API
 
 ```php

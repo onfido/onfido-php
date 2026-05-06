@@ -17,15 +17,30 @@ abstract class OnfidoTestCase extends TestCase
      */
     public static function setUpBeforeClass(): void
     {
+        $config = Onfido\Configuration::getDefaultConfiguration();
+
+        $oauthClientId = getenv('ONFIDO_OAUTH_CLIENT_ID');
+        $basePath = getenv('ONFIDO_BASE_PATH');
+
+        if ($oauthClientId) {
+            $config->setOAuthCredentials($oauthClientId, getenv('ONFIDO_OAUTH_CLIENT_SECRET'));
+        } else {
+            $config->setApiToken(getenv('ONFIDO_API_TOKEN'));
+        }
+
+        if ($basePath) {
+            $config->setHost($basePath);
+        } else {
+            $config->setRegion(Onfido\Region::EU);
+        }
+
         self::$onfido = new Onfido\Api\DefaultApi(
             new \GuzzleHttp\Client([
                 'timeout'  => 30,
                 'connect_timeout' => 30,
                 'read_timeout' => 30
             ]),
-            Onfido\Configuration::getDefaultConfiguration()
-                ->setApiToken(getenv('ONFIDO_API_TOKEN'))
-                ->setRegion(Onfido\Region::EU)
+            $config
         );
 
         self::$sampleapplicant_id = getenv('ONFIDO_SAMPLE_APPLICANT_ID');

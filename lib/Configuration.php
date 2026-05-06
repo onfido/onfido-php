@@ -68,6 +68,34 @@ class Configuration
     protected $accessToken = '';
 
     /**
+     * OAuth2 client ID for client credentials flow
+     *
+     * @var string|null
+     */
+    protected $oauthClientId = null;
+
+    /**
+     * OAuth2 client secret for client credentials flow
+     *
+     * @var string|null
+     */
+    protected $oauthClientSecret = null;
+
+    /**
+     * Cached OAuth2 access token
+     *
+     * @var string|null
+     */
+    private $oauthAccessToken = null;
+
+    /**
+     * OAuth2 token expiry timestamp
+     *
+     * @var float
+     */
+    private $oauthTokenExpiresAt = 0;
+
+    /**
      * Boolean format for query string
      *
      * @var string
@@ -141,6 +169,33 @@ class Configuration
     public function setRegion($region)
     {
         $this->setHost($this->getHostFromSettings(0, ['region'=>strtolower($region->name)]));
+
+        return $this;
+    }
+
+    /**
+     * Sets OAuth2 client credentials for authentication.
+     * The client will automatically exchange credentials for an access token
+     * and refresh it when expired. This is mutually exclusive with setApiToken.
+     *
+     * @param string $clientId     OAuth2 client ID
+     * @param string $clientSecret OAuth2 client secret
+     *
+     * @return $this
+     */
+    public function setOAuthCredentials($clientId, $clientSecret)
+    {
+        if (empty($clientId)) {
+            throw new \InvalidArgumentException('OAuth client ID must not be empty');
+        }
+        if (empty($clientSecret)) {
+            throw new \InvalidArgumentException('OAuth client secret must not be empty');
+        }
+
+        $this->oauthClientId = $clientId;
+        $this->oauthClientSecret = $clientSecret;
+        $this->oauthAccessToken = null;
+        $this->oauthTokenExpiresAt = 0;
 
         return $this;
     }
@@ -419,6 +474,11 @@ class Configuration
      */
     public function getApiKeyWithPrefix($apiKeyIdentifier)
     {
+        // If OAuth credentials are configured, return Bearer token
+        if ($apiKeyIdentifier === 'Authorization' && $this->oauthClientId !== null) {
+            return 'Bearer ' . $this->getOAuthAccessToken();
+        }
+
         $prefix = $this->getApiKeyPrefix($apiKeyIdentifier);
         $apiKey = $this->getApiKey($apiKeyIdentifier);
 
@@ -433,6 +493,51 @@ class Configuration
         }
 
         return $keyWithPrefix;
+    }
+
+    /**
+     * Fetches or returns a cached OAuth2 access token.
+     *
+     * @return string The OAuth2 access token
+     * @throws \RuntimeException if token exchange fails
+     */
+    private function getOAuthAccessToken()
+    {
+        if ($this->oauthAccessToken !== null && microtime(true) < $this->oauthTokenExpiresAt) {
+            return $this->oauthAccessToken;
+        }
+
+        $tokenUrl = $this->getHost() . '/oauth/token';
+
+        $postData = http_build_query([
+            'grant_type' => 'client_credentials',
+            'client_id' => $this->oauthClientId,
+            'client_secret' => $this->oauthClientSecret,
+        ]);
+
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => 'Content-Type: application/x-www-form-urlencoded',
+                'content' => $postData,
+            ],
+        ]);
+
+        $response = @file_get_contents($tokenUrl, false, $context);
+        if ($response === false) {
+            throw new \RuntimeException('OAuth token exchange failed: unable to connect to ' . $tokenUrl);
+        }
+
+        $data = json_decode($response, true);
+        if (!isset($data['access_token'])) {
+            throw new \RuntimeException('OAuth token exchange failed: ' . $response);
+        }
+
+        $this->oauthAccessToken = $data['access_token'];
+        $expiresIn = (int)($data['expires_in'] ?? 3600);
+        $this->oauthTokenExpiresAt = microtime(true) + ($expiresIn - 30);
+
+        return $this->oauthAccessToken;
     }
 
     /**
