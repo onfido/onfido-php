@@ -156,6 +156,9 @@ class Configuration
      */
     public function setApiToken($apiToken)
     {
+        if ($this->oauthClientId !== null) {
+            throw new \InvalidArgumentException('Cannot set API token when OAuth credentials are already configured');
+        }
         return $this->setApiKey('Authorization', "Token token=$apiToken");
     }
 
@@ -190,6 +193,9 @@ class Configuration
         }
         if (empty($clientSecret)) {
             throw new \InvalidArgumentException('OAuth client secret must not be empty');
+        }
+        if ($this->getApiKey('Authorization') !== null) {
+            throw new \InvalidArgumentException('Cannot set OAuth credentials when API token is already configured');
         }
 
         $this->oauthClientId = $clientId;
@@ -509,32 +515,25 @@ class Configuration
 
         $tokenUrl = $this->getHost() . '/oauth/token';
 
-        $postData = http_build_query([
-            'grant_type' => 'client_credentials',
-            'client_id' => $this->oauthClientId,
-            'client_secret' => $this->oauthClientSecret,
-        ]);
-
-        $context = stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => 'Content-Type: application/x-www-form-urlencoded',
-                'content' => $postData,
-            ],
-        ]);
-
-        $response = @file_get_contents($tokenUrl, false, $context);
-        if ($response === false) {
-            throw new \RuntimeException('OAuth token exchange failed: unable to connect to ' . $tokenUrl);
+        $client = new \GuzzleHttp\Client();
+        try {
+            $response = $client->post($tokenUrl, [
+                'form_params' => [
+                    'client_id'     => $this->oauthClientId,
+                    'client_secret' => $this->oauthClientSecret,
+                ],
+            ]);
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            throw new \RuntimeException('OAuth token exchange failed: ' . $e->getMessage());
         }
 
-        $data = json_decode($response, true);
+        $data = json_decode((string) $response->getBody(), true);
         if (!isset($data['access_token'])) {
-            throw new \RuntimeException('OAuth token exchange failed: ' . $response);
+            throw new \RuntimeException('OAuth token exchange failed: missing access_token in response');
         }
 
         $this->oauthAccessToken = $data['access_token'];
-        $expiresIn = (int)($data['expires_in'] ?? 3600);
+        $expiresIn = (int)$data['expires_in'];
         $this->oauthTokenExpiresAt = microtime(true) + ($expiresIn - 30);
 
         return $this->oauthAccessToken;
