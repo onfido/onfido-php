@@ -68,6 +68,34 @@ class Configuration
     protected $accessToken = '';
 
     /**
+     * OAuth2 client ID for client credentials flow
+     *
+     * @var string|null
+     */
+    protected $oauthClientId = null;
+
+    /**
+     * OAuth2 client secret for client credentials flow
+     *
+     * @var string|null
+     */
+    protected $oauthClientSecret = null;
+
+    /**
+     * Cached OAuth2 access token
+     *
+     * @var string|null
+     */
+    private $oauthAccessToken = null;
+
+    /**
+     * OAuth2 token expiry timestamp
+     *
+     * @var float
+     */
+    private $oauthTokenExpiresAt = 0;
+
+    /**
      * Boolean format for query string
      *
      * @var string
@@ -87,7 +115,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'onfido-php/10.1.0';
+    protected $userAgent = 'onfido-php/10.2.0';
 
     /**
      * Debug switch (default set to false)
@@ -128,6 +156,9 @@ class Configuration
      */
     public function setApiToken($apiToken)
     {
+        if ($this->oauthClientId !== null) {
+            throw new \InvalidArgumentException('Cannot set API token when OAuth credentials are already configured');
+        }
         return $this->setApiKey('Authorization', "Token token=$apiToken");
     }
 
@@ -141,6 +172,36 @@ class Configuration
     public function setRegion($region)
     {
         $this->setHost($this->getHostFromSettings(0, ['region'=>strtolower($region->name)]));
+
+        return $this;
+    }
+
+    /**
+     * Sets OAuth2 client credentials for authentication.
+     * The client will automatically exchange credentials for an access token
+     * and refresh it when expired. This is mutually exclusive with setApiToken.
+     *
+     * @param string $clientId     OAuth2 client ID
+     * @param string $clientSecret OAuth2 client secret
+     *
+     * @return $this
+     */
+    public function setOAuthCredentials($clientId, $clientSecret)
+    {
+        if (empty($clientId)) {
+            throw new \InvalidArgumentException('OAuth client ID must not be empty');
+        }
+        if (empty($clientSecret)) {
+            throw new \InvalidArgumentException('OAuth client secret must not be empty');
+        }
+        if ($this->getApiKey('Authorization') !== null) {
+            throw new \InvalidArgumentException('Cannot set OAuth credentials when API token is already configured');
+        }
+
+        $this->oauthClientId = $clientId;
+        $this->oauthClientSecret = $clientSecret;
+        $this->oauthAccessToken = null;
+        $this->oauthTokenExpiresAt = 0;
 
         return $this;
     }
@@ -404,7 +465,7 @@ class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    The version of the OpenAPI document: v3.6' . PHP_EOL;
-        $report .= '    SDK Package Version: 10.1.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 10.2.0' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;
@@ -419,6 +480,11 @@ class Configuration
      */
     public function getApiKeyWithPrefix($apiKeyIdentifier)
     {
+        // If OAuth credentials are configured, return Bearer token
+        if ($apiKeyIdentifier === 'Authorization' && $this->oauthClientId !== null) {
+            return 'Bearer ' . $this->getOAuthAccessToken();
+        }
+
         $prefix = $this->getApiKeyPrefix($apiKeyIdentifier);
         $apiKey = $this->getApiKey($apiKeyIdentifier);
 
@@ -433,6 +499,45 @@ class Configuration
         }
 
         return $keyWithPrefix;
+    }
+
+
+    /**
+     * Fetches or returns a cached OAuth2 access token.
+     *
+     * @return string The OAuth2 access token
+     * @throws \RuntimeException if token exchange fails
+     */
+    private function getOAuthAccessToken()
+    {
+        if ($this->oauthAccessToken !== null && microtime(true) < $this->oauthTokenExpiresAt) {
+            return $this->oauthAccessToken;
+        }
+
+        $tokenUrl = $this->getHost() . '/oauth/token';
+
+        $client = new \GuzzleHttp\Client();
+        try {
+            $response = $client->post($tokenUrl, [
+                'form_params' => [
+                    'client_id'     => $this->oauthClientId,
+                    'client_secret' => $this->oauthClientSecret,
+                ],
+            ]);
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            throw new \RuntimeException('OAuth token exchange failed: ' . $e->getMessage());
+        }
+
+        $data = json_decode((string) $response->getBody(), true);
+        if (!isset($data['access_token'])) {
+            throw new \RuntimeException('OAuth token exchange failed: missing access_token in response');
+        }
+
+        $this->oauthAccessToken = $data['access_token'];
+        $expiresIn = (int)$data['expires_in'];
+        $this->oauthTokenExpiresAt = microtime(true) + ($expiresIn - 30);
+
+        return $this->oauthAccessToken;
     }
 
     /**
