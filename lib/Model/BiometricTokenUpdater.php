@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookUpdate
+ * BiometricTokenUpdater
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WebhookUpdate Class Doc Comment
+ * BiometricTokenUpdater Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
+class BiometricTokenUpdater implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'webhook_update';
+    protected static $openAPIModelName = 'biometric_token_updater';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'url' => 'string'
+        'status' => 'string'
     ];
 
     /**
@@ -69,8 +68,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'url' => null
+        'status' => null
     ];
 
     /**
@@ -79,8 +77,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'url' => false
+        'status' => false
     ];
 
     /**
@@ -169,8 +166,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'url' => 'url'
+        'status' => 'status'
     ];
 
     /**
@@ -179,8 +175,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'url' => 'setUrl'
+        'status' => 'setStatus'
     ];
 
     /**
@@ -189,8 +184,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'url' => 'getUrl'
+        'status' => 'getStatus'
     ];
 
     /**
@@ -234,6 +228,23 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const STATUS_APPROVED = 'approved';
+    public const STATUS_DECLINED = 'declined';
+    public const STATUS_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_APPROVED,
+            self::STATUS_DECLINED,
+            self::STATUS_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -250,8 +261,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
     }
 
     /**
@@ -281,6 +291,18 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -297,55 +319,32 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets name
+     * Gets status
      *
-     * @return string|null
+     * @return string
      */
-    public function getName()
+    public function getStatus()
     {
-        return $this->container['name'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets name
+     * Sets status
      *
-     * @param string|null $name Name of the webhook.
+     * @param string $status Desired biometric token status value.
      *
      * @return self
      */
-    public function setName($name)
+    public function setStatus($status)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets url
-     *
-     * @return string|null
-     */
-    public function getUrl()
-    {
-        return $this->container['url'];
-    }
-
-    /**
-     * Sets url
-     *
-     * @param string|null $url The url that will listen to notifications (must be https).
-     *
-     * @return self
-     */
-    public function setUrl($url)
-    {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            $status = self::STATUS_UNKNOWN_DEFAULT_OPEN_API;
         }
-        $this->container['url'] = $url;
+        $this->container['status'] = $status;
 
         return $this;
     }

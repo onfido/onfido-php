@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookUpdate
+ * InvalidatedBiometricTokenSummaryDeletedItems
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WebhookUpdate Class Doc Comment
+ * InvalidatedBiometricTokenSummaryDeletedItems Class Doc Comment
  *
  * @category Class
+ * @description Summary of invalidated biometric token items.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
+class InvalidatedBiometricTokenSummaryDeletedItems implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'webhook_update';
+    protected static $openAPIModelName = 'invalidated_biometric_token_summary_deleted_items';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'url' => 'string'
+        'count' => 'int'
     ];
 
     /**
@@ -69,8 +69,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'url' => null
+        'count' => null
     ];
 
     /**
@@ -79,8 +78,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'url' => false
+        'count' => false
     ];
 
     /**
@@ -169,8 +167,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'url' => 'url'
+        'count' => 'count'
     ];
 
     /**
@@ -179,8 +176,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'url' => 'setUrl'
+        'count' => 'setCount'
     ];
 
     /**
@@ -189,8 +185,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'url' => 'getUrl'
+        'count' => 'getCount'
     ];
 
     /**
@@ -250,8 +245,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('count', $data ?? [], null);
     }
 
     /**
@@ -281,6 +275,9 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['count'] === null) {
+            $invalidProperties[] = "'count' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -297,55 +294,28 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets name
+     * Gets count
      *
-     * @return string|null
+     * @return int
      */
-    public function getName()
+    public function getCount()
     {
-        return $this->container['name'];
+        return $this->container['count'];
     }
 
     /**
-     * Sets name
+     * Sets count
      *
-     * @param string|null $name Name of the webhook.
+     * @param int $count Number of invalidated biometric tokens.
      *
      * @return self
      */
-    public function setName($name)
+    public function setCount($count)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($count)) {
+            throw new \InvalidArgumentException('non-nullable count cannot be null');
         }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets url
-     *
-     * @return string|null
-     */
-    public function getUrl()
-    {
-        return $this->container['url'];
-    }
-
-    /**
-     * Sets url
-     *
-     * @param string|null $url The url that will listen to notifications (must be https).
-     *
-     * @return self
-     */
-    public function setUrl($url)
-    {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
-        }
-        $this->container['url'] = $url;
+        $this->container['count'] = $count;
 
         return $this;
     }

@@ -58,6 +58,7 @@ class WebhookResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
+        'name' => 'string',
         'url' => 'string',
         'token' => 'string',
         'href' => 'string'
@@ -72,6 +73,7 @@ class WebhookResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
+        'name' => null,
         'url' => null,
         'token' => null,
         'href' => null
@@ -84,6 +86,7 @@ class WebhookResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
+        'name' => false,
         'url' => false,
         'token' => false,
         'href' => false
@@ -176,6 +179,7 @@ class WebhookResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'name' => 'name',
         'url' => 'url',
         'token' => 'token',
         'href' => 'href'
@@ -188,6 +192,7 @@ class WebhookResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
+        'name' => 'setName',
         'url' => 'setUrl',
         'token' => 'setToken',
         'href' => 'setHref'
@@ -200,6 +205,7 @@ class WebhookResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
+        'name' => 'getName',
         'url' => 'getUrl',
         'token' => 'getToken',
         'href' => 'getHref'
@@ -263,6 +269,7 @@ class WebhookResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('token', $data ?? [], null);
         $this->setIfExists('href', $data ?? [], null);
@@ -336,6 +343,33 @@ class WebhookResponse implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name Name of the webhook.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
 
         return $this;
     }

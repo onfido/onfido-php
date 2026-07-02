@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookUpdate
+ * BiometricTokenData
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WebhookUpdate Class Doc Comment
+ * BiometricTokenData Class Doc Comment
  *
  * @category Class
+ * @description Token metadata.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
+class BiometricTokenData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'webhook_update';
+    protected static $openAPIModelName = 'biometric_token_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,9 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'url' => 'string'
+        'inserted_at' => '\DateTime',
+        'media_type' => 'string',
+        'status' => 'string'
     ];
 
     /**
@@ -69,8 +71,9 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'url' => null
+        'inserted_at' => 'date-time',
+        'media_type' => null,
+        'status' => null
     ];
 
     /**
@@ -79,8 +82,9 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'url' => false
+        'inserted_at' => false,
+        'media_type' => false,
+        'status' => false
     ];
 
     /**
@@ -169,8 +173,9 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'url' => 'url'
+        'inserted_at' => 'inserted_at',
+        'media_type' => 'media_type',
+        'status' => 'status'
     ];
 
     /**
@@ -179,8 +184,9 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'url' => 'setUrl'
+        'inserted_at' => 'setInsertedAt',
+        'media_type' => 'setMediaType',
+        'status' => 'setStatus'
     ];
 
     /**
@@ -189,8 +195,9 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'url' => 'getUrl'
+        'inserted_at' => 'getInsertedAt',
+        'media_type' => 'getMediaType',
+        'status' => 'getStatus'
     ];
 
     /**
@@ -234,6 +241,33 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const STATUS_AWAITING_INPUT = 'awaiting_input';
+    public const STATUS_PROCESSING = 'processing';
+    public const STATUS_ERROR = 'error';
+    public const STATUS_ABANDONED = 'abandoned';
+    public const STATUS_REVIEW = 'review';
+    public const STATUS_DECLINED = 'declined';
+    public const STATUS_APPROVED = 'approved';
+    public const STATUS_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_AWAITING_INPUT,
+            self::STATUS_PROCESSING,
+            self::STATUS_ERROR,
+            self::STATUS_ABANDONED,
+            self::STATUS_REVIEW,
+            self::STATUS_DECLINED,
+            self::STATUS_APPROVED,
+            self::STATUS_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -250,8 +284,9 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('inserted_at', $data ?? [], null);
+        $this->setIfExists('media_type', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
     }
 
     /**
@@ -281,6 +316,24 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['inserted_at'] === null) {
+            $invalidProperties[] = "'inserted_at' can't be null";
+        }
+        if ($this->container['media_type'] === null) {
+            $invalidProperties[] = "'media_type' can't be null";
+        }
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -297,55 +350,86 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets name
+     * Gets inserted_at
      *
-     * @return string|null
+     * @return \DateTime
      */
-    public function getName()
+    public function getInsertedAt()
     {
-        return $this->container['name'];
+        return $this->container['inserted_at'];
     }
 
     /**
-     * Sets name
+     * Sets inserted_at
      *
-     * @param string|null $name Name of the webhook.
+     * @param \DateTime $inserted_at Timestamp indicating when the biometric token was created.
      *
      * @return self
      */
-    public function setName($name)
+    public function setInsertedAt($inserted_at)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($inserted_at)) {
+            throw new \InvalidArgumentException('non-nullable inserted_at cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['inserted_at'] = $inserted_at;
 
         return $this;
     }
 
     /**
-     * Gets url
+     * Gets media_type
      *
-     * @return string|null
+     * @return string
      */
-    public function getUrl()
+    public function getMediaType()
     {
-        return $this->container['url'];
+        return $this->container['media_type'];
     }
 
     /**
-     * Sets url
+     * Sets media_type
      *
-     * @param string|null $url The url that will listen to notifications (must be https).
+     * @param string $media_type Type of media associated with the biometric token.
      *
      * @return self
      */
-    public function setUrl($url)
+    public function setMediaType($media_type)
     {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        if (is_null($media_type)) {
+            throw new \InvalidArgumentException('non-nullable media_type cannot be null');
         }
-        $this->container['url'] = $url;
+        $this->container['media_type'] = $media_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string $status Current biometric token status.
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            $status = self::STATUS_UNKNOWN_DEFAULT_OPEN_API;
+        }
+        $this->container['status'] = $status;
 
         return $this;
     }
