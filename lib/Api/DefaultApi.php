@@ -173,6 +173,9 @@ class DefaultApi
         'findApplicantConsents' => [
             'application/json',
         ],
+        'findBiometricToken' => [
+            'application/json',
+        ],
         'findCheck' => [
             'application/json',
         ],
@@ -221,7 +224,16 @@ class DefaultApi
         'generateSdkToken' => [
             'application/json',
         ],
+        'invalidateBiometricToken' => [
+            'application/json',
+        ],
+        'invalidateBiometricTokens' => [
+            'application/json',
+        ],
         'listApplicants' => [
+            'application/json',
+        ],
+        'listBiometricTokens' => [
             'application/json',
         ],
         'listChecks' => [
@@ -288,6 +300,9 @@ class DefaultApi
             'application/json',
         ],
         'updateApplicant' => [
+            'application/json',
+        ],
+        'updateBiometricToken' => [
             'application/json',
         ],
         'updatePasskey' => [
@@ -9691,6 +9706,317 @@ class DefaultApi
     }
 
     /**
+     * Operation findBiometricToken
+     *
+     * Retrieve biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\BiometricToken|\Onfido\Model\Error
+     */
+    public function findBiometricToken($user_id, $token_uuid, string $contentType = self::contentTypes['findBiometricToken'][0])
+    {
+        list($response) = $this->findBiometricTokenWithHttpInfo($user_id, $token_uuid, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation findBiometricTokenWithHttpInfo
+     *
+     * Retrieve biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\BiometricToken|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function findBiometricTokenWithHttpInfo($user_id, $token_uuid, string $contentType = self::contentTypes['findBiometricToken'][0])
+    {
+        $request = $this->findBiometricTokenRequest($user_id, $token_uuid, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\BiometricToken',
+                        $request,
+                        $response,
+                    );
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Onfido\Model\BiometricToken',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\BiometricToken',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation findBiometricTokenAsync
+     *
+     * Retrieve biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findBiometricTokenAsync($user_id, $token_uuid, string $contentType = self::contentTypes['findBiometricToken'][0])
+    {
+        return $this->findBiometricTokenAsyncWithHttpInfo($user_id, $token_uuid, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation findBiometricTokenAsyncWithHttpInfo
+     *
+     * Retrieve biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function findBiometricTokenAsyncWithHttpInfo($user_id, $token_uuid, string $contentType = self::contentTypes['findBiometricToken'][0])
+    {
+        $returnType = '\Onfido\Model\BiometricToken';
+        $request = $this->findBiometricTokenRequest($user_id, $token_uuid, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'findBiometricToken'
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['findBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function findBiometricTokenRequest($user_id, $token_uuid, string $contentType = self::contentTypes['findBiometricToken'][0])
+    {
+
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $user_id when calling findBiometricToken'
+            );
+        }
+
+        // verify the required parameter 'token_uuid' is set
+        if ($token_uuid === null || (is_array($token_uuid) && count($token_uuid) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $token_uuid when calling findBiometricToken'
+            );
+        }
+
+
+        $resourcePath = '/biometric_tokens/{user_id}/{token_uuid}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'user_id' . '}',
+                ObjectSerializer::toPathValue($user_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($token_uuid !== null) {
+            $resourcePath = str_replace(
+                '{' . 'token_uuid' . '}',
+                ObjectSerializer::toPathValue($token_uuid),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation findCheck
      *
      * Retrieve a Check
@@ -14350,6 +14676,608 @@ class DefaultApi
     }
 
     /**
+     * Operation invalidateBiometricToken
+     *
+     * Invalidate biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\InvalidatedBiometricTokenSummary|\Onfido\Model\Error
+     */
+    public function invalidateBiometricToken($user_id, $token_uuid, string $contentType = self::contentTypes['invalidateBiometricToken'][0])
+    {
+        list($response) = $this->invalidateBiometricTokenWithHttpInfo($user_id, $token_uuid, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation invalidateBiometricTokenWithHttpInfo
+     *
+     * Invalidate biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\InvalidatedBiometricTokenSummary|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function invalidateBiometricTokenWithHttpInfo($user_id, $token_uuid, string $contentType = self::contentTypes['invalidateBiometricToken'][0])
+    {
+        $request = $this->invalidateBiometricTokenRequest($user_id, $token_uuid, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\InvalidatedBiometricTokenSummary',
+                        $request,
+                        $response,
+                    );
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Onfido\Model\InvalidatedBiometricTokenSummary',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\InvalidatedBiometricTokenSummary',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation invalidateBiometricTokenAsync
+     *
+     * Invalidate biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function invalidateBiometricTokenAsync($user_id, $token_uuid, string $contentType = self::contentTypes['invalidateBiometricToken'][0])
+    {
+        return $this->invalidateBiometricTokenAsyncWithHttpInfo($user_id, $token_uuid, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation invalidateBiometricTokenAsyncWithHttpInfo
+     *
+     * Invalidate biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function invalidateBiometricTokenAsyncWithHttpInfo($user_id, $token_uuid, string $contentType = self::contentTypes['invalidateBiometricToken'][0])
+    {
+        $returnType = '\Onfido\Model\InvalidatedBiometricTokenSummary';
+        $request = $this->invalidateBiometricTokenRequest($user_id, $token_uuid, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'invalidateBiometricToken'
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function invalidateBiometricTokenRequest($user_id, $token_uuid, string $contentType = self::contentTypes['invalidateBiometricToken'][0])
+    {
+
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $user_id when calling invalidateBiometricToken'
+            );
+        }
+
+        // verify the required parameter 'token_uuid' is set
+        if ($token_uuid === null || (is_array($token_uuid) && count($token_uuid) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $token_uuid when calling invalidateBiometricToken'
+            );
+        }
+
+
+        $resourcePath = '/biometric_tokens/{user_id}/{token_uuid}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'user_id' . '}',
+                ObjectSerializer::toPathValue($user_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($token_uuid !== null) {
+            $resourcePath = str_replace(
+                '{' . 'token_uuid' . '}',
+                ObjectSerializer::toPathValue($token_uuid),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation invalidateBiometricTokens
+     *
+     * Invalidate biometric tokens
+     *
+     * @param  string $user_id Customer user ID whose biometric tokens will be invalidated. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\InvalidatedBiometricTokensSummary|\Onfido\Model\Error
+     */
+    public function invalidateBiometricTokens($user_id, string $contentType = self::contentTypes['invalidateBiometricTokens'][0])
+    {
+        list($response) = $this->invalidateBiometricTokensWithHttpInfo($user_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation invalidateBiometricTokensWithHttpInfo
+     *
+     * Invalidate biometric tokens
+     *
+     * @param  string $user_id Customer user ID whose biometric tokens will be invalidated. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\InvalidatedBiometricTokensSummary|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function invalidateBiometricTokensWithHttpInfo($user_id, string $contentType = self::contentTypes['invalidateBiometricTokens'][0])
+    {
+        $request = $this->invalidateBiometricTokensRequest($user_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\InvalidatedBiometricTokensSummary',
+                        $request,
+                        $response,
+                    );
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Onfido\Model\InvalidatedBiometricTokensSummary',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\InvalidatedBiometricTokensSummary',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation invalidateBiometricTokensAsync
+     *
+     * Invalidate biometric tokens
+     *
+     * @param  string $user_id Customer user ID whose biometric tokens will be invalidated. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function invalidateBiometricTokensAsync($user_id, string $contentType = self::contentTypes['invalidateBiometricTokens'][0])
+    {
+        return $this->invalidateBiometricTokensAsyncWithHttpInfo($user_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation invalidateBiometricTokensAsyncWithHttpInfo
+     *
+     * Invalidate biometric tokens
+     *
+     * @param  string $user_id Customer user ID whose biometric tokens will be invalidated. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function invalidateBiometricTokensAsyncWithHttpInfo($user_id, string $contentType = self::contentTypes['invalidateBiometricTokens'][0])
+    {
+        $returnType = '\Onfido\Model\InvalidatedBiometricTokensSummary';
+        $request = $this->invalidateBiometricTokensRequest($user_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'invalidateBiometricTokens'
+     *
+     * @param  string $user_id Customer user ID whose biometric tokens will be invalidated. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['invalidateBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function invalidateBiometricTokensRequest($user_id, string $contentType = self::contentTypes['invalidateBiometricTokens'][0])
+    {
+
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $user_id when calling invalidateBiometricTokens'
+            );
+        }
+
+
+        $resourcePath = '/biometric_tokens/{user_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'user_id' . '}',
+                ObjectSerializer::toPathValue($user_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation listApplicants
      *
      * List Applicants
@@ -14601,6 +15529,297 @@ class DefaultApi
         ) ?? []);
 
 
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listBiometricTokens
+     *
+     * List biometric tokens
+     *
+     * @param  string $user_id Customer user ID that owns the biometric tokens. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\BiometricTokensList|\Onfido\Model\Error
+     */
+    public function listBiometricTokens($user_id, string $contentType = self::contentTypes['listBiometricTokens'][0])
+    {
+        list($response) = $this->listBiometricTokensWithHttpInfo($user_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listBiometricTokensWithHttpInfo
+     *
+     * List biometric tokens
+     *
+     * @param  string $user_id Customer user ID that owns the biometric tokens. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\BiometricTokensList|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listBiometricTokensWithHttpInfo($user_id, string $contentType = self::contentTypes['listBiometricTokens'][0])
+    {
+        $request = $this->listBiometricTokensRequest($user_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\BiometricTokensList',
+                        $request,
+                        $response,
+                    );
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Onfido\Model\BiometricTokensList',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\BiometricTokensList',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listBiometricTokensAsync
+     *
+     * List biometric tokens
+     *
+     * @param  string $user_id Customer user ID that owns the biometric tokens. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listBiometricTokensAsync($user_id, string $contentType = self::contentTypes['listBiometricTokens'][0])
+    {
+        return $this->listBiometricTokensAsyncWithHttpInfo($user_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listBiometricTokensAsyncWithHttpInfo
+     *
+     * List biometric tokens
+     *
+     * @param  string $user_id Customer user ID that owns the biometric tokens. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listBiometricTokensAsyncWithHttpInfo($user_id, string $contentType = self::contentTypes['listBiometricTokens'][0])
+    {
+        $returnType = '\Onfido\Model\BiometricTokensList';
+        $request = $this->listBiometricTokensRequest($user_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listBiometricTokens'
+     *
+     * @param  string $user_id Customer user ID that owns the biometric tokens. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBiometricTokens'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listBiometricTokensRequest($user_id, string $contentType = self::contentTypes['listBiometricTokens'][0])
+    {
+
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $user_id when calling listBiometricTokens'
+            );
+        }
+
+
+        $resourcePath = '/biometric_tokens/{user_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'user_id' . '}',
+                ObjectSerializer::toPathValue($user_id),
+                $resourcePath
+            );
+        }
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -20859,6 +22078,336 @@ class DefaultApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($applicant_updater));
             } else {
                 $httpBody = $applicant_updater;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation updateBiometricToken
+     *
+     * Update biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  \Onfido\Model\BiometricTokenUpdater $biometric_token_updater Biometric token update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\UpdateBiometricToken200Response|\Onfido\Model\Error
+     */
+    public function updateBiometricToken($user_id, $token_uuid, $biometric_token_updater, string $contentType = self::contentTypes['updateBiometricToken'][0])
+    {
+        list($response) = $this->updateBiometricTokenWithHttpInfo($user_id, $token_uuid, $biometric_token_updater, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updateBiometricTokenWithHttpInfo
+     *
+     * Update biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  \Onfido\Model\BiometricTokenUpdater $biometric_token_updater Biometric token update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\UpdateBiometricToken200Response|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateBiometricTokenWithHttpInfo($user_id, $token_uuid, $biometric_token_updater, string $contentType = self::contentTypes['updateBiometricToken'][0])
+    {
+        $request = $this->updateBiometricTokenRequest($user_id, $token_uuid, $biometric_token_updater, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\UpdateBiometricToken200Response',
+                        $request,
+                        $response,
+                    );
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Onfido\Model\UpdateBiometricToken200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\UpdateBiometricToken200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateBiometricTokenAsync
+     *
+     * Update biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  \Onfido\Model\BiometricTokenUpdater $biometric_token_updater Biometric token update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateBiometricTokenAsync($user_id, $token_uuid, $biometric_token_updater, string $contentType = self::contentTypes['updateBiometricToken'][0])
+    {
+        return $this->updateBiometricTokenAsyncWithHttpInfo($user_id, $token_uuid, $biometric_token_updater, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateBiometricTokenAsyncWithHttpInfo
+     *
+     * Update biometric token
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  \Onfido\Model\BiometricTokenUpdater $biometric_token_updater Biometric token update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateBiometricTokenAsyncWithHttpInfo($user_id, $token_uuid, $biometric_token_updater, string $contentType = self::contentTypes['updateBiometricToken'][0])
+    {
+        $returnType = '\Onfido\Model\UpdateBiometricToken200Response';
+        $request = $this->updateBiometricTokenRequest($user_id, $token_uuid, $biometric_token_updater, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateBiometricToken'
+     *
+     * @param  string $user_id Customer user ID that owns the biometric token. (required)
+     * @param  string $token_uuid Biometric token UUID. (required)
+     * @param  \Onfido\Model\BiometricTokenUpdater $biometric_token_updater Biometric token update payload. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBiometricToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateBiometricTokenRequest($user_id, $token_uuid, $biometric_token_updater, string $contentType = self::contentTypes['updateBiometricToken'][0])
+    {
+
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $user_id when calling updateBiometricToken'
+            );
+        }
+
+        // verify the required parameter 'token_uuid' is set
+        if ($token_uuid === null || (is_array($token_uuid) && count($token_uuid) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $token_uuid when calling updateBiometricToken'
+            );
+        }
+
+        // verify the required parameter 'biometric_token_updater' is set
+        if ($biometric_token_updater === null || (is_array($biometric_token_updater) && count($biometric_token_updater) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $biometric_token_updater when calling updateBiometricToken'
+            );
+        }
+
+
+        $resourcePath = '/biometric_tokens/{user_id}/{token_uuid}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'user_id' . '}',
+                ObjectSerializer::toPathValue($user_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($token_uuid !== null) {
+            $resourcePath = str_replace(
+                '{' . 'token_uuid' . '}',
+                ObjectSerializer::toPathValue($token_uuid),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($biometric_token_updater)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($biometric_token_updater));
+            } else {
+                $httpBody = $biometric_token_updater;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

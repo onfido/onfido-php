@@ -66,6 +66,7 @@ class WebhookUpdater implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_id' => 'string',
         'oauth_server_client_secret' => 'string',
         'oauth_server_scope' => 'string',
+        'name' => 'string',
         'url' => 'string'
     ];
 
@@ -86,6 +87,7 @@ class WebhookUpdater implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_id' => null,
         'oauth_server_client_secret' => null,
         'oauth_server_scope' => null,
+        'name' => null,
         'url' => null
     ];
 
@@ -104,6 +106,7 @@ class WebhookUpdater implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_id' => false,
         'oauth_server_client_secret' => false,
         'oauth_server_scope' => false,
+        'name' => false,
         'url' => false
     ];
 
@@ -202,6 +205,7 @@ class WebhookUpdater implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_id' => 'oauth_server_client_id',
         'oauth_server_client_secret' => 'oauth_server_client_secret',
         'oauth_server_scope' => 'oauth_server_scope',
+        'name' => 'name',
         'url' => 'url'
     ];
 
@@ -220,6 +224,7 @@ class WebhookUpdater implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_id' => 'setOauthServerClientId',
         'oauth_server_client_secret' => 'setOauthServerClientSecret',
         'oauth_server_scope' => 'setOauthServerScope',
+        'name' => 'setName',
         'url' => 'setUrl'
     ];
 
@@ -238,6 +243,7 @@ class WebhookUpdater implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_id' => 'getOauthServerClientId',
         'oauth_server_client_secret' => 'getOauthServerClientSecret',
         'oauth_server_scope' => 'getOauthServerScope',
+        'name' => 'getName',
         'url' => 'getUrl'
     ];
 
@@ -307,6 +313,7 @@ class WebhookUpdater implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('oauth_server_client_id', $data ?? [], null);
         $this->setIfExists('oauth_server_client_secret', $data ?? [], null);
         $this->setIfExists('oauth_server_scope', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
     }
 
@@ -591,6 +598,33 @@ class WebhookUpdater implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable oauth_server_scope cannot be null');
         }
         $this->container['oauth_server_scope'] = $oauth_server_scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name Name of the webhook.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
 
         return $this;
     }

@@ -57,6 +57,7 @@ class WebhookCreate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'name' => 'string',
         'url' => 'string'
     ];
 
@@ -68,6 +69,7 @@ class WebhookCreate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'name' => null,
         'url' => null
     ];
 
@@ -77,6 +79,7 @@ class WebhookCreate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'name' => false,
         'url' => false
     ];
 
@@ -166,6 +169,7 @@ class WebhookCreate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'name' => 'name',
         'url' => 'url'
     ];
 
@@ -175,6 +179,7 @@ class WebhookCreate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'name' => 'setName',
         'url' => 'setUrl'
     ];
 
@@ -184,6 +189,7 @@ class WebhookCreate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'name' => 'getName',
         'url' => 'getUrl'
     ];
 
@@ -244,6 +250,7 @@ class WebhookCreate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
     }
 
@@ -291,6 +298,33 @@ class WebhookCreate implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name Name of the webhook.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
 
     /**
      * Gets url

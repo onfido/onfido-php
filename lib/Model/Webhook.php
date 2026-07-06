@@ -67,6 +67,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_secret' => 'string',
         'oauth_server_scope' => 'string',
         'id' => 'string',
+        'name' => 'string',
         'url' => 'string',
         'token' => 'string',
         'href' => 'string'
@@ -90,6 +91,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_secret' => null,
         'oauth_server_scope' => null,
         'id' => 'uuid',
+        'name' => null,
         'url' => null,
         'token' => null,
         'href' => null
@@ -111,6 +113,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_secret' => false,
         'oauth_server_scope' => false,
         'id' => false,
+        'name' => false,
         'url' => false,
         'token' => false,
         'href' => false
@@ -212,6 +215,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_secret' => 'oauth_server_client_secret',
         'oauth_server_scope' => 'oauth_server_scope',
         'id' => 'id',
+        'name' => 'name',
         'url' => 'url',
         'token' => 'token',
         'href' => 'href'
@@ -233,6 +237,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_secret' => 'setOauthServerClientSecret',
         'oauth_server_scope' => 'setOauthServerScope',
         'id' => 'setId',
+        'name' => 'setName',
         'url' => 'setUrl',
         'token' => 'setToken',
         'href' => 'setHref'
@@ -254,6 +259,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'oauth_server_client_secret' => 'getOauthServerClientSecret',
         'oauth_server_scope' => 'getOauthServerScope',
         'id' => 'getId',
+        'name' => 'getName',
         'url' => 'getUrl',
         'token' => 'getToken',
         'href' => 'getHref'
@@ -326,6 +332,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('oauth_server_client_secret', $data ?? [], null);
         $this->setIfExists('oauth_server_scope', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('token', $data ?? [], null);
         $this->setIfExists('href', $data ?? [], null);
@@ -642,6 +649,33 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name Name of the webhook.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
 
         return $this;
     }

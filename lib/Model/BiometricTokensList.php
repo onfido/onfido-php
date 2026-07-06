@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookUpdate
+ * BiometricTokensList
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * WebhookUpdate Class Doc Comment
+ * BiometricTokensList Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
+class BiometricTokensList implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'webhook_update';
+    protected static $openAPIModelName = 'Biometric_tokens_list';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'url' => 'string'
+        'biometric_tokens' => '\Onfido\Model\BiometricToken[]'
     ];
 
     /**
@@ -69,8 +68,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'url' => null
+        'biometric_tokens' => null
     ];
 
     /**
@@ -79,8 +77,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'url' => false
+        'biometric_tokens' => false
     ];
 
     /**
@@ -169,8 +166,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'url' => 'url'
+        'biometric_tokens' => 'biometric_tokens'
     ];
 
     /**
@@ -179,8 +175,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'url' => 'setUrl'
+        'biometric_tokens' => 'setBiometricTokens'
     ];
 
     /**
@@ -189,8 +184,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'url' => 'getUrl'
+        'biometric_tokens' => 'getBiometricTokens'
     ];
 
     /**
@@ -250,8 +244,7 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('biometric_tokens', $data ?? [], null);
     }
 
     /**
@@ -281,6 +274,9 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['biometric_tokens'] === null) {
+            $invalidProperties[] = "'biometric_tokens' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -297,55 +293,28 @@ class WebhookUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets name
+     * Gets biometric_tokens
      *
-     * @return string|null
+     * @return \Onfido\Model\BiometricToken[]
      */
-    public function getName()
+    public function getBiometricTokens()
     {
-        return $this->container['name'];
+        return $this->container['biometric_tokens'];
     }
 
     /**
-     * Sets name
+     * Sets biometric_tokens
      *
-     * @param string|null $name Name of the webhook.
+     * @param \Onfido\Model\BiometricToken[] $biometric_tokens biometric_tokens
      *
      * @return self
      */
-    public function setName($name)
+    public function setBiometricTokens($biometric_tokens)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($biometric_tokens)) {
+            throw new \InvalidArgumentException('non-nullable biometric_tokens cannot be null');
         }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets url
-     *
-     * @return string|null
-     */
-    public function getUrl()
-    {
-        return $this->container['url'];
-    }
-
-    /**
-     * Sets url
-     *
-     * @param string|null $url The url that will listen to notifications (must be https).
-     *
-     * @return self
-     */
-    public function setUrl($url)
-    {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
-        }
-        $this->container['url'] = $url;
+        $this->container['biometric_tokens'] = $biometric_tokens;
 
         return $this;
     }
