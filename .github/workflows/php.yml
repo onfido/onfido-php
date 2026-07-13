@@ -37,13 +37,19 @@ jobs:
         uses: php-actions/composer@8a65f0d3c6a1d17ca4800491a40b5756a4c164f3 # v6
         with:
           php_version: ${{ matrix.php-version }}
-      - name: Test with API token auth
+      - name: Should run integration tests
+        id: should-run-integration-tests
         if: ${{ matrix.php-version == '8.3' &&
-          github.repository_owner == 'onfido' &&
-          (github.event_name == 'pull_request' ||
-           github.event_name == 'release' ||
-           github.event_name == 'workflow_dispatch' ||
-           github.event_name == 'schedule') }}
+          github.repository_owner == 'onfido' }}
+        uses: onfido/onfido-actions/should-run-integration-tests@main
+      - name: Acquire integration test lock
+        if: steps.should-run-integration-tests.outputs.result == 'true'
+        uses: onfido/onfido-actions/lock/acquire@main
+        with:
+          app-id: ${{ secrets.ONFIDO_CI_LOCK_APP_ID }}
+          app-private-key: ${{ secrets.ONFIDO_CI_LOCK_PRIVATE_KEY }}
+      - name: Test with API token auth
+        if: steps.should-run-integration-tests.outputs.result == 'true'
         run: |
           vendor/bin/phpunit
         env:
@@ -54,12 +60,7 @@ jobs:
           ONFIDO_SAMPLE_MOTION_ID_1: ${{ secrets.ONFIDO_SAMPLE_MOTION_ID_1 }}
           ONFIDO_SAMPLE_MOTION_ID_2: ${{ secrets.ONFIDO_SAMPLE_MOTION_ID_2 }}
       - name: Test with OAuth client credentials auth
-        if: ${{ matrix.php-version == '8.3' &&
-          github.repository_owner == 'onfido' &&
-          (github.event_name == 'pull_request' ||
-           github.event_name == 'release' ||
-           github.event_name == 'workflow_dispatch' ||
-           github.event_name == 'schedule') }}
+        if: steps.should-run-integration-tests.outputs.result == 'true'
         run: |
           vendor/bin/phpunit
         env:
@@ -70,6 +71,12 @@ jobs:
           ONFIDO_SAMPLE_VIDEO_ID_2: ${{ secrets.ONFIDO_SAMPLE_VIDEO_ID_2 }}
           ONFIDO_SAMPLE_MOTION_ID_1: ${{ secrets.ONFIDO_SAMPLE_MOTION_ID_1 }}
           ONFIDO_SAMPLE_MOTION_ID_2: ${{ secrets.ONFIDO_SAMPLE_MOTION_ID_2 }}
+      - name: Release integration test lock
+        if: always() && steps.should-run-integration-tests.outputs.result == 'true'
+        uses: onfido/onfido-actions/lock/release@main
+        with:
+          app-id: ${{ secrets.ONFIDO_CI_LOCK_APP_ID }}
+          app-private-key: ${{ secrets.ONFIDO_CI_LOCK_PRIVATE_KEY }}
 
   publish:
     runs-on: ubuntu-latest
