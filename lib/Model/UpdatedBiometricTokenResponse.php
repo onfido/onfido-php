@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateBiometricToken200Response
+ * UpdatedBiometricTokenResponse
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * UpdateBiometricToken200Response Class Doc Comment
+ * UpdatedBiometricTokenResponse Class Doc Comment
  *
  * @category Class
  * @package  Onfido
@@ -40,7 +40,7 @@ use \Onfido\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateBiometricToken200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdatedBiometricTokenResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class UpdateBiometricToken200Response implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'update_biometric_token_200_response';
+    protected static $openAPIModelName = 'Updated_biometric_token_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
