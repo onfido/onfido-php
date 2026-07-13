@@ -35,6 +35,7 @@ use \Onfido\ObjectSerializer;
  * BiometricToken Class Doc Comment
  *
  * @category Class
+ * @description Biometric token.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -49,7 +50,7 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Biometric_token';
+    protected static $openAPIModelName = 'biometric_token';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +58,8 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'biometric_token' => '\Onfido\Model\BiometricToken'
+        'uuid' => 'string',
+        'data' => '\Onfido\Model\BiometricTokenData'
     ];
 
     /**
@@ -68,7 +70,8 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'biometric_token' => null
+        'uuid' => 'uuid',
+        'data' => null
     ];
 
     /**
@@ -77,7 +80,8 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'biometric_token' => false
+        'uuid' => false,
+        'data' => false
     ];
 
     /**
@@ -166,7 +170,8 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'biometric_token' => 'biometric_token'
+        'uuid' => 'uuid',
+        'data' => 'data'
     ];
 
     /**
@@ -175,7 +180,8 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'biometric_token' => 'setBiometricToken'
+        'uuid' => 'setUuid',
+        'data' => 'setData'
     ];
 
     /**
@@ -184,7 +190,8 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'biometric_token' => 'getBiometricToken'
+        'uuid' => 'getUuid',
+        'data' => 'getData'
     ];
 
     /**
@@ -244,7 +251,8 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('biometric_token', $data ?? [], null);
+        $this->setIfExists('uuid', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
     }
 
     /**
@@ -274,8 +282,11 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['biometric_token'] === null) {
-            $invalidProperties[] = "'biometric_token' can't be null";
+        if ($this->container['uuid'] === null) {
+            $invalidProperties[] = "'uuid' can't be null";
+        }
+        if ($this->container['data'] === null) {
+            $invalidProperties[] = "'data' can't be null";
         }
         return $invalidProperties;
     }
@@ -293,28 +304,55 @@ class BiometricToken implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets biometric_token
+     * Gets uuid
      *
-     * @return \Onfido\Model\BiometricToken
+     * @return string
      */
-    public function getBiometricToken()
+    public function getUuid()
     {
-        return $this->container['biometric_token'];
+        return $this->container['uuid'];
     }
 
     /**
-     * Sets biometric_token
+     * Sets uuid
      *
-     * @param \Onfido\Model\BiometricToken $biometric_token biometric_token
+     * @param string $uuid The biometric token's unique identifier.
      *
      * @return self
      */
-    public function setBiometricToken($biometric_token)
+    public function setUuid($uuid)
     {
-        if (is_null($biometric_token)) {
-            throw new \InvalidArgumentException('non-nullable biometric_token cannot be null');
+        if (is_null($uuid)) {
+            throw new \InvalidArgumentException('non-nullable uuid cannot be null');
         }
-        $this->container['biometric_token'] = $biometric_token;
+        $this->container['uuid'] = $uuid;
+
+        return $this;
+    }
+
+    /**
+     * Gets data
+     *
+     * @return \Onfido\Model\BiometricTokenData
+     */
+    public function getData()
+    {
+        return $this->container['data'];
+    }
+
+    /**
+     * Sets data
+     *
+     * @param \Onfido\Model\BiometricTokenData $data data
+     *
+     * @return self
+     */
+    public function setData($data)
+    {
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        }
+        $this->container['data'] = $data;
 
         return $this;
     }

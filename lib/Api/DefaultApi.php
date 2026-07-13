@@ -9716,7 +9716,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Onfido\Model\BiometricToken|\Onfido\Model\Error
+     * @return \Onfido\Model\BiometricTokenResponse|\Onfido\Model\Error
      */
     public function findBiometricToken($user_id, $token_uuid, string $contentType = self::contentTypes['findBiometricToken'][0])
     {
@@ -9735,7 +9735,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Onfido\Model\BiometricToken|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Onfido\Model\BiometricTokenResponse|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function findBiometricTokenWithHttpInfo($user_id, $token_uuid, string $contentType = self::contentTypes['findBiometricToken'][0])
     {
@@ -9767,7 +9767,7 @@ class DefaultApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Onfido\Model\BiometricToken',
+                        '\Onfido\Model\BiometricTokenResponse',
                         $request,
                         $response,
                     );
@@ -9795,7 +9795,7 @@ class DefaultApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Onfido\Model\BiometricToken',
+                '\Onfido\Model\BiometricTokenResponse',
                 $request,
                 $response,
             );
@@ -9804,7 +9804,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Onfido\Model\BiometricToken',
+                        '\Onfido\Model\BiometricTokenResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -9860,7 +9860,7 @@ class DefaultApi
      */
     public function findBiometricTokenAsyncWithHttpInfo($user_id, $token_uuid, string $contentType = self::contentTypes['findBiometricToken'][0])
     {
-        $returnType = '\Onfido\Model\BiometricToken';
+        $returnType = '\Onfido\Model\BiometricTokenResponse';
         $request = $this->findBiometricTokenRequest($user_id, $token_uuid, $contentType);
 
         return $this->client
@@ -14686,7 +14686,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Onfido\Model\InvalidatedBiometricTokenSummary|\Onfido\Model\Error
+     * @return \Onfido\Model\InvalidatedBiometricTokenResponse|\Onfido\Model\Error
      */
     public function invalidateBiometricToken($user_id, $token_uuid, string $contentType = self::contentTypes['invalidateBiometricToken'][0])
     {
@@ -14705,7 +14705,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Onfido\Model\InvalidatedBiometricTokenSummary|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Onfido\Model\InvalidatedBiometricTokenResponse|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function invalidateBiometricTokenWithHttpInfo($user_id, $token_uuid, string $contentType = self::contentTypes['invalidateBiometricToken'][0])
     {
@@ -14737,7 +14737,7 @@ class DefaultApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Onfido\Model\InvalidatedBiometricTokenSummary',
+                        '\Onfido\Model\InvalidatedBiometricTokenResponse',
                         $request,
                         $response,
                     );
@@ -14765,7 +14765,7 @@ class DefaultApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Onfido\Model\InvalidatedBiometricTokenSummary',
+                '\Onfido\Model\InvalidatedBiometricTokenResponse',
                 $request,
                 $response,
             );
@@ -14774,7 +14774,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Onfido\Model\InvalidatedBiometricTokenSummary',
+                        '\Onfido\Model\InvalidatedBiometricTokenResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -14830,7 +14830,7 @@ class DefaultApi
      */
     public function invalidateBiometricTokenAsyncWithHttpInfo($user_id, $token_uuid, string $contentType = self::contentTypes['invalidateBiometricToken'][0])
     {
-        $returnType = '\Onfido\Model\InvalidatedBiometricTokenSummary';
+        $returnType = '\Onfido\Model\InvalidatedBiometricTokenResponse';
         $request = $this->invalidateBiometricTokenRequest($user_id, $token_uuid, $contentType);
 
         return $this->client
@@ -14996,7 +14996,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Onfido\Model\InvalidatedBiometricTokensSummary|\Onfido\Model\Error
+     * @return \Onfido\Model\InvalidatedBiometricTokensResponse|\Onfido\Model\Error
      */
     public function invalidateBiometricTokens($user_id, string $contentType = self::contentTypes['invalidateBiometricTokens'][0])
     {
@@ -15014,7 +15014,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Onfido\Model\InvalidatedBiometricTokensSummary|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Onfido\Model\InvalidatedBiometricTokensResponse|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function invalidateBiometricTokensWithHttpInfo($user_id, string $contentType = self::contentTypes['invalidateBiometricTokens'][0])
     {
@@ -15046,7 +15046,7 @@ class DefaultApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Onfido\Model\InvalidatedBiometricTokensSummary',
+                        '\Onfido\Model\InvalidatedBiometricTokensResponse',
                         $request,
                         $response,
                     );
@@ -15074,7 +15074,7 @@ class DefaultApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Onfido\Model\InvalidatedBiometricTokensSummary',
+                '\Onfido\Model\InvalidatedBiometricTokensResponse',
                 $request,
                 $response,
             );
@@ -15083,7 +15083,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Onfido\Model\InvalidatedBiometricTokensSummary',
+                        '\Onfido\Model\InvalidatedBiometricTokensResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -15137,7 +15137,7 @@ class DefaultApi
      */
     public function invalidateBiometricTokensAsyncWithHttpInfo($user_id, string $contentType = self::contentTypes['invalidateBiometricTokens'][0])
     {
-        $returnType = '\Onfido\Model\InvalidatedBiometricTokensSummary';
+        $returnType = '\Onfido\Model\InvalidatedBiometricTokensResponse';
         $request = $this->invalidateBiometricTokensRequest($user_id, $contentType);
 
         return $this->client
@@ -15603,7 +15603,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Onfido\Model\BiometricTokensList|\Onfido\Model\Error
+     * @return \Onfido\Model\BiometricTokensResponse|\Onfido\Model\Error
      */
     public function listBiometricTokens($user_id, string $contentType = self::contentTypes['listBiometricTokens'][0])
     {
@@ -15621,7 +15621,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Onfido\Model\BiometricTokensList|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Onfido\Model\BiometricTokensResponse|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function listBiometricTokensWithHttpInfo($user_id, string $contentType = self::contentTypes['listBiometricTokens'][0])
     {
@@ -15653,7 +15653,7 @@ class DefaultApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Onfido\Model\BiometricTokensList',
+                        '\Onfido\Model\BiometricTokensResponse',
                         $request,
                         $response,
                     );
@@ -15681,7 +15681,7 @@ class DefaultApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Onfido\Model\BiometricTokensList',
+                '\Onfido\Model\BiometricTokensResponse',
                 $request,
                 $response,
             );
@@ -15690,7 +15690,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Onfido\Model\BiometricTokensList',
+                        '\Onfido\Model\BiometricTokensResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -15744,7 +15744,7 @@ class DefaultApi
      */
     public function listBiometricTokensAsyncWithHttpInfo($user_id, string $contentType = self::contentTypes['listBiometricTokens'][0])
     {
-        $returnType = '\Onfido\Model\BiometricTokensList';
+        $returnType = '\Onfido\Model\BiometricTokensResponse';
         $request = $this->listBiometricTokensRequest($user_id, $contentType);
 
         return $this->client
@@ -22146,7 +22146,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Onfido\Model\UpdateBiometricToken200Response|\Onfido\Model\Error
+     * @return \Onfido\Model\UpdatedBiometricTokenResponse|\Onfido\Model\Error
      */
     public function updateBiometricToken($user_id, $token_uuid, $biometric_token_updater, string $contentType = self::contentTypes['updateBiometricToken'][0])
     {
@@ -22166,7 +22166,7 @@ class DefaultApi
      *
      * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Onfido\Model\UpdateBiometricToken200Response|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Onfido\Model\UpdatedBiometricTokenResponse|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateBiometricTokenWithHttpInfo($user_id, $token_uuid, $biometric_token_updater, string $contentType = self::contentTypes['updateBiometricToken'][0])
     {
@@ -22198,7 +22198,7 @@ class DefaultApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Onfido\Model\UpdateBiometricToken200Response',
+                        '\Onfido\Model\UpdatedBiometricTokenResponse',
                         $request,
                         $response,
                     );
@@ -22226,7 +22226,7 @@ class DefaultApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Onfido\Model\UpdateBiometricToken200Response',
+                '\Onfido\Model\UpdatedBiometricTokenResponse',
                 $request,
                 $response,
             );
@@ -22235,7 +22235,7 @@ class DefaultApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Onfido\Model\UpdateBiometricToken200Response',
+                        '\Onfido\Model\UpdatedBiometricTokenResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -22293,7 +22293,7 @@ class DefaultApi
      */
     public function updateBiometricTokenAsyncWithHttpInfo($user_id, $token_uuid, $biometric_token_updater, string $contentType = self::contentTypes['updateBiometricToken'][0])
     {
-        $returnType = '\Onfido\Model\UpdateBiometricToken200Response';
+        $returnType = '\Onfido\Model\UpdatedBiometricTokenResponse';
         $request = $this->updateBiometricTokenRequest($user_id, $token_uuid, $biometric_token_updater, $contentType);
 
         return $this->client
