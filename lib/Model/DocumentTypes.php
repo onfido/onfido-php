@@ -194,6 +194,10 @@ class DocumentTypes
 
     public const ACCOMMODATION_TENANCY_CERTIFICATE = 'accommodation_tenancy_certificate';
 
+    public const DIPLOMATIC_ID = 'diplomatic_id';
+
+    public const TRAVEL_DOCUMENT = 'travel_document';
+
     public const UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -279,6 +283,8 @@ class DocumentTypes
             self::IDENTITY_DOCUMENT_WITH_ADDRESS,
             self::EXCHANGE_HOUSE_STATEMENT,
             self::ACCOMMODATION_TENANCY_CERTIFICATE,
+            self::DIPLOMATIC_ID,
+            self::TRAVEL_DOCUMENT,
             self::UNKNOWN_DEFAULT_OPEN_API
         ];
     }
