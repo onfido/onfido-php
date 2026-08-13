@@ -1,6 +1,6 @@
 <?php
 /**
- * InvalidatedBiometricTokenSummary
+ * BiometricTokensResponse
  *
  * PHP version 8.1
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Onfido\ObjectSerializer;
 
 /**
- * InvalidatedBiometricTokenSummary Class Doc Comment
+ * BiometricTokensResponse Class Doc Comment
  *
  * @category Class
- * @description Invalidated biometric tokens response payload.
  * @package  Onfido
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \JsonSerializable
+class BiometricTokensResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'invalidated_biometric_token_summary';
+    protected static $openAPIModelName = 'Biometric_tokens_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +57,7 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'deleted_items' => '\Onfido\Model\InvalidatedBiometricTokenSummaryDeletedItems'
+        'biometric_tokens' => '\Onfido\Model\BiometricToken[]'
     ];
 
     /**
@@ -69,7 +68,7 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'deleted_items' => null
+        'biometric_tokens' => null
     ];
 
     /**
@@ -78,7 +77,7 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'deleted_items' => false
+        'biometric_tokens' => false
     ];
 
     /**
@@ -167,7 +166,7 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'deleted_items' => 'deleted_items'
+        'biometric_tokens' => 'biometric_tokens'
     ];
 
     /**
@@ -176,7 +175,7 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'deleted_items' => 'setDeletedItems'
+        'biometric_tokens' => 'setBiometricTokens'
     ];
 
     /**
@@ -185,7 +184,7 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'deleted_items' => 'getDeletedItems'
+        'biometric_tokens' => 'getBiometricTokens'
     ];
 
     /**
@@ -245,7 +244,7 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('deleted_items', $data ?? [], null);
+        $this->setIfExists('biometric_tokens', $data ?? [], null);
     }
 
     /**
@@ -275,8 +274,8 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
     {
         $invalidProperties = [];
 
-        if ($this->container['deleted_items'] === null) {
-            $invalidProperties[] = "'deleted_items' can't be null";
+        if ($this->container['biometric_tokens'] === null) {
+            $invalidProperties[] = "'biometric_tokens' can't be null";
         }
         return $invalidProperties;
     }
@@ -294,28 +293,28 @@ class InvalidatedBiometricTokenSummary implements ModelInterface, ArrayAccess, \
 
 
     /**
-     * Gets deleted_items
+     * Gets biometric_tokens
      *
-     * @return \Onfido\Model\InvalidatedBiometricTokenSummaryDeletedItems
+     * @return \Onfido\Model\BiometricToken[]
      */
-    public function getDeletedItems()
+    public function getBiometricTokens()
     {
-        return $this->container['deleted_items'];
+        return $this->container['biometric_tokens'];
     }
 
     /**
-     * Sets deleted_items
+     * Sets biometric_tokens
      *
-     * @param \Onfido\Model\InvalidatedBiometricTokenSummaryDeletedItems $deleted_items deleted_items
+     * @param \Onfido\Model\BiometricToken[] $biometric_tokens biometric_tokens
      *
      * @return self
      */
-    public function setDeletedItems($deleted_items)
+    public function setBiometricTokens($biometric_tokens)
     {
-        if (is_null($deleted_items)) {
-            throw new \InvalidArgumentException('non-nullable deleted_items cannot be null');
+        if (is_null($biometric_tokens)) {
+            throw new \InvalidArgumentException('non-nullable biometric_tokens cannot be null');
         }
-        $this->container['deleted_items'] = $deleted_items;
+        $this->container['biometric_tokens'] = $biometric_tokens;
 
         return $this;
     }
