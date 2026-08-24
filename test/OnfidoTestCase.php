@@ -242,6 +242,32 @@ abstract class OnfidoTestCase extends TestCase
         return $instance;
     }
 
+    protected function repeatRequestUntil(
+        callable $function,
+        array $params,
+        callable $condition,
+        string $failureMessage = 'Condition did not change in time',
+        $maxRetries = 15,
+        $sleepTime = 1
+    )
+    {
+        $instance = call_user_func_array($function, $params);
+        $iteration = 0;
+
+        while(!$condition($instance)) {
+            if($iteration >= $maxRetries) {
+                $this->fail($failureMessage);
+            }
+
+            $iteration += 1;
+            sleep($sleepTime);
+
+            $instance = call_user_func_array($function, $params);
+        }
+
+        return $instance;
+    }
+
     protected function repeatRequestUntilHttpCodeChanges(
         callable $function,
         array $params,
