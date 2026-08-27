@@ -269,6 +269,9 @@ class DefaultApi
         'listTasks' => [
             'application/json',
         ],
+        'listWatchlistMeshAlertRisks' => [
+            'application/json',
+        ],
         'listWatchlistMonitorMatches' => [
             'application/json',
         ],
@@ -19026,6 +19029,327 @@ class DefaultApi
             $resourcePath = str_replace(
                 '{' . 'workflow_run_id' . '}',
                 ObjectSerializer::toPathValue($workflow_run_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires OAuth (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listWatchlistMeshAlertRisks
+     *
+     * Retrieve watchlist mesh alert risks
+     *
+     * @param  string $alert_id The unique identifier of the alert whose risks you want to retrieve. (required)
+     * @param  int|null $page The page of results to retrieve. (optional, default to 1)
+     * @param  int|null $per_page The number of risks to return per page. (optional, default to 25)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWatchlistMeshAlertRisks'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Onfido\Model\WatchlistMeshAlertRisk[]|\Onfido\Model\Error
+     */
+    public function listWatchlistMeshAlertRisks($alert_id, $page = 1, $per_page = 25, string $contentType = self::contentTypes['listWatchlistMeshAlertRisks'][0])
+    {
+        list($response) = $this->listWatchlistMeshAlertRisksWithHttpInfo($alert_id, $page, $per_page, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listWatchlistMeshAlertRisksWithHttpInfo
+     *
+     * Retrieve watchlist mesh alert risks
+     *
+     * @param  string $alert_id The unique identifier of the alert whose risks you want to retrieve. (required)
+     * @param  int|null $page The page of results to retrieve. (optional, default to 1)
+     * @param  int|null $per_page The number of risks to return per page. (optional, default to 25)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWatchlistMeshAlertRisks'] to see the possible values for this operation
+     *
+     * @throws \Onfido\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Onfido\Model\WatchlistMeshAlertRisk[]|\Onfido\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listWatchlistMeshAlertRisksWithHttpInfo($alert_id, $page = 1, $per_page = 25, string $contentType = self::contentTypes['listWatchlistMeshAlertRisks'][0])
+    {
+        $request = $this->listWatchlistMeshAlertRisksRequest($alert_id, $page, $per_page, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\WatchlistMeshAlertRisk[]',
+                        $request,
+                        $response,
+                    );
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\Onfido\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Onfido\Model\WatchlistMeshAlertRisk[]',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\WatchlistMeshAlertRisk[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Onfido\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listWatchlistMeshAlertRisksAsync
+     *
+     * Retrieve watchlist mesh alert risks
+     *
+     * @param  string $alert_id The unique identifier of the alert whose risks you want to retrieve. (required)
+     * @param  int|null $page The page of results to retrieve. (optional, default to 1)
+     * @param  int|null $per_page The number of risks to return per page. (optional, default to 25)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWatchlistMeshAlertRisks'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listWatchlistMeshAlertRisksAsync($alert_id, $page = 1, $per_page = 25, string $contentType = self::contentTypes['listWatchlistMeshAlertRisks'][0])
+    {
+        return $this->listWatchlistMeshAlertRisksAsyncWithHttpInfo($alert_id, $page, $per_page, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listWatchlistMeshAlertRisksAsyncWithHttpInfo
+     *
+     * Retrieve watchlist mesh alert risks
+     *
+     * @param  string $alert_id The unique identifier of the alert whose risks you want to retrieve. (required)
+     * @param  int|null $page The page of results to retrieve. (optional, default to 1)
+     * @param  int|null $per_page The number of risks to return per page. (optional, default to 25)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWatchlistMeshAlertRisks'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listWatchlistMeshAlertRisksAsyncWithHttpInfo($alert_id, $page = 1, $per_page = 25, string $contentType = self::contentTypes['listWatchlistMeshAlertRisks'][0])
+    {
+        $returnType = '\Onfido\Model\WatchlistMeshAlertRisk[]';
+        $request = $this->listWatchlistMeshAlertRisksRequest($alert_id, $page, $per_page, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listWatchlistMeshAlertRisks'
+     *
+     * @param  string $alert_id The unique identifier of the alert whose risks you want to retrieve. (required)
+     * @param  int|null $page The page of results to retrieve. (optional, default to 1)
+     * @param  int|null $per_page The number of risks to return per page. (optional, default to 25)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWatchlistMeshAlertRisks'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listWatchlistMeshAlertRisksRequest($alert_id, $page = 1, $per_page = 25, string $contentType = self::contentTypes['listWatchlistMeshAlertRisks'][0])
+    {
+
+        // verify the required parameter 'alert_id' is set
+        if ($alert_id === null || (is_array($alert_id) && count($alert_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $alert_id when calling listWatchlistMeshAlertRisks'
+            );
+        }
+
+
+
+
+        $resourcePath = '/complyadvantage_watchlists/alerts/{alert_id}/risks';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $per_page,
+            'per_page', // param base name
+            'integer', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($alert_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'alert_id' . '}',
+                ObjectSerializer::toPathValue($alert_id),
                 $resourcePath
             );
         }
