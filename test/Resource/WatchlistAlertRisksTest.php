@@ -61,7 +61,7 @@ class WatchlistAlertRisksTest extends OnfidoTestCase
             30,
             2
         );
-        $alertIdentifier = $watchlistTask->getOutput()->properties->alert_identifier;
+        $alertIdentifier = $watchlistTask->getOutput()['properties']->alert_identifier;
 
         $this->assertNotNull($alertIdentifier);
 
