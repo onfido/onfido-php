@@ -275,18 +275,16 @@ abstract class OnfidoTestCase extends TestCase
         $sleepTime = 1
     )
     {
-        $instance = null;
-        $iteration = 0;
-        while($iteration <= $maxRetries) {
+        $lastException = null;
+        for ($iteration = 0; $iteration <= $maxRetries; $iteration++) {
             try {
-                $instance = call_user_func_array($function, $params);
-                break;
-            } catch (Onfido\ApiException) {
+                return call_user_func_array($function, $params);
+            } catch (Onfido\ApiException $e) {
+                $lastException = $e;
                 sleep($sleepTime);
-                $iteration += 1;
             }
         }
-        return $instance;
+        throw $lastException;
     }
 }
 
