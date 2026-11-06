@@ -57,7 +57,7 @@ class InvalidatedBiometricTokenResponse implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'biometric_token' => '\Onfido\Model\InvalidatedBiometricTokenSummary'
+        'biometric_tokens' => '\Onfido\Model\InvalidatedBiometricTokenSummary'
     ];
 
     /**
@@ -68,7 +68,7 @@ class InvalidatedBiometricTokenResponse implements ModelInterface, ArrayAccess, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'biometric_token' => null
+        'biometric_tokens' => null
     ];
 
     /**
@@ -77,7 +77,7 @@ class InvalidatedBiometricTokenResponse implements ModelInterface, ArrayAccess, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'biometric_token' => false
+        'biometric_tokens' => false
     ];
 
     /**
@@ -166,7 +166,7 @@ class InvalidatedBiometricTokenResponse implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'biometric_token' => 'biometric_token'
+        'biometric_tokens' => 'biometric_tokens'
     ];
 
     /**
@@ -175,7 +175,7 @@ class InvalidatedBiometricTokenResponse implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $setters = [
-        'biometric_token' => 'setBiometricToken'
+        'biometric_tokens' => 'setBiometricTokens'
     ];
 
     /**
@@ -184,7 +184,7 @@ class InvalidatedBiometricTokenResponse implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $getters = [
-        'biometric_token' => 'getBiometricToken'
+        'biometric_tokens' => 'getBiometricTokens'
     ];
 
     /**
@@ -244,7 +244,7 @@ class InvalidatedBiometricTokenResponse implements ModelInterface, ArrayAccess, 
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('biometric_token', $data ?? [], null);
+        $this->setIfExists('biometric_tokens', $data ?? [], null);
     }
 
     /**
@@ -274,8 +274,8 @@ class InvalidatedBiometricTokenResponse implements ModelInterface, ArrayAccess, 
     {
         $invalidProperties = [];
 
-        if ($this->container['biometric_token'] === null) {
-            $invalidProperties[] = "'biometric_token' can't be null";
+        if ($this->container['biometric_tokens'] === null) {
+            $invalidProperties[] = "'biometric_tokens' can't be null";
         }
         return $invalidProperties;
     }
@@ -293,28 +293,28 @@ class InvalidatedBiometricTokenResponse implements ModelInterface, ArrayAccess, 
 
 
     /**
-     * Gets biometric_token
+     * Gets biometric_tokens
      *
      * @return \Onfido\Model\InvalidatedBiometricTokenSummary
      */
-    public function getBiometricToken()
+    public function getBiometricTokens()
     {
-        return $this->container['biometric_token'];
+        return $this->container['biometric_tokens'];
     }
 
     /**
-     * Sets biometric_token
+     * Sets biometric_tokens
      *
-     * @param \Onfido\Model\InvalidatedBiometricTokenSummary $biometric_token biometric_token
+     * @param \Onfido\Model\InvalidatedBiometricTokenSummary $biometric_tokens biometric_tokens
      *
      * @return self
      */
-    public function setBiometricToken($biometric_token)
+    public function setBiometricTokens($biometric_tokens)
     {
-        if (is_null($biometric_token)) {
-            throw new \InvalidArgumentException('non-nullable biometric_token cannot be null');
+        if (is_null($biometric_tokens)) {
+            throw new \InvalidArgumentException('non-nullable biometric_tokens cannot be null');
         }
-        $this->container['biometric_token'] = $biometric_token;
+        $this->container['biometric_tokens'] = $biometric_tokens;
 
         return $this;
     }
